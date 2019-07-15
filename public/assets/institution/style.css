@@ -44,7 +44,10 @@
         text-decoration: none;
         text-transform: uppercase;
     }
-
     .m-b-md {
         margin-bottom: 30px;
+    }
+    .container-company{
+        width: 800px;
+        height: 300px;
     }
