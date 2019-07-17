@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Company;
+namespace App\Http\Controllers\Institution;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class CompanyController extends Controller
+class InstitutionController extends Controller
 {
     public function index()
     {
-    	return view('company.index');
+    	return view('institution.index');
     }
     public function welcome()
     {

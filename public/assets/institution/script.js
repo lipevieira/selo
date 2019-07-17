@@ -264,5 +264,28 @@ $(document).ready(function () {
 		$('#list_metodologia').attr('data-toggle', 'tab');
 		$('#metodologia').addClass('active in');
 	});
+	// Button para adcionar limhas na tabela de CNPJs Adcionais
+	AddTableRow = function () {
+		var newRow = $("<tr>");
+		var cols = "";
+		cols += "<td><input type= 'text' class='form-control' id='validationCustom01' placeholder='First name' value=''></td>";
 
+
+		cols += '<td>';
+		cols += '<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover Linha</button>';
+		cols += '</td>';
+		newRow.append(cols);
+		$("#tblCNPJsAdicionais").append(newRow);
+		return false;
+	};
+	// Buuton remover linha da Tabela de cnpsj adcionais
+	RemoveTableRow = function(handler) {
+		var tr = $(handler).closest('tr');
+
+		tr.fadeOut(400, function(){ 
+			tr.remove(); 
+		});
+
+		return false;
+	};
 });
