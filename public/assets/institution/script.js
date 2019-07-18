@@ -289,3 +289,39 @@ $(document).ready(function () {
 		return false;
 	};
 });
+// Buuton adcionar linhas na tabela de cronograma
+AddTableRowSchedule = function () {
+	var newRow = $("<tr>");
+	var cols = "";
+	// TO-DE FAZER: REQUISIÇÃO AJAX PARA PREENCHER ESSE COMBO BOX
+	cols += "<td><select class='form-control form-control-sm'>"
+										+"<option>Small select</option>"
+										+"<option>Small select</option>"
+										+"<option>Small select</option>"
+										+"</select></td>";
+
+	cols += "<td><textarea name='address' id='address' class='form-control'></textarea></td>";
+	cols += "<td><select class='form-control form-control-sm'>"
+										+"<option>1</option>"
+										+"<option>2</option>"
+										+"<option>3</option>"
+										+"<option>4</option>"
+										+"<option>5</option>"
+										+"<option>6</option>"
+										+"</select></td>";
+
+	// cols += "<td><select class='form-control form-control-sm'>"
+	// +"	<option>SIM</option>"
+	// +	"<option>NÂO</option>"
+	// +	"<option>CANCELAR</option>"
+	// +"</select></td>";
+	cols += "<td><input type='date' class='form-control' id='validationCustom01'  value='' ></td>";
+
+
+	cols += '<td>';
+	cols += '<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover Linha</button>';
+	cols += '</td>';
+	newRow.append(cols);
+	$("#tbl_schedules").append(newRow);
+	return false;
+};
