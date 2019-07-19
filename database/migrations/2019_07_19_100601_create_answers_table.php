@@ -15,11 +15,10 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('answer',190);
             $table->text('others');
 
-            $table->bigInteger('question_id')->unsigned();
-            $table->foreign('question_id')->references('id')->on('questions');
+            $table->bigInteger('alternative_id')->unsigned();
+            $table->foreign('alternative_id')->references('id')->on('alternatives');
 
             $table->bigInteger('institution_id')->unsigned();
             $table->foreign('institution_id')->references('id')->on('institutions');
