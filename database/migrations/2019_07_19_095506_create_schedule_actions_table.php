@@ -16,7 +16,6 @@ class CreateScheduleActionsTable extends Migration
         Schema::create('schedule_actions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->text('action');
-            $table->string('field_option', 3);
             $table->timestamps();
         });
     }

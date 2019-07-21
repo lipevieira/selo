@@ -44,34 +44,44 @@ html, body {
     text-decoration: none;
     text-transform: uppercase;
 }
+
 .m-b-md {
     margin-bottom: 30px;
 }
-.container-company{
+
+.container-company {
     width: 800px;
-    height: 300px;  
+    height: 300px;
 }
-.active_tab1
-{
-   background-color:#fff;
-   color:#333;
-   font-weight: 600;
+
+.active_tab1 {
+    background-color: #fff;
+    color: #333;
+    font-weight: 600;
 }
-.inactive_tab1
-{
-   background-color: #f5f5f5;
-   color: #333;
-   cursor: not-allowed;
+
+.inactive_tab1 {
+    background-color: #f5f5f5;
+    color: #333;
+    cursor: not-allowed;
 }
-.form-group{
+
+.form-group {
     margin-bottom: 0px;
 }
+
 /*.questions_censitario{
     color: #000;
 }*/
-.form-textarea, .class_textarea{
+
+.form-textarea, .class_textarea {
     min-height: 600px;
 }
-.qtd_caracteres{
-    text-align:  right;
+
+.qtd_caracteres {
+    text-align: right;
+}
+
+.field_option{
+    width: 150px;
 }

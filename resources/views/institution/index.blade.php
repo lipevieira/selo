@@ -189,15 +189,157 @@
 				<div class="panel-heading"><strong>QUESTIONÁRIO PARA DIAGNÓSTICO CENSITÁRIO</strong></div>
 				<div class="panel-body">
 					<!-- Inicio das Questões -->
-					
-					<p>1) A organização possui uma política interna de valorização da Diversidade Étnico-Racial aprovada pela direção?</p>
-					<select class="form-control form-control-sm">
-						<option>Small select</option>
-					</select>
-					
-					
+					@foreach ($questionAlternatives as $question)
+			
+						<p><strong>{{ $question->name }}</strong></p>
+
+						<div class="row">
+							<div class="col-md-12 mb-3">
+								<label for="">Resposta</label>
+								<select class="form-control form-control-sm">
+									<option value=""></option>
+									@foreach ($question->alternatives as $alternativa)				
+										<option>{{ $alternativa->alternative }}</option>
+									@endforeach
+								</select>
+								@if($question->field_option=="SIM")
+									<label for="">Se sim, quais?</label>
+									<input type="text" class="form-control">
+								@endif
+							</div>
+							
+						</div>
+					@endforeach
+					{{-- Tabelas perfil colaborador --}}
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<h4><strong>Perfil étnico racial dos colaboradores</strong></h4>
+							<table class="table">
+								<thead>
+									<tr>
+									<th scope="col">RAÇA/COR</th>
+									<th scope="col">Nº HOMEMS</th>
+									<th scope="col">Nº MULHERES</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th>
+											<input type="text" class="form-control" id="validationCustom01" value="Negros (pretos + pardos)" readonly="readonly">
+										</th>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<input type="text" class="form-control" id="validationCustom01" value="Demais grupos étinicos-raciais" readonly="readonly">
+										</th>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="form-group col-md-6">
+							<h4><strong>Nivel de atividade dos colaboradores</strong></h4>
+							<table class="table">
+								<thead>
+									<tr>
+									<th scope="col">NIVEL DE ATIVIDADE</th>
+									<th scope="col">RAÇA/COR</th>
+									<th scope="col">Nº HOMEMS</th>
+									<th scope="col">Nº MULHERES</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th width="160px;">
+											<input type="text" class="form-control" id="validationCustom01" value="Operacional" readonly="readonly">
+										</th>
+										<th>
+											<select class="form-control form-control-sm">
+												<option value=""></option>				
+												<option>Negros (pretos + pardos)</option>
+												<option>Demais grupos étinicos-raciais</option>
+											</select>
+										</th>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" value="Mark" required>
+										</td>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="" required>
+										</td>
+									
+									</tr>
+									<tr>
+										<th>
+											<input type="text" class="form-control" id="validationCustom01" value="Supervião" readonly="readonly">
+										</th>
+										<th>
+											<select class="form-control form-control-sm">
+												<option value=""></option>				
+												<option>Negros (pretos + pardos)</option>
+												<option>Demais grupos étinicos-raciais</option>
+											</select>
+										</th>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<input type="text" class="form-control" id="validationCustom01" value="Gerência/Chefia" readonly="readonly">
+										</th>
+										<th>
+											<select class="form-control form-control-sm">
+												<option value=""></option>				
+												<option>Negros (pretos + pardos)</option>
+												<option>Demais grupos étinicos-raciais</option>
+											</select>
+										</th>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<input type="text" class="form-control" id="validationCustom01" value="Direção" readonly="readonly">
+										</th>
+										<th>
+											<select class="form-control form-control-sm">
+												<option value=""></option>				
+												<option>Negros (pretos + pardos)</option>
+												<option>Demais grupos étinicos-raciais</option>
+											</select>
+										</th>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+										<td width="20px;">
+											<input type="number" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+										
 					<!-- Final das questões -->
-					<br />
+					<br /><br /><br /><br /><br />
 					<div align="center">
 						<button type="button" name="btn_previous_diagnostico" id="btn_previous_diagnostico" class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_diagnostico_next" id="btn_diagnostico_next" class="btn btn-info btn-lg">Proximo</button>
