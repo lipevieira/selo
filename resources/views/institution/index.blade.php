@@ -442,7 +442,7 @@
 
 						</tbody>
 					</table>
-					<!-- Final do creonograma -->
+					<!-- Final do cronograma -->
 					<br />
 					<div align="center">
 						<button type="button" name="btn_previous_cronograma" id="btn_previous_cronograma" class="btn btn-default btn-lg">Anterior</button>

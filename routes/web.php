@@ -19,4 +19,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
    Route::get('/', 'InstitutionController@index')->name('index.company');
+   Route::get('cronograma/ações', 'InstitutionController@getSheduleActions')->name('cronograma.actions');
 });

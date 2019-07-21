@@ -325,3 +325,24 @@ AddTableRowSchedule = function () {
 	$("#tbl_schedules").append(newRow);
 	return false;
 };
+// Requisição ajax para carregar select de ações do cronograma.
+//LINK PARA AUXILIAR NO CARREGAMENTO DO SELECT:
+//https://pt.stackoverflow.com/questions/156339/como-popular-um-select-com-jquery-json-e-ajax-mvc
+function loadSelectSheduleActions() {
+	$(document).select(function () {
+		$.ajax({
+			type: 'POST',
+			url: "/Empresas/SelecionarEmpresas",
+			data: { empresa: $("#empresa").val() },
+			dataType: "json",
+			success: function (json) {
+				var options = $('#empresa');
+				options.find('option').remove();
+				$.each(json, function (key, value) {
+					$('<option').val(value.IdEmpresa).text(value.Nome).appendTo(options);
+					//options += '<option value="' + key + '">' + value + '</option>';
+				});
+			}
+		});
+	});
+}
