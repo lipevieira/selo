@@ -11,19 +11,20 @@ class InstitutionController extends Controller
 {
     public function index()
     {
-        // Book::with('author')->get()
+        $actions = ScheduleAction::all();
         $questionAlternatives = Question::with('alternatives')->get();
 
-    	return view('institution.index',compact('questionAlternatives'));
+    	return view('institution.index',compact('questionAlternatives','actions'));
     }
     public function welcome()
     {
     	return view('welcome');
     }
-    public function getSheduleActions()
+    public function saveAllInstutition(Request $request)
     {
-        $actions = ScheduleAction::all();
-        
-        return response()->json($actions);
+        $dataForme = $request->all();
+
+        dd($dataForme);
     }
+  
 }

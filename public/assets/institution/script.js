@@ -3,6 +3,10 @@ $(document).ready(function () {
 	$('#etapa02').hide();
 	$('#etapa03').hide();
 
+	duplicaRowTableShedules();
+
+	duplicaRowTableMenbresCommision();
+
 	$("#cb_company").change(function(){
 		let url = $(this).data('url');
 		switch ($(this).val()) {
@@ -73,6 +77,7 @@ $(document).ready(function () {
 			break;	
 		}
 	});
+	
 	// Menu de cadastro de instituição.
 	$('#btn_indentificacao').click(function(){
 
@@ -263,6 +268,9 @@ $(document).ready(function () {
 
 		$('#list_metodologia').attr('data-toggle', 'tab');
 		$('#metodologia').addClass('active in');
+
+
+
 	});
 	// Button para adcionar limhas na tabela de CNPJs Adcionais
 	AddTableRow = function () {
@@ -288,61 +296,34 @@ $(document).ready(function () {
 
 		return false;
 	};
+
 });
 // Buuton adcionar linhas na tabela de cronograma
 AddTableRowSchedule = function () {
-	var newRow = $("<tr>");
-	var cols = "";
-	// TO-DE FAZER: REQUISIÇÃO AJAX PARA PREENCHER ESSE COMBO BOX
-	cols += "<td><select class='form-control form-control-sm'>"
-										+"<option>Small select</option>"
-										+"<option>Small select</option>"
-										+"<option>Small select</option>"
-										+"</select></td>";
+	var table = $('#tbl_schedules'),
+	lastRow = table.find('tbody tr:last'),
+	rowClone = lastRow.clone();
 
-	cols += "<td><textarea name='address' id='address' class='form-control'></textarea></td>";
-	cols += "<td><select class='form-control form-control-sm'>"
-										+"<option>1</option>"
-										+"<option>2</option>"
-										+"<option>3</option>"
-										+"<option>4</option>"
-										+"<option>5</option>"
-										+"<option>6</option>"
-										+"</select></td>";
+	table.find('tbody').append(rowClone);
 
-	// cols += "<td><select class='form-control form-control-sm'>"
-	// +"	<option>SIM</option>"
-	// +	"<option>NÂO</option>"
-	// +	"<option>CANCELAR</option>"
-	// +"</select></td>";
-	cols += "<td><input type='date' class='form-control' id='validationCustom01'  value='' ></td>";
-
-
-	cols += '<td>';
-	cols += '<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover Linha</button>';
-	cols += '</td>';
-	newRow.append(cols);
-	$("#tbl_schedules").append(newRow);
-	return false;
 };
-// Requisição ajax para carregar select de ações do cronograma.
-//LINK PARA AUXILIAR NO CARREGAMENTO DO SELECT:
-//https://pt.stackoverflow.com/questions/156339/como-popular-um-select-com-jquery-json-e-ajax-mvc
-function loadSelectSheduleActions() {
-	$(document).select(function () {
-		$.ajax({
-			type: 'POST',
-			url: "/Empresas/SelecionarEmpresas",
-			data: { empresa: $("#empresa").val() },
-			dataType: "json",
-			success: function (json) {
-				var options = $('#empresa');
-				options.find('option').remove();
-				$.each(json, function (key, value) {
-					$('<option').val(value.IdEmpresa).text(value.Nome).appendTo(options);
-					//options += '<option value="' + key + '">' + value + '</option>';
-				});
-			}
-		});
-	});
+// Duplicar as linhas da Table de Cronograma... 
+function duplicaRowTableShedules(){
+	for (var i = 0; i < 6; i++) {
+		var table = $('#tbl_schedules'),
+		lastRow = table.find('tbody tr:last'),
+		rowClone = lastRow.clone();
+
+		table.find('tbody').append(rowClone);
+	}
+}
+// Duplicar as linhas da Table de Cronograma... 
+function duplicaRowTableMenbresCommision(){
+	for (var i = 0; i < 2; i++) {
+		var table = $('#tbl_menbress_comission'),
+		lastRow = table.find('tbody tr:last'),
+		rowClone = lastRow.clone();
+
+		table.find('tbody').append(rowClone);
+	}
 }

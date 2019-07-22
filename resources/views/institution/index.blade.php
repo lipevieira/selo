@@ -7,7 +7,8 @@
 <h1>Cadastro da Instituição</h1>
 
 <!-- Menu de cadastro da instituição -->
-<form method="post" id="register_form">
+<form method="post" id="register_form" action="{{route('save.institution')}}" novalidate>
+	  @csrf
 	<ul class="nav nav-tabs">
 		<li class="nav-item">
 			<a class="nav-link active_tab1" style="border:1px solid #ccc" id="list_instituicao_detalhes">Indentificação da Instituição</a>
@@ -40,111 +41,90 @@
 					<!-- Inicio dos Inputs da Instituição-->
 					<div class="form-row">
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="name">Nome da Instituição proponente:	</label>
+							<input type="text" class="form-control"  name="name" id="name" placeholder="Nome da Instituição proponente:" value="" >
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="fantasy_name">Nome para certificação (nome fantasia):	</label>
+							<input type="text" class="form-control" id="fantasy_name" placeholder="Nome para certificação (nome fantasia):" value="" name="fantasy_name">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="activity_branch">Ramo de atividade:</label>
+							<input type="text" class="form-control" id="activity_branch" placeholder="Ramo de atividade:" value="" name="activity_branch">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="cnpj">CNPJ:</label>
+							<input type="text" class="form-control" id="cnpj" placeholder="CNPJ" value="CNPJ" name="cnpj">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="county">Município:</label>
+							<select class="form-control form-control-sm" name="county">
+								<option></option>
+								<option>Camaçari</option>
+								<option>Candeias</option>
+								<option>Lauro de Freitas</option>
+								<option>Salvador</option>
+								<option>Simões Filho</option>
+							</select>
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="uf">UF:</label>
+							<input type="text" class="form-control" id="uf" value="BA" name="uf" readonly="readonly">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="address">Endereço:</label>
+							<input type="text" class="form-control" id="address" placeholder="Endereço:" value="" name="address">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="email">E-mail:</label>
+							<input type="email" class="form-control" id="email" placeholder="E-mail" value="" name="email">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="phone">Telefone:</label>
+							<input type="text" class="form-control" id="phone" placeholder="Telefone" value=""name="phone">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="technical_manager">Responsável técnico:</label>
+							<input type="text" class="form-control" id="technical_manager" placeholder="Responsável técnico:" value="" name="technical_manager">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="formation">Formação:</label>
+							<input type="text" class="form-control" id="formation" placeholder="Formação:" value="" name="formation">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="phone_two">Telefone:</label>
+							<input type="text" class="form-control" id="phone_two" placeholder="Telefone:" value="" name="phone_two">
 						</div>
 						<div class="col-md-12 mb-3">
-							<label for="validationCustom01">First name</label>
-							<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+							<label for="email_two">E-mail:</label>
+							<input type="text" class="form-control" id="email_two" placeholder="E-mail " value="" name="email_two">
 						</div>
 						<!-- Menbros da comiisão -->
 						<h5 class="col-md-12 mb-3"> <strong> Recomendamos eleger três colaboradores para tratar da questão diversidade na empresa. Eles serão os contatos entre empresa e Comitê Gestor. Para melhor andamento do trabalho é indicado, preferencialmente, funcionários dos setores de Marketing e gestão de pessoas, e pelo menos um, estar ocupando um cargo de decisão.
 						</strong></h5>
 						<div class="col-md-12 mb-3">
-							<table class="table  table-bordered">
+							<table class="table  table-bordered" id="tbl_menbress_comission">
 								<thead>
 									<tr>
-										<th scope="col">First</th>
-										<th scope="col">Last</th>
-										<th scope="col">Handle</th>
-										<th scope="col">Handle</th>
+										<th scope="col">Nome do funcionário</th>
+										<th scope="col">Função / setor</th>
+										<th scope="col">Telefone</th>
+										<th scope="col">E-mail</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+											<input type="text" class="form-control" id="name_members_commission" placeholder="Nome" value="" name="name_members_commission[]">
 										</td>
 										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+											<input type="text" class="form-control" id="function" placeholder="Função / setor" value="" name="function[]">
 										</td>
 										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+											<input type="text" class="form-control" id="phone_members_commission" placeholder="Telefone" value="" name="phone_members_commission[]">
 										</td>
 										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-									</tr>
-									<tr>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-									</tr>	
-									<tr>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
-										</td>
-										<td>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+											<input type="email" class="form-control" id="email_members_commission" placeholder="E-mail" value="" name="email_members_commission[]">
 										</td>
 									</tr>
 								</tbody>
@@ -162,7 +142,7 @@
 										<th scope="col" width="950px">
 											&nbsp;
 											<label>CNPJs Acicionais</label>
-											<input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="">
+											<input type="text" class="form-control" id="cnpj_additional" placeholder="CNPJ" name="cnpj_additional[]">
 										</th>
 										<th>
 											&nbsp;
@@ -394,24 +374,24 @@
 					<table class="table table-bordered" id="tbl_schedules">
 						<thead>
 							<tr>
-								<th scope="col"> <button onclick="AddTableRowSchedule()" type="button" class="btn btn-success">Adicionar  Linhas na tabela </button></th>
+								<th scope="col"> <button onclick="AddTableRowSchedule()" type="button" class="btn btn-success">Adicionar  Linhas na Tabela </button></th>
 							</tr>
 							<tr>
 								<th scope="col">AÇÕES</th>
 								<th scope="col">ATIVIDADE(O que é necessário fazer para atingir este objetivo)</th>
 								<th scope="col">QUANTIDADE</th>
-								<!-- <th scope="col">STATUS</th> -->
 								<th scope="col">DATA LIMITE</th>
 								<th scope="col">REMOVER</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td width="200px;">
-									<select class="form-control form-control-sm">
-										<option>Essa função deve estar com o formato de funções do jQuery, para que seja possível utilizarmos as funções dele.</option>
-										<option>Ação 02</option>
-										<option>Ação 03</option>
+								<td width="300px;">
+									<select class="form-control form-control-sm" id="cb_cronograma_actions">
+										<option></option>
+										@foreach ($actions as $item)
+											<option>{{ $item->description}}</option>	
+										@endforeach
 									</select>
 								</td>
 								<td>
@@ -425,13 +405,9 @@
 										<option>4</option>
 										<option>5</option>
 										<option>6</option>
+										<option>12</option>
 									</select>
 								</td>
-								<!-- <td>
-									<select class="form-control form-control-sm">
-										<option>Não</option>
-									</select>
-								</td> -->
 								<td>
 									<input type="date" class="form-control" id="validationCustom01"  value="" >
 								</td>
@@ -527,7 +503,7 @@
 					<br />
 					<div align="center">
 						<button type="button" name="btn_previous_parceiras" id="btn_resultados_previous" class="btn btn-default btn-lg">Anterior</button>
-						<button type="button" name="btn_resultados_next" id="btn_resultados_next" class="btn btn-success btn-lg">Salvar Informações</button>
+						<button type="submit" name="btn_resultados_next" id="btn_resultados_next" class="btn btn-success btn-lg">Salvar Informações</button>
 					</div>
 					<br />
 				</div>

@@ -18,7 +18,7 @@ class CreateSchedulesTable extends Migration
             $table->string('action',190);
             $table->text('activity');
             $table->integer('amount');
-            $table->string('status',3);
+            $table->string('status',3)->default('NÃO');;
             $table->date('deadline');
             
             $table->bigInteger('institution_id')->unsigned();
