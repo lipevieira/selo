@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSchedulesTable extends Migration
+class CreateCollaboratorActivityLevelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateSchedulesTable extends Migration
      */
     public function up()
     {
-        Schema::create('schedules', function (Blueprint $table) {
+        Schema::create('collaborator_activity_levels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('action',190);
-            $table->text('activity');
-            $table->integer('amount');
-            $table->string('status',3)->default('NÃO');
-            $table->date('deadline');
-            
+
+            $table->string('color', 60);
+            $table->integer('human_quantity_activity_level');
+            $table->integer('woman_quantity_activity_level');
+            $table->string('activity_level', 60);
+
             $table->bigInteger('institution_id')->unsigned();
             $table->foreign('institution_id')->references('id')->on('institutions');
 
@@ -35,6 +35,6 @@ class CreateSchedulesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schedules');
+        Schema::dropIfExists('collaborator_activity_levels');
     }
 }

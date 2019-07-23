@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Schedule extends Model
+class CollaboratorActivityLevel extends Model
 {
-    protected $fillable = ['action', 'activity', 'amount', 'status', 'deadline', 'institution_id' ];
+    protected $fillable = ['color', 'human_quantity_activity_level', 'woman_quantity_activity_level', 'activity_level', 'institution_id'];
+
     /**
      * Descrioption: Volta do relacionameto
-     * Muitos cronogramas pertercem a uma Instituição
+     * Muitos CollaboratorActivityLevel pertercem a uma Instituição
      * @return Institution
      */
     public function institution()

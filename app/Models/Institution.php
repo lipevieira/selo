@@ -7,6 +7,11 @@ use Illuminate\Console\Scheduling\Schedule;
 
 class Institution extends Model
 {
+    protected $fillable = ['name', 'fantasy_name', 'activity_branch', 'cnpj', 'county',
+        'uf', 'address', 'email', 'phone', 'technical_manager', 'formation', 'phone_two',
+        'email_two', 'company_classification', 'action_plan', 'partners', 'methodology',
+        'result'
+    ];
     /**
      * @description:  Uma instuição tem muitas filiais
      * Relacionameto 1 - N
@@ -51,5 +56,13 @@ class Institution extends Model
     public function answer()
     {
         return $this->hasMany(Answer::class);
+    }
+    /***
+     * @description: Uma instuição tem muitos CollaboratorActivityLevel 
+     * Relacionamento 1 - N
+     */
+    public function CollaboratorActivityLevels()
+    {
+        return $this->hasMany(CollaboratorActivityLevel::class);
     }
 }

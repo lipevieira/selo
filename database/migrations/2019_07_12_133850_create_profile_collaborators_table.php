@@ -15,15 +15,9 @@ class CreateProfileCollaboratorsTable extends Migration
     {
         Schema::create('profile_collaborators', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('color',100);
+            $table->string('color',60);
             $table->integer('human_quantity');
             $table->integer('woman_quantity');
-
-            $table->integer('human_quantity_activity_level');
-            $table->integer('woman_quantity_activity_level');
-
-            $table->string('activity_level',60);
-
 
             $table->bigInteger('institution_id')->unsigned();
             $table->foreign('institution_id')->references('id')->on('institutions');

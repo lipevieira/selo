@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         // $this->call(QuestionTableSeed::class);
        
-        // $this->call([
-        //     QuestionTableSeed::class,
-        //     AlternativeTableSeed::class,
-        //     ScheduleActionTableSeeder::class,
-        // ]);
+        $this->call([
+            QuestionTableSeed::class,
+            AlternativeTableSeed::class,
+            ScheduleActionTableSeeder::class,
+        ]);
     }
 }

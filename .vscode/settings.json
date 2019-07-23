@@ -1,3 +1,4 @@
 {
-    "editor.fontFamily": "Times New Roman, 'Courier New', monospace"
+    "editor.fontFamily": "Fira Code, 'Courier New', monospace",
+    "blade.format.enable": true
 }
