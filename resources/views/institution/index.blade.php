@@ -109,10 +109,22 @@
 							<input type="text" class="form-control" id="phone_two" placeholder="Telefone:" value=""
 								name="phone_two">
 						</div>
-						<div class="col-md-12 mb-3">
+						<div class="col-md-6 mb-3">
 							<label for="email_two">E-mail:</label>
 							<input type="text" class="form-control" id="email_two" placeholder="E-mail " value=""
 								name="email_two">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label for="email_two">Classificação da Empressa</label>
+							<select class="form-control form-control-sm" id="company_classification" name="company_classification">
+								<option></option>
+								<option>Micro(5 a 9 funcionários)</option>
+								<option>Pequena(10 a 12 funcionários)</option>
+								<option>Pequena(13 a 49 funcionários)</option>
+								<option>Média(50 a 99 funcionários)</option>
+								<option>Grande(+ de 100 funcionários)</option>
+								<option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
+							</select>
 						</div>
 						<!-- Menbros da comiisão -->
 						<h5 class="col-md-12 mb-3"> <strong> Recomendamos eleger três colaboradores para tratar da
@@ -134,20 +146,20 @@
 								<tbody>
 									<tr>
 										<td>
-											<input type="text" class="form-control" id="name_members_commission"
-												placeholder="Nome" value="" name="name_members_commission[]">
+											<input type="text" class="form-control" id="members_name"
+												placeholder="Nome" value="" name="members_name[]">
 										</td>
 										<td>
-											<input type="text" class="form-control" id="function"
-												placeholder="Função / setor" value="" name="function[]">
+											<input type="text" class="form-control" id="members_function"
+												placeholder="Função / setor" value="" name="members_function[]">
 										</td>
 										<td>
 											<input type="text" class="form-control" id="phone_members_commission"
 												placeholder="Telefone" value="" name="phone_members_commission[]">
 										</td>
 										<td>
-											<input type="email" class="form-control" id="email_members_commission"
-												placeholder="E-mail" value="" name="email_members_commission[]">
+											<input type="email" class="form-control" id="members_email"
+												placeholder="E-mail" value="" name="members_email[]">
 										</td>
 									</tr>
 								</tbody>

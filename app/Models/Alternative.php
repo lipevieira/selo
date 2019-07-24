@@ -19,8 +19,8 @@ class Alternative extends Model
      * @description: Volta do relacionamento
      * 1 - 1
      */
-    public function answers()
+    public function institutions()
     {
-        return $this->belongsTo(Answer::class);
+        return $this->belongsToMany(Institution::class,'answers');
     }
 }

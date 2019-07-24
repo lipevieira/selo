@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CommissionMembers extends Model
 {
-    protected $fillable = ['name', 'email', 'function', 'phone', 'institution_id'];
+    protected $fillable = ['members_name', 'members_email', 'members_function', 'members_phone', 'institution_id'];
     /**
      * Descrioption: Volta do relacionameto
      * Muitos Menbro da comissão pertercem a uma Instituição

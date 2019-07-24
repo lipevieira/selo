@@ -15,10 +15,10 @@ class CreateCommissionMembersTable extends Migration
     {
         Schema::create('commission_members', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100);
-            $table->string('email', 150)->unique();
-            $table->string('function', 60);
-            $table->string('phone', 20);
+            $table->string('members_name', 100);
+            $table->string('members_email', 150)->unique();
+            $table->string('members_function', 60);
+            $table->string('members_phone', 20);
             $table->bigInteger('institution_id')->unsigned();
             $table->foreign('institution_id')->references('id')->on('institutions');
             $table->timestamps();
