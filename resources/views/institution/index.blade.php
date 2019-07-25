@@ -61,7 +61,7 @@
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="cnpj">CNPJ:</label>
-							<input type="text" class="form-control" id="cnpj" placeholder="CNPJ" value="CNPJ"
+							<input type="text" class="form-control" id="cnpj" placeholder="Informe apenas números" value=""
 								name="cnpj">
 						</div>
 						<div class="col-md-4 mb-3">
@@ -175,12 +175,12 @@
 								</thead>
 								<tbody>
 									<tr>
-										<th scope="col" width="950px">
+										<td scope="col" width="950px">
 											&nbsp;
-											<label>CNPJs Acicionais</label>
+											<label>CNPJs   Acicionais</label>
 											<input type="text" class="form-control" id="cnpj_additional"
-												placeholder="CNPJ" name="cnpj_additional[]">
-										</th>
+												placeholder="Informe apenas números" name="cnpj_additional[]">
+										</td>
 										<th>
 											&nbsp;
 											<label>Excluir</label><br>

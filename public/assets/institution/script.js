@@ -276,7 +276,7 @@ $(document).ready(function () {
 	AddTableRow = function () {
 		var newRow = $("<tr>");
 		var cols = "";
-		cols += "<td><input type= 'text' class='form-control' id='validationCustom01' placeholder='First name' value=''></td>";
+		cols += "<td><input type='text' class='form-control' id='cnpj_additional' placeholder = 'Informe apenas números'name =' cnpj_additional[]' ></td>";
 
 
 		cols += '<td>';

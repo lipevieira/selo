@@ -53,9 +53,9 @@ class Institution extends Model
      * Relacionameto 1 - N
      * @return ProfileCollaborator
      */
-    public function alternatives()
+    public function answers()
     {
-        return $this->belongsToMany(Anternative::class, 'answers');
+        return $this->hasMany(Answer::class);
     }
     /***
      * @description: Uma instuição tem muitos CollaboratorActivityLevel 

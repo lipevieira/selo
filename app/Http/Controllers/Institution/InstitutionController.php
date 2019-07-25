@@ -24,21 +24,39 @@ class InstitutionController extends Controller
     public function saveAllInstutition(Request $request)
     {
         $dataForm = $request->except('_token');
-
-        //Salvando uma instituição com seus membros
         $institution = new Institution();
-        // dd($dataForm);
-        
-        $institution = Institution::create($dataForm);
-        // $institution->commissionMembers()->attach(\App\Models\CommissionMembers::create($dataForm)->id);  
 
-        $institution->commissionMembers()->insert([
-            'members_name' => $dataForm['members_name'],
-            'members_function' => $dataForm['members_function'],
-            'phone_members_commission' => $dataForm['phone_members_commission'],
-            'members_email' => $dataForm['members_email'],
-        ])->id;
-        
+        $institution = Institution::create($dataForm);
+        $counteArrayMembrers = count($request->members_name);
+        // Salvado os três membros da instituição
+        for ($i = 0; $i < 3; $i++) {
+            $institution->commissionMembers()->create([
+                'members_name' => $request->members_name[$i],
+                'members_function' =>  $request->members_function[$i],
+                'members_phone' =>  $request->phone_members_commission[$i],
+                'members_email' =>  $request->members_email[$i],
+            ]);
+        }
+        // Verificação para salvar outros CNPJs caso seja enviado.
+        if ($dataForm['cnpj_additional'] != null) {
+            $counteArrayCnpj = count($request->cnpj_additional);
+            for ($i = 0; $i < $counteArrayCnpj; $i++) {
+                $institution->branches()->create([
+                    'cnpj_additional' => $request->cnpj_additional[$i],
+                ]);
+            }
+        }
+        //Salvado o Diagnóstico Censitário.
+        $counteArrayDiagnosticoCensitario = count($request->alternative_id);
+        for ($i = 0; $i < $counteArrayDiagnosticoCensitario; $i++) {
+            $institution->answers()->create([
+                'alternative_id' => $request->alternative_id[$i],
+                'others' => $request->others[$i],
+            ]);
+        }
+
+
+
 
         // $levelActivity =    $institution->CollaboratorActivityLevels()->create($dataForm);
         // $perfilColaborators = $institution->profileCollaborators()->create($dataForm);

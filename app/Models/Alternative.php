@@ -14,13 +14,9 @@ class Alternative extends Model
     {
         return $this->belongsTo(Question::class);
     }
-
-    /*** 
-     * @description: Volta do relacionamento
-     * 1 - 1
-     */
-    public function institutions()
+    public function answer()
     {
-        return $this->belongsToMany(Institution::class,'answers');
+        return $this->belongsTo(Answer::class);
     }
+  
 }
