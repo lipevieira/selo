@@ -24,6 +24,7 @@ class InstitutionController extends Controller
     public function saveAllInstutition(Request $request)
     {
         $dataForm = $request->except('_token');
+        $cnpjAdd = $request->cnpj_additional;
         $institution = new Institution();
 
         $institution = Institution::create($dataForm);
@@ -38,7 +39,7 @@ class InstitutionController extends Controller
             ]);
         }
         // Verificação para salvar outros CNPJs caso seja enviado.
-        if ($dataForm['cnpj_additional'] != null) {
+        if (!empty($cnpjAdd)) {
             $counteArrayCnpj = count($request->cnpj_additional);
             for ($i = 0; $i < $counteArrayCnpj; $i++) {
                 $institution->branches()->create([
@@ -48,15 +49,14 @@ class InstitutionController extends Controller
         }
         //Salvado o Diagnóstico Censitário.
         $counteArrayDiagnosticoCensitario = count($request->alternative_id);
+        $array = '';
+
         for ($i = 0; $i < $counteArrayDiagnosticoCensitario; $i++) {
             $institution->answers()->create([
                 'alternative_id' => $request->alternative_id[$i],
-                'others' => $request->others[$i],
+                'others' => !empty($request->others[$i]) ? $request->others[$i] : $array,
             ]);
         }
-
-
-
 
         // $levelActivity =    $institution->CollaboratorActivityLevels()->create($dataForm);
         // $perfilColaborators = $institution->profileCollaborators()->create($dataForm);
