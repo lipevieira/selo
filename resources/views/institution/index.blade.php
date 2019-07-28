@@ -5,7 +5,6 @@
 @section('content')
 
 <h1>Cadastro da Instituição</h1>
-
 <!-- Menu de cadastro da instituição -->
 <form method="post" id="register_form" action="{{route('save.institution')}}" novalidate>
 	@csrf
@@ -37,6 +36,11 @@
 		</li>
 	</ul>
 	<!-- Campos de texto para descrever a instituição -->
+	@if(session('success'))
+	<div class="alert alert-success">
+		{{ session('success') }}
+	</div>
+	@endif
 	<div class="tab-content" style="margin-top:16px; ">
 		<div class="tab-pane active" id="instituicao_detalhes">
 			<div class="panel panel-default">
@@ -61,8 +65,8 @@
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="cnpj">CNPJ:</label>
-							<input type="text" class="form-control" id="cnpj" placeholder="Informe apenas números" value=""
-								name="cnpj">
+							<input type="text" class="form-control" id="cnpj" placeholder="Informe apenas números"
+								value="" name="cnpj">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="county">Município:</label>
@@ -116,7 +120,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="email_two">Classificação da Empressa</label>
-							<select class="form-control form-control-sm" id="company_classification" name="company_classification">
+							<select class="form-control form-control-sm" id="company_classification"
+								name="company_classification">
 								<option></option>
 								<option>Micro(5 a 9 funcionários)</option>
 								<option>Pequena(10 a 12 funcionários)</option>
@@ -146,8 +151,8 @@
 								<tbody>
 									<tr>
 										<td>
-											<input type="text" class="form-control" id="members_name"
-												placeholder="Nome" value="" name="members_name[]">
+											<input type="text" class="form-control" id="members_name" placeholder="Nome"
+												value="" name="members_name[]">
 										</td>
 										<td>
 											<input type="text" class="form-control" id="members_function"
@@ -177,7 +182,7 @@
 									<tr>
 										<td scope="col" width="950px">
 											&nbsp;
-											<label>CNPJs   Acicionais</label>
+											<label>CNPJs Acicionais</label>
 											<input type="text" class="form-control" id="cnpj_additional"
 												placeholder="Informe apenas números" name="cnpj_additional[]">
 										</td>
@@ -209,9 +214,7 @@
 				<div class="panel-body">
 					<!-- Inicio das Questões -->
 					@foreach ($questionAlternatives as $question)
-
 					<p><strong>{{ $question->name }}</strong></p>
-
 					<div class="row">
 						<div class="col-md-12 mb-3">
 							<label for="">Resposta</label>
@@ -221,9 +224,11 @@
 								<option value="{{$alternativa->id}}">{{ $alternativa->alternative }}</option>
 								@endforeach
 							</select>
-							@if($question->field_option=="SIM")
-							<label for="">Se sim, quais?</label>
-							<input type="text" class="form-control" name="others[]">
+							@if($question->field_option == "SIM")
+							<label for="others">Se sim, quais?</label>
+							<input type="text" class="form-control" name="others[]" id="others">
+							@else
+							<input type="hidden" class="form-control" name="others[]" id="others">
 							@endif
 						</div>
 
@@ -234,7 +239,7 @@
 						<div class="form-group col-md-6">
 							<h4><strong>Nivel de atividade dos colaboradores: Demais grupos étnicos-raciais</strong>
 							</h4>
-							<table class="table">
+							<table class="table" id="tblLevelActivicDemiasGroups">
 								<thead>
 									<tr>
 										<th scope="col">NIVEL DE ATIVIDADE</th>
@@ -250,8 +255,9 @@
 												value="Operacional" readonly="readonly" name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly" name="color[]">
+											<input type="text" class="form-control" id="color"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
@@ -259,7 +265,7 @@
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value="" name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -269,7 +275,8 @@
 										</th>
 										<th>
 											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly" name="color[]">
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
@@ -277,7 +284,7 @@
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value="" name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -287,7 +294,8 @@
 										</th>
 										<th>
 											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly" name="color[]">
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
@@ -295,17 +303,18 @@
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value="" name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
 										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level"
-												value="Direção" readonly="readonly" name="activity_level[]">
+											<input type="text" class="form-control" id="activity_level" value="Direção"
+												readonly="readonly" name="activity_level[]">
 										</th>
 										<th>
 											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly" name="color[]">
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
@@ -313,16 +322,15 @@
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value="" name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
-									
 								</tbody>
 							</table>
 						</div>
 						<div class="form-group col-md-6">
 							<h4><strong>Nivel de atividade dos colaboradores: Negros (pretos + pardos)</strong></h4>
-							<table class="table">
+							<table class="table" id="tblLevelAtcivictColaboratorsblacks">
 								<thead>
 									<tr>
 										<th scope="col">NIVEL DE ATIVIDADE</th>
@@ -343,11 +351,11 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value=""  name="human_quantity_activity_level[]">
+												value="" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value=""  name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -356,16 +364,17 @@
 												value="Supervisão" readonly="readonly" name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color"
-												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
+											<input type="text" class="form-control" id="color[]"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value=""  name="human_quantity_activity_level[]">
+												value="" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value=""  name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -374,37 +383,38 @@
 												value="Gerência / Chefia" readonly="readonly" name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color"
-												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
+											<input type="text" class="form-control" id="color[]"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value=""  name="human_quantity_activity_level[]">
+												value="" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value=""  name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
 										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level"
-												value="Direção" readonly="readonly" name="activity_level[]">
+											<input type="text" class="form-control" id="activity_level" value="Direção"
+												readonly="readonly" name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color"
-												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
+											<input type="text" class="form-control" id="color[]"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value=""  name="human_quantity_activity_level[]">
+												value="" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												 value=""  name="woman_quantity_activity_level[]">
+												value="" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
-								
 								</tbody>
 							</table>
 						</div>
@@ -424,33 +434,33 @@
 							<tbody>
 								<tr>
 									<th>
-										<input type="text" class="form-control" id="color"
-											value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
+										<input type="text" class="form-control" value="Negros (pretos + pardos)"
+											readonly="readonly" name="profile_color[]">
 									</th>
 									<td width="20px;">
-										<input type="text" class="form-control" id="human_quantity"
-											 value="" name="human_quantity[]">
+										<input type="text" class="form-control" id="human_quantity" value=""
+											name="human_quantity[]">
 									</td>
 									<td width="20px;">
-										<input type="text" class="form-control" id="woman_quantity"
-										 value="" name="woman_quantity[]" >
+										<input type="text" class="form-control" id="woman_quantity" value=""
+											name="woman_quantity[]">
 									</td>
 								</tr>
 								<tr>
 									<th>
-										<input type="text" class="form-control" id="color"
-											value="Demais grupos étnicos-raciais" readonly="readonly" name="color[]">
+										<input type="text" class="form-control" value="Demais grupos étnicos-raciais"
+											readonly="readonly" name="profile_color[]">
 									</th>
 									<td width="20px;">
-										<input type="text" class="form-control" id="human_quantity"
-											 value="" name="human_quantity[]">
+										<input type="text" class="form-control" id="human_quantity" value=""
+											name="human_quantity[]">
 									</td>
 									<td width="20px;">
-										<input type="text" class="form-control" id="woman_quantity"
-										 value="" name="woman_quantity[]" >
+										<input type="text" class="form-control" id="woman_quantity" value=""
+											name="woman_quantity[]">
 									</td>
 								</tr>
-								
+
 							</tbody>
 						</table>
 					</div>
@@ -483,8 +493,8 @@
 									Tamanho: 3000
 								</strong>
 							</div>
-							<textarea class="form-control class_textarea" id="action_plan"
-								rows="3" name="action_plan"></textarea>
+							<textarea class="form-control class_textarea" id="action_plan" rows="3"
+								name="action_plan"></textarea>
 						</div>
 					</div>
 					<!-- Final do plano de trabalho -->
@@ -509,7 +519,7 @@
 					<h4>Listar todas as atividades necessárias à realização do projeto.</h4>
 					<label>
 						Autoriza a divulgação destas ações pela SEMUR?
-						<select class="form-control-sm">
+						<select class="form-control-sm" name="authorization">
 							<option></option>
 							<option>SIM</option>
 							<option>NÃO</option>
@@ -594,7 +604,8 @@
 						<strong>
 							Tamanho: 2000
 						</strong>
-						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3" name="partners"></textarea>
+						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
+							name="partners"></textarea>
 					</div>
 					<!-- Final dos inputs -->
 					<br />
@@ -629,7 +640,8 @@
 						<strong>
 							Tamanho: 7000
 						</strong>
-						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3" name="methodology"></textarea>
+						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
+							name="methodology"></textarea>
 					</div>
 					<!-- Final dos Inpust -->
 					<br />
@@ -660,7 +672,8 @@
 						<strong>
 							Tamanho: 3000
 						</strong>
-						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3" name="result"></textarea>
+						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
+							name="result"></textarea>
 					</div>
 					<!-- Final dos Inputs -->
 					<br />

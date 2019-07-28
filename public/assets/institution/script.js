@@ -2,11 +2,9 @@ $(document).ready(function () {
 	$('#etapa01').hide();
 	$('#etapa02').hide();
 	$('#etapa03').hide();
-
-	duplicaRowTableShedules();
-
+	// Funtion para duplicar Linhas das Tabelas
+	// duplicaRowTableShedules();
 	duplicaRowTableMenbresCommision();
-
 	$("#cb_company").change(function(){
 		let url = $(this).data('url');
 		switch ($(this).val()) {
@@ -308,15 +306,15 @@ AddTableRowSchedule = function () {
 
 };
 // Duplicar as linhas da Table de Cronograma... 
-function duplicaRowTableShedules(){
-	for (var i = 0; i < 6; i++) {
-		var table = $('#tbl_schedules'),
-		lastRow = table.find('tbody tr:last'),
-		rowClone = lastRow.clone();
+// function duplicaRowTableShedules(){
+// 	for (var i = 0; i < 6; i++) {
+// 		var table = $('#tbl_schedules'),
+// 		lastRow = table.find('tbody tr:last'),
+// 		rowClone = lastRow.clone();
 
-		table.find('tbody').append(rowClone);
-	}
-}
+// 		table.find('tbody').append(rowClone);
+// 	}
+// }
 // Duplicar as linhas da Table de Cronograma... 
 function duplicaRowTableMenbresCommision(){
 	for (var i = 0; i < 2; i++) {
@@ -327,3 +325,4 @@ function duplicaRowTableMenbresCommision(){
 		table.find('tbody').append(rowClone);
 	}
 }
+

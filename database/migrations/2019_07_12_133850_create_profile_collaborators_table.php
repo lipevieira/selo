@@ -15,7 +15,7 @@ class CreateProfileCollaboratorsTable extends Migration
     {
         Schema::create('profile_collaborators', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('color',60);
+            $table->string('profile_color',60);
             $table->integer('human_quantity');
             $table->integer('woman_quantity');
 

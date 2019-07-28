@@ -29,6 +29,7 @@ class CreateInstitutionsTable extends Migration
             $table->string('phone_two',20);
             $table->string('email_two',150)->unique();
             $table->string('company_classification',100);
+            $table->string('authorization',3);
             $table->text('action_plan');
             $table->text('partners');
             $table->text('methodology');

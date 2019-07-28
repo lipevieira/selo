@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProfileCollaborator extends Model
 {
-    protected $fillable = ['color', 'human_quantity', 'woman_quantity', 'institution_id'];
+    protected $fillable = ['profile_color', 'human_quantity', 'woman_quantity', 'institution_id'];
     /**
      * Descrioption: Volta do relacionameto
      * Muitos Menbro da comissão pertercem a uma Instituição
