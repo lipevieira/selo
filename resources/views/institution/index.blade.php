@@ -68,9 +68,16 @@
 								placeholder="Nome para certificação (nome fantasia):" value="" name="fantasy_name">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="activity_branch">Ramo de atividade:</label>
-							<input type="text" class="form-control" id="activity_branch"
-								placeholder="Ramo de atividade:" value="" name="activity_branch">
+							<label for="email_two">Classificação da Empresa</label>
+							<select class="form-control form-control-sm" id="company_classification" name="company_classification">
+								<option></option>
+								<option>Micro(5 a 9 funcionários)</option>
+								<option>Pequena(10 a 12 funcionários)</option>
+								<option>Pequena(13 a 49 funcionários)</option>
+								<option>Média(50 a 99 funcionários)</option>
+								<option>Grande(+ de 100 funcionários)</option>
+								<option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
+							</select>	
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="cnpj">CNPJ:</label>
@@ -123,22 +130,18 @@
 								name="phone_two">
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="email_two">E-mail:</label>
-							<input type="text" class="form-control" id="email_two" placeholder="E-mail " value=""
-								name="email_two">
+							<label for="email_two">Atividade:</label>
+							<select class="form-control form-control-sm" name="institution_activity">
+								<option></option>
+								<option>Indústria</option>
+								<option>Comércio</option>
+								<option>Serviços</option>
+							</select>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="email_two">Classificação da Empressa</label>
-							<select class="form-control form-control-sm" id="company_classification"
-								name="company_classification">
-								<option></option>
-								<option>Micro(5 a 9 funcionários)</option>
-								<option>Pequena(10 a 12 funcionários)</option>
-								<option>Pequena(13 a 49 funcionários)</option>
-								<option>Média(50 a 99 funcionários)</option>
-								<option>Grande(+ de 100 funcionários)</option>
-								<option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
-							</select>
+							<label for="activity_branch">Ramo de atividade:</label>
+							<input type="text" class="form-control" id="activity_branch" placeholder="Ramo de atividade:" value=""
+								name="activity_branch">
 						</div>
 						<!-- Menbros da comiisão -->
 						<h5 class="col-md-12 mb-3"> <strong> Recomendamos eleger três colaboradores para tratar da
