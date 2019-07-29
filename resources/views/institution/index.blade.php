@@ -35,12 +35,21 @@
 				Esperados</a>
 		</li>
 	</ul>
-	<!-- Campos de texto para descrever a instituição -->
+	{{-- Messagem de casdastro --}}
 	@if(session('success'))
 	<div class="alert alert-success">
 		{{ session('success') }}
 	</div>
 	@endif
+	{{-- messagem de campos invalidos  --}}
+	@if(isset($errors) && count($errors) > 0)
+	<div class="alert alert-danger">
+		@foreach ($errors->all() as $error)
+		<p>{{$error}}</p>
+		@endforeach
+	</div>
+	@endif
+	<!-- Campos de texto para descrever a instituição -->
 	<div class="tab-content" style="margin-top:16px; ">
 		<div class="tab-pane active" id="instituicao_detalhes">
 			<div class="panel panel-default">

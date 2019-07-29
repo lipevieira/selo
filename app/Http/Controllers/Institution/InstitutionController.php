@@ -7,6 +7,7 @@ use App\Models\Institution;
 use App\Models\Question;
 use App\Models\ScheduleAction;
 use Illuminate\Http\Request;
+use App\Http\Requests\Institution\InstitutionFormRequest;
 
 class InstitutionController extends Controller
 {
@@ -22,7 +23,7 @@ class InstitutionController extends Controller
         return view('welcome');
     }
 
-    public function saveAllInstutition(Request $request)
+    public function saveAllInstutition(InstitutionFormRequest $request)
     {
         $dataForm = $request->except('_token');
         // dd($dataForm);
