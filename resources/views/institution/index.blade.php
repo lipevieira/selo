@@ -49,6 +49,18 @@
 		@endforeach
 	</div>
 	@endif
+	{{-- Messagem para validação de cnpj --}}
+	@if(session('error-cnpj'))
+		<div class="alert alert-danger">
+			{{ session('error-cnpj') }}
+		</div>
+	@endif
+{{-- Messagem para Data  Limite--}}
+@if(session('error-deadline'))
+	<div class="alert alert-danger">
+		{{ session('error-deadline') }}
+	</div>
+@endif
 	<!-- Campos de texto para descrever a instituição -->
 	<div class="tab-content" style="margin-top:16px; ">
 		<div class="tab-pane active" id="instituicao_detalhes">
@@ -69,7 +81,8 @@
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="email_two">Classificação da Empresa</label>
-							<select class="form-control form-control-sm" id="company_classification" name="company_classification">
+							<select class="form-control form-control-sm" id="company_classification"
+								name="company_classification">
 								<option></option>
 								<option>Micro(5 a 9 funcionários)</option>
 								<option>Pequena(10 a 12 funcionários)</option>
@@ -77,7 +90,7 @@
 								<option>Média(50 a 99 funcionários)</option>
 								<option>Grande(+ de 100 funcionários)</option>
 								<option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
-							</select>	
+							</select>
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="cnpj">CNPJ:</label>
@@ -140,8 +153,8 @@
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="activity_branch">Ramo de atividade:</label>
-							<input type="text" class="form-control" id="activity_branch" placeholder="Ramo de atividade:" value=""
-								name="activity_branch">
+							<input type="text" class="form-control" id="activity_branch"
+								placeholder="Ramo de atividade:" value="" name="activity_branch">
 						</div>
 						<!-- Menbros da comiisão -->
 						<h5 class="col-md-12 mb-3"> <strong> Recomendamos eleger três colaboradores para tratar da
@@ -171,8 +184,8 @@
 												placeholder="Função / setor" value="" name="members_function[]">
 										</td>
 										<td>
-											<input type="text" class="form-control" id="phone_members_commission"
-												placeholder="Telefone" value="" name="phone_members_commission[]">
+											<input type="text" class="form-control" id="members_phone"
+												placeholder="Telefone" value="" name="members_phone[]">
 										</td>
 										<td>
 											<input type="email" class="form-control" id="members_email"

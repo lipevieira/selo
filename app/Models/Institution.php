@@ -10,7 +10,7 @@ class Institution extends Model
     protected $fillable = ['name', 'fantasy_name', 'activity_branch', 'cnpj', 'county',
         'uf', 'address', 'email', 'phone', 'technical_manager', 'formation', 'phone_two',
         'email_two', 'company_classification', 'action_plan', 'partners', 'methodology',
-        'result','authorization'
+        'result','authorization', 'institution_activity'
     ];
     /**
      * @description:  Uma instuição tem muitas filiais

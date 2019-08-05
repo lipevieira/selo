@@ -27,7 +27,7 @@ class InstitutionFormRequest extends FormRequest
             'name' => 'required | min:3 | max:100',
             'fantasy_name' => 'required | min:3 | max:100',
             'activity_branch' => 'required | min:3 | max:100',
-            'cnpj' => 'required | min:11 | max:20',
+            'cnpj' => 'required | min:18 | max:18',
             'county' => 'required | min:3 | max:80',
             'uf' => 'required | max:2',
             'address' => 'required | min:5 | max:190',
@@ -43,22 +43,21 @@ class InstitutionFormRequest extends FormRequest
             'partners' => 'required | min:10|max:2000',
             'methodology' => 'required | min:10',
             'result' => 'required | min:10',
-            
-            'members_name '  => 'required | min:4 | max:100',
-            'members_email ' => 'required | unique:commission_members,id | max:100',
-            'members_function ' => 'required | max:60',
-            'members_phone ' => 'required | min:4 | max:20',
+            'members_name.*'  => 'required | min:4 | max:100',
+            'members_email.*' => 'required|unique:commission_members,id|max:150',
+            'members_function.*' => 'required | max:60',
+            'members_phone.*' => 'required | min:4 | max:20',
             // Validação das reposta do diagnóstico censitário
-            'alternative_id ' => 'required ',
+            'alternative_id.*' => 'required ',
             // Validação  nivel de atividade dos colaboradores
-            'color ' => 'required | max:60 ',
-            'human_quantity_activity_level ' => 'required',
-            'woman_quantity_activity_level ' => 'required',
-            'activity_level ' => 'required',
-            // Validação Perfil dos colaboradores
-            'profile_color ' => 'required | max:60',
-            'human_quantity ' => 'required ',
-            'woman_quantity ' => 'required ',
+            'color .*' => 'required | max:60 ',
+            'human_quantity_activity_level.*' => 'required',
+            'woman_quantity_activity_level.*' => 'required',
+            'activity_level.*' => 'required',
+            //Validação Perfil dos colaboradores
+            'profile_color .*' => 'required | max:60',
+            'human_quantity.*' => 'required ',
+            'woman_quantity .* ' => 'required ',
             // Validação do cronograma
             'action ' => 'required',
             'activity ' => 'required',
@@ -102,23 +101,22 @@ class InstitutionFormRequest extends FormRequest
             'result.required' => 'O campo Resultado é obrigátorio',
             'result.max' => 'O campo Resultado não pode ultrapassar 3000 caracteres',
             'result.min' => 'O campo Resultado não  pode ser menor que 10 caracteres',
-            
-            'members_name.required ' => 'É obrigátorio informa o nome do membros da comissão',
-            'members_email.unique ' => 'Esse E-mail já está cadastrado',
-            'members_email.required ' => 'É obrigatório informar o email do membro da comissão',
-            'members_phone.required ' => 'É obrigatório informar o telefone do membro da comissão',
+            'members_name.*.required ' => 'É obrigátorio informa o nome do membros da comissão',
+            'members_email.*.unique ' => 'Esse E-mail já está cadastrado',
+            'members_function.*.required ' => 'É obrigatório informar o email do membro da comissão',
+            'members_phone.*.required ' => 'É obrigatório informar o telefone do membro da comissão',
             // Messagem  diagnóstico censitário alternative_id
-            'alternative_id.required' => 'É obrigatório responder todas as questões do diagnóstico censitário',
-            // Messagem para nivel de atividade dos colaboradores
-            'color.required' => 'RAÇA/COR é  obrigatório',
+            'alternative_id.*.required ' => ' É obrigatório responder todas as questões do diagnóstico censitário',
+           // Messagem para nivel de atividade dos colaboradores
+            // 'color.required' => 'RAÇA/COR é  obrigatório',
             'human_quantity_activity_level.required' => 'Campo Nº HOMEMS é  obrigatório',
             'woman_quantity_activity_level.required' => 'Campo Nº MULHERES é  obrigatório',
             'activity_level.required' => 'Campo NIVEL DE ATIVIDADE é  obrigatório',
-            // Messagem Validação Perfil dos colaboradores
+             // Messagem Validação Perfil dos colaboradores
             'profile_color.required' => 'Campo RAÇA/COR é  obrigatório',
             'human_quantity.required' => 'Campo Nº HOMEMS é  obrigatório',
             'woman_quantity.required' => 'Campo Nº MULHERES é  obrigatório',
-            // Messagem para o cronograma
+            // // Messagem para o cronograma
             'action.required' => 'O campo Ações  é  obrigatório',
             'activity.required' => 'O campo Atividade  é  obrigatório',
             'amount.required' => 'O campo Quantidade  é  obrigatório',

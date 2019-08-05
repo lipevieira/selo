@@ -8,6 +8,8 @@ use App\Models\Question;
 use App\Models\ScheduleAction;
 use Illuminate\Http\Request;
 use App\Http\Requests\Institution\InstitutionFormRequest;
+use App\Http\Requests\Institution\MembresFormRequest;
+use Carbon\Carbon;
 
 class InstitutionController extends Controller
 {
@@ -25,15 +27,35 @@ class InstitutionController extends Controller
 
     public function saveAllInstutition(InstitutionFormRequest $request)
     {
+        // $validacaoMembrosComissao = new MembresFormRequest(); 
+        // $validacaoInstiuicao = new InstitutionFormRequest();
         $dataForm = $request->except('_token');
+        // $this->validate($request, $validacaoInstiuicao->rules(), $validacaoInstiuicao->messages());
+        // $this->validate($request, $validacaoMembrosComissao->rules(), $validacaoMembrosComissao->messages());
         // dd($dataForm);
+        if ($this->validateCnpj($request->cnpj) == false) {
+            echo "CNPJ Invalido";
+            return redirect()
+                ->back()
+                ->with('error-cnpj', 'Erro CNPJ Inválido')
+                ->withInput();
+        }
+        if ($this->validateDeadline($request->deadline) == false) {
+            return redirect()
+                ->back()
+                ->with('error-deadline', 'Erro Data Limte não deve ser maior que o dia 30 de novembro')
+                ->withInput();
+        }
+
+
+
         $institution = Institution::create($dataForm);
         // Salvado os três membros da instituição
         for ($i = 0; $i < 3; $i++) {
             $institution->commissionMembers()->create([
                 'members_name' => $request->members_name[$i],
                 'members_function' => $request->members_function[$i],
-                'members_phone' => $request->phone_members_commission[$i],
+                'members_phone' => $request->members_phone[$i],
                 'members_email' => $request->members_email[$i],
             ]);
         }
@@ -52,7 +74,7 @@ class InstitutionController extends Controller
                 'others' => $request->others[$i],
             ]);
         }
-        // Salvado O nivel de atividade dos colaboradores
+        // // Salvado O nivel de atividade dos colaboradores
         for ($i=0; $i < count($request->activity_level); $i++) {
             $institution->collaboratorActivityLevels()->create([
                 'activity_level' => $request->activity_level[$i],
@@ -61,7 +83,7 @@ class InstitutionController extends Controller
                 'woman_quantity_activity_level' => $request->woman_quantity_activity_level[$i],
             ]);
         }
-        // Salvado os perfis dos colaboradores
+        // // Salvado os perfis dos colaboradores
         for ($i=0; $i < 2; $i++) {
             $institution->profileCollaborators()->create([
                 'profile_color' => $request->profile_color[$i],
@@ -69,7 +91,7 @@ class InstitutionController extends Controller
                 'woman_quantity' => $request->woman_quantity[$i],
             ]);
         }
-        // Salvando o cronograma da instituição
+        // // Salvando o cronograma da instituição
         for ($i = 0; $i < count($request->action); $i++) {
             $institution->schedules()->create([
                 'action' => $request->action[$i],
@@ -81,5 +103,47 @@ class InstitutionController extends Controller
         }
         return redirect()->route('index.company')
             ->with('success', 'Instituição salva com sucesso!');
+    }
+    private function validateDeadline($dataForm = array())
+    {
+        $now = new Carbon();
+        $ano = $now->year;
+        $mes = 11;
+        $dia = 29;
+        $deadlineValidate = Carbon::createFromDate($ano, $mes, $dia);
+        $valida = true;
+
+        foreach ($dataForm as $value) {
+            if ($value > $deadlineValidate) {
+                $valida = false;
+            }
+        }
+        return $valida;
+    }
+    private function validateCnpj($cnpj)
+    {
+        $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
+        // Valida tamanho
+        if (strlen($cnpj) != 14)
+            return false;
+        // Valida primeiro dígito verificador
+        for ($i = 0, $j = 5, $soma = 0; $i < 12; $i++) {
+            $soma += $cnpj{
+                $i} * $j;
+            $j = ($j == 2) ? 9 : $j - 1;
+        }
+        $resto = $soma % 11;
+        if ($cnpj{
+            12} != ($resto < 2 ? 0 : 11 - $resto))
+            return false;
+        // Valida segundo dígito verificador
+        for ($i = 0, $j = 6, $soma = 0; $i < 13; $i++) {
+            $soma += $cnpj{
+                $i} * $j;
+            $j = ($j == 2) ? 9 : $j - 1;
+        }
+        $resto = $soma % 11;
+        return $cnpj{
+        13} == ($resto < 2 ? 0 : 11 - $resto);
     }
 }
