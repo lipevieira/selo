@@ -27,8 +27,8 @@ class InstitutionFormRequest extends FormRequest
             'name' => 'required | min:3 | max:100',
             'fantasy_name' => 'required | min:3 | max:100',
             'activity_branch' => 'required | min:3 | max:100',
-            'cnpj' => 'required | min:18 | max:18',
-            'county' => 'required | min:3 | max:80',
+            'cnpj' => 'required | max:18',
+            'county' => 'required',
             'uf' => 'required | max:2',
             'address' => 'required | min:5 | max:190',
             'email' => 'required|unique:institutions,id|max:100',
@@ -38,34 +38,9 @@ class InstitutionFormRequest extends FormRequest
             'phone_two' => 'required | min:4 | max:20',
             'institution_activity' => 'required',
             'company_classification' => 'required | min:18 | max:100',
-            'authorization' => 'required',
-            'action_plan' => 'required | min:20',
-            'partners' => 'required | min:10|max:2000',
-            'methodology' => 'required | min:10',
-            'result' => 'required | min:10',
-            'members_name.*'  => 'required | min:4 | max:100',
-            'members_email.*' => 'required|unique:commission_members,id|max:150',
-            'members_function.*' => 'required | max:60',
-            'members_phone.*' => 'required | min:4 | max:20',
-            // Validação das reposta do diagnóstico censitário
-            'alternative_id.*' => 'required ',
-            // Validação  nivel de atividade dos colaboradores
-            'color .*' => 'required | max:60 ',
-            'human_quantity_activity_level.*' => 'required',
-            'woman_quantity_activity_level.*' => 'required',
-            'activity_level.*' => 'required',
-            //Validação Perfil dos colaboradores
-            'profile_color .*' => 'required | max:60',
-            'human_quantity.*' => 'required ',
-            'woman_quantity .* ' => 'required ',
-            // Validação do cronograma
-            'action ' => 'required',
-            'activity ' => 'required',
-            'amount ' => 'required ',
-            'deadline ' => 'required ',
+            // 'result' => 'required | min:10',
         ];
     }
-    // TO-DE FAZER: Memssagens para validação de campos no back end
     public function messages()
     {
         return [
@@ -85,42 +60,137 @@ class InstitutionFormRequest extends FormRequest
             'formation.required' => 'O campo Formação é obrigatório',
             'phone_two.required' => 'O campo Telefone é obrigatório',
             'institution_activity.required' => 'O campo Ramo de atividade é obrigatório',
-            'company_classification.required' => 'O campo Classificação da Empresa é obrigatório',
-            'authorization.required' => 'O campo Autorização é obrigátorio para o cronograma',
-            'action_plan.required' => 'O campo Plano de ação é obrigátorio',
-            'action_plan.max' => 'O campo Plano de ação  não pode ultrapassar 3000 caracteres',
-            'action_plan.min' => 'O campo Plano de ação  não pode ser menor que 20 caracteres',
-            'partners.required' => 'O campo Plano de ação é obrigátorio',
-            'partners.max' => 'O campo Plano de ação pode ultrapassar 2000 caracteres',
-            'partners.min' => 'O campo Plano de ação pode ser menor que 10 caracteres',
-
-            'methodology.required' => 'O campo Metodologia é obrigátorio',
-            'methodology.max' => 'O campo Metodologia ultrapassar 2000 caracteres',
-            'methodology.min' => 'O campo Metodologia pode ser menor que 10 caracteres',
-
+            'company_classification.required' => 'O campo Classificação da Empresa é obrigatório',          
             'result.required' => 'O campo Resultado é obrigátorio',
             'result.max' => 'O campo Resultado não pode ultrapassar 3000 caracteres',
             'result.min' => 'O campo Resultado não  pode ser menor que 10 caracteres',
-            'members_name.*.required ' => 'É obrigátorio informa o nome do membros da comissão',
-            'members_email.*.unique ' => 'Esse E-mail já está cadastrado',
-            'members_function.*.required ' => 'É obrigatório informar o email do membro da comissão',
-            'members_phone.*.required ' => 'É obrigatório informar o telefone do membro da comissão',
-            // Messagem  diagnóstico censitário alternative_id
-            'alternative_id.*.required ' => ' É obrigatório responder todas as questões do diagnóstico censitário',
-           // Messagem para nivel de atividade dos colaboradores
-            // 'color.required' => 'RAÇA/COR é  obrigatório',
-            'human_quantity_activity_level.required' => 'Campo Nº HOMEMS é  obrigatório',
-            'woman_quantity_activity_level.required' => 'Campo Nº MULHERES é  obrigatório',
-            'activity_level.required' => 'Campo NIVEL DE ATIVIDADE é  obrigatório',
-             // Messagem Validação Perfil dos colaboradores
+        ];
+    }
+    public function rulesMembers()
+    {
+        return [
+            'members_name.*'  => 'required | min:4 | max:100',
+            'members_email.*' => 'required|unique:commission_members,id|max:150',
+            'members_function.*' => 'required | max:60',
+            'members_phone.*' => 'required | min:4 | max:20',
+        ];
+    }
+    public function messageMembers()
+    {
+        return [
+            'members_name.0.required' => 'É obrigatório informa o nome do primeiro  membros da comissão',
+            'members_name.1.required' => 'É obrigatório informa o nome do segundo membros da comissão',
+            'members_name.2.required' => 'É obrigatório informa o nome do terceiro  membros da comissão',
+            'members_email.0.required' => 'É obrigatório informa o E-mail do primeiro membros da comissão',
+            'members_email.1.required' => 'É obrigatório informa o E-mail do segundo membros da comissão',
+            'members_email.2.required' => 'É obrigatório informa o E-mail do terceiro  membros da comissão',
+            'members_email.*.unique' => 'Não permitido E-mail repetido para os membros da comissão',
+            'members_function.0.required' => 'É obrigatório informa a Função/Setor do primeiro  membros da comissão',
+            'members_function.1.required' => 'É obrigatório informa a Função/Setor segundo membros da comissão',
+            'members_function.2.required' => 'É obrigatório informa a Função/Setor do terceiro  membros da comissão',
+            'members_phone.0.required' => 'É obrigatório informa o Telefone do primeiro  membros da comissão',
+            'members_phone.1.required' => 'É obrigatório informa o Telefone do segundo membros da comissão',
+            'members_phone.2.required' => 'É obrigatório informa o Telefone o nome do terceiro  membros da comissão',
+        ];
+    }
+    public function rulesDiagnosticoCencitario()
+    {
+        return [
+            'alternative_id.*' => 'required',
+            'color .*' => 'required | max:60',
+            'human_quantity_activity_level.*' => 'required | numeric',
+            'woman_quantity_activity_level.*' => 'required | numeric',
+            'activity_level.*' => 'required',
+            'profile_color.*' => 'required | max:60',
+            'human_quantity.*' => 'required | numeric',
+            'woman_quantity.*' => 'required | numeric',
+        ];
+    }
+    public function messagesDiagnosticoCencitario()
+    {
+        return [
+            'alternative_id.0.required' => 'É obrigatório responder a questões 01 do diagnóstico censitário',
+            'alternative_id.1.required' => 'É obrigatório responder a questões 02 questões do diagnóstico censitário',
+            'alternative_id.2.required' => 'É obrigatório responder a questões 03 questões do diagnóstico censitário',
+            'alternative_id.3.required' => 'É obrigatório responder a questões 04 do diagnóstico censitário',
+            'alternative_id.4.required' => 'É obrigatório responder a questões 05 do diagnóstico censitário',
+            'alternative_id.5.required' => 'É obrigatório responder a questões 06 do diagnóstico censitário',
+            'alternative_id.6.required' => 'É obrigatório responder a questões 07 questões do diagnóstico censitário',
+            'alternative_id.7.required' => 'É obrigatório responder a questões 08 questões do diagnóstico censitário',
+            'alternative_id.8.required' => 'É obrigatório responder a questões 09 questões do diagnóstico censitário',
+            'alternative_id.9.required' => 'É obrigatório responder a questões 10 questões do diagnóstico censitário',
+            'human_quantity_activity_level.*.required' => 'Campo Nº HOMEMS é  obrigatório',
+            'human_quantity_activity_level.*.numeric' => 'Campo Nº HOMEMS é  deve ser numérico',
+            'woman_quantity_activity_level.*.required' => 'Campo Nº MULHERES é  obrigatório',
+            'woman_quantity_activity_level.*.numeric' => 'Campo Nº MULHERES deve ser numérico',
+            'activity_level.*.required' => 'Campo NIVEL DE ATIVIDADE é  obrigatório',
             'profile_color.required' => 'Campo RAÇA/COR é  obrigatório',
-            'human_quantity.required' => 'Campo Nº HOMEMS é  obrigatório',
-            'woman_quantity.required' => 'Campo Nº MULHERES é  obrigatório',
-            // // Messagem para o cronograma
-            'action.required' => 'O campo Ações  é  obrigatório',
-            'activity.required' => 'O campo Atividade  é  obrigatório',
-            'amount.required' => 'O campo Quantidade  é  obrigatório',
-            'deadline.required' => 'O campo Data Limite  é  obrigatório',
+            'human_quantity.*.required' => 'Campo Nº HOMEMS Negros (pretos + pardos) Perfil étnico racial dos colaboradores é  obrigatório',
+            'human_quantity.*.numeric' => 'Campo Nº HOMEMS Negros (pretos + pardos) Perfil étnico racial dos colaboradores deve ser numérico',
+            'woman_quantity.*.required' => 'Campo Nº MULHERES Demais grupos étnicos-raciais do Perfil étnico racial dos colaboradores é  obrigatório',
+            'woman_quantity.*.numeric' => 'Campo Nº MULHERES Demais grupos étnicos-raciais do Perfil étnico racial dos colaboradores deve ser numérico',
+        ];
+    }
+    public function rulesPlainAction()
+    {
+        return [
+            'action_plan' => 'required | min:10 | max:3000',
+        ];
+    }
+    public function messagesPlainAction()
+    {
+        return [
+            'action_plan.required' => 'O campo Plano de ação é obrigátorio',
+            'action_plan.max' => 'O campo Plano de ação  não pode ultrapassar 3000 caracteres',
+            'action_plan.min' => 'O campo Plano de ação  não pode ser menor que 10 caracteres',
+        ];
+    }
+    public function rulesShedule()
+    {
+        return [
+            'action.*' => 'required',
+            'activity.*' => 'required',
+            'amount.*' => 'required',
+            'deadline.*' => 'required',
+            'authorization' => 'required',
+        ];
+    }
+    public function messagesShedule()
+    {
+        return [
+            'action.*.required*' => 'O campo Ações  é  obrigatório',
+            'activity.*.required' => 'O campo Atividade  é  obrigatório',
+            'amount.*.required*' => 'O campo Quantidade  é  obrigatório',
+            'deadline.*.required*' => 'O campo Data Limite  é  obrigatório',
+            'authorization.required' => 'O campo Autorização é obrigátorio para o cronograma',
+        ];
+    }
+    public function rulesPartners()
+    {
+        return [
+            'partners' => 'required | min:10|max:2000',
+        ];
+    }
+    public function messagesPartners()
+    {
+        return [
+            'partners.required' => 'O campo Parceiras não pode ser vazio',
+            'partners.max' => 'O campo Parceiras pode ultrapassar 2000 caracteres',
+            'partners.min' => 'O campo Parceiras pode ser menor que 10 caracteres',
+        ];
+    }
+    public function rulesMethodology()
+    {
+        return [
+            'methodology' => 'required | min:10 | max:7000',
+        ];
+    }
+    public function messageMethodology()
+    {
+        return [
+            'methodology.required' => 'O campo Metodologia é obrigátorio',
+            'methodology.max' => 'O campo Metodologia não pode ultrapassar 7000 caracteres',
+            'methodology.min' => 'O campo Metodologia pode ser menor que 10 caracteres',
         ];
     }
 }

@@ -2,98 +2,127 @@ $(document).ready(function () {
 	$('#etapa01').hide();
 	$('#etapa02').hide();
 	$('#etapa03').hide();
+	// var company_classification;
+
 	// Funtion para duplicar Linhas das Tabelas
 	// duplicaRowTableShedules();
-	duplicaRowTableMenbresCommision();
-	$("#cb_company").change(function(){
+	// duplicaRowTableMenbresCommision();
+	$("#cb_company").change(function () {
 		let url = $(this).data('url');
+		// company_classification = $(this).val();
 		switch ($(this).val()) {
 			case 'Micro(5 a 9 funcionários)':
-			$('#etapa01').show();
-			break;
+				$('#etapa01').show();
+				break;
 
-			case ( 'Pequena(10 a 12 funcionários)' ):
-			$('#etapa01').show();
-			break;
+			case ('Pequena(10 a 12 funcionários)'):
+				$('#etapa01').show();
+				break;
 
 			case 'Pequena(13 a 49 funcionários)':
-			// Tela de cadastro
+				// Tela de cadastro
 
-			window.location.href = url;
-			break;
+				window.location.href = url;
+				break;
 
 			case 'Média(50 a 99 funcionários)':
-			window.location.href = url;
-			break;
+				window.location.href = url;
+				break;
 
 			case 'Grande(+ de 100 funcionários)':
-			window.location.href = url;
-			break;
+				window.location.href = url;
+				break;
 
 			case 'ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?':
-			$('#etapa03').show();
-			break;
+				$('#etapa03').show();
+				break;
 
 			default:
-			alert('Por favor selecione a quantidade de funcionário da sua empresa!')
-			break;
+				alert('Por favor selecione a quantidade de funcionário da sua empresa!')
+				break;
 		}
 	});
-	$("#cb_company_01").change(function(){
-		switch($(this).val()){
+	$("#cb_company_01").change(function () {
+		switch ($(this).val()) {
 			case 'SIM':
-			$('#etapa02').show();
-			break;
+				$('#etapa02').show();
+				break;
 
-			case'NÃO':
-			alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.')
-			break;	
+			case 'NÃO':
+				alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.')
+				break;
 		}
 	});
 
-	$("#cb_company_02").change(function(){
-		switch($(this).val()){
+	$("#cb_company_02").change(function () {
+		switch ($(this).val()) {
 			case 'SIM':
-			let url = $(this).data('url');
-			window.location.href = url;
-			break;
+				let url = $(this).data('url');
+				window.location.href = url;
+				break;
 
-			case'NÃO':
-			alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.');
-			break;	
+			case 'NÃO':
+				alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.');
+				break;
 		}
 	});
-	$("#cb_company_03").change(function(){
-		switch($(this).val()){
+	$("#cb_company_03").change(function () {
+		switch ($(this).val()) {
 			case 'SIM':
-			let url = $(this).data('url');
-			window.location.href = url;
-			break;
+				let url = $(this).data('url');
+				window.location.href = url;
+				break;
 
-			case'NÃO':
-			alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.')
-			break;	
+			case 'NÃO':
+				alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.')
+				break;
 		}
 	});
-	
+
 	// Menu de cadastro de instituição.
-	$('#btn_indentificacao').click(function(){
-
-		$('#list_instituicao_detalhes').removeClass('active active_tab1');
-		$('#list_instituicao_detalhes').removeAttr('href data-toggle');
-		$('#instituicao_detalhes').removeClass('active');
-		$('#list_instituicao_detalhes').addClass('inactive_tab1');
-
-		// Ativando outra aba no menu
-		$('#list_diagnostico_censitario').removeClass('inactive_tab1');
-		$('#list_diagnostico_censitario').addClass('active_tab1 active');
-		$('#list_diagnostico_censitario').attr('href', '#diagnostico_censitario');
-		$('#list_diagnostico_censitario').attr('data-toggle', 'tab');
-		$('#diagnostico_censitario').addClass('active in');
+	$('#btn_indentificacao').click(function () {
+		let url = $(this).data('url');
+		var form = $('#register_form');
+		var formData = form.serialize();
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+		$.ajax({
+			type: 'POST',
+			url: url,
+			data: formData, 
+			success: function (data) {
+				if ((data.errors)) {
+					$('#modalErrorCad').modal('show');
+					var danger = $('#danger');
+					danger.hide().find('ul').empty();
+					$.each(data.errors, function (index, error) {
+						danger.find('ul').append('<li>' + error + '</li>');
+					});
+					danger.show();
+				} else {
+					$('#list_instituicao_detalhes').removeClass('active active_tab1');
+					$('#list_instituicao_detalhes').removeAttr('href data-toggle');
+					$('#instituicao_detalhes').removeClass('active');
+					$('#list_instituicao_detalhes').addClass('inactive_tab1');
+					// Ativando outra aba no menu
+					$('#list_diagnostico_censitario').removeClass('inactive_tab1');
+					$('#list_diagnostico_censitario').addClass('active_tab1 active');
+					$('#list_diagnostico_censitario').attr('href', '#diagnostico_censitario');
+					$('#list_diagnostico_censitario').attr('data-toggle', 'tab');
+					$('#diagnostico_censitario').addClass('active in');
+				}
+			},
+			error: function () {
+				alert('Erro ao valida dados');
+			}
+		});
 		
 	});
 
-	$('#btn_previous_diagnostico').click(function(){
+	$('#btn_previous_diagnostico').click(function () {
 		$('#list_diagnostico_censitario').removeClass('active active_tab1');
 		$('#list_diagnostico_censitario').removeAttr('href data-toggle');
 
@@ -110,7 +139,7 @@ $(document).ready(function () {
 	});
 
 	// Diagnostico proximo
-	$('#btn_diagnostico_next').click(function(){
+	$('#btn_diagnostico_next').click(function () {
 
 		$('#list_diagnostico_censitario').removeClass('active active_tab1');
 		$('#list_diagnostico_censitario').removeAttr('href data-toggle');
@@ -122,12 +151,12 @@ $(document).ready(function () {
 		$('#list_plano_trabalho_etnico').addClass('active_tab1 active');
 
 		$('#list_plano_trabalho_etnico').attr('href', '#plano_trabalho');
-		
+
 		$('#list_plano_trabalho_etnico').attr('data-toggle', 'tab');
 		$('#plano_trabalho').addClass('active in');
 	});
 
-	$('#btn_previous_plano_trabalho').click(function(){
+	$('#btn_previous_plano_trabalho').click(function () {
 		$('#list_plano_trabalho_etnico').removeClass('active active_tab1');
 		$('#list_plano_trabalho_etnico').removeAttr('href data-toggle');
 
@@ -143,7 +172,7 @@ $(document).ready(function () {
 	});
 
 	//Button Proximo plano de trabalho
-	$('#btn_plano_trabalho_next').click(function(){
+	$('#btn_plano_trabalho_next').click(function () {
 		$('#list_plano_trabalho_etnico').removeClass('active active_tab1');
 		$('#list_plano_trabalho_etnico').removeAttr('href data-toggle');
 
@@ -154,12 +183,12 @@ $(document).ready(function () {
 		$('#list_cronograma').addClass('active_tab1 active');
 
 		$('#list_cronograma').attr('href', '#cronograma');
-		
+
 		$('#list_plano_trabalho_etnico').attr('data-toggle', 'tab');
 		$('#cronograma').addClass('active in');
 	});
 	// Button previos Cronograma
-	$('#btn_previous_cronograma').click(function(){
+	$('#btn_previous_cronograma').click(function () {
 		$('#list_cronograma').removeClass('active active_tab1');
 		$('#list_cronograma').removeAttr('href data-toggle');
 
@@ -174,7 +203,7 @@ $(document).ready(function () {
 		$('#plano_trabalho').addClass('active in');
 	});
 	//Button proximo plano de trabalho
-	$('#btn_plano_next').click(function(){
+	$('#btn_plano_next').click(function () {
 		$('#list_cronograma').removeClass('active active_tab1');
 		$('#list_cronograma').removeAttr('href data-toggle');
 
@@ -185,12 +214,12 @@ $(document).ready(function () {
 		$('#list_parceiras').addClass('active_tab1 active');
 
 		$('#list_parceiras').attr('href', '#parceiras');
-		
+
 		$('#list_cronograma').attr('data-toggle', 'tab');
 		$('#parceiras').addClass('active in');
 	});
 	// Button Anterior Parceiras
-	$('#btn_previous_parceiras').click(function(){
+	$('#btn_previous_parceiras').click(function () {
 		$('#list_parceiras').removeClass('active active_tab1');
 		$('#list_parceiras').removeAttr('href data-toggle');
 
@@ -205,7 +234,7 @@ $(document).ready(function () {
 		$('#cronograma').addClass('active in');
 	});
 	// Button proximo parceiras
-	$('#btn_next_parceiras').click(function(){
+	$('#btn_next_parceiras').click(function () {
 		$('#list_parceiras').removeClass('active active_tab1');
 		$('#list_parceiras').removeAttr('href data-toggle');
 
@@ -216,12 +245,12 @@ $(document).ready(function () {
 		$('#list_metodologia').addClass('active_tab1 active');
 
 		$('#list_metodologia').attr('href', '#metodologia');
-		
+
 		$('#list_metodologia').attr('data-toggle', 'tab');
 		$('#metodologia').addClass('active in');
 	});
 	//Button previos Metodologia
-	$('#btn_metodologia_previous').click(function(){
+	$('#btn_metodologia_previous').click(function () {
 		$('#list_metodologia').removeClass('active active_tab1');
 		$('#list_metodologia').removeAttr('href data-toggle');
 
@@ -236,7 +265,7 @@ $(document).ready(function () {
 		$('#parceiras').addClass('active in');
 	});
 	// Button next Metodologia
-	$('#btn_metodologia_next').click(function(){
+	$('#btn_metodologia_next').click(function () {
 		$('#list_metodologia').removeClass('active active_tab1');
 		$('#list_metodologia').removeAttr('href data-toggle');
 
@@ -247,12 +276,12 @@ $(document).ready(function () {
 		$('#list_resultados_esperados').addClass('active_tab1 active');
 
 		$('#list_resultados_esperados').attr('href', '#resultados_esperados');
-		
+
 		$('#list_resultados_esperados').attr('data-toggle', 'tab');
 		$('#resultados_esperados').addClass('active in');
 	});
 	//Button previos Resultados esperados
-	$('#btn_resultados_previous').click(function(){
+	$('#btn_resultados_previous').click(function () {
 		$('#list_resultados_esperados').removeClass('active active_tab1');
 		$('#list_resultados_esperados').removeAttr('href data-toggle');
 
@@ -285,11 +314,11 @@ $(document).ready(function () {
 		return false;
 	};
 	// Buuton remover linha da Tabela de cnpsj adcionais
-	RemoveTableRow = function(handler) {
+	RemoveTableRow = function (handler) {
 		var tr = $(handler).closest('tr');
 
-		tr.fadeOut(400, function(){ 
-			tr.remove(); 
+		tr.fadeOut(400, function () {
+			tr.remove();
 		});
 
 		return false;
@@ -299,8 +328,8 @@ $(document).ready(function () {
 // Buuton adcionar linhas na tabela de cronograma
 AddTableRowSchedule = function () {
 	var table = $('#tbl_schedules'),
-	lastRow = table.find('tbody tr:last'),
-	rowClone = lastRow.clone();
+		lastRow = table.find('tbody tr:last'),
+		rowClone = lastRow.clone();
 
 	table.find('tbody').append(rowClone);
 
@@ -316,13 +345,22 @@ AddTableRowSchedule = function () {
 // 	}
 // }
 // Duplicar as linhas da Table de Cronograma... 
-function duplicaRowTableMenbresCommision(){
-	for (var i = 0; i < 2; i++) {
-		var table = $('#tbl_menbress_comission'),
-		lastRow = table.find('tbody tr:last'),
-		rowClone = lastRow.clone();
+// function duplicaRowTableMenbresCommision() {
+// 	for (var i = 0; i < 2; i++) {
+// 		var table = $('#tbl_menbress_comission'),
+// 			lastRow = table.find('tbody tr:last'),
+// 			rowClone = lastRow.clone();
 
-		table.find('tbody').append(rowClone);
-	}
-}
+// 		table.find('tbody').append(rowClone);
+// 	}
+// }
+// function teste(){
+// 	var name = $('#name').val();
+// 	if (name  == '') {
+// 		alert('Campo Nome da Instituição proponente: éobrigatorio')	
+// 		$("#name").focus();
+// 		$('#name').css('border', '2px solid red');
+// 	}
+// }
+
 

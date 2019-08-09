@@ -5,8 +5,30 @@
 @section('content')
 
 <h1>Cadastro da Instituição</h1>
+{{-- Modal para messagem de campos invalidos --}}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modalErrorCad" >
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title">Atenção: Há campos invalidos!</h1>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="alert alert-warning" style="display: none; " id="danger">
+					<ul></ul>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- Menu de cadastro da instituição -->
-<form method="post" id="register_form" action="{{route('save.institution')}}" novalidate>
+<form method="post" id="register_form">
 	@csrf
 	<ul class="nav nav-tabs">
 		<li class="nav-item">
@@ -41,26 +63,27 @@
 		{{ session('success') }}
 	</div>
 	@endif
-	{{-- messagem de campos invalidos  --}}
-	@if(isset($errors) && count($errors) > 0)
-	<div class="alert alert-danger">
-		@foreach ($errors->all() as $error)
-		<p>{{$error}}</p>
-		@endforeach
+	@if ($errors->any())
+	<div class="alert alert-warning">
+		<ul>
+			@foreach ($errors->all() as $erro)
+			<li>{{$erro}}</li>
+			@endforeach
+		</ul>
 	</div>
 	@endif
 	{{-- Messagem para validação de cnpj --}}
 	@if(session('error-cnpj'))
-		<div class="alert alert-danger">
-			{{ session('error-cnpj') }}
-		</div>
+	<div class="alert alert-danger">
+		{{ session('error-cnpj') }}
+	</div>
 	@endif
-{{-- Messagem para Data  Limite--}}
-@if(session('error-deadline'))
+	{{-- Messagem para Data  Limite--}}
+	@if(session('error-deadline'))
 	<div class="alert alert-danger">
 		{{ session('error-deadline') }}
 	</div>
-@endif
+	@endif
 	<!-- Campos de texto para descrever a instituição -->
 	<div class="tab-content" style="margin-top:16px; ">
 		<div class="tab-pane active" id="instituicao_detalhes">
@@ -68,23 +91,26 @@
 				<div class="panel-heading"><strong> IDENTIFICAÇÃO DA INSTITUIÇÃO</strong></div>
 				<div class="panel-body">
 					<!-- Inicio dos Inputs da Instituição-->
+					<input type="hidden" name="etapa_01" value="1">
 					<div class="form-row">
 						<div class="col-md-4 mb-3">
 							<label for="name">Nome da Instituição proponente: </label>
-							<input type="text" class="form-control" name="name" id="name"
-								placeholder="Nome da Instituição proponente:" value="">
+							<input type="text" class="form-control " name="name" id="name"
+								placeholder="Nome da Instituição proponente:" value="{{old('name')}}">
 						</div>
-						<div class="col-md-4 mb-3">
+						<div class="col-md-4 mb-3 ">
 							<label for="fantasy_name">Nome para certificação (nome fantasia): </label>
 							<input type="text" class="form-control" id="fantasy_name"
-								placeholder="Nome para certificação (nome fantasia):" value="" name="fantasy_name">
+								placeholder="Nome para certificação (nome fantasia):" value="{{old('fantasy_name')}}"
+								name="fantasy_name">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="email_two">Classificação da Empresa</label>
 							<select class="form-control form-control-sm" id="company_classification"
 								name="company_classification">
 								<option></option>
-								<option>Micro(5 a 9 funcionários)</option>
+								<option value="1" {{ old('company_classification') == 1 ? 'selected' : '' }}>Micro(5 a 9
+									funcionários)</option>
 								<option>Pequena(10 a 12 funcionários)</option>
 								<option>Pequena(13 a 49 funcionários)</option>
 								<option>Média(50 a 99 funcionários)</option>
@@ -95,17 +121,17 @@
 						<div class="col-md-4 mb-3">
 							<label for="cnpj">CNPJ:</label>
 							<input type="text" class="form-control" id="cnpj" placeholder="Informe apenas números"
-								value="" name="cnpj">
+								value="{{old('cnpj')}}" name="cnpj">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="county">Município:</label>
 							<select class="form-control form-control-sm" name="county">
 								<option></option>
-								<option>Camaçari</option>
-								<option>Candeias</option>
-								<option>Lauro de Freitas</option>
-								<option>Salvador</option>
-								<option>Simões Filho</option>
+								<option value="1" {{ old('county') == 1 ? 'selected' : '' }}>Camaçari</option>
+								<option value="2" {{ old('county') == 2 ? 'selected' : '' }}>Candeias</option>
+								<option value="3" {{ old('county') == 3 ? 'selected' : '' }}>Lauro de Freitas</option>
+								<option value="4" {{ old('county') == 4 ? 'selected' : '' }}>Salvador</option>
+								<option value="5" {{ old('county') == 5 ? 'selected' : '' }}>Simões Filho</option>
 							</select>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -114,49 +140,51 @@
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="address">Endereço:</label>
-							<input type="text" class="form-control" id="address" placeholder="Endereço:" value=""
-								name="address">
+							<input type="text" class="form-control" id="address" placeholder="Endereço:"
+								value="{{old('address')}}" name="address">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="email">E-mail:</label>
-							<input type="email" class="form-control" id="email" placeholder="E-mail" value=""
-								name="email">
+							<input type="email" class="form-control" id="email" placeholder="E-mail"
+								value="{{old('email')}}" name="email">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="phone">Telefone:</label>
-							<input type="text" class="form-control" id="phone" placeholder="Telefone" value=""
-								name="phone">
+							<input type="text" class="form-control" id="phone" placeholder="Telefone"
+								value="{{old('phone')}}" name="phone">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="technical_manager">Responsável técnico:</label>
 							<input type="text" class="form-control" id="technical_manager"
-								placeholder="Responsável técnico:" value="" name="technical_manager">
+								placeholder="Responsável técnico:" value="{{old('technical_manager')}}"
+								name="technical_manager">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="formation">Formação:</label>
-							<input type="text" class="form-control" id="formation" placeholder="Formação:" value=""
-								name="formation">
+							<input type="text" class="form-control" id="formation" placeholder="Formação:"
+								value="{{old('formation')}}" name="formation">
 						</div>
 						<div class="col-md-4 mb-3">
 							<label for="phone_two">Telefone:</label>
-							<input type="text" class="form-control" id="phone_two" placeholder="Telefone:" value=""
-								name="phone_two">
+							<input type="text" class="form-control" id="phone_two" placeholder="Telefone:"
+								value="{{old('phone_two')}}" name="phone_two">
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="email_two">Atividade:</label>
 							<select class="form-control form-control-sm" name="institution_activity">
 								<option></option>
-								<option>Indústria</option>
-								<option>Comércio</option>
-								<option>Serviços</option>
+								<option value="1" {{ old('county') == 1 ? 'selected' : '' }}>Indústria</option>
+								<option value="2" {{ old('county') == 2 ? 'selected' : '' }}>Comércio</option>
+								<option value="3" {{ old('county') == 3 ? 'selected' : '' }}>Serviços</option>
 							</select>
 						</div>
 						<div class="col-md-6 mb-3">
 							<label for="activity_branch">Ramo de atividade:</label>
 							<input type="text" class="form-control" id="activity_branch"
-								placeholder="Ramo de atividade:" value="" name="activity_branch">
+								placeholder="Ramo de atividade:" value="{{old('activity_branch')}}"
+								name="activity_branch">
 						</div>
-						<!-- Menbros da comiisão -->
+						<!-- Membros da comiisão -->
 						<h5 class="col-md-12 mb-3"> <strong> Recomendamos eleger três colaboradores para tratar da
 								questão diversidade na empresa. Eles serão os contatos entre empresa e Comitê Gestor.
 								Para melhor andamento do trabalho é indicado, preferencialmente, funcionários dos
@@ -174,29 +202,34 @@
 									</tr>
 								</thead>
 								<tbody>
+									@foreach (range(1,3) as $item)
 									<tr>
 										<td>
 											<input type="text" class="form-control" id="members_name" placeholder="Nome"
-												value="" name="members_name[]">
+												value="{{old('members_name[]')}}" name="members_name[]">
 										</td>
 										<td>
 											<input type="text" class="form-control" id="members_function"
-												placeholder="Função / setor" value="" name="members_function[]">
+												placeholder="Função / setor" value="{{old('members_function[]')}}"
+												name="members_function[]">
 										</td>
 										<td>
 											<input type="text" class="form-control" id="members_phone"
-												placeholder="Telefone" value="" name="members_phone[]">
+												placeholder="Telefone" value="{{old('members_phone[]')}}"
+												name="members_phone[]">
 										</td>
 										<td>
 											<input type="email" class="form-control" id="members_email"
-												placeholder="E-mail" value="" name="members_email[]">
+												placeholder="E-mail" value="{{old('members_email[]')}}"
+												name="members_email[]">
 										</td>
 									</tr>
+									@endforeach
 								</tbody>
 							</table>
 							<!-- CNPJ Adicionias. Estes campos são opcionais -->
 							<!-- <label>CNPJ Adicionais</label> -->
-							<table class="table " id="tblCNPJsAdicionais">
+							<table class="table table-bordered" id="tblCNPJsAdicionais">
 								<thead>
 									<tr>
 										<th scope="col"> <button onclick="AddTableRow()" type="button"
@@ -209,7 +242,8 @@
 											&nbsp;
 											<label>CNPJs Acicionais</label>
 											<input type="text" class="form-control" id="cnpj_additional"
-												placeholder="Informe apenas números" name="cnpj_additional[]">
+												placeholder="Informe apenas números" name="cnpj_additional[]"
+												value="{{old('cnpj_additional[]')}}">
 										</td>
 										<th>
 											&nbsp;
@@ -225,7 +259,7 @@
 						<br />
 						<div align="center">
 							<button type="button" name="btn_indentificacao" id="btn_indentificacao"
-								class="btn btn-info btn-lg">Proximo</button>
+								class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
 						</div>
 						<br />
 					</div>
@@ -246,7 +280,8 @@
 							<select class="form-control form-control-sm" name="alternative_id[]">
 								<option value=""></option>
 								@foreach ($question->alternatives as $alternativa)
-								<option value="{{$alternativa->id}}">{{ $alternativa->alternative }}</option>
+								<option value="{{$alternativa->id}}">{{ $alternativa->alternative }}
+									{{ old('alternative_id[]') == $alternativa->id ? 'selected' : '' }}</option>
 								@endforeach
 							</select>
 							@if($question->field_option == "SIM")
@@ -286,11 +321,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -305,11 +342,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -324,11 +363,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -343,11 +384,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 								</tbody>
@@ -376,11 +419,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -395,11 +440,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -414,11 +461,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
@@ -433,11 +482,13 @@
 										</th>
 										<td width="20px;">
 											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="" name="human_quantity_activity_level[]">
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
 											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="" name="woman_quantity_activity_level[]">
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 								</tbody>
@@ -463,12 +514,12 @@
 											readonly="readonly" name="profile_color[]">
 									</th>
 									<td width="20px;">
-										<input type="text" class="form-control" id="human_quantity" value=""
-											name="human_quantity[]">
+										<input type="text" class="form-control" id="human_quantity"
+											value="{{old('human_quantity[]')}}" name="human_quantity[]">
 									</td>
 									<td width="20px;">
-										<input type="text" class="form-control" id="woman_quantity" value=""
-											name="woman_quantity[]">
+										<input type="text" class="form-control" id="woman_quantity"
+											value="{{old('woman_quantity[]')}}" name="woman_quantity[]">
 									</td>
 								</tr>
 								<tr>
@@ -477,15 +528,14 @@
 											readonly="readonly" name="profile_color[]">
 									</th>
 									<td width="20px;">
-										<input type="text" class="form-control" id="human_quantity" value=""
-											name="human_quantity[]">
+										<input type="text" class="form-control" id="human_quantity"
+											value="{{old('human_quantity[]')}}" name="human_quantity[]">
 									</td>
 									<td width="20px;">
-										<input type="text" class="form-control" id="woman_quantity" value=""
-											name="woman_quantity[]">
+										<input type="text" class="form-control" id="woman_quantity"
+											value="{{old('woman_quantity[]')}}" name="woman_quantity[]">
 									</td>
 								</tr>
-
 							</tbody>
 						</table>
 					</div>
@@ -519,7 +569,7 @@
 								</strong>
 							</div>
 							<textarea class="form-control class_textarea" id="action_plan" rows="3"
-								name="action_plan"></textarea>
+								name="action_plan">{{old('action_plan')}}</textarea>
 						</div>
 					</div>
 					<!-- Final do plano de trabalho -->
@@ -546,8 +596,8 @@
 						Autoriza a divulgação destas ações pela SEMUR?
 						<select class="form-control-sm" name="authorization">
 							<option></option>
-							<option>SIM</option>
-							<option>NÃO</option>
+							<option value="1" {{ old('authorization') == 1 ? 'selected' : '' }}>SIM</option>
+							<option value="2" {{ old('authorization') == 2 ? 'selected' : '' }}>NÃO</option>
 						</select>
 					</label>
 					<table class="table table-bordered" id="tbl_schedules">
@@ -575,7 +625,8 @@
 									</select>
 								</td>
 								<td>
-									<textarea id="activity" class="form-control" name="activity[]"></textarea>
+									<textarea id="activity" class="form-control"
+										name="activity[]">{{old('activity[]')}}</textarea>
 								</td>
 								<td width="30px;">
 									<select class="form-control form-control-sm" name="amount[]">
@@ -590,7 +641,8 @@
 									</select>
 								</td>
 								<td>
-									<input type="date" class="form-control" id="deadline" value="" name="deadline[]">
+									<input type="date" class="form-control" id="deadline" value="{{old('deadline[]')}}"
+										name="deadline[]">
 								</td>
 								<td>
 									<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover
@@ -630,7 +682,7 @@
 							Tamanho: 2000
 						</strong>
 						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
-							name="partners"></textarea>
+							name="partners">{{old('partners')}}</textarea>
 					</div>
 					<!-- Final dos inputs -->
 					<br />
@@ -666,7 +718,7 @@
 							Tamanho: 7000
 						</strong>
 						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
-							name="methodology"></textarea>
+							name="methodology">{{old('methodology')}}</textarea>
 					</div>
 					<!-- Final dos Inpust -->
 					<br />
@@ -698,7 +750,7 @@
 							Tamanho: 3000
 						</strong>
 						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
-							name="result"></textarea>
+							name="result" required>{{old('result')}}</textarea>
 					</div>
 					<!-- Final dos Inputs -->
 					<br />
