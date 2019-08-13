@@ -26,7 +26,10 @@
 		</div>
 	</div>
 </div>
-
+{{-- Messagem para requição ajax  --}}
+<div class="msg-ajax" id="msg-ajax">
+	<h3>Aguarde...</h3>
+</div>
 <!-- Menu de cadastro da instituição -->
 <form method="post" id="register_form">
 	@csrf
@@ -57,12 +60,7 @@
 				Esperados</a>
 		</li>
 	</ul>
-	{{-- Messagem de casdastro --}}
-	@if(session('success'))
-	<div class="alert alert-success">
-		{{ session('success') }}
-	</div>
-	@endif
+	
 	@if ($errors->any())
 	<div class="alert alert-warning">
 		<ul>
@@ -91,7 +89,7 @@
 				<div class="panel-heading"><strong> IDENTIFICAÇÃO DA INSTITUIÇÃO</strong></div>
 				<div class="panel-body">
 					<!-- Inicio dos Inputs da Instituição-->
-					<input type="hidden" name="etapa_01" value="1">
+					<input type="hidden" name="etapas" value="" id="etapas">
 					<div class="form-row">
 						<div class="col-md-4 mb-3">
 							<label for="name">Nome da Instituição proponente: </label>
@@ -214,7 +212,7 @@
 												name="members_function[]">
 										</td>
 										<td>
-											<input type="text" class="form-control" id="members_phone"
+											<input type="text" class="form-control members_phone" id="members_phone"
 												placeholder="Telefone" value="{{old('members_phone[]')}}"
 												name="members_phone[]">
 										</td>
@@ -228,7 +226,6 @@
 								</tbody>
 							</table>
 							<!-- CNPJ Adicionias. Estes campos são opcionais -->
-							<!-- <label>CNPJ Adicionais</label> -->
 							<table class="table table-bordered" id="tblCNPJsAdicionais">
 								<thead>
 									<tr>
@@ -241,10 +238,11 @@
 										<td scope="col" width="950px">
 											&nbsp;
 											<label>CNPJs Acicionais</label>
-											<input type="text" class="form-control" id="cnpj_additional"
+											<input type="text" class="form-control cnpj_additional" id="cnpj_additional"
 												placeholder="Informe apenas números" name="cnpj_additional[]"
 												value="{{old('cnpj_additional[]')}}">
 										</td>
+										
 										<th>
 											&nbsp;
 											<label>Excluir</label><br>
@@ -320,12 +318,12 @@
 												name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -341,12 +339,12 @@
 												name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -362,12 +360,12 @@
 												name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -383,12 +381,12 @@
 												name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -410,85 +408,74 @@
 								<tbody>
 									<tr>
 										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level"
-												value="Operacional" readonly="readonly" name="activity_level[]">
+											<input type="text" class="form-control" id="activity_level" value="Operacional" readonly="readonly"
+												name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color"
-												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
+											<input type="text" class="form-control" id="color" value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}"
-												name="human_quantity_activity_level[]">
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}"
-												name="woman_quantity_activity_level[]">
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
 										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level"
-												value="Supervisão" readonly="readonly" name="activity_level[]">
+											<input type="text" class="form-control" id="activity_level" value="Supervisão" readonly="readonly"
+												name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
+											<input type="text" class="form-control" id="color[]" value="Demais grupos étnicos-raciais"
+												readonly="readonly" name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}"
-												name="human_quantity_activity_level[]">
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}"
-												name="woman_quantity_activity_level[]">
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
 										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level"
-												value="Gerência / Chefia" readonly="readonly" name="activity_level[]">
+											<input type="text" class="form-control" id="activity_level" value="Gerência / Chefia" readonly="readonly"
+												name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
+											<input type="text" class="form-control" id="color[]" value="Demais grupos étnicos-raciais"
+												readonly="readonly" name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}"
-												name="human_quantity_activity_level[]">
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}"
-												name="woman_quantity_activity_level[]">
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 									<tr>
 										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level" value="Direção"
-												readonly="readonly" name="activity_level[]">
+											<input type="text" class="form-control" id="activity_level" value="Direção" readonly="readonly"
+												name="activity_level[]">
 										</th>
 										<th>
-											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
+											<input type="text" class="form-control" id="color[]" value="Demais grupos étnicos-raciais"
+												readonly="readonly" name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}"
-												name="human_quantity_activity_level[]">
+											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}"
-												name="woman_quantity_activity_level[]">
+											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
 										</td>
 									</tr>
 								</tbody>
@@ -514,11 +501,11 @@
 											readonly="readonly" name="profile_color[]">
 									</th>
 									<td width="20px;">
-										<input type="text" class="form-control" id="human_quantity"
+										<input type="text" class="form-control human_quantity" id="human_quantity"
 											value="{{old('human_quantity[]')}}" name="human_quantity[]">
 									</td>
 									<td width="20px;">
-										<input type="text" class="form-control" id="woman_quantity"
+										<input type="text" class="form-control woman_quantity" id="woman_quantity"
 											value="{{old('woman_quantity[]')}}" name="woman_quantity[]">
 									</td>
 								</tr>
@@ -528,11 +515,11 @@
 											readonly="readonly" name="profile_color[]">
 									</th>
 									<td width="20px;">
-										<input type="text" class="form-control" id="human_quantity"
+										<input type="text" class="form-control human_quantity" id="human_quantity"
 											value="{{old('human_quantity[]')}}" name="human_quantity[]">
 									</td>
 									<td width="20px;">
-										<input type="text" class="form-control" id="woman_quantity"
+										<input type="text" class="form-control woman_quantity" id="woman_quantity"
 											value="{{old('woman_quantity[]')}}" name="woman_quantity[]">
 									</td>
 								</tr>
@@ -545,7 +532,7 @@
 						<button type="button" name="btn_previous_diagnostico" id="btn_previous_diagnostico"
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_diagnostico_next" id="btn_diagnostico_next"
-							class="btn btn-info btn-lg">Proximo</button>
+							class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
 					</div>
 					<br />
 				</div>
@@ -578,7 +565,7 @@
 						<button type="button" name="previous_btn_personal_details" id="btn_previous_plano_trabalho"
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_instituicacao_next" id="btn_plano_trabalho_next"
-							class="btn btn-info btn-lg">Proximo</button>
+							class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
 					</div>
 					<br />
 				</div>
@@ -658,7 +645,7 @@
 						<button type="button" name="btn_previous_cronograma" id="btn_previous_cronograma"
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_plano_next" id="btn_plano_next"
-							class="btn btn-info btn-lg">Proximo</button>
+							class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
 					</div>
 					<br />
 				</div>
@@ -690,7 +677,7 @@
 						<button type="button" name="btn_previous_parceiras" id="btn_previous_parceiras"
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_next_parceiras" id="btn_next_parceiras"
-							class="btn btn-info btn-lg">Proximo</button>
+							class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
 					</div>
 					<br />
 				</div>
@@ -726,7 +713,7 @@
 						<button type="button" name="btn_previous_parceiras" id="btn_metodologia_previous"
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_contact_details" id="btn_metodologia_next"
-							class="btn btn-info btn-lg">Proximo</button>
+							class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
 					</div>
 					<br />
 				</div>
@@ -750,15 +737,15 @@
 							Tamanho: 3000
 						</strong>
 						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
-							name="result" required>{{old('result')}}</textarea>
+							name="result">{{old('result')}}</textarea>
 					</div>
 					<!-- Final dos Inputs -->
 					<br />
 					<div align="center">
 						<button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
 							class="btn btn-default btn-lg">Anterior</button>
-						<button type="submit" name="btn_resultados_next" id="btn_resultados_next"
-							class="btn btn-success btn-lg">Salvar Informações</button>
+						<button type="button" name="btn_resultados_next" id="btn_resultados_next"
+							class="btn btn-success btn-lg" data-url="{{route('save.institution')}}">Salvar Informações</button>
 					</div>
 					<br />
 				</div>

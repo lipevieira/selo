@@ -20,6 +20,9 @@
      <script type="text/javascript" src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js')}}"></script>
      <script type="text/javascript" src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
      <script type="text/javascript" src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+     <script src="{{ asset('assets/institution/mask.js') }}"></script>
      <script src="{{ asset('assets/institution/script.js') }}"></script>
+
 </body>
 </html>

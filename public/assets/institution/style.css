@@ -86,3 +86,9 @@ html, body {
     width: 150px;
 }
 
+.msg-ajax {
+    background-color: #F0E68C;
+    width: 160px;
+    margin: auto;
+    text-align: center;
+}

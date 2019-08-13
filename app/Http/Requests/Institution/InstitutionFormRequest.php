@@ -37,8 +37,8 @@ class InstitutionFormRequest extends FormRequest
             'formation' => 'required | min:3 | max:80',
             'phone_two' => 'required | min:4 | max:20',
             'institution_activity' => 'required',
-            'company_classification' => 'required | min:18 | max:100',
-            // 'result' => 'required | min:10',
+            'company_classification' => 'required  | max:100',
+            'cnpj_additional.*' => 'distinct',
         ];
     }
     public function messages()
@@ -52,7 +52,6 @@ class InstitutionFormRequest extends FormRequest
             'uf.required' => 'O campo Estado é obrigatorio',
             'address.required' => 'O campo Endeço é obrigatorio',
             'address.max' => 'O campo não pode ser maior que 190 caracteres',
-            'email.unique' => 'Esse E-mail já está cadastrado',
             'email.required' => 'O campo E-mail é obrigatório',
             'phone.required' => 'O campo Telefone é obrigatório',
             'phone.min' => 'O campo Telefone não pode ser menor que 3 caracteres',
@@ -60,17 +59,15 @@ class InstitutionFormRequest extends FormRequest
             'formation.required' => 'O campo Formação é obrigatório',
             'phone_two.required' => 'O campo Telefone é obrigatório',
             'institution_activity.required' => 'O campo Ramo de atividade é obrigatório',
-            'company_classification.required' => 'O campo Classificação da Empresa é obrigatório',          
-            'result.required' => 'O campo Resultado é obrigátorio',
-            'result.max' => 'O campo Resultado não pode ultrapassar 3000 caracteres',
-            'result.min' => 'O campo Resultado não  pode ser menor que 10 caracteres',
+            'company_classification.required' => 'O campo Classificação da Empresa é obrigatório',
+            'cnpj_additional.*.distinct' => 'O CNPJ adicional não pode ser repetido'
         ];
     }
     public function rulesMembers()
     {
         return [
             'members_name.*'  => 'required | min:4 | max:100',
-            'members_email.*' => 'required|unique:commission_members,id|max:150',
+            'members_email.*' => 'required|unique:commission_members,id|max:150 | distinct',
             'members_function.*' => 'required | max:60',
             'members_phone.*' => 'required | min:4 | max:20',
         ];
@@ -91,6 +88,8 @@ class InstitutionFormRequest extends FormRequest
             'members_phone.0.required' => 'É obrigatório informa o Telefone do primeiro  membros da comissão',
             'members_phone.1.required' => 'É obrigatório informa o Telefone do segundo membros da comissão',
             'members_phone.2.required' => 'É obrigatório informa o Telefone o nome do terceiro  membros da comissão',
+            'members_email.*.distinct' => 'Os e-mails dos membros  membros da comissão devem ser todos diferentes',
+
         ];
     }
     public function rulesDiagnosticoCencitario()
@@ -191,6 +190,22 @@ class InstitutionFormRequest extends FormRequest
             'methodology.required' => 'O campo Metodologia é obrigátorio',
             'methodology.max' => 'O campo Metodologia não pode ultrapassar 7000 caracteres',
             'methodology.min' => 'O campo Metodologia pode ser menor que 10 caracteres',
+        ];
+    }
+    public function rulesResult()
+    {
+        return [
+            'result' => 'required | min:10',
+            'email' => 'unique:institutions,id',
+        ];
+    }
+    public function messageResul()
+    {
+        return [
+            'result.required' => 'O campo Resultado é obrigátorio',
+            'result.max' => 'O campo Resultado não pode ultrapassar 3000 caracteres',
+            'result.min' => 'O campo Resultado não  pode ser menor que 10 caracteres',
+            'email.unique' => 'Esse E-mail já está cadastrado',
         ];
     }
 }

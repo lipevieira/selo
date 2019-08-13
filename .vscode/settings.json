@@ -1,5 +1,4 @@
 {
-    "editor.fontFamily": "Tomes new row",
-    "blade.format.enable": true,
-    "editor.fontSize": 20
+    "editor.fontFamily": "Fira Code",
+    "blade.format.enable": true
 }
