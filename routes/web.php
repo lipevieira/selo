@@ -11,12 +11,24 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', 'Institution\InstitutionController@welcome')->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/***
+ * @description: Rotas para Home
+ */
+Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth'],function(){
+   Route::get('/', 'HomeController@index')->name('home');
+   Route::get('/perfil-collaborator', 'HomeController@profileCollaborator')->name('home.profile');
 
+});
+
+/**
+ * @description: Rotas para cadastro de instituições
+ */
 Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
    Route::get('/', 'InstitutionController@index')->name('index.company');
    Route::post('salvar', 'InstitutionController@saveAllInstutition')->name('save.institution');

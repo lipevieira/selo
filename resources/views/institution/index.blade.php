@@ -125,11 +125,11 @@
 							<label for="county">Município:</label>
 							<select class="form-control form-control-sm" name="county">
 								<option></option>
-								<option value="1" {{ old('county') == 1 ? 'selected' : '' }}>Camaçari</option>
-								<option value="2" {{ old('county') == 2 ? 'selected' : '' }}>Candeias</option>
-								<option value="3" {{ old('county') == 3 ? 'selected' : '' }}>Lauro de Freitas</option>
-								<option value="4" {{ old('county') == 4 ? 'selected' : '' }}>Salvador</option>
-								<option value="5" {{ old('county') == 5 ? 'selected' : '' }}>Simões Filho</option>
+								<option value="Camaçari" >Camaçari</option>
+								<option value="Candeias" >Candeias</option>
+								<option value="Lauro de Freitas" >Lauro de Freitas</option>
+								<option value="Salvador" >Salvador</option>
+								<option value="Simões Filho" >Simões Filho</option>
 							</select>
 						</div>
 						<div class="col-md-4 mb-3">
