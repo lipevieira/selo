@@ -42,9 +42,6 @@
                             <a href="#" class="btn btn-info btn-sm" role="button">
                                 <span class="glyphicon glyphicon-eye-open"></span> Visualizar
                             </a>
-                            <button class="btn btn-warning btn-sm " id="btnEditarDocumento" >
-                                <span class="glyphicon glyphicon-pencil"></span> Editar
-                            </button>
                             <button class="btn btn-danger btn-sm " id="btnExcluirDocumento">
                                 <span class="glyphicon glyphicon-trash"></span> Excluir
                             </button>
@@ -62,6 +59,13 @@
 @stop
 
 @section('js')
+{{-- TO-DE Fazer: Correção do Carregamento de arquivos na pagina home  --}}
+<script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
+<script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
+<script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
+<script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
+<script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
+
 <script src="{{asset('assets/home/script.js')}}"></script>
 @stop
 @stop

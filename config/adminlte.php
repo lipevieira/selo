@@ -127,12 +127,12 @@ return [
                 ],
                 [
                     'text' => 'Membros da Comissão',
-                    'url'  => '#',
+                    'url'  => 'home/perfil-membros-comissão',
                     'icon' => 'users',
                 ],
                 [
                     'text' => 'Cronograma',
-                    'url'  => '#',
+                    'url'  => 'home/cronograma',
                     'icon' => 'table',
                 ],
                 

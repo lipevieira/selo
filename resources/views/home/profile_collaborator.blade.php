@@ -14,7 +14,7 @@
                 <h3>Nivel de atividade dos colaboradores:</h3>
             </div>
             <div class="box-body">
-                <table class="table">
+                <table class="table" id="tblLevelActivity">
                     <thead>
                         <tr>
                             <th scope="col">COD</th>
@@ -27,17 +27,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach ($collaboratorActivity as $item)
-                        @endforeach --}}
-                            <tr>
-                            <th scope="row"></th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-
-                            </tr>
+                        @foreach ($collaboratorActivitylevels as $item)
+                        <tr>
+                            <th scope="row">{{$item->id}}</th>
+                            <td>{{$item->institution->name}}</td>
+                            <td>{{$item->activity_level}}</td>
+                            <td>{{$item->color}}</td>
+                            <td>{{$item->human_quantity_activity_level}}</td>
+                            <td>{{$item->woman_quantity_activity_level}}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -49,7 +48,7 @@
                 <h3>Perfil étnico racial dos colaboradores:</h3>
             </div>
             <div class="box-body">
-                <table class="table">
+                <table class="table" id="tblProfileCollaborators">
                     <thead>
                         <tr>
                             <th scope="col">COD</th>
@@ -61,13 +60,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($profileCollaborators as $perfil)
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th scope="row">{{$perfil->id}}</th>
+                            <td>{{$perfil->institution->name}}</td>
+                            <th>{{$perfil->profile_color}}</th>
+                            <th>{{$perfil->human_quantity}}</th>
+                            <th>{{$perfil->woman_quantity}}</th>
+
                         </tr>
+                        @endforeach
 
                     </tbody>
                 </table>
@@ -82,7 +84,5 @@
 @stop
 
 @section('js')
-<script>
-    // console.log('Hi!'); 
-</script>
+    <script src="{{asset('assets/home/script.js')}}"></script>
 @stop
