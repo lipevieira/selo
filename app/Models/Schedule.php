@@ -8,6 +8,11 @@ use Carbon\Carbon;
 class Schedule extends Model
 {
     protected $fillable = ['action', 'activity', 'amount', 'status', 'deadline', 'institution_id' ];
+    protected $dates = [
+        'created_id',
+        'created_at',
+        'deadline',
+    ];
     /**
      * Descrioption: Volta do relacionameto
      * Muitos cronogramas pertercem a uma Instituição

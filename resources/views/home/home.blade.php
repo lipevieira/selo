@@ -14,16 +14,16 @@
         <table class="table" id="tblInstitution">
             <thead>
                 <tr>
-                    <th scope="col">Cod</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Nome Fantasia</th>
-                    <th scope="col">Ramo de atividade</th>
+                    <th scope="col">COD</th>
+                    <th scope="col">NOME</th>
+                    <th scope="col">NOME FANTASIA</th>
+                    <th scope="col">RAMO DE ATIVIDADE</th>
                     <th scope="col">CPNJ</th>
-                    <th scope="col">Municipio</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Resposavel Técnico</th>
-                    <th scope="col">Ações</th>
+                    <th scope="col">MUNICIPIO</th>
+                    <th scope="col">E-MAIL</th>
+                    <th scope="col">TELEFONE</th>
+                    <th scope="col">RESPONSAEVEL TÉCNICO</th>
+                    <th scope="col">AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,11 +39,11 @@
                         <td>{{$item->phone}}</td>
                         <td>{{$item->technical_manager}}</td>
                         <td class="actions_tables">
-                            <a href="#" class="btn btn-info btn-sm" role="button">
+                        <a href="{{route('home.details.institution',$item->id)}}" class="btn btn-info btn-sm" role="button">
                                 <span class="glyphicon glyphicon-eye-open"></span> Visualizar
                             </a>
                             <button class="btn btn-danger btn-sm " id="btnExcluirDocumento">
-                                <span class="glyphicon glyphicon-trash"></span> Excluir
+                                <span class="glyphicon glyphicon-trash"></span> Desativar
                             </button>
                         </td>
                 
@@ -59,7 +59,7 @@
 @stop
 
 @section('js')
-{{-- TO-DE Fazer: Correção do Carregamento de arquivos na pagina home  --}}
+<script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
 <script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
 <script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
 <script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>

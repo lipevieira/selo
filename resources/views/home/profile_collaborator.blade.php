@@ -84,5 +84,11 @@
 @stop
 
 @section('js')
-    <script src="{{asset('assets/home/script.js')}}"></script>
+<script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
+<script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
+<script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
+<script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
+<script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
+<script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
+<script src="{{asset('assets/home/script.js')}}"></script>
 @stop

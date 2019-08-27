@@ -25,6 +25,7 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth']
    Route::get('/perfil-collaborator', 'HomeController@getProfileCollaborator')->name('home.profile');
    Route::get('/perfil-membros-comissão', 'HomeController@getCommissionMembers')->name('home.membros.comissao');
    Route::get('/cronograma', 'HomeController@getSchedules')->name('home.schedules');
+   Route::get('/detalhes-instituição/{id}', 'HomeController@getInstituitionDetails')->name('home.details.institution');
 
 });
 

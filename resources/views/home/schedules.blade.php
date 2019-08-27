@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Cronograma')
 
 @section('content_header')
 {{-- <h1>Dashboard</h1> --}}
@@ -36,7 +36,7 @@
                             <td>{{$item->activity}}</td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->status}}</td>
-                            <td>{{$item->deadline}}</td>
+                            <td>{{$item->deadline->format('d/m/Y')}}</td>
                             <td>{{$item->institution->authorization}}</td>
                         </tr>
                         @endforeach
@@ -52,5 +52,11 @@
 @stop
 
 @section('js')
+<script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
+<script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
+<script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
+<script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
+<script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
+<script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
 <script src="{{asset('assets/home/script.js')}}"></script>
 @stop

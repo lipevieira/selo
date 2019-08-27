@@ -9,6 +9,8 @@ use App\Models\CollaboratorActivityLevel;
 use App\Models\ProfileCollaborator;
 use App\Models\CommissionMembers;
 use App\Models\Schedule;
+use App\Models\Question;
+use App\Models\ScheduleAction;
 
 class HomeController extends Controller
 {
@@ -79,5 +81,25 @@ class HomeController extends Controller
 
         return view('home.schedules', compact('schedules'));
     }
-   
+   public function getInstituitionDetails($id)
+   {
+        // Buscando o Diagnostico censitário
+        $actions = ScheduleAction::all();
+        $questionAlternatives = Question::with('alternatives')->get();
+        // Buscando Instituição e sues derivados.
+        $instituion = $this->institution->find($id);
+
+        // $derivativesInstituion  = $this->institution->where("id", "{$id}")->with('commissionMembers')
+        // $derivativesInstituion  = $this->institution->where("id", "{$id}")->with('commissionMembers')
+                        // ->with('commissionMembers')
+                        // ->with('branches')
+                        // ->with('collaboratorActivityLevels')
+                        // ->with('profileCollaborators')
+                        // ->with('answers')
+                        // ->with('schedules')
+                        // ->get();
+        // \dd($instituion->branches);
+
+       return view('home.show_institution', compact('questionAlternatives', 'actions','instituion'));
+   }
 }
