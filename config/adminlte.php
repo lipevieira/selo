@@ -113,8 +113,8 @@ return [
             'text'        => 'Home',
             'url'         => 'home',
             'icon'        => 'home',
-            'label'       => 4,
-            'label_color' => 'success',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
         ],
         [
             'text'    => 'Detalhes da Instituição',
@@ -137,6 +137,12 @@ return [
                 ],
                 
             ],
+        ],
+        [
+            'text'        => 'Ações do Cronograma',
+            'url'         => 'ações/cronograma',
+            'icon'        => 'adn',
+       
         ],
         
     ],

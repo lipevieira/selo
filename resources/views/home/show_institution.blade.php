@@ -212,20 +212,35 @@
                                     <select class="form-control form-control-sm" name="alternative_id[]">
 
                                         {{-- TO-DE FAZER: Listagem das repostas do diagnotisco censitario --}}
-                                        {{-- @foreach ($instituion->answers->alternatives as $answer)
-                                            <option value="{{$answer->alternative}}">{{$answer->alternative}}</option>
+                                        {{-- @foreach ($instituion->answers as $answer)
+                                            <option value=""></option>
                                         @endforeach --}}
 
                                         @foreach ($question->alternatives as $alternativa)
-                                            <option value="{{$alternativa->id}}">{{ $alternativa->alternative }}</option>
-                                        @endforeach
+                                            <option value="{{$alternativa->id}}" @foreach ($instituion->answers as $answer)
+                                                @if ($alternativa->id == $answer->alternative_id)
+                                                    selected
+                                                @endif
+                                                @endforeach
+                                                >{{ $alternativa->alternative }}
+                                            </option>
 
+                                        @endforeach
                                     </select>
+
                                     @if($question->field_option == "SIM")
-                                    <label for="others">Se sim, quais?</label>
-                                    <input type="text" class="form-control" name="others[]" id="others">
+                                    @foreach ($question->alternatives as $alternativa)
+                                        @foreach ($instituion->answers as $answer)
+                                            @if ($alternativa->id == $answer->alternative_id && $answer->others != null)
+                                                <label for="others">Se sim, quais?</label>
+                                                <input type="text" class="form-control" name="others[]" id="others" value="{{$answer->others}}">
+                                            @endif
+                                        @endforeach
+                                    @endforeach
+                                        {{-- <label for="others">Se sim, quais?</label>
+                                        <input type="text" class="form-control" name="others[]" id="others"> --}}
                                     @else
-                                    <input type="hidden" class="form-control" name="others[]" id="others">
+                                        <input type="hidden" class="form-control" name="others[]" id="others">
                                     @endif
                                 </div>
 

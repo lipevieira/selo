@@ -26,7 +26,7 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth']
    Route::get('/perfil-membros-comissão', 'HomeController@getCommissionMembers')->name('home.membros.comissao');
    Route::get('/cronograma', 'HomeController@getSchedules')->name('home.schedules');
    Route::get('/detalhes-instituição/{id}', 'HomeController@getInstituitionDetails')->name('home.details.institution');
-
+   
 });
 
 /**
@@ -36,4 +36,11 @@ Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
    Route::get('/', 'InstitutionController@index')->name('index.company');
    Route::post('salvar', 'InstitutionController@saveAllInstutition')->name('save.institution');
 
+});
+
+/***
+ * @description: Rotas para ActionSheduleController
+ */
+Route::group(['prefix' => 'ações', 'namespace' => 'Shedule'], function () {
+   Route::get('/cronograma', 'SheduleActionController@index')->name('index.shedule.action');
 });
