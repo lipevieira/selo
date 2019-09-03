@@ -1,0 +1,4 @@
+.box-body {
+    max-height: 755px;
+    overflow-y: auto;
+}

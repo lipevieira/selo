@@ -56,11 +56,10 @@
                             <th scope="col">RAÇA/COR</th>
                             <th scope="col">Nº HOMEMS</th>
                             <th scope="col">Nº MULHERES</th>
-
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($profileCollaborators as $perfil)
+                        {{-- @foreach ($profileCollaborators as $perfil)
                         <tr>
                             <th scope="row">{{$perfil->id}}</th>
                             <td>{{$perfil->institution->name}}</td>
@@ -69,7 +68,7 @@
                             <th>{{$perfil->woman_quantity}}</th>
 
                         </tr>
-                        @endforeach
+                        @endforeach --}}
 
                     </tbody>
                 </table>

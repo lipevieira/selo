@@ -96,13 +96,6 @@ class InstitutionFormRequest extends FormRequest
     {
         return [
             'alternative_id.*' => 'required',
-            'color .*' => 'required | max:60',
-            'human_quantity_activity_level.*' => 'required | numeric',
-            'woman_quantity_activity_level.*' => 'required | numeric',
-            'activity_level.*' => 'required',
-            'profile_color.*' => 'required | max:60',
-            'human_quantity.*' => 'required | numeric',
-            'woman_quantity.*' => 'required | numeric',
         ];
     }
     public function messagesDiagnosticoCencitario()
@@ -118,16 +111,6 @@ class InstitutionFormRequest extends FormRequest
             'alternative_id.7.required' => 'É obrigatório responder a questões 08 questões do diagnóstico censitário',
             'alternative_id.8.required' => 'É obrigatório responder a questões 09 questões do diagnóstico censitário',
             'alternative_id.9.required' => 'É obrigatório responder a questões 10 questões do diagnóstico censitário',
-            'human_quantity_activity_level.*.required' => 'Campo Nº HOMEMS é  obrigatório',
-            'human_quantity_activity_level.*.numeric' => 'Campo Nº HOMEMS é  deve ser numérico',
-            'woman_quantity_activity_level.*.required' => 'Campo Nº MULHERES é  obrigatório',
-            'woman_quantity_activity_level.*.numeric' => 'Campo Nº MULHERES deve ser numérico',
-            'activity_level.*.required' => 'Campo NIVEL DE ATIVIDADE é  obrigatório',
-            'profile_color.required' => 'Campo RAÇA/COR é  obrigatório',
-            'human_quantity.*.required' => 'Campo Nº HOMEMS Negros (pretos + pardos) Perfil étnico racial dos colaboradores é  obrigatório',
-            'human_quantity.*.numeric' => 'Campo Nº HOMEMS Negros (pretos + pardos) Perfil étnico racial dos colaboradores deve ser numérico',
-            'woman_quantity.*.required' => 'Campo Nº MULHERES Demais grupos étnicos-raciais do Perfil étnico racial dos colaboradores é  obrigatório',
-            'woman_quantity.*.numeric' => 'Campo Nº MULHERES Demais grupos étnicos-raciais do Perfil étnico racial dos colaboradores deve ser numérico',
         ];
     }
     public function rulesPlainAction()
@@ -142,26 +125,6 @@ class InstitutionFormRequest extends FormRequest
             'action_plan.required' => 'O campo Plano de ação é obrigátorio',
             'action_plan.max' => 'O campo Plano de ação  não pode ultrapassar 3000 caracteres',
             'action_plan.min' => 'O campo Plano de ação  não pode ser menor que 10 caracteres',
-        ];
-    }
-    public function rulesShedule()
-    {
-        return [
-            'action.*' => 'required',
-            'activity.*' => 'required',
-            'amount.*' => 'required',
-            'deadline.*' => 'required',
-            'authorization' => 'required',
-        ];
-    }
-    public function messagesShedule()
-    {
-        return [
-            'action.*.required*' => 'O campo Ações  é  obrigatório',
-            'activity.*.required' => 'O campo Atividade  é  obrigatório',
-            'amount.*.required*' => 'O campo Quantidade  é  obrigatório',
-            'deadline.*.required*' => 'O campo Data Limite  é  obrigatório',
-            'authorization.required' => 'O campo Autorização é obrigátorio para o cronograma',
         ];
     }
     public function rulesPartners()
@@ -181,22 +144,19 @@ class InstitutionFormRequest extends FormRequest
     public function rulesMethodology()
     {
         return [
-            'methodology' => 'required | min:10 | max:7000',
+            'methodology' => 'max:7000',
         ];
     }
     public function messageMethodology()
     {
         return [
-            'methodology.required' => 'O campo Metodologia é obrigátorio',
             'methodology.max' => 'O campo Metodologia não pode ultrapassar 7000 caracteres',
-            'methodology.min' => 'O campo Metodologia pode ser menor que 10 caracteres',
         ];
     }
     public function rulesResult()
     {
         return [
             'result' => 'required | min:10',
-            'email' => 'unique:institutions,id',
         ];
     }
     public function messageResul()

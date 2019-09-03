@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Institution;
 use App\Models\CollaboratorActivityLevel;
-use App\Models\ProfileCollaborator;
 use App\Models\CommissionMembers;
 use App\Models\Schedule;
 use App\Models\Question;
@@ -25,11 +24,10 @@ class HomeController extends Controller
      * @return void
      */
     public function __construct(Institution $institution, CollaboratorActivityLevel $collaboratorActivitylevel,
-            ProfileCollaborator $profileCollaborator, CommissionMembers $commissionMembers,Schedule $schedule)
+            CommissionMembers $commissionMembers,Schedule $schedule)
     {
         $this->institution = $institution;
         $this->collaboratorActivitylevel = $collaboratorActivitylevel;
-        $this->profileCollaborator = $profileCollaborator;
         $this->commissionMembers = $commissionMembers;
         $this->schedule = $schedule;
 
@@ -55,9 +53,9 @@ class HomeController extends Controller
     {
         $collaboratorActivitylevels = $this->collaboratorActivitylevel->all();
 
-        $profileCollaborators = $this->profileCollaborator->all();
+        // $profileCollaborators = $this->profileCollaborator->all();
        
-        return view('home.profile_collaborator', compact('collaboratorActivitylevels', 'profileCollaborators'));
+        return view('home.profile_collaborator', compact('collaboratorActivitylevels'));
     }
     /**
      * Undocumented function

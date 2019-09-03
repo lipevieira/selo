@@ -17,8 +17,8 @@ class CreateCollaboratorActivityLevelsTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('color', 60);
-            $table->integer('human_quantity_activity_level');
-            $table->integer('woman_quantity_activity_level');
+            $table->integer('human_quantity_activity_level')->nullable();
+            $table->integer('woman_quantity_activity_level')->nullable();
             $table->string('activity_level', 60);
 
             $table->bigInteger('institution_id')->unsigned();

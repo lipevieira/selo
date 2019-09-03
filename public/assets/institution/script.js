@@ -75,6 +75,67 @@ $(document).ready(function () {
 				break;
 		}
 	});
+	// Contagem de caracteres dos textarea Plano de trabalho
+	$(document).on("input", "#action_plan", function () {
+		var limite = 3000;
+		var informativo = "caracteres restantes.";
+		var caracteresDigitados = $(this).val().length;
+		var caracteresRestantes = limite - caracteresDigitados;
+
+		if (caracteresRestantes <= 0) {
+			var action_plan = $("textarea[name=action_plan]").val();
+			$("textarea[name=action_plan]").val(action_plan.substr(0, limite));
+			$(".caracteres").text("0 " + informativo);
+		} else {
+			$(".caracteres").text(caracteresRestantes + " " + informativo);
+		}
+	});
+
+	//Contagem de caracteres dos textarea parcerias
+	$(document).on("input", "#partners", function () {
+		var limite = 2000;
+		var informativo = "caracteres restantes.";
+		var caracteresDigitados = $(this).val().length;
+		var caracteresRestantes = limite - caracteresDigitados;
+
+		if (caracteresRestantes <= 0) {
+			var partners = $("textarea[name=partners]").val();
+			$("textarea[name=partners]").val(partners.substr(0, limite));
+			$(".caracteres_partners").text("0 " + informativo);
+		} else {
+			$(".caracteres_partners").text(caracteresRestantes + " " + informativo);
+		}
+	});
+	// Contagem de caracteres dos textarea Metodologia
+	$(document).on("input", "#methodology", function () {
+		var limite = 7000;
+		var informativo = "caracteres restantes.";
+		var caracteresDigitados = $(this).val().length;
+		var caracteresRestantes = limite - caracteresDigitados;
+
+		if (caracteresRestantes <= 0) {
+			var methodology = $("textarea[name=methodology]").val();
+			$("textarea[name=methodology]").val(methodology.substr(0, limite));
+			$(".methodology_caracteres").text("0 " + informativo);
+		} else {
+			$(".methodology_caracteres").text(caracteresRestantes + " " + informativo);
+		}
+	});
+	// Contagem de caracteres dos textarea Resultados esperados
+	$(document).on("input", "#result", function () {
+		var limite = 3000;
+		var informativo = "caracteres restantes.";
+		var caracteresDigitados = $(this).val().length;
+		var caracteresRestantes = limite - caracteresDigitados;
+
+		if (caracteresRestantes <= 0) {
+			var result = $("textarea[name=result]").val();
+			$("textarea[name=result]").val(result.substr(0, limite));
+			$(".caracteres_result").text("0 " + informativo);
+		} else {
+			$(".caracteres_result").text(caracteresRestantes + " " + informativo);
+		}
+	});
 
 	// Menu de cadastro de instituição.
 	$('#btn_indentificacao').click(function () {
@@ -442,8 +503,7 @@ $(document).ready(function () {
 			url: url,
 			data: formData,
 			beforeSend: function () {
-				$('#msg-ajax').show();
-				$('#btn_resultados_next').attr("disabled", true);
+				$('#loadSaveInstitution').modal('show');
 			},
 			success: function (data) {
 				if ((data.errors)) {
@@ -454,32 +514,37 @@ $(document).ready(function () {
 						danger.find('ul').append('<li>' + error + '</li>');
 					});
 					danger.show();
-					$('#msg-ajax').hide();
-					$(this).attr("disabled", false);
+					$('#loadSaveInstitution').modal('hide'); 
 				} else {
-					alert('Instituição salva com sucesso!');
-					$('#msg-ajax').hide();
+					$('#loadSaveInstitution').modal('hide'); 
+					alert('Instituição salva com sucesso!');	
 				}
 			},
 			error: function (request, status, erro) {
-				$('#msg-ajax').hide();
+				$('#loadSaveInstitution').modal('hide'); 
+				alert('Erro ao salvar instituição  ' + erro);
 			}
 		});
 	});
-	// Button para adcionar limhas na tabela de CNPJs Adcionais
-	AddTableRow = function () {
-		var newRow = $("<tr>");
-		var cols = "";
-		cols += "<td><input type='text' class='form-control cnpj_additional' id='cnpj_additional' placeholder = 'Informe apenas números'name =' cnpj_additional[]' ></td>";
+	
+	AddTableRowCnpjsAdicionais = function () {
+		var table = $('#tbl_cnpj_add'),
+		lastRow = table.find('tbody tr:last'),
+		rowClone = lastRow.clone();
+		table.find('tbody').append(rowClone);
 
-
-		cols += '<td>';
-		cols += '<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover Linha</button>';
-		cols += '</td>';
-		newRow.append(cols);
-		$("#tblCNPJsAdicionais").append(newRow);
-		return false;
+		// Pegando a ultima posição do array e add o Mask
+		var inputs = jQuery('input[name^="cnpj_additional"]');
+		var values = [];
+		for (var i = 0; i < inputs.length; i++) {
+			values.push($(inputs[i]).val());
+		}
+		// var ultimo = values[values.length - 1];
+		values.push($(inputs[values.length - 1]).mask('00.000.000/0000-00').val(""));
 	};
+
+
+
 	// Buuton remover linha da Tabela de cnpsj adcionais
 	RemoveTableRow = function (handler) {
 		var tr = $(handler).closest('tr');
@@ -499,35 +564,18 @@ AddTableRowSchedule = function () {
 		rowClone = lastRow.clone();
 
 	table.find('tbody').append(rowClone);
-
+	// Limpando campos  de atividade depois de inserir uma nova linha na tabela de cronograma.
+	var activity = jQuery('textarea[name^="activity"]');
+	var valuesActivity = [];
+	for (var i = 0; i < activity.length; i++) {
+		valuesActivity.push($(activity[i]).val());
+	}
+	valuesActivity.push($(activity[valuesActivity.length - 1]).val(""));
+	// Limpando campos  de Data Limite depois de inserir uma nova linha na tabela de cronograma.
+	var deadline = jQuery('input[name^="deadline"]');
+	var valuesDeadline = [];
+	for (var i = 0; i < deadline.length; i++) {
+		valuesDeadline.push($(deadline[i]).val());
+	}
+	valuesDeadline.push($(deadline[valuesDeadline.length - 1]).val(""));
 };
-// Duplicar as linhas da Table de Cronograma...
-// function duplicaRowTableShedules(){
-// 	for (var i = 0; i < 6; i++) {
-// 		var table = $('#tbl_schedules'),
-// 		lastRow = table.find('tbody tr:last'),
-// 		rowClone = lastRow.clone();
-
-// 		table.find('tbody').append(rowClone);
-// 	}
-// }
-// Duplicar as linhas da Table de Cronograma... 
-// function duplicaRowTableMenbresCommision() {
-// 	for (var i = 0; i < 2; i++) {
-// 		var table = $('#tbl_menbress_comission'),
-// 			lastRow = table.find('tbody tr:last'),
-// 			rowClone = lastRow.clone();
-
-// 		table.find('tbody').append(rowClone);
-// 	}
-// }
-// function teste(){
-// 	var name = $('#name').val();
-// 	if (name  == '') {
-// 		alert('Campo Nome da Instituição proponente: éobrigatorio')	
-// 		$("#name").focus();
-// 		$('#name').css('border', '2px solid red');
-// 	}
-// }
-
-

@@ -40,15 +40,6 @@ class Institution extends Model
         return $this->hasMany(CommissionMembers::class);
     }
     /**
-     * @description: Uma Uma instuição tem muitos Menbros de comiisão
-     * Relacionameto 1 - N
-     * @return ProfileCollaborator
-     */
-    public function profileCollaborators()
-    {
-        return $this->hasMany(ProfileCollaborator::class);
-    }
-    /**
      * @description: Uma Uma instuição tem muitos Respotas
      * Relacionameto 1 - N
      * @return ProfileCollaborator

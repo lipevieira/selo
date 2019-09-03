@@ -6,7 +6,7 @@
 
 <h1>Cadastro da Instituição</h1>
 {{-- Modal para messagem de campos invalidos --}}
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modalErrorCad" >
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modalErrorCad">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -60,7 +60,7 @@
 				Esperados</a>
 		</li>
 	</ul>
-	
+
 	@if ($errors->any())
 	<div class="alert alert-warning">
 		<ul>
@@ -92,18 +92,21 @@
 					<input type="hidden" name="etapas" value="" id="etapas">
 					<div class="form-row">
 						<div class="col-md-4 mb-3">
-							<label for="name">Nome da Instituição proponente: </label>
+							<label for="name">Nome da Instituição proponente <small class="asterisco-input">*</small>
+							</label>
 							<input type="text" class="form-control " name="name" id="name"
 								placeholder="Nome da Instituição proponente:" value="{{old('name')}}">
 						</div>
 						<div class="col-md-4 mb-3 ">
-							<label for="fantasy_name">Nome para certificação (nome fantasia): </label>
+							<label for="fantasy_name">Nome para certificação (nome fantasia) <small
+									class="asterisco-input">*</small> </label>
 							<input type="text" class="form-control" id="fantasy_name"
 								placeholder="Nome para certificação (nome fantasia):" value="{{old('fantasy_name')}}"
 								name="fantasy_name">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="email_two">Classificação da Empresa</label>
+							<label for="email_two">Classificação da Empresa <small
+									class="asterisco-input">*</small></label>
 							<select class="form-control form-control-sm" id="company_classification"
 								name="company_classification">
 								<option></option>
@@ -117,19 +120,19 @@
 							</select>
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="cnpj">CNPJ:</label>
+							<label for="cnpj">CNPJ <small class="asterisco-input">*</small></label>
 							<input type="text" class="form-control" id="cnpj" placeholder="Informe apenas números"
 								value="{{old('cnpj')}}" name="cnpj">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="county">Município:</label>
+							<label for="county">Município <small class="asterisco-input">*</small></label>
 							<select class="form-control form-control-sm" name="county">
 								<option></option>
-								<option value="Camaçari" >Camaçari</option>
-								<option value="Candeias" >Candeias</option>
-								<option value="Lauro de Freitas" >Lauro de Freitas</option>
-								<option value="Salvador" >Salvador</option>
-								<option value="Simões Filho" >Simões Filho</option>
+								<option value="Camaçari">Camaçari</option>
+								<option value="Candeias">Candeias</option>
+								<option value="Lauro de Freitas">Lauro de Freitas</option>
+								<option value="Salvador">Salvador</option>
+								<option value="Simões Filho">Simões Filho</option>
 							</select>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -137,47 +140,49 @@
 							<input type="text" class="form-control" id="uf" value="BA" name="uf" readonly="readonly">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="address">Endereço:</label>
+							<label for="address">Endereço <small class="asterisco-input">*</small></label>
 							<input type="text" class="form-control" id="address" placeholder="Endereço:"
 								value="{{old('address')}}" name="address">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="email">E-mail:</label>
+							<label for="email">E-mail <small class="asterisco-input">*</small></label>
 							<input type="email" class="form-control" id="email" placeholder="E-mail"
 								value="{{old('email')}}" name="email">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="phone">Telefone:</label>
+							<label for="phone">Telefone <small class="asterisco-input">*</small></label>
 							<input type="text" class="form-control" id="phone" placeholder="Telefone"
 								value="{{old('phone')}}" name="phone">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="technical_manager">Responsável técnico:</label>
+							<label for="technical_manager">Responsável técnico <small
+									class="asterisco-input">*</small></label>
 							<input type="text" class="form-control" id="technical_manager"
 								placeholder="Responsável técnico:" value="{{old('technical_manager')}}"
 								name="technical_manager">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="formation">Formação:</label>
+							<label for="formation">Formação <small class="asterisco-input">*</small></label>
 							<input type="text" class="form-control" id="formation" placeholder="Formação:"
 								value="{{old('formation')}}" name="formation">
 						</div>
 						<div class="col-md-4 mb-3">
-							<label for="phone_two">Telefone:</label>
+							<label for="phone_two">Telefone <small class="asterisco-input">*</small></label>
 							<input type="text" class="form-control" id="phone_two" placeholder="Telefone:"
 								value="{{old('phone_two')}}" name="phone_two">
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="email_two">Atividade:</label>
+							<label for="email_two">Atividade <small class="asterisco-input">*</small></label>
 							<select class="form-control form-control-sm" name="institution_activity">
 								<option></option>
-								<option value="1" {{ old('county') == 1 ? 'selected' : '' }}>Indústria</option>
-								<option value="2" {{ old('county') == 2 ? 'selected' : '' }}>Comércio</option>
-								<option value="3" {{ old('county') == 3 ? 'selected' : '' }}>Serviços</option>
+								<option value="Indústria" >Indústria</option>
+								<option value="Comércio" >Comércio</option>
+								<option value="Serviços" >Serviços</option>
 							</select>
 						</div>
 						<div class="col-md-6 mb-3">
-							<label for="activity_branch">Ramo de atividade:</label>
+							<label for="activity_branch">Ramo de atividade <small
+									class="asterisco-input">*</small></label>
 							<input type="text" class="form-control" id="activity_branch"
 								placeholder="Ramo de atividade:" value="{{old('activity_branch')}}"
 								name="activity_branch">
@@ -193,10 +198,11 @@
 							<table class="table  table-bordered" id="tbl_menbress_comission">
 								<thead>
 									<tr>
-										<th scope="col">Nome do funcionário</th>
-										<th scope="col">Função / setor</th>
-										<th scope="col">Telefone</th>
-										<th scope="col">E-mail</th>
+										<th scope="col">Nome do funcionário <small class="asterisco-input">*</small>
+										</th>
+										<th scope="col">Função / setor <small class="asterisco-input">*</small> </th>
+										<th scope="col">Telefone <small class="asterisco-input">*</small></th>
+										<th scope="col">E-mail <small class="asterisco-input">*</small></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -226,33 +232,39 @@
 								</tbody>
 							</table>
 							<!-- CNPJ Adicionias. Estes campos são opcionais -->
-							<table class="table table-bordered" id="tblCNPJsAdicionais">
-								<thead>
-									<tr>
-										<th scope="col"> <button onclick="AddTableRow()" type="button"
-												class="btn btn-success">Adicionar mais CNPJs </button></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td scope="col" width="950px">
-											&nbsp;
-											<label>CNPJs Acicionais</label>
-											<input type="text" class="form-control cnpj_additional" id="cnpj_additional"
-												placeholder="Informe apenas números" name="cnpj_additional[]"
-												value="{{old('cnpj_additional[]')}}">
-										</td>
-										
-										<th>
-											&nbsp;
-											<label>Excluir</label><br>
-											<button onclick="RemoveTableRow(this)" type="button"
-												class="btn btn-danger">Remover Linha</button>
-										</th>
-									</tr>
+							<div class="container_cnpj_adcional">
+								<div class="sub_conatainer_cnpj_adcioanl">
+									<table class="table " id="tbl_cnpj_add">
+										<thead>
+											<tr>
+												<th scope="col"> <button onclick="AddTableRowCnpjsAdicionais()"
+														type="button" class="btn btn-success">Adicionar mais CNPJs
+													</button>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td scope="col" width="950px">
+													&nbsp;
+													<label>CNPJs Acicionais</label>
+													<input type="text" class="form-control cnpj_additional"
+														id="cnpj_additional" placeholder="Informe apenas números"
+														name="cnpj_additional[]" value="">
+												</td>
 
-								</tbody>
-							</table>
+												<td>
+													&nbsp;
+													<label>Excluir</label><br>
+													<button onclick="RemoveTableRow(this)" type="button"
+														class="btn btn-danger">Remover Linha</button>
+												</td>
+											</tr>
+
+										</tbody>
+									</table>
+								</div>
+							</div>
 						</div>
 						<br />
 						<div align="center">
@@ -270,40 +282,48 @@
 				<div class="panel-heading"><strong>QUESTIONÁRIO PARA DIAGNÓSTICO CENSITÁRIO</strong></div>
 				<div class="panel-body">
 					<!-- Inicio das Questões -->
-					@foreach ($questionAlternatives as $question)
-					<p><strong>{{ $question->name }}</strong></p>
-					<div class="row">
-						<div class="col-md-12 mb-3">
-							<label for="">Resposta</label>
-							<select class="form-control form-control-sm" name="alternative_id[]">
-								<option value=""></option>
-								@foreach ($question->alternatives as $alternativa)
-								<option value="{{$alternativa->id}}">{{ $alternativa->alternative }}
-									{{ old('alternative_id[]') == $alternativa->id ? 'selected' : '' }}</option>
-								@endforeach
-							</select>
-							@if($question->field_option == "SIM")
-							<label for="others">Se sim, quais?</label>
-							<input type="text" class="form-control" name="others[]" id="others">
-							@else
-							<input type="hidden" class="form-control" name="others[]" id="others">
-							@endif
-						</div>
+					<div class="question-color">
+						@foreach ($questionAlternatives as $question)
+						<p><strong>{{ $question->name }}</strong></p>
+						<div class="row">
+							<div class="col-md-12 mb-3">
+								<label for="">
+									Resposta <small class="asterisco-input">*</small>
+								</label>
 
+								<select class="form-control form-control-sm" name="alternative_id[]">
+									<option value=""></option>
+									@foreach ($question->alternatives as $alternativa)
+									<option value="{{$alternativa->id}}">{{ $alternativa->alternative }}
+										{{ old('alternative_id[]') == $alternativa->id ? 'selected' : '' }}</option>
+									@endforeach
+								</select>
+								@if($question->field_option == "SIM")
+								<label for="others">Se sim, quais?</label>
+								<input type="text" class="form-control" name="others[]" id="others">
+								@else
+								<input type="hidden" class="form-control" name="others[]" id="others">
+								@endif
+							</div>
+
+						</div>
+						@endforeach
 					</div>
-					@endforeach
 					{{-- Tabelas perfil colaborador --}}
 					<div class="form-row">
-						<div class="form-group col-md-6">
-							<h4><strong>Nivel de atividade dos colaboradores: Demais grupos étnicos-raciais</strong>
+						<div class="form-group col-md-12">
+							<h4><strong>Nivel de atividade dos colaboradores:</strong>
 							</h4>
 							<table class="table" id="tblLevelActivicDemiasGroups">
 								<thead>
 									<tr>
-										<th scope="col">NIVEL DE ATIVIDADE</th>
-										<th scope="col">RAÇA/COR</th>
-										<th scope="col">Nº HOMEMS</th>
-										<th scope="col">Nº MULHERES</th>
+										<th scope="col">NIVEL DE ATIVIDADE<small class="asterisco-input">*</small></th>
+										<th scope="col">RAÇA/COR<small class="asterisco-input">*</small></th>
+										<th scope="col">Nº HOMEMS<small class="asterisco-input">*</small></th>
+										<th scope="col">Nº MULHERES<small class="asterisco-input">*</small></th>
+										<th scope="col">RAÇA/COR<small class="asterisco-input">*</small></th>
+										<th scope="col">Nº HOMEMS<small class="asterisco-input">*</small></th>
+										<th scope="col">Nº MULHERES<small class="asterisco-input">*</small></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -314,16 +334,35 @@
 										</th>
 										<th>
 											<input type="text" class="form-control" id="color"
-												value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
+												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
+										</td>
+										{{-- Mesclação --}}
+										<th>
+											<input type="text" class="form-control" id="color"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
+										</th>
+										<td width="20px;">
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
+										</td>
+										<td width="20px;">
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -335,16 +374,35 @@
 										</th>
 										<th>
 											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
+												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
+										</td>
+										{{-- Mesclação --}}
+										<th>
+											<input type="text" class="form-control" id="color"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
+										</th>
+										<td width="20px;">
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
+										</td>
+										<td width="20px;">
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -356,16 +414,35 @@
 										</th>
 										<th>
 											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
+												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
+										</td>
+										{{-- Mesclação --}}
+										<th>
+											<input type="text" class="form-control" id="color"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
+										</th>
+										<td width="20px;">
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
+										</td>
+										<td width="20px;">
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -377,16 +454,35 @@
 										</th>
 										<th>
 											<input type="text" class="form-control" id="color[]"
-												value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
+												value="Negros (pretos + pardos)" readonly="readonly" name="color[]">
 										</th>
 										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
 												value="{{old('human_quantity_activity_level[]')}}"
 												name="human_quantity_activity_level[]">
 										</td>
 										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
+												value="{{old('woman_quantity_activity_level[]')}}"
+												name="woman_quantity_activity_level[]">
+										</td>
+										{{-- Mesclação --}}
+										<th>
+											<input type="text" class="form-control" id="color"
+												value="Demais grupos étnicos-raciais" readonly="readonly"
+												name="color[]">
+										</th>
+										<td width="20px;">
+											<input type="text" class="form-control human_quantity_activity_level"
+												id="human_quantity_activity_level"
+												value="{{old('human_quantity_activity_level[]')}}"
+												name="human_quantity_activity_level[]">
+										</td>
+										<td width="20px;">
+											<input type="text" class="form-control woman_quantity_activity_level"
+												id="woman_quantity_activity_level"
 												value="{{old('woman_quantity_activity_level[]')}}"
 												name="woman_quantity_activity_level[]">
 										</td>
@@ -394,169 +490,40 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="form-group col-md-6">
-							<h4><strong>Nivel de atividade dos colaboradores: Negros (pretos + pardos)</strong></h4>
-							<table class="table" id="tblLevelAtcivictColaboratorsblacks">
-								<thead>
-									<tr>
-										<th scope="col">NIVEL DE ATIVIDADE</th>
-										<th scope="col">RAÇA/COR</th>
-										<th scope="col">Nº HOMEMS</th>
-										<th scope="col">Nº MULHERES</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level" value="Operacional" readonly="readonly"
-												name="activity_level[]">
-										</th>
-										<th>
-											<input type="text" class="form-control" id="color" value="Demais grupos étnicos-raciais" readonly="readonly"
-												name="color[]">
-										</th>
-										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
-										</td>
-										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
-										</td>
-									</tr>
-									<tr>
-										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level" value="Supervisão" readonly="readonly"
-												name="activity_level[]">
-										</th>
-										<th>
-											<input type="text" class="form-control" id="color[]" value="Demais grupos étnicos-raciais"
-												readonly="readonly" name="color[]">
-										</th>
-										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
-										</td>
-										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
-										</td>
-									</tr>
-									<tr>
-										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level" value="Gerência / Chefia" readonly="readonly"
-												name="activity_level[]">
-										</th>
-										<th>
-											<input type="text" class="form-control" id="color[]" value="Demais grupos étnicos-raciais"
-												readonly="readonly" name="color[]">
-										</th>
-										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
-										</td>
-										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
-										</td>
-									</tr>
-									<tr>
-										<th width="160px;">
-											<input type="text" class="form-control" id="activity_level" value="Direção" readonly="readonly"
-												name="activity_level[]">
-										</th>
-										<th>
-											<input type="text" class="form-control" id="color[]" value="Demais grupos étnicos-raciais"
-												readonly="readonly" name="color[]">
-										</th>
-										<td width="20px;">
-											<input type="text" class="form-control human_quantity_activity_level" id="human_quantity_activity_level"
-												value="{{old('human_quantity_activity_level[]')}}" name="human_quantity_activity_level[]">
-										</td>
-										<td width="20px;">
-											<input type="text" class="form-control woman_quantity_activity_level" id="woman_quantity_activity_level"
-												value="{{old('woman_quantity_activity_level[]')}}" name="woman_quantity_activity_level[]">
-										</td>
-									</tr>
-								</tbody>
-							</table>
+						<!-- Final das questões -->
+						<br /><br /><br /><br /><br />
+						<div align="center">
+							<button type="button" name="btn_previous_diagnostico" id="btn_previous_diagnostico"
+								class="btn btn-default btn-lg">Anterior</button>
+							<button type="button" name="btn_diagnostico_next" id="btn_diagnostico_next"
+								class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
 						</div>
+						<br />
 					</div>
-					{{-- perfil dos colaboradores  --}}
-					<div class="form-group col-md-12">
-
-						<h4><strong>Perfil étnico racial dos colaboradores</strong></h4>
-						<table class="table">
-							<thead>
-								<tr>
-									<th scope="col">RAÇA/COR</th>
-									<th scope="col">Nº HOMEMS</th>
-									<th scope="col">Nº MULHERES</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>
-										<input type="text" class="form-control" value="Negros (pretos + pardos)"
-											readonly="readonly" name="profile_color[]">
-									</th>
-									<td width="20px;">
-										<input type="text" class="form-control human_quantity" id="human_quantity"
-											value="{{old('human_quantity[]')}}" name="human_quantity[]">
-									</td>
-									<td width="20px;">
-										<input type="text" class="form-control woman_quantity" id="woman_quantity"
-											value="{{old('woman_quantity[]')}}" name="woman_quantity[]">
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<input type="text" class="form-control" value="Demais grupos étnicos-raciais"
-											readonly="readonly" name="profile_color[]">
-									</th>
-									<td width="20px;">
-										<input type="text" class="form-control human_quantity" id="human_quantity"
-											value="{{old('human_quantity[]')}}" name="human_quantity[]">
-									</td>
-									<td width="20px;">
-										<input type="text" class="form-control woman_quantity" id="woman_quantity"
-											value="{{old('woman_quantity[]')}}" name="woman_quantity[]">
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!-- Final das questões -->
-					<br /><br /><br /><br /><br />
-					<div align="center">
-						<button type="button" name="btn_previous_diagnostico" id="btn_previous_diagnostico"
-							class="btn btn-default btn-lg">Anterior</button>
-						<button type="button" name="btn_diagnostico_next" id="btn_diagnostico_next"
-							class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
-					</div>
-					<br />
 				</div>
 			</div>
-		</div>
+		</div>	
 		<!-- Campos de texto para descrever o plano de trabalho étnico racial -->
 		<div class="tab-pane fade" id="plano_trabalho">
 			<div class="panel panel-default">
 				<div class="panel-heading">PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL APRESENTAÇÃO.</div>
 				<div class="panel-body">
 					<!-- Inicio do plano de trabalho -->
+					<h4>PLANO DE TRABALHO<small class="asterisco-input">*</small></h4>
 					<div class="form-textarea">
 						<div class="form-group">
 							<label for="exampleFormControlTextarea1">Explicar brevemente do que trata o plano de
 								trabalho, apresentar a organização e mencionar se já está sendo desenvolvido e os
-								principais resultados alcançados.</label><br />
-							<strong>Até 3000 caracteres. </strong>
+								principais resultados alcançados.
+							</label><br />
+							<strong>Até 3000 caracteres. <small class="asterisco-input">*</small> </strong>
 							<div class="qtd_caracteres">
 								<strong>
-									Tamanho: 3000
+									<p><small class="caracteres"></small></p>
 								</strong>
 							</div>
 							<textarea class="form-control class_textarea" id="action_plan" rows="3"
-								name="action_plan">{{old('action_plan')}}</textarea>
+								name="action_plan"></textarea>
 						</div>
 					</div>
 					<!-- Final do plano de trabalho -->
@@ -580,11 +547,11 @@
 					<h4>Cronograma (Data limite de entrega das atividades será <strong> 30/11/2019)</strong></h4>
 					<h4>Listar todas as atividades necessárias à realização do projeto.</h4>
 					<label>
-						Autoriza a divulgação destas ações pela SEMUR?
+						Autoriza a divulgação destas ações pela SEMUR? <small class="asterisco-input">*</small>
 						<select class="form-control-sm" name="authorization">
 							<option></option>
-							<option value="1" {{ old('authorization') == 1 ? 'selected' : '' }}>SIM</option>
-							<option value="2" {{ old('authorization') == 2 ? 'selected' : '' }}>NÃO</option>
+							<option value="SIM">SIM</option>
+							<option value="NÃO">NÃO</option>
 						</select>
 					</label>
 					<table class="table table-bordered" id="tbl_schedules">
@@ -594,10 +561,11 @@
 										class="btn btn-success">Adicionar Linhas na Tabela </button></th>
 							</tr>
 							<tr>
-								<th scope="col">AÇÕES</th>
-								<th scope="col">ATIVIDADE(O que é necessário fazer para atingir este objetivo)</th>
-								<th scope="col">QUANTIDADE</th>
-								<th scope="col">DATA LIMITE</th>
+								<th scope="col">AÇÕES <small class="asterisco-input">*</small></th>
+								<th scope="col">ATIVIDADE(O que é necessário fazer para atingir este objetivo)
+									<small class="asterisco-input">*</small></th>
+								<th scope="col">QUANTIDADE<small class="asterisco-input">*</small></th>
+								<th scope="col">DATA LIMITE <small class="asterisco-input">*</small></th>
 								<th scope="col">REMOVER</th>
 							</tr>
 						</thead>
@@ -613,7 +581,7 @@
 								</td>
 								<td>
 									<textarea id="activity" class="form-control"
-										name="activity[]">{{old('activity[]')}}</textarea>
+										name="activity[]" value=""></textarea>
 								</td>
 								<td width="30px;">
 									<select class="form-control form-control-sm" name="amount[]">
@@ -628,11 +596,12 @@
 									</select>
 								</td>
 								<td>
-									<input type="date" class="form-control" id="deadline" value="{{old('deadline[]')}}"
-										name="deadline[]">
+									<input type="date" class="form-control" id="deadline"
+										value="" name="deadline[]">
 								</td>
 								<td>
-									<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover
+									<button onclick="RemoveTableRow(this)" type="button"
+										class="btn btn-danger">Remover
 										Linha</button>
 								</td>
 							</tr>
@@ -644,8 +613,8 @@
 					<div align="center">
 						<button type="button" name="btn_previous_cronograma" id="btn_previous_cronograma"
 							class="btn btn-default btn-lg">Anterior</button>
-						<button type="button" name="btn_plano_next" id="btn_plano_next"
-							class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
+						<button type="button" name="btn_plano_next" id="btn_plano_next" class="btn btn-info btn-lg"
+							data-url="{{route('save.institution')}}">Proximo</button>
 					</div>
 					<br />
 				</div>
@@ -657,19 +626,20 @@
 				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL</div>
 				<div class="panel-body">
 					<!-- Inicio dos inpust -->
-					<h4>PARCEIRAS</h4>
+					<h4>PARCERIAS<small class="asterisco-input">*</small></h4>
 					<strong>
 						(Descrever as parcerias propostas e potenciais, enumerando os parceiros e suas respectivas
-						responsabilidades/competências - o que caberá a cada um e/ou áreas das organizações envolvidas -
+						responsabilidades/competências - o que caberá a cada um e/ou áreas das organizações
+						envolvidas -
 						bem como a natureza das contrapartidas e valor em reais – R$ se houver.)
 					</strong>
 					<strong>Até 2000 caracteres. </strong>
 					<div class="qtd_caracteres">
 						<strong>
-							Tamanho: 2000
+							<p><small class="caracteres_partners"></small></p>
 						</strong>
-						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
-							name="partners">{{old('partners')}}</textarea>
+						<textarea class="form-control class_textarea" id="partners" rows="3"
+							name="partners"></textarea>
 					</div>
 					<!-- Final dos inputs -->
 					<br />
@@ -689,7 +659,7 @@
 				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL</div>
 				<div class="panel-body">
 					<!-- Incio dos Inputs -->
-					<h4>METODOLOGIA</h4>
+					<h4>METODOLOGIA<small class="asterisco-input">*</small></h4>
 					<strong>
 						(Descrever as estratégias a serem utilizadas na intervenção, as etapas do trabalho a serem
 						desenvolvidas, os instrumentos, técnicas previstas e registros de sistematização a ser
@@ -702,10 +672,10 @@
 					<strong>Até 7000 caracteres. </strong>
 					<div class="qtd_caracteres">
 						<strong>
-							Tamanho: 7000
+							<p><small class="methodology_caracteres"></small></p>
 						</strong>
-						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
-							name="methodology">{{old('methodology')}}</textarea>
+						<textarea class="form-control class_textarea" id="methodology" rows="3"
+							name="methodology"></textarea>
 					</div>
 					<!-- Final dos Inpust -->
 					<br />
@@ -725,19 +695,19 @@
 				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL</div>
 				<div class="panel-body">
 					<!-- Inicio dos inputs -->
-					<h4>RESULTADOS ESPERADOS</h4>
+					<h4>RESULTADOS ESPERADOS<small class="asterisco-input">*</small></h4>
 					<strong>
-						(Enumerar os resultados esperados após a execução do projeto. Explicitar os ganhos e benefícios
+						(Enumerar os resultados esperados após a execução do projeto. Explicitar os ganhos e
+						benefícios
 						auferidos pelo público-alvo e impactos mais imediatos constatados na realidade alvo da
 						intervenção. Descrever as mudanças pretendidas mais imediatas).
 					</strong>
 					<strong>Até 3000 caracteres. </strong>
 					<div class="qtd_caracteres">
 						<strong>
-							Tamanho: 3000
+							<p><small class="caracteres_result"></small></p>
 						</strong>
-						<textarea class="form-control class_textarea" id="textarea_plano_trabalho" rows="3"
-							name="result">{{old('result')}}</textarea>
+						<textarea class="form-control class_textarea" id="result" rows="3" name="result"></textarea>
 					</div>
 					<!-- Final dos Inputs -->
 					<br />
@@ -745,7 +715,8 @@
 						<button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_resultados_next" id="btn_resultados_next"
-							class="btn btn-success btn-lg" data-url="{{route('save.institution')}}">Salvar Informações</button>
+							class="btn btn-success btn-lg" data-url="{{route('save.institution')}}">Salvar
+							Informações</button>
 					</div>
 					<br />
 				</div>
@@ -753,5 +724,25 @@
 		</div>
 	</div>
 </form>
+
+{{-- Modal para carregar messagem ao salvar Institução --}}
+<div class="modal" tabindex="-1" role="dialog" id="loadSaveInstitution">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Título do modal</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<h1>Aguarde...</h1>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 @endsection

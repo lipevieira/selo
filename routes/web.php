@@ -43,4 +43,8 @@ Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
  */
 Route::group(['prefix' => 'ações', 'namespace' => 'Shedule'], function () {
    Route::get('/cronograma', 'SheduleActionController@index')->name('index.shedule.action');
+   Route::post('/save', 'SheduleActionController@store')->name('store.shedule.action');
+   Route::get('/show', 'SheduleActionController@showAction')->name('show.shedule.action');
+   Route::post('/update', 'SheduleActionController@update')->name('update.shedule.action');
+   Route::post('/delete', 'SheduleActionController@delete')->name('delete.shedule.action');
 });

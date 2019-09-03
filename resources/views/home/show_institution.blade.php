@@ -294,14 +294,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($instituion->profileCollaborators as $profileCollaborators)
+                                        {{-- @foreach ($instituion->profileCollaborators as $profileCollaborators)
                                         <tr>
                                             <th scope="row">{{$profileCollaborators->id}}</th>
                                             <td>{{$profileCollaborators->profile_color}}</td>
                                             <td>{{$profileCollaborators->human_quantity}}</td>
                                             <td>{{$profileCollaborators->woman_quantity}}</td>
                                         </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                 </table>
                             </div>
@@ -376,7 +376,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($instituion->schedules as $schedule)
+                                    @forelse ($instituion->schedules as $schedule)
                                     <tr>
                                         <th scope="row">{{$schedule->id}}</th>
                                         <td>{{$schedule->action}}</td>
@@ -385,7 +385,9 @@
                                         <td>{{$schedule->deadline->format('d/m/Y')}}</td>
                                         <td>{{$schedule->status}}</td>
                                     </tr>
-                                    @endforeach
+                                    @empty
+                                        <h1>A Instituição ainda não enviou o seu cronograma.</h1>
+                                    @endforelse
                                 </tbody>
                             </table>
                             <!-- Final do cronograma -->
@@ -503,8 +505,9 @@
                             <div align="center">
                                 <button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
                                     class="btn btn-default btn-lg">Anterior</button>
-                                <button type="button" name="btn_resultados_next" id="btn_resultados_next"
-                                    class="btn btn-success btn-lg">Voltar ao Menu</button>
+                            <a href="{{route('home')}}" class="btn btn-success btn-lg" role="button" aria-pressed="true">
+                                Voltar ao Menu
+                            </a> 
                             </div>
                             <br />
                         </div>

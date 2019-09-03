@@ -86,9 +86,26 @@ html, body {
     width: 150px;
 }
 
-.msg-ajax {
-    background-color: #F0E68C;
-    width: 160px;
+.asterisco-input {
+    color: red;
+}
+
+.question-color {
+    background-color: #f5f5f5;
+}
+
+.container_cnpj_adcional {
+    /* background-color: #f5f5f5; */
+    border-width: 3px;
+    border-style: solid;
+    border-color: #f5f5f5;
+}
+
+.sub_conatainer_cnpj_adcioanl {
+    width: 700px;
     margin: auto;
-    text-align: center;
+}
+
+#btn_indentificacao {
+    margin-top: 10PX;
 }

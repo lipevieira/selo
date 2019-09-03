@@ -23,21 +23,21 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            {
-                extend: 'pdf',
-                text: '<i class="fa fa-file-pdf-o"></i> PDF',
-                titleAttr: 'PDF',
-                className: 'btn btn-primary btn-sm',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            }, 
-            {
-                extend: 'copy',
-                text: '<i class="fa fa-files-o"></i> Copy',
-                titleAttr: 'Copy',
-                className: 'btn btn-primary btn-sm'
-            },
+            // {
+            //     extend: 'pdf',
+            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
+            //     titleAttr: 'PDF',
+            //     className: 'btn btn-primary btn-sm',
+            //     exportOptions: {
+            //         columns: ':visible'
+            //     }
+            // }, 
+            // {
+            //     extend: 'copy',
+            //     text: '<i class="fa fa-files-o"></i> Copy',
+            //     titleAttr: 'Copy',
+            //     className: 'btn btn-primary btn-sm'
+            // },
             
         ]
     } );
@@ -66,21 +66,21 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            {
-                extend: 'pdf',
-                text: '<i class="fa fa-file-pdf-o"></i> PDF',
-                titleAttr: 'PDF',
-                className: 'btn btn-primary btn-sm',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'copy',
-                text: '<i class="fa fa-files-o"></i> Copy',
-                titleAttr: 'Copy',
-                className: 'btn btn-primary btn-sm'
-            },
+            // {
+            //     extend: 'pdf',
+            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
+            //     titleAttr: 'PDF',
+            //     className: 'btn btn-primary btn-sm',
+            //     exportOptions: {
+            //         columns: ':visible'
+            //     }
+            // },
+            // {
+            //     extend: 'copy',
+            //     text: '<i class="fa fa-files-o"></i> Copy',
+            //     titleAttr: 'Copy',
+            //     className: 'btn btn-primary btn-sm'
+            // },
 
         ]
     } );
@@ -108,21 +108,21 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            {
-                extend: 'pdf',
-                text: '<i class="fa fa-file-pdf-o"></i> PDF',
-                titleAttr: 'PDF',
-                className: 'btn btn-primary btn-sm',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'copy',
-                text: '<i class="fa fa-files-o"></i> Copy',
-                titleAttr: 'Copy',
-                className: 'btn btn-primary btn-sm'
-            },
+            // {
+            //     extend: 'pdf',
+            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
+            //     titleAttr: 'PDF',
+            //     className: 'btn btn-primary btn-sm',
+            //     exportOptions: {
+            //         columns: ':visible'
+            //     }
+            // },
+            // {
+            //     extend: 'copy',
+            //     text: '<i class="fa fa-files-o"></i> Copy',
+            //     titleAttr: 'Copy',
+            //     className: 'btn btn-primary btn-sm'
+            // },
 
         ]
     } );
@@ -150,21 +150,21 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            {
-                extend: 'pdf',
-                text: '<i class="fa fa-file-pdf-o"></i> PDF',
-                titleAttr: 'PDF',
-                className: 'btn btn-primary btn-sm',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'copy',
-                text: '<i class="fa fa-files-o"></i> Copy',
-                titleAttr: 'Copy',
-                className: 'btn btn-primary btn-sm'
-            },
+            // {
+            //     extend: 'pdf',
+            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
+            //     titleAttr: 'PDF',
+            //     className: 'btn btn-primary btn-sm',
+            //     exportOptions: {
+            //         columns: ':visible'
+            //     }
+            // },
+            // {
+            //     extend: 'copy',
+            //     text: '<i class="fa fa-files-o"></i> Copy',
+            //     titleAttr: 'Copy',
+            //     className: 'btn btn-primary btn-sm'
+            // },
 
         ]
     } );
@@ -192,21 +192,21 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            {
-                extend: 'pdf',
-                text: '<i class="fa fa-file-pdf-o"></i> PDF',
-                titleAttr: 'PDF',
-                className: 'btn btn-primary btn-sm',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            {
-                extend: 'copy',
-                text: '<i class="fa fa-files-o"></i> Copy',
-                titleAttr: 'Copy',
-                className: 'btn btn-primary btn-sm'
-            },
+            // {
+            //     extend: 'pdf',
+            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
+            //     titleAttr: 'PDF',
+            //     className: 'btn btn-primary btn-sm',
+            //     exportOptions: {
+            //         columns: ':visible'
+            //     }
+            // },
+            // {
+            //     extend: 'copy',
+            //     text: '<i class="fa fa-files-o"></i> Copy',
+            //     titleAttr: 'Copy',
+            //     className: 'btn btn-primary btn-sm'
+            // },
 
         ]
     } );

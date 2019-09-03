@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Institution;
 use App\Models\Question;
 use App\Models\ScheduleAction;
+use App\Models\CommissionMembers;
 use Illuminate\Http\Request;
 use App\Http\Requests\Institution\InstitutionFormRequest;
 use DB;
@@ -69,6 +70,35 @@ class InstitutionController extends Controller
                         }
                     }
                 }
+                // Verificando se existe CNPJ e E-mail na table de institutições
+                $queryInstitutionEmail = Institution::where('email','=',$dataForm['email'])->first();
+                $queryInstitutionCnpj = Institution::where('cnpj','=',$dataForm['cnpj'])->first();
+                $queryMembrersComissionEmail = CommissionMembers::where('members_email','=',$dataForm['members_email'])->first();
+
+                if ($queryInstitutionEmail == true) {
+                    $validator = [
+                        'errors' => 'O E-mail para essa instiuição já está cadastrado. Por favor informe um e-mail diferente',
+                    ];
+                    return Response::json(array(
+                        'errors' => $validator,
+                    ));
+                }    
+                if ($queryInstitutionCnpj == true) {
+                    $validator = [
+                        'errors' => 'Esse CNPJ já está cadastrado. Por Favor acesse a pagina de login de Instituições',
+                    ];
+                    return Response::json(array(
+                        'errors' => $validator,
+                    ));
+                }    
+                if ($queryMembrersComissionEmail == true) {
+                    $validator = [
+                        'errors' => 'O E-mail do Membros da comissão já esta cadastrando. Por favor informe um e-mail diferente',
+                    ];
+                    return Response::json(array(
+                        'errors' => $validator,
+                    ));
+                }    
                 break;
             case 2:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesDiagnosticoCencitario(), $validacaoInstiuicao->messagesDiagnosticoCencitario());
@@ -87,12 +117,6 @@ class InstitutionController extends Controller
                 }
                 break;
             case 4:
-                $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesShedule(), $validacaoInstiuicao->messagesShedule());
-                if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
-                }
                 // Validando a Data Limte
                 if ($schedule->validateDeadline($request->deadline) == false) {
                     $validator = [
@@ -125,14 +149,13 @@ class InstitutionController extends Controller
                     return Response::json(array(
                         'errors' => $validator->getMessageBag()->toArray(),
                     ));
-                }else{
+                } else {
                     // INICIALIZAÇÃO DE CADASTROS 
                     $institution = Institution::create($dataForm);
                     $transctionMembers = false;
                     $transctionCnpj = false;
                     $transctionAnswers = false;
                     $transctionCollaboratorActivityLevels = false;
-                    $transctionProfileCollaborators = false;
                     $transctionSchedules = false;
                     // Salvado os três membros da instituição
                     for ($i = 0; $i < 3; $i++) {
@@ -167,25 +190,18 @@ class InstitutionController extends Controller
                             'woman_quantity_activity_level' => $request->woman_quantity_activity_level[$i],
                         ]);
                     }
-                    // // Salvado os perfis dos colaboradores
-                    for ($i = 0; $i < 2; $i++) {
-                        $transctionProfileCollaborators = $institution->profileCollaborators()->create([
-                            'profile_color' => $request->profile_color[$i],
-                            'human_quantity' => $request->human_quantity[$i],
-                            'woman_quantity' => $request->woman_quantity[$i],
-                        ]);
-                    }
-                    // // Salvando o cronograma da instituição
+                    // Salvando o cronograma da instituição
                     for ($i = 0; $i < count($request->action); $i++) {
-                        $transctionSchedules = $institution->schedules()->create([
-                            'action' => $request->action[$i],
-                            // 'authorization' => $request->authorization[$i],
-                            'activity' => $request->activity[$i],
-                            'amount' => $request->amount[$i],
-                            'deadline' => $request->deadline[$i],
-                        ]);
+                        if ($request->action[$i] != null && $request->activity && $request->amount && $request->deadline) {
+                            $transctionSchedules = $institution->schedules()->create([
+                                'action' => $request->action[$i],
+                                'activity' => $request->activity[$i],
+                                'amount' => $request->amount[$i],
+                                'deadline' => $request->deadline[$i],
+                            ]);
+                        }
                     }
-                    if ($institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels && $transctionProfileCollaborators && $transctionSchedules) {
+                    if ($institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels  && $transctionSchedules) {
                         DB::commit();
                     } else {
                         DB::rollBack();
@@ -202,5 +218,4 @@ class InstitutionController extends Controller
                 break;
         }
     }
- 
 }
