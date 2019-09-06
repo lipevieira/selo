@@ -4,9 +4,13 @@ $(document).ready(function () {
 	$('#etapa03').hide();
 	$('#msg-ajax').hide();
 	// var company_classification;
+
 	$("#cb_company").change(function () {
 		let url = $(this).data('url');
-		// company_classification = $(this).val();
+		// var company_classification = $('#cb_company').val();
+
+		// console.log(company_classification);
+		
 		switch ($(this).val()) {
 			case 'Micro(5 a 9 funcionários)':
 				$('#etapa01').show();
@@ -493,6 +497,7 @@ $(document).ready(function () {
 		let url = $(this).data('url');
 		var form = $('#register_form');
 		var formData = form.serialize();
+		var welcome = $(this).attr("welcome");
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -518,6 +523,7 @@ $(document).ready(function () {
 				} else {
 					$('#loadSaveInstitution').modal('hide'); 
 					alert('Instituição salva com sucesso!');	
+					window.location.href = welcome;
 				}
 			},
 			error: function (request, status, erro) {

@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class Schedule extends Model
 {
-    protected $fillable = ['action', 'activity', 'amount', 'status', 'deadline', 'institution_id' ];
+    protected $fillable = ['schedule_action_id', 'activity', 'amount', 'status', 'deadline', 'institution_id' ];
     protected $dates = [
         'created_id',
         'created_at',
@@ -21,6 +21,14 @@ class Schedule extends Model
     public function institution()
     {
         return $this->belongsTo(Institution::class);
+    }
+    /***
+     * @Description: Relacionamento 1 - N
+     * Muitas ações petencem ao um cronograma de ação
+     */
+    public function schedule()
+    {
+        return $this->belongsTo('App\Models\ScheduleAction','id');
     }
     public  function validateDeadline($dataForm = array())
     {

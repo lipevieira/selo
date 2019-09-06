@@ -15,14 +15,17 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('action',190);
+            // $table->string('action',190);
             $table->text('activity');
             $table->integer('amount');
-            $table->string('status',3)->default('NÃO');
+            $table->string('status', 20)->default('Pendente');
             $table->date('deadline');
-            
+
             $table->bigInteger('institution_id')->unsigned();
             $table->foreign('institution_id')->references('id')->on('institutions');
+
+            $table->bigInteger('schedule_action_id')->unsigned();
+            $table->foreign('schedule_action_id')->references('id')->on('schedule_actions');
 
             $table->timestamps();
         });

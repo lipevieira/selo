@@ -71,9 +71,9 @@ class InstitutionController extends Controller
                     }
                 }
                 // Verificando se existe CNPJ e E-mail na table de institutições
-                $queryInstitutionEmail = Institution::where('email','=',$dataForm['email'])->first();
-                $queryInstitutionCnpj = Institution::where('cnpj','=',$dataForm['cnpj'])->first();
-                $queryMembrersComissionEmail = CommissionMembers::where('members_email','=',$dataForm['members_email'])->first();
+                $queryInstitutionEmail = Institution::where('email', '=', $dataForm['email'])->first();
+                $queryInstitutionCnpj = Institution::where('cnpj', '=', $dataForm['cnpj'])->first();
+                $queryMembrersComissionEmail = CommissionMembers::where('members_email', '=', $dataForm['members_email'])->first();
 
                 if ($queryInstitutionEmail == true) {
                     $validator = [
@@ -82,7 +82,7 @@ class InstitutionController extends Controller
                     return Response::json(array(
                         'errors' => $validator,
                     ));
-                }    
+                }
                 if ($queryInstitutionCnpj == true) {
                     $validator = [
                         'errors' => 'Esse CNPJ já está cadastrado. Por Favor acesse a pagina de login de Instituições',
@@ -90,7 +90,7 @@ class InstitutionController extends Controller
                     return Response::json(array(
                         'errors' => $validator,
                     ));
-                }    
+                }
                 if ($queryMembrersComissionEmail == true) {
                     $validator = [
                         'errors' => 'O E-mail do Membros da comissão já esta cadastrando. Por favor informe um e-mail diferente',
@@ -98,7 +98,7 @@ class InstitutionController extends Controller
                     return Response::json(array(
                         'errors' => $validator,
                     ));
-                }    
+                }
                 break;
             case 2:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesDiagnosticoCencitario(), $validacaoInstiuicao->messagesDiagnosticoCencitario());
@@ -119,6 +119,7 @@ class InstitutionController extends Controller
             case 4:
                 // Validando a Data Limte
                 if ($schedule->validateDeadline($request->deadline) == false) {
+                    // dd($request->schedule_action_id);
                     $validator = [
                         'errors' => 'Não é permitido uma data maior ou igual ao dia 30 de novembro',
                     ];
@@ -191,10 +192,10 @@ class InstitutionController extends Controller
                         ]);
                     }
                     // Salvando o cronograma da instituição
-                    for ($i = 0; $i < count($request->action); $i++) {
-                        if ($request->action[$i] != null && $request->activity && $request->amount && $request->deadline) {
+                    for ($i = 0; $i < count($request->schedule_action_id); $i++) {
+                        if ($request->schedule_action_id[$i] != null && $request->activity && $request->amount && $request->deadline) {
                             $transctionSchedules = $institution->schedules()->create([
-                                'action' => $request->action[$i],
+                                'schedule_action_id' => $request->schedule_action_id[$i],
                                 'activity' => $request->activity[$i],
                                 'amount' => $request->amount[$i],
                                 'deadline' => $request->deadline[$i],
@@ -217,5 +218,9 @@ class InstitutionController extends Controller
                 ));
                 break;
         }
+    }
+    public function showLogin()
+    {
+        return view('institution.login');
     }
 }

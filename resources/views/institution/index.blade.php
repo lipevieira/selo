@@ -86,7 +86,14 @@
 	<div class="tab-content" style="margin-top:16px; ">
 		<div class="tab-pane active" id="instituicao_detalhes">
 			<div class="panel panel-default">
-				<div class="panel-heading"><strong> IDENTIFICAÇÃO DA INSTITUIÇÃO</strong></div>
+				<div class="panel-heading">
+					<strong> IDENTIFICAÇÃO DA INSTITUIÇÃO</strong>
+					<div class="legends-forms">
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
+							class="asterisco-input-ogrigatorio">*</small>
+						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
+					</div>
+				</div>
 				<div class="panel-body">
 					<!-- Inicio dos Inputs da Instituição-->
 					<input type="hidden" name="etapas" value="" id="etapas">
@@ -109,14 +116,14 @@
 									class="asterisco-input">*</small></label>
 							<select class="form-control form-control-sm" id="company_classification"
 								name="company_classification">
-								<option></option>
-								<option value="1" {{ old('company_classification') == 1 ? 'selected' : '' }}>Micro(5 a 9
-									funcionários)</option>
+								<option value=""></option>
+								<option value="1">Micro(5 a 9 funcionários)</option>
 								<option>Pequena(10 a 12 funcionários)</option>
 								<option>Pequena(13 a 49 funcionários)</option>
 								<option>Média(50 a 99 funcionários)</option>
 								<option>Grande(+ de 100 funcionários)</option>
 								<option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
+								
 							</select>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -175,9 +182,9 @@
 							<label for="email_two">Atividade <small class="asterisco-input">*</small></label>
 							<select class="form-control form-control-sm" name="institution_activity">
 								<option></option>
-								<option value="Indústria" >Indústria</option>
-								<option value="Comércio" >Comércio</option>
-								<option value="Serviços" >Serviços</option>
+								<option value="Indústria">Indústria</option>
+								<option value="Comércio">Comércio</option>
+								<option value="Serviços">Serviços</option>
 							</select>
 						</div>
 						<div class="col-md-6 mb-3">
@@ -247,7 +254,7 @@
 											<tr>
 												<td scope="col" width="950px">
 													&nbsp;
-													<label>CNPJs Acicionais</label>
+													<label>CNPJs Acicionais <small class="asterisco-input-options">*</small></label>
 													<input type="text" class="form-control cnpj_additional"
 														id="cnpj_additional" placeholder="Informe apenas números"
 														name="cnpj_additional[]" value="">
@@ -279,7 +286,13 @@
 		<!-- Campos de texto para descrever o Diagnóstico Censitário -->
 		<div class="tab-pane fade" id="diagnostico_censitario">
 			<div class="panel panel-default">
-				<div class="panel-heading"><strong>QUESTIONÁRIO PARA DIAGNÓSTICO CENSITÁRIO</strong></div>
+				<div class="panel-heading"><strong>QUESTIONÁRIO PARA DIAGNÓSTICO CENSITÁRIO</strong>
+					<div class="legends-forms">
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
+							class="asterisco-input-ogrigatorio">*</small>
+						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
+					</div>
+				</div>
 				<div class="panel-body">
 					<!-- Inicio das Questões -->
 					<div class="question-color">
@@ -317,13 +330,13 @@
 							<table class="table" id="tblLevelActivicDemiasGroups">
 								<thead>
 									<tr>
-										<th scope="col">NIVEL DE ATIVIDADE<small class="asterisco-input">*</small></th>
-										<th scope="col">RAÇA/COR<small class="asterisco-input">*</small></th>
-										<th scope="col">Nº HOMEMS<small class="asterisco-input">*</small></th>
-										<th scope="col">Nº MULHERES<small class="asterisco-input">*</small></th>
-										<th scope="col">RAÇA/COR<small class="asterisco-input">*</small></th>
-										<th scope="col">Nº HOMEMS<small class="asterisco-input">*</small></th>
-										<th scope="col">Nº MULHERES<small class="asterisco-input">*</small></th>
+										<th scope="col">NIVEL DE ATIVIDADE<small class="asterisco-input-options">*</small></th>
+										<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small></th>
+										<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small></th>
+										<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small></th>
+										<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small></th>
+										<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small></th>
+										<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -502,11 +515,16 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 		<!-- Campos de texto para descrever o plano de trabalho étnico racial -->
 		<div class="tab-pane fade" id="plano_trabalho">
 			<div class="panel panel-default">
-				<div class="panel-heading">PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL APRESENTAÇÃO.</div>
+				<div class="panel-heading">PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL APRESENTAÇÃO.
+					<div class="legends-forms">
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
+					</div>
+				</div>
 				<div class="panel-body">
 					<!-- Inicio do plano de trabalho -->
 					<h4>PLANO DE TRABALHO<small class="asterisco-input">*</small></h4>
@@ -541,10 +559,16 @@
 		<!-- Campos de texto para descrever o cronograma -->
 		<div class="tab-pane fade" id="cronograma">
 			<div class="panel panel-default">
-				<div class="panel-heading">CRONOGRAMA</div>
+				<div class="panel-heading">CRONOGRAMA
+					<div class="legends-forms">
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
+					</div>
+				</div>
 				<div class="panel-body">
 					<!-- Inicio do cronograma -->
-					<h4>Cronograma (Data limite de entrega das atividades será <strong> 30/11/2019)</strong></h4>
+					<h4>Cronograma (Data limite de entrega das atividades será <strong> {{date('30/11/Y')}})</strong>
+					</h4>
 					<h4>Listar todas as atividades necessárias à realização do projeto.</h4>
 					<label>
 						Autoriza a divulgação destas ações pela SEMUR? <small class="asterisco-input">*</small>
@@ -572,16 +596,16 @@
 						<tbody>
 							<tr>
 								<td width="300px;">
-									<select class="form-control form-control-sm" id="action" name="action[]">
+									<select class="form-control form-control-sm" id="action"
+										name="schedule_action_id[]">
 										<option></option>
 										@foreach ($actions as $item)
-										<option>{{ $item->description}}</option>
+										<option value="{{$item->id}}">{{ $item->description}}</option>
 										@endforeach
 									</select>
 								</td>
 								<td>
-									<textarea id="activity" class="form-control"
-										name="activity[]" value=""></textarea>
+									<textarea id="activity" class="form-control" name="activity[]" value=""></textarea>
 								</td>
 								<td width="30px;">
 									<select class="form-control form-control-sm" name="amount[]">
@@ -596,12 +620,10 @@
 									</select>
 								</td>
 								<td>
-									<input type="date" class="form-control" id="deadline"
-										value="" name="deadline[]">
+									<input type="date" class="form-control" id="deadline" value="" name="deadline[]">
 								</td>
 								<td>
-									<button onclick="RemoveTableRow(this)" type="button"
-										class="btn btn-danger">Remover
+									<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover
 										Linha</button>
 								</td>
 							</tr>
@@ -623,7 +645,12 @@
 		<!-- Campos de texto para descrever as parceiras -->
 		<div class="tab-pane fade" id="parceiras">
 			<div class="panel panel-default">
-				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL</div>
+				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL
+					<div class="legends-forms">
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
+					</div>
+				</div>
 				<div class="panel-body">
 					<!-- Inicio dos inpust -->
 					<h4>PARCERIAS<small class="asterisco-input">*</small></h4>
@@ -638,8 +665,7 @@
 						<strong>
 							<p><small class="caracteres_partners"></small></p>
 						</strong>
-						<textarea class="form-control class_textarea" id="partners" rows="3"
-							name="partners"></textarea>
+						<textarea class="form-control class_textarea" id="partners" rows="3" name="partners"></textarea>
 					</div>
 					<!-- Final dos inputs -->
 					<br />
@@ -656,10 +682,15 @@
 		<!-- Campos de texto para descrever o METODOLOGIA -->
 		<div class="tab-pane fade" id="metodologia">
 			<div class="panel panel-default">
-				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL</div>
+				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL
+					<div class="legends-forms">
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
+					</div>
+				</div>
 				<div class="panel-body">
 					<!-- Incio dos Inputs -->
-					<h4>METODOLOGIA<small class="asterisco-input">*</small></h4>
+					<h4>METODOLOGIA<small class="asterisco-input-options">*</small></h4>
 					<strong>
 						(Descrever as estratégias a serem utilizadas na intervenção, as etapas do trabalho a serem
 						desenvolvidas, os instrumentos, técnicas previstas e registros de sistematização a ser
@@ -692,10 +723,15 @@
 		<!--  Campos de texto para descrever resultados esperados -->
 		<div class="tab-pane fade" id="resultados_esperados">
 			<div class="panel panel-default">
-				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL</div>
+				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL
+					<div class="legends-forms">
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
+					</div>
+				</div>
 				<div class="panel-body">
 					<!-- Inicio dos inputs -->
-					<h4>RESULTADOS ESPERADOS<small class="asterisco-input">*</small></h4>
+					<h4>RESULTADOS ESPERADOS<small class="asterisco-input-options">*</small></h4>
 					<strong>
 						(Enumerar os resultados esperados após a execução do projeto. Explicitar os ganhos e
 						benefícios
@@ -715,7 +751,8 @@
 						<button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_resultados_next" id="btn_resultados_next"
-							class="btn btn-success btn-lg" data-url="{{route('save.institution')}}">Salvar
+							class="btn btn-success btn-lg" data-url="{{route('save.institution')}}"
+							welcome="{{route('login.institution')}}">Salvar
 							Informações</button>
 					</div>
 					<br />

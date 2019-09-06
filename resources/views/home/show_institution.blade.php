@@ -141,7 +141,7 @@
                                     Membros da Comissão
                                 </h1>
                                 <div class="col-md-12 mb-3">
-                                    <table class="table  table-bordered" id="tbl_menbress_comission">
+                                    <table class="table  table-bordered table-striped" id="tbl_menbress_comission">
                                         <thead>
                                             <tr>
                                                 <th scope="col">COD</th>
@@ -167,7 +167,7 @@
                                     <h1>
                                         Empresas Filiais
                                     </h1>
-                                    <table class="table">
+                                    <table class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th scope="col">COD</th>
@@ -254,7 +254,7 @@
                                             étnicos-raciais e Negros (pretos + pardos).
                                         </strong>
                                     </h4>
-                                    <table class="table table-bordered" id="tblLevelActivicDemiasGroups">
+                                    <table class="table table-bordered table-striped" id="tblLevelActivicDemiasGroups">
                                         <thead>
                                             <tr>
                                                 <th scope="col">COD</th>
@@ -354,17 +354,10 @@
                         <div class="panel-heading">CRONOGRAMA</div>
                         <div class="panel-body">
                             <!-- Inicio do cronograma -->
-                            <h4>Cronograma (Data limite de entrega das atividades será <strong> 30/11/2019)</strong>
+                            <h4>Cronograma (Data limite de entrega das atividades será <strong>{{date('30/11/Y')}})</strong>
                             </h4>
                             <h4>Listar todas as atividades necessárias à realização do projeto.</h4>
-                            <label>
-                                Autoriza a divulgação destas ações pela SEMUR?
-                                <select class="form-control-sm" name="authorization">
-                                    <option value="{{$instituion->authorization}}">{{$instituion->authorization}}
-                                    </option>
-                                </select>
-                            </label>
-                            <table class="table table-bordered" id="tbl_schedules">
+                            <table class="table table-bordered table-striped" id="tbl_schedules">
                                 <thead>
                                     <tr>
                                         <th scope="col">COD</th>

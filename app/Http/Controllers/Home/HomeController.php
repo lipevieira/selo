@@ -53,7 +53,8 @@ class HomeController extends Controller
     {
         $collaboratorActivitylevels = $this->collaboratorActivitylevel->all();
 
-        // $profileCollaborators = $this->profileCollaborator->all();
+        // $profileCollaborators = $this->collaboratorActivitylevel->sum('woman_quantity_activity_level');
+        // dd($profileCollaborators);
        
         return view('home.profile_collaborator', compact('collaboratorActivitylevels'));
     }
@@ -75,8 +76,10 @@ class HomeController extends Controller
      */
     public function getSchedules()
     {
+        // $schedules = $this->schedule->with('schedule')->first();
+        
         $schedules = $this->schedule->all();
-
+        // dd($schedules);
         return view('home.schedules', compact('schedules'));
     }
    public function getInstituitionDetails($id)
@@ -86,17 +89,6 @@ class HomeController extends Controller
         $questionAlternatives = Question::with('alternatives')->get();
         // Buscando Instituição e sues derivados.
         $instituion = $this->institution->find($id);
-
-        // $derivativesInstituion  = $this->institution->where("id", "{$id}")->with('commissionMembers')
-        // $derivativesInstituion  = $this->institution->where("id", "{$id}")->with('commissionMembers')
-                        // ->with('commissionMembers')
-                        // ->with('branches')
-                        // ->with('collaboratorActivityLevels')
-                        // ->with('profileCollaborators')
-                        // ->with('answers')
-                        // ->with('schedules')
-                        // ->get();
-        // \dd($instituion->branches);
 
        return view('home.show_institution', compact('questionAlternatives', 'actions','instituion'));
    }

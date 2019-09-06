@@ -5,7 +5,7 @@ $(document).ready(function () {
             "lengthMenu": "Mostrando _MENU_ registros por página",
             "zeroRecords": "Nada Encontrado",
             "info": "Mostrando páginas _PAGE_ de _PAGES_",
-            "infoEmpty": "Nenhum equipamento encontrado",
+            "infoEmpty": "Nenhum registro encontrado",
             "infoFiltered": "(Filtrado de _MAX_ registros no total)",
             "paginate": {
                 "previous": "Anterior",
@@ -23,32 +23,65 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            // {
-            //     extend: 'pdf',
-            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
-            //     titleAttr: 'PDF',
-            //     className: 'btn btn-primary btn-sm',
-            //     exportOptions: {
-            //         columns: ':visible'
-            //     }
-            // }, 
-            // {
-            //     extend: 'copy',
-            //     text: '<i class="fa fa-files-o"></i> Copy',
-            //     titleAttr: 'Copy',
-            //     className: 'btn btn-primary btn-sm'
-            // },
-            
         ]
     } );
         
     $('#tblLevelActivity').DataTable({
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            // Total da coluna de homems
+            pageMem = api
+                .column(4, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(4).footer()).html(
+                pageMem 
+            );
+            // Total da coluna de mulheres
+            pageWomana = api
+                .column(5, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(5).footer()).html(
+                pageWomana
+            );
+            // Total da Coluna total
+            pageTotal = api
+                .column(6, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(6).footer()).html(
+                pageTotal
+            );
+
+        },
         dom: 'Bfrtip',
+        "bPaginate": false,
         "language": {
             "lengthMenu": "Mostrando _MENU_ registros por página",
             "zeroRecords": "Nada Encontrado",
             "info": "Mostrando páginas _PAGE_ de _PAGES_",
-            "infoEmpty": "Nenhum equipamento encontrado",
+            "infoEmpty": "Nenhum registro encontrado",
             "infoFiltered": "(Filtrado de _MAX_ registros no total)",
             "paginate": {
                 "previous": "Anterior",
@@ -58,7 +91,7 @@ $(document).ready(function () {
         },
         buttons: [
             {
-                extend: 'excel',
+                extend: 'excel',footer: true, 
                 text: '<i class="fa fa-files-o"></i> Excel',
                 titleAttr: 'Excel',
                 className: 'btn btn-primary btn-sm',
@@ -66,22 +99,6 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            // {
-            //     extend: 'pdf',
-            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
-            //     titleAttr: 'PDF',
-            //     className: 'btn btn-primary btn-sm',
-            //     exportOptions: {
-            //         columns: ':visible'
-            //     }
-            // },
-            // {
-            //     extend: 'copy',
-            //     text: '<i class="fa fa-files-o"></i> Copy',
-            //     titleAttr: 'Copy',
-            //     className: 'btn btn-primary btn-sm'
-            // },
-
         ]
     } );
     $('#tblProfileCollaborators').DataTable({
@@ -90,7 +107,7 @@ $(document).ready(function () {
             "lengthMenu": "Mostrando _MENU_ registros por página",
             "zeroRecords": "Nada Encontrado",
             "info": "Mostrando páginas _PAGE_ de _PAGES_",
-            "infoEmpty": "Nenhum equipamento encontrado",
+            "infoEmpty": "Nenhum registro encontrado",
             "infoFiltered": "(Filtrado de _MAX_ registros no total)",
             "paginate": {
                 "previous": "Anterior",
@@ -108,22 +125,6 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            // {
-            //     extend: 'pdf',
-            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
-            //     titleAttr: 'PDF',
-            //     className: 'btn btn-primary btn-sm',
-            //     exportOptions: {
-            //         columns: ':visible'
-            //     }
-            // },
-            // {
-            //     extend: 'copy',
-            //     text: '<i class="fa fa-files-o"></i> Copy',
-            //     titleAttr: 'Copy',
-            //     className: 'btn btn-primary btn-sm'
-            // },
-
         ]
     } );
     $('#tblMembrersComission').DataTable({
@@ -132,7 +133,7 @@ $(document).ready(function () {
             "lengthMenu": "Mostrando _MENU_ registros por página",
             "zeroRecords": "Nada Encontrado",
             "info": "Mostrando páginas _PAGE_ de _PAGES_",
-            "infoEmpty": "Nenhum equipamento encontrado",
+            "infoEmpty": "Nenhum registro encontrado",
             "infoFiltered": "(Filtrado de _MAX_ registros no total)",
             "paginate": {
                 "previous": "Anterior",
@@ -150,31 +151,39 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            // {
-            //     extend: 'pdf',
-            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
-            //     titleAttr: 'PDF',
-            //     className: 'btn btn-primary btn-sm',
-            //     exportOptions: {
-            //         columns: ':visible'
-            //     }
-            // },
-            // {
-            //     extend: 'copy',
-            //     text: '<i class="fa fa-files-o"></i> Copy',
-            //     titleAttr: 'Copy',
-            //     className: 'btn btn-primary btn-sm'
-            // },
-
         ]
     } );
     $('#tblShedule').DataTable({
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            // Total da coluna de homems
+            total = api
+                .column(3, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(3).footer()).html(
+                total
+            );
+        },
         dom: 'Bfrtip',
+        "bPaginate": false,
         "language": {
             "lengthMenu": "Mostrando _MENU_ registros por página",
             "zeroRecords": "Nada Encontrado",
             "info": "Mostrando páginas _PAGE_ de _PAGES_",
-            "infoEmpty": "Nenhum equipamento encontrado",
+            "infoEmpty": "Nenhum registro encontrado",
             "infoFiltered": "(Filtrado de _MAX_ registros no total)",
             "paginate": {
                 "previous": "Anterior",
@@ -184,7 +193,7 @@ $(document).ready(function () {
         },
         buttons: [
             {
-                extend: 'excel',
+                extend: 'excel',footer: true,
                 text: '<i class="fa fa-files-o"></i> Excel',
                 titleAttr: 'Excel',
                 className: 'btn btn-primary btn-sm',
@@ -192,22 +201,6 @@ $(document).ready(function () {
                     columns: ':visible'
                 }
             },
-            // {
-            //     extend: 'pdf',
-            //     text: '<i class="fa fa-file-pdf-o"></i> PDF',
-            //     titleAttr: 'PDF',
-            //     className: 'btn btn-primary btn-sm',
-            //     exportOptions: {
-            //         columns: ':visible'
-            //     }
-            // },
-            // {
-            //     extend: 'copy',
-            //     text: '<i class="fa fa-files-o"></i> Copy',
-            //     titleAttr: 'Copy',
-            //     className: 'btn btn-primary btn-sm'
-            // },
-
         ]
     } );
 });

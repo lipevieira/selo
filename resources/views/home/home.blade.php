@@ -11,7 +11,7 @@
     <div class="box-header">
     </div>
     <div class="box-body">
-        <table class="table" id="tblInstitution">
+        <table class="table table-striped" id="tblInstitution">
             <thead>
                 <tr>
                     <th scope="col">COD</th>

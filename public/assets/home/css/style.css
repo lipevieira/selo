@@ -1,3 +1,7 @@
 .form-textarea, .class_textarea {
     min-height: 600px;
 }
+.box-body {
+    max-height: 755px;
+    overflow-y: auto;
+}

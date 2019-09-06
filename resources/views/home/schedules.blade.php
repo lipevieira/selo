@@ -14,25 +14,28 @@
                 <h3>Cronograma das Instituições:</h3>
             </div>
             <div class="box-body">
-                <table class="table" id="tblShedule">
+                <table class="table table-striped" id="tblShedule">
                     <thead>
                         <tr>
                             <th scope="col">COD</th>
                             <th scope="col">INSTITUIÇÃO</th>
                             <th scope="col">AÇÕES</th>
+                            <th scope="col">PESO</th>
                             <th scope="col">ATIVIDADE</th>
                             <th scope="col">QUANTIDADE</th>
                             <th scope="col">STATUS</th>
-                            <th scope="col">DATA LIMIT</th>
+                            <th scope="col">DATA LIMITE</th>
                             <th scope="col">ALTORIZAÇÃO DAS AÇÕES</th>
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach ($schedules as $item)
                         <tr>
                             <th scope="row">{{$item->id}}</th>
                             <td>{{$item->institution->name}}</td>
-                            <td>{{$item->action}}</td>
+                            <td>{{$item->schedule->description}}</td>
+                            <td>{{$item->schedule->weight}}</td>
                             <td>{{$item->activity}}</td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->status}}</td>
@@ -41,22 +44,37 @@
                         </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th scope="col">COD</th>
+                            <th scope="col">INSTITUIÇÃO</th>
+                            <th scope="col">AÇÕES</th>
+                            <th scope="col">PESO</th>
+                            <th scope="col">ATIVIDADE</th>
+                            <th scope="col">QUANTIDADE</th>
+                            <th scope="col">STATUS</th>
+                            <th scope="col">DATA LIMITE</th>
+                            <th scope="col">ALTORIZAÇÃO DAS AÇÕES</th>
+                            {{-- <th colspan="3" style="text-align:right">TOTAL:</th>
+                            <th></th> --}}
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
     </div>
-@stop
+    @stop
 
-@section('css')
-{{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@stop
+    @section('css')
+<link rel="stylesheet" href="{{asset('assets/home/css/style.css')}}">
+    @stop
 
-@section('js')
-<script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
-<script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
-<script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
-<script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
-<script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
-<script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
-<script src="{{asset('assets/home/script.js')}}"></script>
-@stop
+    @section('js')
+    <script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
+    <script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
+    <script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
+    <script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
+    <script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
+    <script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
+    <script src="{{asset('assets/home/script.js')}}"></script>
+    @stop

@@ -30,11 +30,12 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth']
 });
 
 /**
- * @description: Rotas para cadastro de instituições
+ * @description: Rotas para instituições
  */
 Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
    Route::get('/', 'InstitutionController@index')->name('index.company');
    Route::post('salvar', 'InstitutionController@saveAllInstutition')->name('save.institution');
+   Route::get('login', 'InstitutionController@showLogin')->name('login.institution');
 
 });
 
