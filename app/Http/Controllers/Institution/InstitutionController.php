@@ -13,6 +13,7 @@ use DB;
 use \Validator;
 use Response;
 use App\Models\Schedule;
+use App\Notifications\InstitutionRegistered;
 
 class InstitutionController extends Controller
 {
@@ -153,11 +154,11 @@ class InstitutionController extends Controller
                 } else {
                     // INICIALIZAÇÃO DE CADASTROS 
                     $institution = Institution::create($dataForm);
-                    $transctionMembers = false;
-                    $transctionCnpj = false;
-                    $transctionAnswers = false;
-                    $transctionCollaboratorActivityLevels = false;
-                    $transctionSchedules = false;
+                    $transctionMembers = true;
+                    $transctionCnpj = true;
+                    $transctionAnswers = true;
+                    $transctionCollaboratorActivityLevels = true;
+                    $transctionSchedules = true;
                     // Salvado os três membros da instituição
                     for ($i = 0; $i < 3; $i++) {
                         $transctionMembers = $institution->commissionMembers()->create([
@@ -202,8 +203,12 @@ class InstitutionController extends Controller
                             ]);
                         }
                     }
-                    if ($institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels  && $transctionSchedules) {
+                    if ($institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels
+                                     && $transctionSchedules && $transctionCnpj) {
                         DB::commit();
+                        $institutionRegisted = $institution;
+                        $institutionRegisted->notify(new InstitutionRegistered($institution));
+                        
                     } else {
                         DB::rollBack();
                     }

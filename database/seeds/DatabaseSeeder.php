@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             QuestionTableSeed::class,
             AlternativeTableSeed::class,
             ScheduleActionTableSeeder::class,
+            UserTableSeeder::class,
         ]);
     }
 }

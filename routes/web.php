@@ -49,3 +49,10 @@ Route::group(['prefix' => 'ações', 'namespace' => 'Shedule'], function () {
    Route::post('/update', 'SheduleActionController@update')->name('update.shedule.action');
    Route::post('/delete', 'SheduleActionController@delete')->name('delete.shedule.action');
 });
+/***
+ * @description rotas para notificação
+ */
+Route::group(['prefix' => 'notifications', 'namespace' => 'Notification','middleware' => 'auth'], function () {
+   Route::get('/', 'NotificationController@notificationRegisterInstitution')->name('notification.institution');
+   
+});

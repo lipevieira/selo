@@ -523,7 +523,7 @@ $(document).ready(function () {
 				} else {
 					$('#loadSaveInstitution').modal('hide'); 
 					alert('Instituição salva com sucesso!');	
-					window.location.href = welcome;
+					// window.location.href = welcome;
 				}
 			},
 			error: function (request, status, erro) {
