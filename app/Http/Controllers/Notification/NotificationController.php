@@ -18,10 +18,16 @@ class NotificationController extends Controller
     public function notificationRegisterInstitution()
     {
 
-        $notification = $this->institution->with('notifications')->get();
-    
+        // $notification = $this->institution->with('notifications')->get();
+        // $notification = $this->institution->find(1)->notifications;
+
         // return response()->json(compact('notification'));
-        // \dd($notification);
-        return view('layouts.notification.notification', compact('notification'));
+
+
+
+        $notification = ['name' => 'Notificação 01'];
+
+        return response()->json(compact('notification'));
+       
     }
 }

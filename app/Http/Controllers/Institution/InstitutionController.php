@@ -228,4 +228,43 @@ class InstitutionController extends Controller
     {
         return view('institution.login');
     }
+    public function auth(Request $request, Institution $institution)
+    {
+        $institutions = $institution->find(1);
+
+        return view('institution.update.update-institution', compact('institutions'));
+    }
+    /***
+     * 
+     * @return View Diagnostico censitário
+     */
+    public function getDiagnosticoCensitario(Institution $institution)
+    {
+        $questionAlternatives = Question::with('alternatives')->get();
+        $institutions = $institution->find(1);
+
+        return view('institution.update.diagnostico-censitario', compact('questionAlternatives', 'institutions'));
+    }
+    /***
+     * 
+     * @return View Croonograma 
+     */
+    public function getShedule(Institution $institution)
+    {
+        $institutions = $institution->find(1);
+        $actions = ScheduleAction::all();
+
+        return view('institution.update.shedule', compact('institutions', 'actions'));
+    }
+    /***
+     * 
+     * @return View Filiais 
+     */
+    public function getBranches(Institution $institution)
+    {
+        $institutions = $institution->find(1);
+     
+
+        return view('institution.update.branches', compact('institutions'));
+    }
 }

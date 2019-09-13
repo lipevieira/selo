@@ -82,11 +82,6 @@
                                     <select class="form-control form-control-sm" name="county">
                                         <option value="{{$instituion->county}}" selected>{{$instituion->county}}
                                         </option>
-                                        {{-- <option value="Camaçari">Camaçari</option>
-                                        <option value="Candeias">Candeias</option>
-                                        <option value="Lauro de Freitas">Lauro de Freitas</option>
-                                        <option value="Salvador">Salvador</option>
-                                        <option value="Simões Filho">Simões Filho</option> --}}
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -210,12 +205,6 @@
                                 <div class="col-md-12 mb-3">
                                     <label for="">Resposta</label>
                                     <select class="form-control form-control-sm" name="alternative_id[]">
-
-                                        {{-- TO-DE FAZER: Listagem das repostas do diagnotisco censitario --}}
-                                        {{-- @foreach ($instituion->answers as $answer)
-                                            <option value=""></option>
-                                        @endforeach --}}
-
                                         @foreach ($question->alternatives as $alternativa)
                                             <option value="{{$alternativa->id}}" @foreach ($instituion->answers as $answer)
                                                 @if ($alternativa->id == $answer->alternative_id)

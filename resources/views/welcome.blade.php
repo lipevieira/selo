@@ -60,5 +60,8 @@
 </div>
 @endsection
 
+@section('footer')
+<script src="{{ asset('assets/institution/script.js') }}"></script>
+@stop
 
 

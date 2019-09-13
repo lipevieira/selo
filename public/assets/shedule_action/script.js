@@ -51,7 +51,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-                alert("Ocorreu um erro ao salvar esssa ação. Por favor recarregue a pagina");
+                alert("Ocorreu um erro ao salvar essa ação. Por favor recarregue a pagina");
             }
         });
     });

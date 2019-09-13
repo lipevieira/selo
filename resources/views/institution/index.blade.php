@@ -117,13 +117,15 @@
 							<select class="form-control form-control-sm" id="company_classification"
 								name="company_classification">
 								<option value=""></option>
-								<option value="1">Micro(5 a 9 funcionários)</option>
-								<option>Pequena(10 a 12 funcionários)</option>
-								<option>Pequena(13 a 49 funcionários)</option>
-								<option>Média(50 a 99 funcionários)</option>
-								<option>Grande(+ de 100 funcionários)</option>
-								<option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
-								
+								<option value="Micro(5 a 9 funcionários)">Micro(5 a 9 funcionários)</option>
+								<option value="Pequena(10 a 12 funcionários)">Pequena(10 a 12 funcionários)</option>
+								<option value="Pequena(13 a 49 funcionários)">Pequena(13 a 49 funcionários)</option>
+								<option value="Média(50 a 99 funcionários)">Média(50 a 99 funcionários)</option>
+								<option value="Grande(+ de 100 funcionários)">Grande(+ de 100 funcionários)</option>
+								<option value="ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?">
+									ENTIDADE SEM FINS LUCRATIVOS QUE
+									LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
+
 							</select>
 						</div>
 						<div class="col-md-4 mb-3">
@@ -254,7 +256,8 @@
 											<tr>
 												<td scope="col" width="950px">
 													&nbsp;
-													<label>CNPJs Acicionais <small class="asterisco-input-options">*</small></label>
+													<label>CNPJs Acicionais <small
+															class="asterisco-input-options">*</small></label>
 													<input type="text" class="form-control cnpj_additional"
 														id="cnpj_additional" placeholder="Informe apenas números"
 														name="cnpj_additional[]" value="">
@@ -330,7 +333,8 @@
 							<table class="table" id="tblLevelActivicDemiasGroups">
 								<thead>
 									<tr>
-										<th scope="col">NIVEL DE ATIVIDADE<small class="asterisco-input-options">*</small></th>
+										<th scope="col">NIVEL DE ATIVIDADE<small
+												class="asterisco-input-options">*</small></th>
 										<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small></th>
 										<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small></th>
 										<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small></th>
@@ -521,7 +525,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL APRESENTAÇÃO.
 					<div class="legends-forms">
-						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
+							class="asterisco-input-ogrigatorio">*</small>
 						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 					</div>
 				</div>
@@ -561,7 +566,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">CRONOGRAMA
 					<div class="legends-forms">
-						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
+							class="asterisco-input-ogrigatorio">*</small>
 						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 					</div>
 				</div>
@@ -647,7 +653,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL
 					<div class="legends-forms">
-						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
+							class="asterisco-input-ogrigatorio">*</small>
 						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 					</div>
 				</div>
@@ -684,7 +691,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL
 					<div class="legends-forms">
-						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
+							class="asterisco-input-ogrigatorio">*</small>
 						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 					</div>
 				</div>
@@ -725,7 +733,8 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL
 					<div class="legends-forms">
-						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small class="asterisco-input-ogrigatorio">*</small>
+						<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
+							class="asterisco-input-ogrigatorio">*</small>
 						<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 					</div>
 				</div>
@@ -783,3 +792,7 @@
 </div>
 
 @endsection
+
+@section('footer')
+<script src="{{ asset('assets/institution/script.js') }}"></script>
+@stop

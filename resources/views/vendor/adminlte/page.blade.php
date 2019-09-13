@@ -67,12 +67,12 @@
                                     <li class="header">Minhas Notificações</li>
                                     <li>
                                         <!-- inner menu: contains the actual data -->
-                                        <ul class="menu">
+                                        <ul class="menu" id="menu-notification">
                                             <li>
-                                                {{-- <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> Notificações de numero 01
-                                                </a> --}}
-                                                {{-- @include('layouts.notification.notification') --}}
+                                            <a href="#" id="notifications" data-url="{{route('notification.institution')}}">
+                                                    <i class="fa fa-users text-aqua"></i> Minha notification
+                                                </a>
+                                                
                                             </li>
                                         </ul>
                                     </li>
@@ -160,4 +160,5 @@
 @stack('js')
 @yield('js')
 
+<script type="text/javascript" src="{{asset('assets/notification/script.js')}}"></script>
 @stop

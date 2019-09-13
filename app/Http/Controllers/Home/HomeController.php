@@ -92,4 +92,16 @@ class HomeController extends Controller
 
        return view('home.show_institution', compact('questionAlternatives', 'actions','instituion'));
    }
+   /***
+    * @return Page Inex-user
+    *
+    */
+   public function getIndexUser()
+   {
+        return view('auth.index');
+   }
+   public function getUserCad()
+   {
+        return view('auth.register');
+   }
 }
