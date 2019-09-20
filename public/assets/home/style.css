@@ -1,4 +1,8 @@
 .actions_tables {
-    width: 230px;
-    text-align: center;
+    /* width: 230px; */
+    text-align: right;
+}
+
+.action{
+    text-align: right;
 }

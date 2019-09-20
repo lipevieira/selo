@@ -50,4 +50,5 @@ class CollaboratorActivityLevelController extends Controller
             return redirect()->route('auth.get.diagnostico.censitario')->with('success', 'Nivel de atividade dos colaboradores editado com sucesso');
         }
     }
+   
 }

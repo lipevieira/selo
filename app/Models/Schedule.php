@@ -26,10 +26,16 @@ class Schedule extends Model
      * @Description: Relacionamento 1 - N
      * Muitas ações petencem ao um cronograma de ação
      */
-    public function schedule()
+    public function action()
     {
-        return $this->belongsTo('App\Models\ScheduleAction','id');
+        return $this->belongsTo('App\Models\ScheduleAction', 'schedule_action_id');
     }
+    /**
+     * Validação de Data Limite do cronograma
+     *
+     * @param array $dataForm
+     * @return void
+     */
     public  function validateDeadline($dataForm = array())
     {
         $now = new Carbon();
@@ -45,5 +51,43 @@ class Schedule extends Model
             }
         }
         return $valida;
+    }
+    /**
+     * Validação de Data Limite do cronograma
+     *
+     * @param  $data
+     * @return void
+     */
+    public  function validateDeadlineUpdate($data)
+    {
+        $now = new Carbon();
+        $ano = $now->year;
+        $mes = 11;
+        $dia = 29;
+        $deadlineValidate = Carbon::createFromDate($ano, $mes, $dia);
+        $valida = true;
+
+            if ($data > $deadlineValidate) {
+                $valida = false;
+            }
+        return $valida;
+    }
+    public function rules()
+    {
+        return [
+            'schedule_action_id' => 'required',
+            'activity' => 'required',
+            'amount' => 'required',
+            'deadline' => 'required|date',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'schedule_action_id.required' => 'O campo Ação obrigatório',
+            'activity.required' => 'O campo Atividade obrigatório',
+            'amount.required' => 'O campo Quantidade obrigatório ',
+            'deadline.required' => 'O campo Data Limite obrigatório',
+        ];
     }
 }

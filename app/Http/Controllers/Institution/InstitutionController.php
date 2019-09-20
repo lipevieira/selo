@@ -17,6 +17,14 @@ use App\Notifications\InstitutionRegistered;
 
 class InstitutionController extends Controller
 {
+    private $institution;
+    private $schedule;
+
+    public function __construct(Institution $institution, Schedule $schedule)
+    {
+        $this->institution = $institution;
+        $this->schedule = $schedule;
+    }
     public function index()
     {
         $actions = ScheduleAction::all();
@@ -203,12 +211,13 @@ class InstitutionController extends Controller
                             ]);
                         }
                     }
-                    if ($institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels
-                                     && $transctionSchedules && $transctionCnpj) {
+                    if (
+                        $institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels
+                        && $transctionSchedules && $transctionCnpj
+                    ) {
                         DB::commit();
                         $institutionRegisted = $institution;
                         $institutionRegisted->notify(new InstitutionRegistered($institution));
-                        
                     } else {
                         DB::rollBack();
                     }
@@ -252,9 +261,10 @@ class InstitutionController extends Controller
     public function getShedule(Institution $institution)
     {
         $institutions = $institution->find(1);
-        $actions = ScheduleAction::all();
+        // dd($institutions);
+        // $actions = ScheduleAction::all();
 
-        return view('institution.update.shedule', compact('institutions', 'actions'));
+        return view('institution.update.shedule', compact('institutions'));
     }
     /***
      * 
@@ -263,8 +273,63 @@ class InstitutionController extends Controller
     public function getBranches(Institution $institution)
     {
         $institutions = $institution->find(1);
-     
+
 
         return view('institution.update.branches', compact('institutions'));
+    }
+
+    /***
+     * Abrir a tela com os membros da comissão
+     * @return void
+     */
+    public function getMembrersComission(Institution $institution)
+    {
+        $institutions = $institution->find(1);
+
+        return view('institution.update.membrers', compact('institutions'));
+    }
+    /**
+     * Atualizando uma Instituição com seus derivados
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function update(Request $request)
+    {
+        $dataForm = $request->except('_token');
+
+        switch ($dataForm['etapas']) {
+            case 1:
+                $validator  = Validator::make($request->all(), $this->institution->rules($request['id']), $this->institution->messages());
+                if ($validator->fails()) {
+                    return response()->json(['errors' => $validator->errors()->all()]);
+                }
+                break;
+            case 2:
+                $validator  = Validator::make($request->all(), $this->institution->rulesPlainAction(), $this->institution->messagesPlainAction());
+                if ($validator->fails()) {
+                    return response()->json(['errors' => $validator->errors()->all()]);
+                }
+                break;
+            case 3:
+                $validator  = Validator::make($dataForm, $this->institution->rulesPartners(), $this->institution->messagesPartners());
+                if ($validator->fails()) {
+                    return response()->json(['errors' => $validator->errors()->all()]);
+                }
+                break;    
+            case 4:
+                $validator  = Validator::make($dataForm, $this->institution->rulesResult(), $this->institution->messageResul());
+                if ($validator->fails()) {
+                    return response()->json(['errors' => $validator->errors()->all()]);
+                }else{
+                    $institution = $this->institution->find($dataForm['id']);
+                    $institution->update($dataForm);
+                }
+                break;    
+
+            default:
+                # code...
+                break;
+        }
     }
 }

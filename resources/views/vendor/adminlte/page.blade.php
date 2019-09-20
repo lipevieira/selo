@@ -57,28 +57,8 @@
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         {{-- Lista de notificação --}}"
-                    <ul class="nav navbar-nav">
-                            <li class="dropdown notifications-menu ">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                    Notificações <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">Minhas Notificações</li>
-                                    <li>
-                                        <!-- inner menu: contains the actual data -->
-                                        <ul class="menu" id="menu-notification">
-                                            <li>
-                                            <a href="#" id="notifications" data-url="{{route('notification.institution')}}">
-                                                    <i class="fa fa-users text-aqua"></i> Minha notification
-                                                </a>
-                                                
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    {{-- <li class="footer"><a href="#">View all</a></li> --}}
-                                </ul>
-                            </li>
+                        <ul class="nav navbar-nav">
+
                             {{-- Logoute do sistema --}}
                             <li>
                                 @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') &&

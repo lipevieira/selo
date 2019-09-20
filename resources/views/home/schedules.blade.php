@@ -34,8 +34,8 @@
                         <tr>
                             <th scope="row">{{$item->id}}</th>
                             <td>{{$item->institution->name}}</td>
-                            <td>{{$item->schedule->description}}</td>
-                            <td>{{$item->schedule->weight}}</td>
+                            <td>{{$item->action->description}}</td>
+                            <td>{{$item->action->weight}}</td>
                             <td>{{$item->activity}}</td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->status}}</td>

@@ -4,6 +4,28 @@
 
 @section('content_header')
 <h1>Instituições Cadastradas</h1>
+{{-- 
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+        Notificações <i class="fa fa-bell-o"></i>
+        <span class="label label-warning">10</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">Minhas Notificações</li>
+        <li>
+            <!-- inner menu: contains the actual data -->
+            <ul class="menu" id="menu-notification">
+                <li>
+                    <a href="#" id="notifications" data-url="{{route('notification.institution')}}">
+                        <i class="fa fa-users text-aqua"></i> Minha notification
+                    </a>
+    
+                </li>
+            </ul>
+        </li>
+        <li class="footer"><a href="#">View all</a></li>
+    </ul> --}}
+
+
 @stop
 
 @section('content')
@@ -23,7 +45,7 @@
                     <th scope="col">E-MAIL</th>
                     <th scope="col">TELEFONE</th>
                     <th scope="col">RESPONSAEVEL TÉCNICO</th>
-                    <th scope="col">AÇÕES</th>
+                    <th scope="col" class="action">AÇÕES</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,11 +64,11 @@
                         <a href="{{route('home.details.institution',$item->id)}}" class="btn btn-info btn-sm" role="button">
                                 <span class="glyphicon glyphicon-eye-open"></span> Visualizar
                             </a>
-                            <button class="btn btn-danger btn-sm " id="btnExcluirDocumento">
+                            {{-- TO-DE Fazer: BOtão para desativa uma instituição --}}
+                            {{-- <button class="btn btn-danger btn-sm " id="btnExcluirDocumento">
                                 <span class="glyphicon glyphicon-trash"></span> Desativar
-                            </button>
+                            </button> --}}
                         </td>
-                
                     </tr>
                 @endforeach
             </tbody>

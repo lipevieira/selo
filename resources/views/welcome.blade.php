@@ -18,6 +18,9 @@
     </div>
     @endif     
     <div class="container-company">
+        {{-- <div id="logo">
+            <img src="{{asset('images/selo_horizontal.jpg')}}" class="img-fluid" alt="Selo" width="400" height="125" >
+        </div> --}}
         <form>
             <div class="form-group">
                 <label for="cb_company">Indentificação da Empresa</label>

@@ -5,7 +5,7 @@
 @section('content')
 @include('layouts.nav-bar-institution')
 
-<form method="post" id="register_form">
+<form method="POST" id="formUpdate">
     @csrf
     <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -70,7 +70,8 @@
                 </div>
                 <div class="panel-body">
                     <!-- Inicio dos Inputs da Instituição-->
-                    <input type="hidden" name="etapas" value="" id="etapas">
+                <input type="hidden" name="etapas" value="" id="etapas">
+                <input type="hidden" name="id" value="{{$institutions->id}}" id="id">
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="name">Nome da Instituição proponente <small class="asterisco-input">*</small>
@@ -169,7 +170,7 @@
                         </div>
                         <div align="center">
                             <button type="button" name="btn_indentificacao" id="btn_indentificacao"
-                                class="btn btn-info btn-lg" data-url="#">Proximo</button>
+                        class="btn btn-info btn-lg" data-url="{{route('update.institution')}}">Proximo</button>
                         </div>
                         <br />
                     </div>
@@ -210,7 +211,7 @@
                         <button type="button" name="previous_btn_personal_details" id="btn_previous_plano_trabalho"
                             class="btn btn-default btn-lg">Anterior</button>
                         <button type="button" name="btn_instituicacao_next" id="btn_plano_trabalho_next"
-                            class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
+                            class="btn btn-info btn-lg" data-url="{{route('update.institution')}}">Proximo</button>
                     </div>
                     <br />
                 </div>
@@ -249,7 +250,7 @@
                         <button type="button" name="btn_previous_parceiras" id="btn_previous_parceiras"
                             class="btn btn-default btn-lg">Anterior</button>
                         <button type="button" name="btn_next_parceiras" id="btn_next_parceiras"
-                            class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
+                            class="btn btn-info btn-lg" data-url="{{route('update.institution')}}">Proximo</button>
                     </div>
                     <br />
                 </div>
@@ -290,7 +291,7 @@
                         <button type="button" name="btn_previous_parceiras" id="btn_metodologia_previous"
                             class="btn btn-default btn-lg">Anterior</button>
                         <button type="button" name="btn_contact_details" id="btn_metodologia_next"
-                            class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
+                            class="btn btn-info btn-lg">Proximo</button>
                     </div>
                     <br />
                 </div>
@@ -328,7 +329,7 @@
                         <button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
                             class="btn btn-default btn-lg">Anterior</button>
                         <button type="button" name="btn_resultados_next" id="btn_resultados_next"
-                            class="btn btn-success btn-lg">Atualizar Informações</button>
+                            class="btn btn-success btn-lg" data-url="{{route('update.institution')}}">Atualizar Informações</button>
                     </div>
                     <br />
                 </div>
@@ -338,8 +339,49 @@
     </div>
 </form>
 
+{{-- Modal para messagem de campos invalidos --}}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modalErrorCad">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Atenção: Há campos invalidos!</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" style="display: none; " id="danger">
+                    <ul></ul>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{-- Modal para carregar messagem ao salvar Institução --}}
+<div class="modal" tabindex="-1" role="dialog" id="loadUpdateInstitution">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atualizando</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1>Aguarde...</h1>
+            </div>
+            <div class="modal-footer">
+                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> --}}
+            </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('footer')
-<script src="{{asset('assets/institution/update.js')}}"></script>
+<script src="{{asset('assets/institution/update/institution-update.js')}}"></script>
 @stop

@@ -2,6 +2,7 @@ $(document).ready(function(){
     // Mascaras para inpust da etapa 01 do formulario.
     $('#cnpj').mask('00.000.000/0000-00');
     $('.cnpj_additional').mask('00.000.000/0000-00');
+    $('#cnpj_additional').mask('00.000.000/0000-00');
     $('#phone').mask('(00) 0000-00009');
     $('#phone_two').mask('(00) 0000-00009');
     $('.members_phone').mask('(00) 0000-00009');

@@ -4,6 +4,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a class="navbar-brand" href="{{route('auth.institution')}}">Instituição</a></li>
+                <li><a class="navbar-brand" href="{{route('auth.membrers')}}">Membros</a></li>
                 <li><a class="navbar-brand" href="{{route('auth.get.diagnostico.censitario')}}">Diagnóstico
                         Censitário</a></li>
                 <li><a class="navbar-brand" href="{{route('auth.get.shedule')}}">Cronograma</a></li>

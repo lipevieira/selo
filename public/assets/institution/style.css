@@ -99,6 +99,7 @@ html, body {
     color: #449d44;
     font-size: 20px;
 }
+
 .question-color {
     background-color: #f5f5f5;
 }
@@ -127,4 +128,9 @@ html, body {
 
 /* .legends-forms{
     text-align: center;
+} */
+
+/* #logo {
+    text-align: center;
+    margin-top: 0px;
 } */

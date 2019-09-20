@@ -42,8 +42,11 @@ Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
    Route::get('/', 'InstitutionController@index')->name('index.company');
    Route::post('salvar', 'InstitutionController@saveAllInstutition')->name('save.institution');
 
+   Route::post('/update', 'InstitutionController@update')->name('update.institution');
+
    Route::get('login', 'InstitutionController@showLogin')->name('login.institution');
    Route::get('login/access', 'InstitutionController@auth')->name('auth.institution');
+   Route::get('login/membros-comissão', 'InstitutionController@getMembrersComission')->name('auth.membrers');
 
    Route::get('login/diagnostico-censiratio', 'InstitutionController@getDiagnosticoCensitario')->name('auth.get.diagnostico.censitario');
    Route::get('login/diagnostico-cronograma', 'InstitutionController@getShedule')->name('auth.get.shedule');
@@ -57,15 +60,48 @@ Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
 Route::group(['prefix' => 'nivel-collaboradores-atividade', 'namespace' => 'CollaboratorActivityLevel'], function () {
    Route::get('/', 'CollaboratorActivityLevelController@getDiagnosticoCensitarioEdit')->name('show.edit.cencisitario');
    Route::put('/update', 'CollaboratorActivityLevelController@update')->name('update.censitario');
+   // Route::post('/update/cencitário', 'CollaboratorActivityLevelController@updateDiagnostico')->name('edit.censitario');
 });
+
+/***
+ * Rotas para Repostas do Diagnóstico censitário
+ */
+Route::group(['prefix' => 'reposta', 'namespace' => 'Answer'], function () {
+   Route::post('/', 'AnswerController@show')->name('show.edit.answer');
+   
+});
+/***
+ * Rotas Membros da comissão
+ */
+Route::group(['prefix' => 'membros-comissão', 'namespace' => 'CommissionMembers'], function () {
+   Route::get('/show', 'CommissionMembersController@show')->name('show.comission');
+   Route::post('/update', 'CommissionMembersController@update')->name('update.comission');
+   
+});
+
+
 /***
  * @Description: Rotas para o Cronograma
  */
 Route::group(['prefix' => 'auth-cronograma', 'namespace' => 'Schedule'], function () {
    // Route::get('/', 'CollaboratorActivityLevelController@getDiagnosticoCensitarioEdit')->name('show.edit.cencisitario');
+   Route::get('/show/insert', 'ScheduleController@getSheduleInsert')->name('show.schedule.insert');
    Route::post('/store', 'ScheduleController@store')->name('schedule.store');
+   Route::get('/show/{id}', 'ScheduleController@showSchedule')->name('showSchedule');
+   Route::post('/update', 'ScheduleController@update')->name('schedule.update');
+
 });
 
+/***
+ * Rotas para filiais da instituição autenticada
+ * TO-DE Fazer: add middleware de auth para todas as rotas da instituição
+ */
+Route::group(['prefix' => 'filiais', 'namespace' => 'Branche'], function () {
+   Route::post('/', 'BrancheController@store')->name('branche.store');
+   Route::get('/show', 'BrancheController@show')->name('branche.show');
+   Route::post('/update', 'BrancheController@update')->name('branche.update');
+   Route::post('/delete', 'BrancheController@delete')->name('branche.delete');
+});
 
 /***
  * @description: Rotas para ActionSheduleController
