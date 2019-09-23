@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Branche;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Branch;
+use App\Models\Institution;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
  
@@ -13,9 +14,17 @@ class BrancheController extends Controller
 {
     private $branche;
 
-    public function __construct(Branch $branch)
+    public function __construct(Branch $branch, Institution  $institution)
     {
         $this->branche = $branch;
+        $this->institution = $institution;
+    }
+    public function index()
+    {
+        $id = auth()->guard('client')->user()->id;
+        $institutions  = $this->institution->find($id);
+        
+        return view('institution.update.branches', compact('institutions'));
     }
 
     public function store(Request $request)

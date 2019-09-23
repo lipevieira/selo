@@ -36,6 +36,16 @@ class InstitutionController extends Controller
     {
         return view('welcome');
     }
+    /**
+     * Carregando uma de questionario para fazer 
+     * cadastro de instituiçoes
+     *
+     * @return void
+     */
+    public function start()
+    {
+        return view('institution.register.start');
+    }
 
     public function saveAllInstutition(Request $request, Schedule $schedule, Institution $institution)
     {
@@ -233,60 +243,13 @@ class InstitutionController extends Controller
                 break;
         }
     }
-    public function showLogin()
-    {
-        return view('institution.login');
-    }
+   
     public function auth(Request $request, Institution $institution)
     {
-        $institutions = $institution->find(1);
+        // $institutions = $institution->find(1);
+        
 
         return view('institution.update.update-institution', compact('institutions'));
-    }
-    /***
-     * 
-     * @return View Diagnostico censitário
-     */
-    public function getDiagnosticoCensitario(Institution $institution)
-    {
-        $questionAlternatives = Question::with('alternatives')->get();
-        $institutions = $institution->find(1);
-
-        return view('institution.update.diagnostico-censitario', compact('questionAlternatives', 'institutions'));
-    }
-    /***
-     * 
-     * @return View Croonograma 
-     */
-    public function getShedule(Institution $institution)
-    {
-        $institutions = $institution->find(1);
-        // dd($institutions);
-        // $actions = ScheduleAction::all();
-
-        return view('institution.update.shedule', compact('institutions'));
-    }
-    /***
-     * 
-     * @return View Filiais 
-     */
-    public function getBranches(Institution $institution)
-    {
-        $institutions = $institution->find(1);
-
-
-        return view('institution.update.branches', compact('institutions'));
-    }
-
-    /***
-     * Abrir a tela com os membros da comissão
-     * @return void
-     */
-    public function getMembrersComission(Institution $institution)
-    {
-        $institutions = $institution->find(1);
-
-        return view('institution.update.membrers', compact('institutions'));
     }
     /**
      * Atualizando uma Instituição com seus derivados

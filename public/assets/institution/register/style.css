@@ -1,0 +1,19 @@
+.login {
+    /* max-width: 1151px;
+    max-height: 250px; */
+    background-color: aqua;
+    text-align: right;
+    margin-top: 0px;
+}
+
+.d-inline-block {
+    margin-top: 20px;
+}
+
+.logo {
+    text-align: center;
+}
+
+.institution_auth, .semur_auth, .wellcome {
+    text-align: center;
+}

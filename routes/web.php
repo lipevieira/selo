@@ -24,35 +24,41 @@ Route::post('/user-register', 'Auth\RegisterController@create')->name('user.regi
 /***
  * @description: Rotas para Home
  */
-Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth'],function(){
+Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth'], function () {
    Route::get('/', 'HomeController@index')->name('home');
    Route::get('/perfil-collaborator', 'HomeController@getProfileCollaborator')->name('home.profile');
    Route::get('/perfil-membros-comissão', 'HomeController@getCommissionMembers')->name('home.membros.comissao');
    Route::get('/cronograma', 'HomeController@getSchedules')->name('home.schedules');
    Route::get('/detalhes-instituição/{id}', 'HomeController@getInstituitionDetails')->name('home.details.institution');
    Route::get('/user-index', 'HomeController@getIndexUser')->name('home.index.user');
- 
-   
 });
 
 /**
  * @description: Rotas para instituições
  */
-Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function(){
+Route::group(['prefix' => 'empresa', 'namespace' => 'Institution'], function () {
    Route::get('/', 'InstitutionController@index')->name('index.company');
+   Route::get('/start', 'InstitutionController@start')->name('start.register');
    Route::post('salvar', 'InstitutionController@saveAllInstutition')->name('save.institution');
-
    Route::post('/update', 'InstitutionController@update')->name('update.institution');
 
-   Route::get('login', 'InstitutionController@showLogin')->name('login.institution');
-   Route::get('login/access', 'InstitutionController@auth')->name('auth.institution');
-   Route::get('login/membros-comissão', 'InstitutionController@getMembrersComission')->name('auth.membrers');
-
-   Route::get('login/diagnostico-censiratio', 'InstitutionController@getDiagnosticoCensitario')->name('auth.get.diagnostico.censitario');
-   Route::get('login/diagnostico-cronograma', 'InstitutionController@getShedule')->name('auth.get.shedule');
-   Route::get('login/diagnostico-branches', 'InstitutionController@getBranches')->name('auth.get.branches');
-
 });
+/***
+ * @description Autenticação da Instituição
+ */
+Route::group(['prefix' => 'autentication-client', 'namespace' => 'Client'], function () {
+   Route::get('show', 'ClientController@showLogin')->name('login.client');
+   Route::post('/auth', 'ClientController@clientLogin')->name('client.auth');
+
+   /**
+    * Rotas para usuário logados
+    */
+   Route::group(['middleware'  =>  'auth.institution:client'], function () {
+         Route::get('index', 'ClientController@index')->name('index.client');
+         Route::get('/logout', 'ClientController@logout')->name('logout');
+   });
+});
+
 
 /***
  * @description: Rotas para editar o diagnostico censitario
@@ -61,6 +67,8 @@ Route::group(['prefix' => 'nivel-collaboradores-atividade', 'namespace' => 'Coll
    Route::get('/', 'CollaboratorActivityLevelController@getDiagnosticoCensitarioEdit')->name('show.edit.cencisitario');
    Route::put('/update', 'CollaboratorActivityLevelController@update')->name('update.censitario');
    // Route::post('/update/cencitário', 'CollaboratorActivityLevelController@updateDiagnostico')->name('edit.censitario');
+      Route::get('/diagnostico-censiratio', 'CollaboratorActivityLevelController@index')->name('diagnostico.censitario.index');
+
 });
 
 /***
@@ -68,15 +76,14 @@ Route::group(['prefix' => 'nivel-collaboradores-atividade', 'namespace' => 'Coll
  */
 Route::group(['prefix' => 'reposta', 'namespace' => 'Answer'], function () {
    Route::post('/', 'AnswerController@show')->name('show.edit.answer');
-   
 });
 /***
  * Rotas Membros da comissão
  */
 Route::group(['prefix' => 'membros-comissão', 'namespace' => 'CommissionMembers'], function () {
+   Route::get('/index', 'CommissionMembersController@index')->name('auth.membrers');
    Route::get('/show', 'CommissionMembersController@show')->name('show.comission');
    Route::post('/update', 'CommissionMembersController@update')->name('update.comission');
-   
 });
 
 
@@ -84,12 +91,11 @@ Route::group(['prefix' => 'membros-comissão', 'namespace' => 'CommissionMembers
  * @Description: Rotas para o Cronograma
  */
 Route::group(['prefix' => 'auth-cronograma', 'namespace' => 'Schedule'], function () {
-   // Route::get('/', 'CollaboratorActivityLevelController@getDiagnosticoCensitarioEdit')->name('show.edit.cencisitario');
+   Route::get('/index', 'ScheduleController@index')->name('get.shedule.index');
    Route::get('/show/insert', 'ScheduleController@getSheduleInsert')->name('show.schedule.insert');
    Route::post('/store', 'ScheduleController@store')->name('schedule.store');
    Route::get('/show/{id}', 'ScheduleController@showSchedule')->name('showSchedule');
    Route::post('/update', 'ScheduleController@update')->name('schedule.update');
-
 });
 
 /***
@@ -98,6 +104,7 @@ Route::group(['prefix' => 'auth-cronograma', 'namespace' => 'Schedule'], functio
  */
 Route::group(['prefix' => 'filiais', 'namespace' => 'Branche'], function () {
    Route::post('/', 'BrancheController@store')->name('branche.store');
+   Route::get('index', 'BrancheController@index')->name('get.branches.index');
    Route::get('/show', 'BrancheController@show')->name('branche.show');
    Route::post('/update', 'BrancheController@update')->name('branche.update');
    Route::post('/delete', 'BrancheController@delete')->name('branche.delete');
@@ -116,7 +123,6 @@ Route::group(['prefix' => 'ações', 'namespace' => 'Shedule'], function () {
 /***
  * @description rotas para notificação
  */
-Route::group(['prefix' => 'notifications', 'namespace' => 'Notification','middleware' => 'auth'], function () {
+Route::group(['prefix' => 'notifications', 'namespace' => 'Notification', 'middleware' => 'auth'], function () {
    Route::get('/', 'NotificationController@notificationRegisterInstitution')->name('notification.institution');
-   
 });

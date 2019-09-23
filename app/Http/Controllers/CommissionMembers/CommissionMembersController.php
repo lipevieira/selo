@@ -7,16 +7,26 @@ use App\Http\Controllers\Controller;
 use App\Models\CommissionMembers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
-
+use App\Models\Institution;
 
 
 class CommissionMembersController extends Controller
 {
     private $comission;
+    private $institution;
 
-    public function __construct(CommissionMembers $comission)
+    public function __construct(CommissionMembers $comission, Institution $institution)
     {
         $this->comission = $comission;    
+        $this->institution = $institution;    
+    }
+    public function index()
+    {
+        $id = auth()->guard('client')->user()->id;
+        $institutions = $this->institution->find($id);
+
+        return view('institution.update.membrers', compact('institutions'));
+      
     }
     /**
      * Recuperando um membro da comissão

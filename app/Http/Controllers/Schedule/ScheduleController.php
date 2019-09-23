@@ -8,16 +8,30 @@ use App\Models\Schedule;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use App\Models\ScheduleAction;
+use App\Models\Institution;
 
 
 class ScheduleController extends Controller
 {
     private $schedule;
+    private $institution;
 
-    public function __construct(Schedule $schedule)
+    public function __construct(Schedule $schedule, Institution $institution)
     {
         $this->schedule = $schedule;
+        $this->institution = $institution;
     }
+    /***
+     * @param  $id
+     * @return  Institution
+     */
+    public function index()
+    {
+        $id = auth()->guard('client')->user()->id;
+        $institutions =  $this->institution->find($id);
+        return view('institution.update.shedule', compact('institutions'));
+    }
+
     public function getSheduleInsert()
     {
         $actions = ScheduleAction::all();

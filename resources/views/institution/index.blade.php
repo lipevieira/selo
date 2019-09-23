@@ -761,7 +761,7 @@
 							class="btn btn-default btn-lg">Anterior</button>
 						<button type="button" name="btn_resultados_next" id="btn_resultados_next"
 							class="btn btn-success btn-lg" data-url="{{route('save.institution')}}"
-							welcome="{{route('login.institution')}}">Salvar
+							welcome="{{route('login.client')}}">Salvar
 							Informações</button>
 					</div>
 					<br />

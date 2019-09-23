@@ -1,70 +1,68 @@
-@extends('layouts.site')
+@extends('adminlte::master')
 
-@section('title', 'Intentificação da empresa')
-
-@section('content')
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-    <div class="top-right links">
-        @auth
-        <a href="{{ url('/home') }}">Home</a>
-        @else
-        <a href="{{ route('login') }}">Login</a>
-
-        @if (Route::has('register'))
-        <a href="{{ route('register') }}">Register</a>
-        @endif
-        @endauth
-    </div>
-    @endif     
-    <div class="container-company">
-        {{-- <div id="logo">
-            <img src="{{asset('images/selo_horizontal.jpg')}}" class="img-fluid" alt="Selo" width="400" height="125" >
-        </div> --}}
-        <form>
-            <div class="form-group">
-                <label for="cb_company">Indentificação da Empresa</label>
-                <select class="form-control form-control-sm" id="cb_company" data-url="{{route('index.company')}}">
-                    <option></option>
-                    <option>Micro(5 a 9 funcionários)</option>
-                    <option>Pequena(10 a 12 funcionários)</option>
-                    <option>Pequena(13 a 49 funcionários)</option>
-                    <option>Média(50 a 99 funcionários)</option>
-                    <option>Grande(+ de 100 funcionários)</option>
-                    <option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
-                </select>
-            </div>
-            <div class="form-group" id="etapa01">
-                <label for="cb_company_etapa01">PROPRIETÁRIO OU ADMINISTRADOR NEGRO?</label>
-                <select class="form-control form-control-sm" id="cb_company_01">
-                    <option></option>
-                    <option>SIM</option>
-                    <option>NÃO</option>
-                </select>
-            </div>
-            <div class="form-group" id="etapa02">
-                <label for="cb_company_etapa02">MAIORIA DOS FUNCIONÁRIOS NEGROS?</label>
-                <select class="form-control form-control-sm" id="cb_company_02" data-url="{{route('index.company')}}">
-                    <option></option>
-                    <option>SIM</option>
-                    <option>NÃO</option>
-                </select>
-            </div>
-            <div class="form-group" id="etapa03">
-                <label for="cb_company_etapa03">ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIZAÇÃO DA DIVERSIDADE?</label>
-                <select class="form-control form-control-sm" id="cb_company_03" data-url="{{route('index.company')}}">
-                    <option></option>
-                    <option>SIM</option>
-                    <option>NÃO</option>
-                </select>
-            </div>
-        </form>
-    </div>
-</div>
-@endsection
-
-@section('footer')
-<script src="{{ asset('assets/institution/script.js') }}"></script>
+@section('adminlte_css')
+{{-- Arquivos de css --}}
+<link rel="stylesheet" href="{{asset('assets/institution/register/style.css ')}}">
+@yield('css')
 @stop
 
+@section('body_class')
 
+@section('body')
+<div class="container">
+    {{-- <nav class="navbar navbar-default">
+        <div class="container-fluid">
+      
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-brand" href="{{ route('login') }}">Fazer Login</a></li>
+    </ul>
+</div>
+</div>
+</nav> --}}
+
+<div>
+    <div class="box">
+        <div class="box-header">
+
+        </div>
+        <div class="box-body">
+            <div class="logo">
+                <img src="{{asset('images/selo_horizontal.jpg')}}" width="800" height="300"
+                    class="d-inline-block align-top" alt="">
+            </div>
+            <div class="wellcome">
+                <h1>Bem-Vindo ao Selo da diversidade étnico racial!</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-6 institution_auth">
+                    <h1> Instituições</h1>
+                    <h4>Se já é cadastrado em nosso sistema por favor, <strong> <a href="{{route('login.client')}}">click
+                                aqui para fazer Login.</strong></a></p>
+                    <h4>Caso contrário faça seu cadastro para participa do projeto Selo da diversidade étnico racial.</h4>
+                    <a href="{{route('start.register')}}" class="btn btn-success btn-lg " role="button" aria-pressed="true">Fazer cadastro de Instituição</a>
+                </div>
+                <div class="col-md-6 semur_auth">
+                    <h1>Semur</h1>
+                    <h4>Área exclusiva para funcionário da secrétaria da reparação da reparação</h4>
+                    <h4>Para fazer seu cadastrado por favor, entre em contato com o NTI (Nucléo de Tecnologia da Informação)</h4>
+                    <br/>
+                <a href="{{route('login')}}" class="btn btn-success btn-lg " role="button" aria-pressed="true">Fazer Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+@stop
+
+@section('adminlte_js')
+{{-- Arquivos de js --}}
+<script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script src="{{ asset('assets/institution/mask.js') }}"></script>
+<script src="{{ asset('assets/institution/script.js') }}"></script>
+<script src="{{ asset('vendor/adminlte/plugins/iCheck/icheck.min.js') }}"></script>
+
+@stop
