@@ -1,4 +1,4 @@
-<!doctype html>
+{{-- <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -22,11 +22,11 @@
      <script type="text/javascript" src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
      <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
      <script src="{{ asset('assets/institution/mask.js') }}"></script>
-     {{-- <script src="{{ asset('assets/institution/script.js') }}"></script> --}}
-     {{-- <script src="{{asset('assets/institution/update.js')}}"></script> --}}
+     <script src="{{ asset('assets/institution/script.js') }}"></script>
+     <script src="{{asset('assets/institution/update.js')}}"></script>
      <div class="footer">
         @yield('footer')
     </div>
 
 </body>
-</html>
+</html> --}}

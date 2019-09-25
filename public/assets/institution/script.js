@@ -7,10 +7,7 @@ $(document).ready(function () {
 
 	$("#cb_company").change(function () {
 		let url = $(this).data('url');
-		// var company_classification = $('#cb_company').val();
 
-		// console.log(company_classification);
-		
 		switch ($(this).val()) {
 			case 'Micro(5 a 9 funcionários)':
 				$('#etapa01').show();
@@ -51,6 +48,7 @@ $(document).ready(function () {
 
 			case 'NÃO':
 				alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.')
+				window.location.reload();
 				break;
 		}
 	});
@@ -64,6 +62,7 @@ $(document).ready(function () {
 
 			case 'NÃO':
 				alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.');
+				window.location.reload();
 				break;
 		}
 	});
@@ -75,7 +74,8 @@ $(document).ready(function () {
 				break;
 
 			case 'NÃO':
-				alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.')
+				alert('Agradecemos seu interrese. Sua empresa não preenche os requisitos.');
+				window.location.reload();
 				break;
 		}
 	});

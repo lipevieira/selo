@@ -13,7 +13,7 @@ class Client extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'institution_id',
     ];
 
     /**
@@ -33,4 +33,14 @@ class Client extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * Volta do relacionamento de 1 - 1
+     * Um Client tem uma e unica Instituição
+     *
+     * @return Institution
+     */
+    public function institution()
+    {
+        return $this->belongsTo(Institution::class);
+    }
 }

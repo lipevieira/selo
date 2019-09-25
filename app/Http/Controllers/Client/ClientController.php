@@ -29,7 +29,7 @@ class ClientController extends Controller
     }
     public function index()
     {
-        $id = auth()->guard('client')->user()->id;
+        $id = auth()->guard('client')->user()->institution_id;
         $institutions  = $this->institution->find($id);
         return view('institution.update.update-institution', compact('institutions'));
     }

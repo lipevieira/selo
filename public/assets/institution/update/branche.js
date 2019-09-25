@@ -2,7 +2,9 @@ $(document).ready(function () {
 
     $('#btnSaveBranche').on('click', function () {
         $('#btnUpdate').hide();
+        $('#btnConfirmSave').show();
         $('#modalSaveEdit').modal('show');
+        $('#cnpj_additional').val('');
     });
 
     $('#btnConfirmSave').on('click', function () {
@@ -23,7 +25,7 @@ $(document).ready(function () {
                     });
                     danger.slideDown();
                 } else {
-                    alert('Ação salva com sucesso!')
+                    alert('Filial salva com sucesso!')
                     window.location.reload();
                     $('#modalSaveEdit').modal('hide');
                 }
@@ -120,7 +122,7 @@ $(document).ready(function () {
                     });
                     danger.slideDown();
                 } else {
-                    alert('Ação Alterada com sucesso!')
+                    alert('Filial Alterada com sucesso!')
                     window.location.reload();
                     $('#btnConfirmSave').modal('hide');
                 }
@@ -157,7 +159,7 @@ $(document).ready(function () {
             }
         });
     });
-    /*Quando fechar o modal de emprestimo deve ocultar  as messagens de errors*/
+    /*Quando fechar o modal  deve ocultar  as messagens de errors*/
     $('#modalSaveEdit').on('hide.bs.modal', function (event) {
         $('#danger').hide();
     });

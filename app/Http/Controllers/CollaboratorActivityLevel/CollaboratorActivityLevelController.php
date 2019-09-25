@@ -30,7 +30,7 @@ class CollaboratorActivityLevelController extends Controller
      */
     public function index()
     {
-        $id = auth()->guard('client')->user()->id;
+        $id = auth()->guard('client')->user()->institution_id;
         $institutions = $this->institution->find($id);
         $questionAlternatives = Question::with('alternatives')->get();
 
@@ -56,7 +56,7 @@ class CollaboratorActivityLevelController extends Controller
 
         if ($validator->fails()) {
             return redirect()
-                ->route('auth.get.diagnostico.censitario')
+                ->route('diagnostico.censitario.index')
                 ->withErrors($validator)
                 ->withInput();
         } else {
@@ -66,7 +66,7 @@ class CollaboratorActivityLevelController extends Controller
             $profileCollaborators = $this->collaboratorActivityLevel->find($id);
             $profileCollaborators->update($dataForm);
 
-            return redirect()->route('auth.get.diagnostico.censitario')->with('success', 'Nivel de atividade dos colaboradores editado com sucesso');
+            return redirect()->route('diagnostico.censitario.index')->with('success', 'Nivel de atividade dos colaboradores editado com sucesso');
         }
     }
    

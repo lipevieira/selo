@@ -27,7 +27,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $id = auth()->guard('client')->user()->id;
+        $id = auth()->guard('client')->user()->institution_id;
         $institutions =  $this->institution->find($id);
         return view('institution.update.shedule', compact('institutions'));
     }
@@ -35,9 +35,6 @@ class ScheduleController extends Controller
     public function getSheduleInsert()
     {
         $actions = ScheduleAction::all();
-
-        // dd($actions);
-
         return view('institution.update.shedule-insert', compact('actions'));
     }
     /***
@@ -69,7 +66,7 @@ class ScheduleController extends Controller
 
             $this->schedule->save();
 
-            return redirect()->route('auth.get.shedule')->with('success', 'Salvo com sucesso!');
+            return redirect()->route('get.shedule.index')->with('success', 'Salvo com sucesso!');
         }
     }
     /***
@@ -82,6 +79,10 @@ class ScheduleController extends Controller
         $id = $request->id;
         $schedule = $this->schedule->find($id);
         $actions = ScheduleAction::all();
+
+        // $this->authorize($schedule, auth()->guard('client')->user()->institution_id);
+
+        // auth()->guard('client')->user()->institution_id;
 
         return view('institution.update.shedule-update', compact('actions', 'schedule'));
     }
@@ -115,9 +116,9 @@ class ScheduleController extends Controller
 
             $schedule->update($dataForm);
             if ($schedule) {
-                return redirect()->route('auth.get.shedule')->with('success', 'Editado com sucesso!');
+                return redirect()->route('get.shedule.index')->with('success', 'Editado com sucesso!');
             } else {
-                return redirect()->route('auth.get.shedule')->with('errors', 'Error ao editar!');
+                return redirect()->route('showSchedule')->with('error', 'Error ao editar!');
             }
         }
     }

@@ -53,11 +53,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-8">
-                    {{-- <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox" name="remember"> {{ trans('adminlte::adminlte.remember_me') }}
-                        </label>
-                    </div> --}}
+                    
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
@@ -68,7 +64,7 @@
             </div>
         </form>
         <div class="auth-links">
-            <a href="{{ route('welcome') }}" class="text-center">Cadastrar uma nova Instituição</a>
+            <a href="{{ route('start.register') }}" class="text-center">Cadastrar uma nova Instituição</a>
         </div>
     </div>
     <!-- /.login-box-body -->

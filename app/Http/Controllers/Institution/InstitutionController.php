@@ -30,7 +30,7 @@ class InstitutionController extends Controller
         $actions = ScheduleAction::all();
         $questionAlternatives = Question::with('alternatives')->get();
 
-        return view('institution.index', compact('questionAlternatives', 'actions'));
+        return view('institution.register.register', compact('questionAlternatives', 'actions'));
     }
     public function welcome()
     {
@@ -47,7 +47,7 @@ class InstitutionController extends Controller
         return view('institution.register.start');
     }
 
-    public function saveAllInstutition(Request $request, Schedule $schedule, Institution $institution)
+    public function saveAllInstutition(Request $request)
     {
         $validacaoInstiuicao = new InstitutionFormRequest();
         $dataForm = $request->except('_token');
@@ -56,127 +56,89 @@ class InstitutionController extends Controller
             case 1:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rules(), $validacaoInstiuicao->messages());
                 if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 }
                 //validando membros da comissão
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesMembers(), $validacaoInstiuicao->messageMembers());
                 if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 }
                 // Validando o cnpj
-                if ($institution->validateCnpj($dataForm['cnpj']) == false) {
-                    $validator = [
-                        'errors' => 'CNPJ Invalido, por favor corrija.',
-                    ];
-                    return Response::json(array(
-                        'errors' => $validator,
-                    ));
+                if ($this->institution->validateCnpj($dataForm['cnpj']) == false) {
+                    $validator = ['errors' => 'O campo CNPJ é Invalido, por favor corrija.',];
+                    return response()->json(['errors' => $validator]);
                 }
                 // Validando cnps adcionais
                 for ($i = 0; $i < count($request->cnpj_additional); $i++) {
                     if ($request->cnpj_additional[$i] != null) {
-                        if ($institution->validateCnpj($request->cnpj_additional[$i]) == false) {
-                            $validator = [
-                                'errors' => 'O campo CNPJ  adcional é invalido, por favor corrija.',
-                            ];
-                            return Response::json(array(
-                                'errors' => $validator,
-                            ));
+                        if ($this->institution->validateCnpj($request->cnpj_additional[$i]) == false) {
+                            $validator = ['errors' => 'O campo CNPJ Adicional é Invalido, por favor corrija.',];
+                            return response()->json(['errors' => $validator]);
                         }
                     }
-                }
-                // Verificando se existe CNPJ e E-mail na table de institutições
-                $queryInstitutionEmail = Institution::where('email', '=', $dataForm['email'])->first();
-                $queryInstitutionCnpj = Institution::where('cnpj', '=', $dataForm['cnpj'])->first();
-                $queryMembrersComissionEmail = CommissionMembers::where('members_email', '=', $dataForm['members_email'])->first();
-
-                if ($queryInstitutionEmail == true) {
-                    $validator = [
-                        'errors' => 'O E-mail para essa instiuição já está cadastrado. Por favor informe um e-mail diferente',
-                    ];
-                    return Response::json(array(
-                        'errors' => $validator,
-                    ));
-                }
-                if ($queryInstitutionCnpj == true) {
-                    $validator = [
-                        'errors' => 'Esse CNPJ já está cadastrado. Por Favor acesse a pagina de login de Instituições',
-                    ];
-                    return Response::json(array(
-                        'errors' => $validator,
-                    ));
-                }
-                if ($queryMembrersComissionEmail == true) {
-                    $validator = [
-                        'errors' => 'O E-mail do Membros da comissão já esta cadastrando. Por favor informe um e-mail diferente',
-                    ];
-                    return Response::json(array(
-                        'errors' => $validator,
-                    ));
                 }
                 break;
             case 2:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesDiagnosticoCencitario(), $validacaoInstiuicao->messagesDiagnosticoCencitario());
                 if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 }
                 break;
             case 3:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesPlainAction(), $validacaoInstiuicao->messagesPlainAction());
                 if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 }
                 break;
             case 4:
+                for ($i = 0; $i < count($request->schedule_action_id); $i++) {
+                    if ($request->schedule_action_id[$i] != null || $request->activity[$i] || $request->amount[$i] || $request->deadline[$i]) {
+                        $validator  = Validator::make($dataForm,  $validacaoInstiuicao->rulesSchedule(), $validacaoInstiuicao->messagesSchedule());
+                        if ($validator->fails()) {
+                            return response()->json(['errors' => $validator->errors()->all()]);
+                        }
+                    }
+                }
                 // Validando a Data Limte
-                if ($schedule->validateDeadline($request->deadline) == false) {
-                    // dd($request->schedule_action_id);
-                    $validator = [
-                        'errors' => 'Não é permitido uma data maior ou igual ao dia 30 de novembro',
-                    ];
-                    return Response::json(array(
-                        'errors' => $validator,
-                    ));
+                if ($this->schedule->validateDeadline($request->deadline) == false) {
+                    $validator = ['errors' => 'Não é permitido uma data maior ou igual ao dia 30 de novembro',];
+                    return response()->json(['errors' => $validator]);
                 }
                 break;
             case 5:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesPartners(), $validacaoInstiuicao->messagesPartners());
                 if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 }
                 break;
             case 6:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesMethodology(), $validacaoInstiuicao->messageMethodology());
                 if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 }
                 break;
             case 7:
                 $validator  = Validator::make($dataForm, $validacaoInstiuicao->rulesResult(), $validacaoInstiuicao->messageResul());
                 if ($validator->fails()) {
-                    return Response::json(array(
-                        'errors' => $validator->getMessageBag()->toArray(),
-                    ));
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 } else {
                     // INICIALIZAÇÃO DE CADASTROS 
-                    $institution = Institution::create($dataForm);
+                    // $institution = Institution::create($dataForm);
+                    $institution = $this->institution->create($dataForm);
+
                     $transctionMembers = true;
                     $transctionCnpj = true;
                     $transctionAnswers = true;
                     $transctionCollaboratorActivityLevels = true;
                     $transctionSchedules = true;
+                    $autentication = true;
+                    //Salvando a autenticação da Instituição
+                    $autentication = $institution->client()->create([
+                        'name'  =>    $institution->name,
+                        'email'  =>    $institution->email,
+                        'password'  =>  bcrypt($institution->cnpj),
+                        'institution_id'  =>   $institution->id,
+                    ]);
                     // Salvado os três membros da instituição
                     for ($i = 0; $i < 3; $i++) {
                         $transctionMembers = $institution->commissionMembers()->create([
@@ -223,11 +185,12 @@ class InstitutionController extends Controller
                     }
                     if (
                         $institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels
-                        && $transctionSchedules && $transctionCnpj
+                        && $transctionSchedules && $transctionCnpj && $autentication 
                     ) {
                         DB::commit();
-                        $institutionRegisted = $institution;
-                        $institutionRegisted->notify(new InstitutionRegistered($institution));
+                        //TO-DE Fazer: notificação após salvar uma Instituição
+                        // $institutionRegisted = $institution;
+                        // $institutionRegisted->notify(new InstitutionRegistered($institution));
                     } else {
                         DB::rollBack();
                     }
@@ -237,17 +200,14 @@ class InstitutionController extends Controller
                 $validator = [
                     'errors' => 'Numero de Etapa do formulario Invalida!',
                 ];
-                return Response::json(array(
-                    'errors' => $validator,
-                ));
+                return response()->json(['errors' => $validator]);
                 break;
         }
     }
-   
     public function auth(Request $request, Institution $institution)
     {
         // $institutions = $institution->find(1);
-        
+
 
         return view('institution.update.update-institution', compact('institutions'));
     }
@@ -279,16 +239,16 @@ class InstitutionController extends Controller
                 if ($validator->fails()) {
                     return response()->json(['errors' => $validator->errors()->all()]);
                 }
-                break;    
+                break;
             case 4:
                 $validator  = Validator::make($dataForm, $this->institution->rulesResult(), $this->institution->messageResul());
                 if ($validator->fails()) {
                     return response()->json(['errors' => $validator->errors()->all()]);
-                }else{
+                } else {
                     $institution = $this->institution->find($dataForm['id']);
                     $institution->update($dataForm);
                 }
-                break;    
+                break;
 
             default:
                 # code...

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Notifications\Notifiable;
+use App\Models\Client;
 
 class Institution extends Model
 {
@@ -16,6 +17,16 @@ class Institution extends Model
         'email_two', 'company_classification', 'action_plan', 'partners', 'methodology',
         'result', 'authorization', 'institution_activity'
     ];
+    /**
+     *Relacionamento de 1 - 1 
+     *Uma isntituição tem um e único login
+     *
+     * @return Client
+     */
+    public function client()
+    {
+        return $this->hasOne(Client::class);
+    }
     /**
      * @description:  Uma instuição tem muitas filiais
      * Relacionameto 1 - N

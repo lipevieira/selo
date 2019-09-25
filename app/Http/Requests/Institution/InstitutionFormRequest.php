@@ -27,11 +27,11 @@ class InstitutionFormRequest extends FormRequest
             'name' => 'required | min:3 | max:100',
             'fantasy_name' => 'required | min:3 | max:100',
             'activity_branch' => 'required | min:3 | max:100',
-            'cnpj' => 'required | max:18',
+            'cnpj' => 'required|unique:institutions|max:18',
             'county' => 'required',
             'uf' => 'required | max:2',
             'address' => 'required | min:5 | max:190',
-            'email' => 'required|unique:institutions,id|max:100',
+            'email' => 'required|unique:institutions|max:100',
             'phone' => 'required | min:4 | max:20',
             'technical_manager' => 'required | min:3 | max:130',
             'formation' => 'required | min:3 | max:80',
@@ -53,6 +53,7 @@ class InstitutionFormRequest extends FormRequest
             'address.required' => 'O campo Endeço é obrigatorio',
             'address.max' => 'O campo não pode ser maior que 190 caracteres',
             'email.required' => 'O campo E-mail é obrigatório',
+            'email.unique' => 'O E-mail informado para a instituição, já foi cadastrado ',
             'phone.required' => 'O campo Telefone é obrigatório',
             'phone.min' => 'O campo Telefone não pode ser menor que 3 caracteres',
             'technical_manager.required' => 'O campo Responsável técnico é obrigatório',
@@ -67,7 +68,8 @@ class InstitutionFormRequest extends FormRequest
     {
         return [
             'members_name.*'  => 'required | min:4 | max:100',
-            'members_email.*' => 'required|unique:commission_members,id|max:150 | distinct',
+            'members_email.*' => 'required|max:150 | distinct',
+            'members_email' => 'unique:commission_members',
             'members_function.*' => 'required | max:60',
             'members_phone.*' => 'required | min:4 | max:20',
         ];
@@ -81,7 +83,7 @@ class InstitutionFormRequest extends FormRequest
             'members_email.0.required' => 'É obrigatório informa o E-mail do primeiro membros da comissão',
             'members_email.1.required' => 'É obrigatório informa o E-mail do segundo membros da comissão',
             'members_email.2.required' => 'É obrigatório informa o E-mail do terceiro  membros da comissão',
-            'members_email.*.unique' => 'Não permitido E-mail repetido para os membros da comissão',
+            'members_email.unique' => 'O E-mail do Membros da comissão já esta cadastrando. Por favor informe um e-mail diferente',
             'members_function.0.required' => 'É obrigatório informa a Função/Setor do primeiro  membros da comissão',
             'members_function.1.required' => 'É obrigatório informa a Função/Setor segundo membros da comissão',
             'members_function.2.required' => 'É obrigatório informa a Função/Setor do terceiro  membros da comissão',
@@ -127,6 +129,26 @@ class InstitutionFormRequest extends FormRequest
             'action_plan.min' => 'O campo Plano de ação  não pode ser menor que 10 caracteres',
         ];
     }
+    public function rulesSchedule()
+    {
+        return [
+            'schedule_action_id.*' => 'required',
+            'activity.*' => 'required',
+            'amount.*' => 'required',
+            'deadline.*' => 'required|date',
+        ];
+    }
+    public function messagesSchedule()
+    {
+        return [
+            'schedule_action_id.*.required' => 'O campo Ação obrigatório',
+            'activity.*.required' => 'O campo Atividade obrigatório',
+            'amount.*.required' => 'O campo Quantidade obrigatório ',
+            'deadline.*.required' => 'O campo Data Limite obrigatório',
+        ];
+    }
+
+
     public function rulesPartners()
     {
         return [
@@ -165,7 +187,6 @@ class InstitutionFormRequest extends FormRequest
             'result.required' => 'O campo Resultado é obrigátorio',
             'result.max' => 'O campo Resultado não pode ultrapassar 3000 caracteres',
             'result.min' => 'O campo Resultado não  pode ser menor que 10 caracteres',
-            'email.unique' => 'Esse E-mail já está cadastrado',
         ];
     }
 }

@@ -21,7 +21,7 @@ class BrancheController extends Controller
     }
     public function index()
     {
-        $id = auth()->guard('client')->user()->id;
+        $id = auth()->guard('client')->user()->institution_id;
         $institutions  = $this->institution->find($id);
         
         return view('institution.update.branches', compact('institutions'));
@@ -41,7 +41,7 @@ class BrancheController extends Controller
         }else{
             $save = $this->branche->insert([
                 'cnpj_additional'  => $request->cnpj_additional,
-                'institution_id'    => 1,
+                'institution_id'    =>  auth()->guard('client')->user()->institution_id,
             ]);
 
             if ($save) {
@@ -67,10 +67,11 @@ class BrancheController extends Controller
 
             return response()->json(['errors' => $validator]);
         } else{
+            $id = auth()->guard('client')->user()->institution_id;
             $branche = $this->branche->find($request->id);
             $branche->update([
                 'cnpj_additional'  => $request->cnpj_additional,
-                'institution_id'    => 1,
+                'institution_id'    =>  $id,
             ]);
     
             if ($branche) {
