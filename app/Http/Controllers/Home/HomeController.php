@@ -32,7 +32,6 @@ class HomeController extends Controller
         $this->schedule = $schedule;
 
     }
-
     /**
      * Mostrar a tela home.
      *
@@ -104,4 +103,5 @@ class HomeController extends Controller
    {
         return view('auth.register');
    }
+  
 }

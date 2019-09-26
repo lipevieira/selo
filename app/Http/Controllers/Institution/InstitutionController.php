@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Institution;
 use App\Models\Question;
 use App\Models\ScheduleAction;
-use App\Models\CommissionMembers;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\Institution\InstitutionFormRequest;
 use DB;
@@ -185,7 +185,7 @@ class InstitutionController extends Controller
                     }
                     if (
                         $institution && $transctionMembers && $transctionAnswers  && $transctionCollaboratorActivityLevels
-                        && $transctionSchedules && $transctionCnpj && $autentication 
+                        && $transctionSchedules && $transctionCnpj && $autentication
                     ) {
                         DB::commit();
                         //TO-DE Fazer: notificação após salvar uma Instituição
@@ -203,13 +203,6 @@ class InstitutionController extends Controller
                 return response()->json(['errors' => $validator]);
                 break;
         }
-    }
-    public function auth(Request $request, Institution $institution)
-    {
-        // $institutions = $institution->find(1);
-
-
-        return view('institution.update.update-institution', compact('institutions'));
     }
     /**
      * Atualizando uma Instituição com seus derivados
@@ -245,14 +238,37 @@ class InstitutionController extends Controller
                 if ($validator->fails()) {
                     return response()->json(['errors' => $validator->errors()->all()]);
                 } else {
+                    unset($dataForm['uf']);
+                    unset($dataForm['cnpj']);
                     $institution = $this->institution->find($dataForm['id']);
                     $institution->update($dataForm);
+                    $this->updateClient($dataForm);
                 }
                 break;
 
             default:
                 # code...
                 break;
+        }
+    }
+    /**
+     * Atualizando o login da Instituição
+     *
+     * @param array $dataForm
+     * @return void
+     */
+    private function updateClient($dataForm = [])
+    {
+        $client = Client::find(auth()->guard('client')->user()->id);
+        $client->update([
+            'name'  =>  $dataForm['name'],
+            'email'  =>  $dataForm['email'],
+        ]);
+
+        if($client == true){
+            return true;
+        }else{
+            return false;
         }
     }
 }

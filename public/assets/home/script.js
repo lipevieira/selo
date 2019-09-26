@@ -20,7 +20,8 @@ $(document).ready(function () {
                 titleAttr: 'Excel',
                 className: 'btn btn-primary btn-sm',
                 exportOptions: {
-                    columns: ':visible'
+                    // columns: ':visible',
+                    columns: [0,1, 2, 3,4, 5, 6, 7, 8]
                 }
             },
         ]

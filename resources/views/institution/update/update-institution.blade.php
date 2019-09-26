@@ -101,7 +101,7 @@
                             <div class="col-md-4 mb-3">
                                 <label for="cnpj">CNPJ <small class="asterisco-input">*</small></label>
                                 <input type="text" class="form-control" id="cnpj" value="{{$institutions->cnpj}}"
-                                    name="cnpj">
+                                    name="cnpj" readonly="readonly">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="county">Município <small class="asterisco-input">*</small></label>
@@ -124,7 +124,7 @@
                                     name="address">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="email">E-mail <small class="asterisco-input">*</small></label>
+                                <label for="email">E-mail <small class="asterisco-input">*(Deve ser usado como seu Login)</small></label>
                                 <input type="email" class="form-control" id="email" value="{{$institutions->email}}"
                                     name="email">
                             </div>

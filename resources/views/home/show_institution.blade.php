@@ -351,6 +351,7 @@
                                     <tr>
                                         <th scope="col">COD</th>
                                         <th scope="col">AÇÕES</th>
+                                        <th scope="col">PESO</th>
                                         <th scope="col">ATIVIDADE</th>
                                         <th scope="col">QUANTIDADE</th>
                                         <th scope="col">DATA LIMITE</th>
@@ -361,7 +362,8 @@
                                     @forelse ($instituion->schedules as $schedule)
                                     <tr>
                                         <th scope="row">{{$schedule->id}}</th>
-                                        <td>{{$schedule->action}}</td>
+                                        <td>{{$schedule->action->description}}</td>
+                                        <td>{{$schedule->action->weight}}</td>
                                         <td>{{$schedule->activity}}</td>
                                         <td>{{$schedule->amount}}</td>
                                         <td>{{$schedule->deadline->format('d/m/Y')}}</td>

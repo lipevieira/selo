@@ -19,9 +19,15 @@ class InstitutionPolicy
     {
         //
     }
-    public function updateInstitution( Schedule $schedule, Client $client)
+    /**
+     *Politica de acesso para visualização do cronograma da instituição logada
+     *
+     * @param Client $client
+     * @param Schedule $schedule
+     * @return void
+     */
+    public function updateInstitution(Client $client, Schedule $schedule)
     {
-        // TO-DE: Fazer Permissão para acessar cronograma de quem está logado
-        // return $schedule->institution->id == $client->institution->id;
+        return  $client->institution->id   ==  $schedule->institution_id;
     }
 }

@@ -61,8 +61,7 @@ class ScheduleController extends Controller
             $this->schedule->activity = $request->activity;
             $this->schedule->amount = $request->amount;
             $this->schedule->deadline = $request->deadline;
-            // TO-DE Fazer: Pegar o ID da empresa logada no sistema.
-            $this->schedule->institution_id = 1;
+            $this->schedule->institution_id = auth()->guard('client')->user()->institution_id;;
 
             $this->schedule->save();
 
@@ -80,9 +79,7 @@ class ScheduleController extends Controller
         $schedule = $this->schedule->find($id);
         $actions = ScheduleAction::all();
 
-        // $this->authorize($schedule, auth()->guard('client')->user()->institution_id);
-
-        // auth()->guard('client')->user()->institution_id;
+        $this->authorize('updateInstitution',$schedule);
 
         return view('institution.update.shedule-update', compact('actions', 'schedule'));
     }
