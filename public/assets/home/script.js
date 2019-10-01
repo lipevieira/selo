@@ -102,6 +102,89 @@ $(document).ready(function () {
             },
         ]
     } );
+    /**
+     * DataTable para a tabela de Nivel de atividade dos colaboradores
+     */
+    $('#tblActivityLevelCollaborator').DataTable({
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            // Total da coluna de homens
+            pageHomens = api
+                .column(2, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            $(api.column(2).footer()).html(
+                pageHomens
+            );    
+
+
+            // Total da coluna de mulhres
+            pageMulhres = api
+                .column(3, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(3).footer()).html(
+                pageMulhres
+            );
+            // Total da coluna TOTAL
+            pageWomana = api
+                .column(4, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(4).footer()).html(
+                pageWomana
+            );
+         
+
+        },
+        dom: 'Bfrtip',
+        "bPaginate": false,
+        "language": {
+            "lengthMenu": "Mostrando _MENU_ registros por página",
+            "zeroRecords": "Nada Encontrado",
+            "info": "Mostrando páginas _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro encontrado",
+            "infoFiltered": "(Filtrado de _MAX_ registros no total)",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próximo"
+            },
+            "search": "Pesquisar"
+        },
+        buttons: [
+            {
+                extend: 'excel', footer: true,
+                text: '<i class="fa fa-files-o"></i> Excel',
+                titleAttr: 'Excel',
+                className: 'btn btn-primary btn-sm',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+        ]
+    });
+
+
+
     $('#tblProfileCollaborators').DataTable({
         dom: 'Bfrtip',
         "language": {

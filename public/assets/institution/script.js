@@ -508,6 +508,7 @@ $(document).ready(function () {
 			url: url,
 			data: formData,
 			beforeSend: function () {
+				// $(this).attr('disabled', 'disabled');
 				$('#loadSaveInstitution').modal('show');
 			},
 			success: function (data) {

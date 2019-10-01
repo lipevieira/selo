@@ -27,6 +27,9 @@ Route::post('/user-register', 'Auth\RegisterController@create')->name('user.regi
 Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth'], function () {
    Route::get('/', 'HomeController@index')->name('home');
    Route::get('/perfil-collaborator', 'HomeController@getProfileCollaborator')->name('home.profile');
+   // Tetse
+   Route::get('/nivel-atividade', 'HomeController@getActivitLevelCollaborator')->name('home.activit.level');
+// ----
    Route::get('/perfil-membros-comissão', 'HomeController@getCommissionMembers')->name('home.membros.comissao');
    Route::get('/cronograma', 'HomeController@getSchedules')->name('home.schedules');
    Route::get('/detalhes-instituição/{id}', 'HomeController@getInstituitionDetails')->name('home.details.institution');

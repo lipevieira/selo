@@ -121,9 +121,14 @@ return [
             'icon'    => 'share',
             'submenu' => [
                 [
-                    'text' => 'Perfil e nivel de atividade',
+                    'text' => 'Perfil Colaborador',
                     'url'  => 'home/perfil-collaborator',
                     'icon' => 'user',
+                ],
+                [
+                    'text' => 'Nivel de atividade',
+                    'url'  => 'home/nivel-atividade',
+                    'icon' => 'address-card',
                 ],
                 [
                     'text' => 'Membros da Comissão',
