@@ -164,7 +164,7 @@ class InstitutionController extends Controller
                         ]);
                     }
                     // // Salvado O nivel de atividade dos colaboradores
-                    for ($i = 0; $i < count($request->activity_level); $i++) {
+                    for ($i = 0; $i < count($request->color); $i++) {
                         $transctionCollaboratorActivityLevels = $institution->collaboratorActivityLevels()->create([
                             'activity_level' => $request->activity_level[$i],
                             'color' => $request->color[$i],

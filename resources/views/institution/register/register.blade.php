@@ -1,7 +1,7 @@
 @extends('adminlte::master')
 
 @section('adminlte_css')
-	<link rel="stylesheet" href="{{asset('assets/institution/style.css ')}}">
+<link rel="stylesheet" href="{{asset('assets/institution/style.css ')}}">
 @yield('css')
 @stop
 
@@ -40,11 +40,13 @@
 		@csrf
 		<ul class="nav nav-tabs">
 			<li class="nav-item">
-				<a class="nav-link active_tab1" style="border:1px solid #ccc" id="list_instituicao_detalhes">Indentificação
+				<a class="nav-link active_tab1" style="border:1px solid #ccc"
+					id="list_instituicao_detalhes">Indentificação
 					da Instituição</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link inactive_tab1" id="list_diagnostico_censitario" style="border:1px solid #ccc">Diagnóstico
+				<a class="nav-link inactive_tab1" id="list_diagnostico_censitario"
+					style="border:1px solid #ccc">Diagnóstico
 					Censitário</a>
 			</li>
 			<li class="nav-item">
@@ -61,11 +63,12 @@
 				<a class="nav-link inactive_tab1" id="list_metodologia" style="border:1px solid #ccc">Metodologia</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link inactive_tab1" id="list_resultados_esperados" style="border:1px solid #ccc">Resultados
+				<a class="nav-link inactive_tab1" id="list_resultados_esperados"
+					style="border:1px solid #ccc">Resultados
 					Esperados</a>
 			</li>
 		</ul>
-	
+
 		@if ($errors->any())
 		<div class="alert alert-warning">
 			<ul>
@@ -104,7 +107,8 @@
 						<input type="hidden" name="etapas" value="" id="etapas">
 						<div class="form-row">
 							<div class="col-md-4 mb-3">
-								<label for="name">Nome da Instituição proponente <small class="asterisco-input">*</small>
+								<label for="name">Nome da Instituição proponente <small
+										class="asterisco-input">*</small>
 								</label>
 								<input type="text" class="form-control " name="name" id="name"
 									placeholder="Nome da Instituição proponente:" value="{{old('name')}}">
@@ -113,8 +117,8 @@
 								<label for="fantasy_name">Nome para certificação (nome fantasia) <small
 										class="asterisco-input">*</small> </label>
 								<input type="text" class="form-control" id="fantasy_name"
-									placeholder="Nome para certificação (nome fantasia):" value="{{old('fantasy_name')}}"
-									name="fantasy_name">
+									placeholder="Nome para certificação (nome fantasia):"
+									value="{{old('fantasy_name')}}" name="fantasy_name">
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="email_two">Classificação da Empresa <small
@@ -127,7 +131,8 @@
 									<option value="Pequena(13 a 49 funcionários)">Pequena(13 a 49 funcionários)</option>
 									<option value="Média(50 a 99 funcionários)">Média(50 a 99 funcionários)</option>
 									<option value="Grande(+ de 100 funcionários)">Grande(+ de 100 funcionários)</option>
-									<option value="ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?">
+									<option
+										value="ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?">
 										ENTIDADE SEM FINS LUCRATIVOS QUE
 										LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
 								</select>
@@ -150,7 +155,8 @@
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="uf">UF:</label>
-								<input type="text" class="form-control" id="uf" value="BA" name="uf" readonly="readonly">
+								<input type="text" class="form-control" id="uf" value="BA" name="uf"
+									readonly="readonly">
 							</div>
 							<div class="col-md-4 mb-3">
 								<label for="address">Endereço <small class="asterisco-input">*</small></label>
@@ -158,8 +164,8 @@
 									name="address">
 							</div>
 							<div class="col-md-4 mb-3">
-								<label for="email"> E-mail<small
-										class="asterisco-input"> (Esse email será usado como seu Login) *</small></label>
+								<label for="email"> E-mail<small class="asterisco-input"> (Esse email será usado como
+										seu Login) *</small></label>
 								<input type="email" class="form-control" id="email" placeholder="E-mail" value=""
 									name="email">
 							</div>
@@ -202,9 +208,11 @@
 							</div>
 							<!-- Membros da comisão -->
 							<h5 class="col-md-12 mb-3"> <strong> Recomendamos eleger três colaboradores para tratar da
-									questão diversidade na empresa. Eles serão os contatos entre empresa e Comitê Gestor.
+									questão diversidade na empresa. Eles serão os contatos entre empresa e Comitê
+									Gestor.
 									Para melhor andamento do trabalho é indicado, preferencialmente, funcionários dos
-									setores de Marketing e gestão de pessoas, e pelo menos um, estar ocupando um cargo de
+									setores de Marketing e gestão de pessoas, e pelo menos um, estar ocupando um cargo
+									de
 									decisão.
 								</strong></h5>
 							<div class="col-md-12 mb-3">
@@ -213,7 +221,8 @@
 										<tr>
 											<th scope="col">Nome do funcionário <small class="asterisco-input">*</small>
 											</th>
-											<th scope="col">Função / setor <small class="asterisco-input">*</small> </th>
+											<th scope="col">Função / setor <small class="asterisco-input">*</small>
+											</th>
 											<th scope="col">Telefone <small class="asterisco-input">*</small></th>
 											<th scope="col">E-mail <small class="asterisco-input">*</small></th>
 										</tr>
@@ -222,8 +231,9 @@
 										@foreach (range(1,3) as $item)
 										<tr>
 											<td>
-												<input type="text" class="form-control" id="members_name" placeholder="Nome"
-													value="{{old('members_name[]')}}" name="members_name[]">
+												<input type="text" class="form-control" id="members_name"
+													placeholder="Nome" value="{{old('members_name[]')}}"
+													name="members_name[]">
 											</td>
 											<td>
 												<input type="text" class="form-control" id="members_function"
@@ -279,7 +289,8 @@
 							<br />
 							<div align="center">
 								<button type="button" name="btn_indentificacao" id="btn_indentificacao"
-									class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
+									class="btn btn-info btn-lg"
+									data-url="{{route('save.institution')}}">Proximo</button>
 							</div>
 							<br />
 						</div>
@@ -306,7 +317,7 @@
 									<label for="">
 										Resposta <small class="asterisco-input">*</small>
 									</label>
-	
+
 									<select class="form-control form-control-sm" name="alternative_id[]">
 										<option value=""></option>
 										@foreach ($question->alternatives as $alternativa)
@@ -321,7 +332,7 @@
 									<input type="hidden" class="form-control" name="others[]" id="others">
 									@endif
 								</div>
-	
+
 							</div>
 							@endforeach
 						</div>
@@ -335,12 +346,19 @@
 										<tr>
 											<th scope="col">NIVEL DE ATIVIDADE<small
 													class="asterisco-input-options">*</small></th>
-											<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small></th>
-											<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small></th>
-											<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small></th>
-											<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small></th>
-											<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small></th>
-											<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small></th>
+											<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small>
+											</th>
+											<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small>
+											</th>
+											<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small>
+											</th>
+											<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small>
+											</th>
+											<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small>
+											</th>
+											<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small>
+											</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -355,17 +373,19 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 											{{-- Mesclação --}}
+											{{-- <th width="160px;">
+											</th> --}}
+													<input type="hidden" class="form-control" id="activity_level" value="Operacional" readonly="readonly"
+														name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -373,14 +393,12 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 										</tr>
@@ -395,17 +413,19 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 											{{-- Mesclação --}}
+											{{-- <th width="160px;">
+											</th> --}}
+												<input type="hidden" class="form-control" id="activity_level"
+													value="Supervisão" name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -413,21 +433,20 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 										</tr>
 										<tr>
 											<th width="160px;">
 												<input type="text" class="form-control" id="activity_level"
-													value="Gerência / Chefia" readonly="readonly" name="activity_level[]">
+													value="Gerência / Chefia" readonly="readonly"
+													name="activity_level[]">
 											</th>
 											<th>
 												<input type="text" class="form-control" id="color[]"
@@ -435,17 +454,20 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 											{{-- Mesclação --}}
+											{{-- <th width="160px;">
+											</th> --}}
+												<input type="hidden" class="form-control" id="activity_level"
+													value="Gerência / Chefia" readonly="readonly"
+													name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -453,21 +475,19 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 										</tr>
 										<tr>
 											<th width="160px;">
-												<input type="text" class="form-control" id="activity_level" value="Direção"
-													readonly="readonly" name="activity_level[]">
+												<input type="text" class="form-control" id="activity_level"
+													value="Direção" readonly="readonly" name="activity_level[]">
 											</th>
 											<th>
 												<input type="text" class="form-control" id="color[]"
@@ -475,17 +495,19 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 											{{-- Mesclação --}}
+											{{-- <th width="160px;">
+											</th> --}}
+												<input type="hidden" class="form-control" id="activity_level"
+													value="Direção" readonly="readonly" name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -493,14 +515,12 @@
 											</th>
 											<td width="20px;">
 												<input type="text" class="form-control human_quantity_activity_level"
-													id="human_quantity_activity_level"
-													value="{{old('human_quantity_activity_level[]')}}"
+													id="human_quantity_activity_level" value=""
 													name="human_quantity_activity_level[]">
 											</td>
 											<td width="20px;">
 												<input type="text" class="form-control woman_quantity_activity_level"
-													id="woman_quantity_activity_level"
-													value="{{old('woman_quantity_activity_level[]')}}"
+													id="woman_quantity_activity_level" value=""
 													name="woman_quantity_activity_level[]">
 											</td>
 										</tr>
@@ -513,7 +533,8 @@
 								<button type="button" name="btn_previous_diagnostico" id="btn_previous_diagnostico"
 									class="btn btn-default btn-lg">Anterior</button>
 								<button type="button" name="btn_diagnostico_next" id="btn_diagnostico_next"
-									class="btn btn-info btn-lg" data-url="{{route('save.institution')}}">Proximo</button>
+									class="btn btn-info btn-lg"
+									data-url="{{route('save.institution')}}">Proximo</button>
 							</div>
 							<br />
 						</div>
@@ -573,7 +594,8 @@
 					</div>
 					<div class="panel-body">
 						<!-- Inicio do cronograma -->
-						<h4>Cronograma (Data limite de entrega das atividades será <strong> {{date('30/11/Y')}})</strong>
+						<h4>Cronograma (Data limite de entrega das atividades será <strong>
+								{{date('30/11/Y')}})</strong>
 						</h4>
 						<h4>Listar todas as atividades necessárias à realização do projeto.</h4>
 						<label>
@@ -611,7 +633,8 @@
 										</select>
 									</td>
 									<td>
-										<textarea id="activity" class="form-control" name="activity[]" value=""></textarea>
+										<textarea id="activity" class="form-control" name="activity[]"
+											value=""></textarea>
 									</td>
 									<td width="30px;">
 										<select class="form-control form-control-sm" name="amount[]">
@@ -626,14 +649,16 @@
 										</select>
 									</td>
 									<td>
-										<input type="date" class="form-control" id="deadline" value="" name="deadline[]">
+										<input type="date" class="form-control" id="deadline" value=""
+											name="deadline[]">
 									</td>
 									<td>
-										<button onclick="RemoveTableRow(this)" type="button" class="btn btn-danger">Remover
+										<button onclick="RemoveTableRow(this)" type="button"
+											class="btn btn-danger">Remover
 											Linha</button>
 									</td>
 								</tr>
-	
+
 							</tbody>
 						</table>
 						<!-- Final do cronograma -->
@@ -672,7 +697,8 @@
 							<strong>
 								<p><small class="caracteres_partners"></small></p>
 							</strong>
-							<textarea class="form-control class_textarea" id="partners" rows="3" name="partners"></textarea>
+							<textarea class="form-control class_textarea" id="partners" rows="3"
+								name="partners"></textarea>
 						</div>
 						<!-- Final dos inputs -->
 						<br />
@@ -770,7 +796,7 @@
 			</div>
 		</div>
 	</form>
-	
+
 	{{-- Modal para carregar messagem ao salvar Institução --}}
 	<div class="modal" tabindex="-1" role="dialog" id="loadSaveInstitution">
 		<div class="modal-dialog" role="document">
