@@ -155,7 +155,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'POST',
 			url: url,
-			data: formData,
+			data: formData,		
 			success: function (data) {
 				if ((data.errors)) {
 					$('#modalErrorCad').modal('show');
@@ -498,6 +498,8 @@ $(document).ready(function () {
 		var form = $('#register_form');
 		var formData = form.serialize();
 		var welcome = $(this).attr("welcome");
+		$(this).prop("disabled", true);
+
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -508,11 +510,11 @@ $(document).ready(function () {
 			url: url,
 			data: formData,
 			beforeSend: function () {
-				// $(this).attr('disabled', 'disabled');
 				$('#loadSaveInstitution').modal('show');
 			},
 			success: function (data) {
 				if ((data.errors)) {
+					$(this).prop("disabled", false);
 					$('#modalErrorCad').modal('show');
 					var danger = $('#danger');
 					danger.hide().find('ul').empty();

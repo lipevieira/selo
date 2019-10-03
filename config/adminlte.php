@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'logo' => '<b>Selo Étnico Racial</b>',
+    'logo' => '<b>Selo da Diversidade</b>',
 
     'logo_mini' => '<b>SER</b>LT',
 

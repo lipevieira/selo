@@ -95,7 +95,7 @@
                                         value="{{$instituion->address}}" name="address">
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="email">E-mail:</label>
+                                    <label for="email" style="color:red;">E-mail: usado para fazer Login</label>
                                     <input type="email" class="form-control" id="email" placeholder="E-mail"
                                         value="{{$instituion->email}}" name="email">
                                 </div>
