@@ -9,6 +9,7 @@
                         Censitário</a></li>
                 <li><a class="navbar-brand" href="{{route('get.shedule.index')}}">Cronograma</a></li>
                 <li><a class="navbar-brand" href="{{route('get.branches.index')}}">Filiais</a></li>
+                <li><a class="navbar-brand" href="{{ route('doc.index') }}">Documentos</a></li>
                 <li><a class="navbar-brand" href="{{route('logout')}}">Sair</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->

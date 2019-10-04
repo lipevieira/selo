@@ -135,13 +135,23 @@ Route::group(['prefix' => 'filiais', 'namespace' => 'Branche', 'middleware'  => 
 /***
  * @description: Rotas para ActionSheduleController
  */
-Route::group(['prefix' => 'ações', 'namespace' => 'Shedule'], function () {
+Route::group(['prefix' => 'ações', 'namespace' => 'Shedule', 'middleware'  =>  'auth.institution:client'], function () {
    Route::get('/cronograma', 'SheduleActionController@index')->name('index.shedule.action');
    Route::post('/save', 'SheduleActionController@store')->name('store.shedule.action');
    Route::get('/show', 'SheduleActionController@showAction')->name('show.shedule.action');
    Route::post('/update', 'SheduleActionController@update')->name('update.shedule.action');
    Route::post('/delete', 'SheduleActionController@delete')->name('delete.shedule.action');
 });
+/***
+ * @description rotas para o menu de 
+ * documentos de instituições cadastradas
+ */
+Route::group(['prefix' => 'documentos', 'namespace' => 'Document', 'middleware'  =>  'auth.institution:client'], function () {
+   Route::get('/', 'DocumentController@index')->name('doc.index');
+   Route::post('save', 'DocumentController@saveDoc')->name('save.doc');
+   Route::get('show/{$doc_name}', 'DocumentController@show')->name('document.show');
+});
+
 /***
  * @description rotas para notificação
  */
