@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Nivel de atividade')
+@section('title', 'Nivel de Atvidade dos Colaboradores')
 
 @section('content_header')
 {{-- <h1>Dashboard</h1> --}}
@@ -11,56 +11,63 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3>Nivel de atividade dos colaboradores:</h3>
-                <p>Nessa tabela você tem a quantidade total de pessoas negras e não negras de todas as Instituições.</p>
+                <h3>TABELA DE NIVEL DE ATIVIDADE DOS COLABORADORES:</h3>
+                <p></p>
             </div>
             <div class="box-body">
-                <table class="table table-striped" id="tblActivityLevelCollaborator">
+                <table class="table table-striped" id="tblLevelActivity">
                     <thead>
                         <tr>
+                            <th scope="col">COD</th>
                             <th scope="col">INSTITUIÇÃO</th>
+                            <th scope="col">NIVEL DE ATIVIDADE</th>
                             <th scope="col">RAÇA/COR</th>
                             <th scope="col">Nº HOMEMS</th>
                             <th scope="col">Nº MULHERES</th>
-                            <th scope="col">TOTAL DE PESSOAS</th>
+                            <th scope="col">TOTAL</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($activitLevelCollabator as $item)
+                        @foreach ($collaboratorActivitylevels as $item)
                         <tr>
-                            <td>{{$item->name}}</td>
+                            <th scope="row">{{$item->id}}</th>
+                            <td>{{$item->institution->name}}</td>
+                            <td>{{$item->activity_level}}</td>
                             <td>{{$item->color}}</td>
-                            <td>{{$item->max_human}}</td>
-                            <td>{{$item->max_woman}}</td>
-                            <td>{{$item->max_human + $item->max_woman}}</td>
+                            <td>{{$item->human_quantity_activity_level}}</td>
+                            <td>{{$item->woman_quantity_activity_level}}</td>
+                            <td>{{$item->woman_quantity_activity_level + $item->human_quantity_activity_level}}</td>
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
+                            <th scope="col">COD</th>
                             <th scope="col">INSTITUIÇÃO</th>
+                            <th scope="col">NIVEL DE ATIVIDADE</th>
                             <th scope="col">RAÇA/COR</th>
                             <th scope="col">Nº HOMEMS</th>
                             <th scope="col">Nº MULHERES</th>
-                            <th scope="col">TOTAL DE PESSOAS</th>
+                            <th scope="col">TOTAL</th>
                         </tr>
                     </tfoot>
                 </table>
             </div>
         </div>
     </div>
-    @stop
+@stop
 
-    @section('css')
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-    @stop
+@section('css')
+{{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
+@stop
 
-    @section('js')
-    <script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
-    <script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
-    <script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
-    <script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
-    <script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
-    <script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
-    <script src="{{asset('assets/home/script.js')}}"></script>
-    @stop
+@section('js')
+<script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
+<script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
+<script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
+<script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
+<script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
+<script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
+<script src="{{asset('assets/home/script.js')}}"></script>
+@stop

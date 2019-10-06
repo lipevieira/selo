@@ -86,7 +86,7 @@ $(document).ready(function () {
         let url = $(this).data('url');
         var form = $('#formUpdate');
         var formData = form.serialize();
-      
+
         $.ajax({
             type: 'POST',
             url: url,
@@ -101,12 +101,12 @@ $(document).ready(function () {
                     });
                     danger.show();
                 } else {
-                    $('#list_parceiras').removeClass('active active_tab1');
-                    $('#list_parceiras').removeAttr('href data-toggle');
+                    $('#list_plano_trabalho_etnico').removeClass('active active_tab1');
+                    $('#list_plano_trabalho_etnico').removeAttr('href data-toggle');
 
                     $('#plano_trabalho').removeClass('active');
                     $('#list_plano_trabalho_etnico').addClass('inactive_tab1');
-
+                   
                     $('#list_parceiras').removeClass('inactive_tab1');
                     $('#list_parceiras').addClass('active_tab1 active');
 
@@ -159,7 +159,7 @@ $(document).ready(function () {
         let url = $(this).data('url');
         var form = $('#formUpdate');
         var formData = form.serialize();
-       
+
         $.ajax({
             type: 'POST',
             url: url,
@@ -277,5 +277,5 @@ $(document).ready(function () {
         });
     });
 
-   
+
 });

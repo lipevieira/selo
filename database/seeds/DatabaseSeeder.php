@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             AlternativeTableSeed::class,
             ScheduleActionTableSeeder::class,
             UserTableSeeder::class,
+            CompanyClassificationTableSeed::class,
         ]);
         // DB::table('clients')->insert([
         //     'name'  =>  'Empresa-02',

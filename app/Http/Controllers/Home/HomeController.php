@@ -11,6 +11,8 @@ use App\Models\Schedule;
 use App\Models\Question;
 use App\Models\ScheduleAction;
 use Illuminate\Support\Facades\DB;
+use App\Models\CompanyClassification;
+
 
 class HomeController extends Controller
 {
@@ -19,6 +21,7 @@ class HomeController extends Controller
     private $profileCollaborator;
     private $commissionMembers;
     private $schedule;
+    private $companyClassification;
     /**
      * Create a new controller instance.
      *
@@ -28,12 +31,14 @@ class HomeController extends Controller
         Institution $institution,
         CollaboratorActivityLevel $collaboratorActivitylevel,
         CommissionMembers $commissionMembers,
-        Schedule $schedule
+        Schedule $schedule,
+        CompanyClassification $companyClassification
     ) {
         $this->institution = $institution;
         $this->collaboratorActivitylevel = $collaboratorActivitylevel;
         $this->commissionMembers = $commissionMembers;
         $this->schedule = $schedule;
+        $this->companyClassification = $companyClassification;
     }
     /**
      * Mostrar a tela home.
@@ -51,10 +56,10 @@ class HomeController extends Controller
      * @Description:  Nivel de atividade dos colaboradores:
      * @return CollaboratorActivityLevel
      */
-    public function getProfileCollaborator()
+    public function getActivitLevelCollaborator()
     {
         $collaboratorActivitylevels = $this->collaboratorActivitylevel->all();
-        return view('home.profile_collaborator', compact('collaboratorActivitylevels'));
+        return view('home.activityLevelCollaborator', compact('collaboratorActivitylevels'));
     }
 
     /**
@@ -63,17 +68,11 @@ class HomeController extends Controller
      *
      * @return CollaboratorActivityLevel
      */
-    public function getActivitLevelCollaborator()
+    public function getProfileCollaborator()
     {
-        $activitLevelCollabator = DB::table('institutions')
-            ->join('collaborator_activity_levels', 'institutions.id', '=', 'collaborator_activity_levels.institution_id')
-            ->selectRaw('collaborator_activity_levels.color, institutions.name,
-              sum(collaborator_activity_levels.human_quantity_activity_level)  as max_human,
-               sum(collaborator_activity_levels.woman_quantity_activity_level) as max_woman')
-            ->groupBy('collaborator_activity_levels.color', 'institutions.name')
-            ->get();
-            
-            return view('home.activityLevelCollaborator' , compact('activitLevelCollabator'));
+        $profileCollaborator = $this->collaboratorActivitylevel->getProfileCollaborator();
+
+        return view('home.profile_collaborator', compact('profileCollaborator'));
     }
     /**
      * Undocumented function
@@ -93,10 +92,7 @@ class HomeController extends Controller
      */
     public function getSchedules()
     {
-        // $schedules = $this->schedule->with('schedule')->first();
-
         $schedules = $this->schedule->all();
-        // dd($schedules);
         return view('home.schedules', compact('schedules'));
     }
     public function getInstituitionDetails($id)
@@ -104,10 +100,22 @@ class HomeController extends Controller
         // Buscando o Diagnostico censitário
         $actions = ScheduleAction::all();
         $questionAlternatives = Question::with('alternatives')->get();
-        // Buscando Instituição e sues derivados.
         $instituion = $this->institution->find($id);
+        $profile = $this->collaboratorActivitylevel->getProfileCollaboratorDetail($id);
+        $companyClassifications = $this->companyClassification->all();
 
-        return view('home.show_institution', compact('questionAlternatives', 'actions', 'instituion'));
+        return view('home.show_institution', compact('questionAlternatives', 'actions', 'instituion', 'companyClassifications', 'profile'));
+    }
+    /**
+     * Baixando ducumentos da isntituição
+     * @return $Request
+     * @return arquivo
+     */
+    public function show(Request $request)
+    {
+        $doc_name = $request->name;
+
+        return response()->download(storage_path("app/public/documents/anexos/" . $doc_name));
     }
     /***
      * @return Page Inex-user

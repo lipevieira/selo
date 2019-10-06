@@ -37,7 +37,7 @@ class InstitutionFormRequest extends FormRequest
             'formation' => 'required | min:3 | max:80',
             'phone_two' => 'required | min:4 | max:20',
             'institution_activity' => 'required',
-            'company_classification' => 'required  | max:100',
+            'company_classification' => 'required  | exists:company_classifications,id',
             'cnpj_additional.*' => 'distinct',
         ];
     }
@@ -61,6 +61,7 @@ class InstitutionFormRequest extends FormRequest
             'phone_two.required' => 'O campo Telefone é obrigatório',
             'institution_activity.required' => 'O campo Ramo de atividade é obrigatório',
             'company_classification.required' => 'O campo Classificação da Empresa é obrigatório',
+            'company_classification.exists' => 'O valor selecionado para o campo Classificação da Empresa é inválido.',
             'cnpj_additional.*.distinct' => 'O CNPJ adicional não pode ser repetido'
         ];
     }

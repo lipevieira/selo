@@ -201,7 +201,36 @@ $(document).ready(function () {
         $('#metodologia').addClass('active in');
 
     });
-    $('#btn_resultados_next').on('click', function () {
-       
+    $('#btn_result_next').on('click', function () {
+
+        $('#list_resultados_esperados').removeClass('active active_tab1');
+        $('#list_resultados_esperados').removeAttr('href data-toggle');
+
+        $('#resultados_esperados').removeClass('active');
+        $('#list_resultados_esperados').addClass('inactive_tab1');
+
+        $('#list_documentos').removeClass('inactive_tab1');
+        $('#list_documentos').addClass('active_tab1 active');
+
+        $('#list_documentos').attr('href', '#documento');
+
+        $('#list_documentos').attr('data-toggle', 'tab');
+        $('#documento').addClass('active in');
+    });
+
+    $('#previous_btn_documentos').on('click', function(){
+        $('#list_documentos').removeClass('active active_tab1');
+        $('#list_documentos').removeAttr('href data-toggle');
+
+        $('#list_documentos').removeClass('active in');
+        $('#list_documentos').addClass('inactive_tab1');
+
+        $('#list_resultados_esperados').removeClass('inactive_tab1');
+        $('#list_resultados_esperados').addClass('active_tab1 active');
+
+        $('#list_resultados_esperados').attr('href', '#resultados_esperados');
+
+        $('#list_resultados_esperados').attr('data-toggle', 'tab');
+        $('#resultados_esperados').addClass('active in');
     });
 });

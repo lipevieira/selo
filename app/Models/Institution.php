@@ -71,6 +71,15 @@ class Institution extends Model
     {
         return $this->hasMany(CollaboratorActivityLevel::class);
     }
+    /**
+     *  @description: Uma instuição tem muitos Documentos 
+     * Relacionamento 1 - N
+     * @return Document
+     */ 
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
+    }
     public  function validateCnpj($cnpj)
     {
         $cnpj = preg_replace('/[^0-9]/', '', (string) $cnpj);
@@ -118,7 +127,7 @@ class Institution extends Model
             'formation' => 'required | min:3 | max:80',
             'phone_two' => 'required | min:4 | max:20',
             'institution_activity' => 'required',
-            'company_classification' => 'required  | max:100',
+            'company_classification' => 'required  | max:100| exists:company_classifications,id',
             // 'cnpj_additional.*' => 'distinct',
         ];
     }
@@ -148,7 +157,7 @@ class Institution extends Model
             'phone_two.required' => 'O campo Telefone é obrigatório',
             'institution_activity.required' => 'O campo Ramo de atividade é obrigatório',
             'company_classification.required' => 'O campo Classificação da Empresa é obrigatório',
-            // 'cnpj_additional.*.distinct' => 'O CNPJ adicional não pode ser repetido'
+            'company_classification.exists' => 'O valor selecionado para o campo Classificação da Empresa é inválido.',
         ];
     }
     /**

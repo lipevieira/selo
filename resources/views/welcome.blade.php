@@ -51,7 +51,7 @@
 {{-- Arquivos de js --}}
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('assets/institution/mask.js') }}"></script>
-<script src="{{ asset('assets/institution/script.js') }}"></script>
+<script src="{{ asset('assets/institution/register/script.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/plugins/iCheck/icheck.min.js') }}"></script>
 
 @stop

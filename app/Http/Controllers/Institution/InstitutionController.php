@@ -7,6 +7,7 @@ use App\Models\Institution;
 use App\Models\Question;
 use App\Models\ScheduleAction;
 use App\Models\Client;
+use App\Models\CompanyClassification;
 use Illuminate\Http\Request;
 use App\Http\Requests\Institution\InstitutionFormRequest;
 use DB;
@@ -19,18 +20,21 @@ class InstitutionController extends Controller
 {
     private $institution;
     private $schedule;
+    private $companyClassification;
 
-    public function __construct(Institution $institution, Schedule $schedule)
+    public function __construct(Institution $institution, Schedule $schedule, CompanyClassification $companyClassification)
     {
         $this->institution = $institution;
         $this->schedule = $schedule;
+        $this->companyClassification = $companyClassification;
     }
     public function index()
     {
         $actions = ScheduleAction::all();
+        $companyClassifications = $this->companyClassification->all(); 
         $questionAlternatives = Question::with('alternatives')->get();
 
-        return view('institution.register.register', compact('questionAlternatives', 'actions'));
+        return view('institution.register.register', compact('questionAlternatives', 'actions', 'companyClassifications'));
     }
     public function welcome()
     {

@@ -9,6 +9,30 @@
 <div class="container">
     @include('layouts.nav-bar-institution')
     <div class="row show-grid">
+        {{-- Preenchimento do Anexo SETE --}}
+        <div class="col-md-8">
+            @if ($anexos == 1 || $anexos == 2 || $anexos == 6)
+                <p>Para a instituição ser certificada baixe e preenchar o Anexo </p>
+                <a class="btn btn-primary btn-sm" href="{{ route('anexo07.show') }}" role="button" target="_blank">Baixar Anexo VII</a>
+            @endif
+        {{-- Prenechimento de todos os anexos --}}
+        @if ($anexos == 3 || $anexos == 4 || $anexos == 5 || $anexos == 6)
+                <p>Para a instituição ser certificada baixe e preenchar os Anexo </p>
+                <a class="btn btn-primary btn-sm" href="{{ route('anexo01.show') }}" role="button" target="_blank">Baixar Anexo I
+                </a>
+                {{-- <a class="btn btn-primary btn-sm" href="{{ route('anexo07.show') }}" role="button" target="_blank">Baixar o Anexo IV
+                </a> --}}
+                <a class="btn btn-primary btn-sm" href="{{ route('anexo06.show') }}" role="button" target="_blank">Baixar o AnexoVI
+                </a>
+                <a class="btn btn-primary btn-sm" href="{{ route('anexo07.show') }}" role="button" target="_blank">Baixar Anexo VII</a>
+                <p>APRESENTAR AS CERTIDÕES NEGATIVAS DAS ESFERAS MUNICIPAL, ESTADUAL E FEDERAL,              CONTRATO SOCIAL (OU DOCUMENTO EQUIVALENTE) E DECLARAÇÃO DE NÃO CONTRATAÇÃO DE MENORES.
+                </p>
+
+            @endif
+        </div>
+    </div>
+    <br /><br />
+    <div class="row show-grid">
         <div class="col-md-8">
             {{-- Messagem de sucesso para documentos salvos --}}
             @if(session('success'))
@@ -29,12 +53,13 @@
                     @foreach ($documents as $document)
                     <tr>
                         <th scope="row">{{ $document->id }}</th>
-                        <td>{{ $document->created_at }}</td>
+                        <td>{{ $document->created_at->format('d/m/Y') }}</td>
                         <td>{{ $document->description }}</td>
                         <td>
-                       <a href="#" class="btn btn-info btn-sm" role="button">
-                        <span class="glyphicon glyphicon-folder-open"></span> Documento
-                    </a>
+                            <a href="{{ route('document.show',$document->doc_name) }}" class="btn btn-info btn-sm"
+                                role="button" target="_blank">
+                                <span class="glyphicon glyphicon-folder-open"></span> Documento
+                            </a>
                         </td>
                     </tr>
                     @endforeach

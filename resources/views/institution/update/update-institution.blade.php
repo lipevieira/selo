@@ -87,15 +87,13 @@
                                         class="asterisco-input">*</small></label>
                                 <select class="form-control form-control-sm" id="company_classification"
                                     name="company_classification">
-                                    <option value="{{$institutions->company_classification}}" selected>
-                                        {{$institutions->company_classification}}</option>
-                                    <option value="Micro(5 a 9 funcionários)">Micro(5 a 9 funcionários)</option>
-                                    <option value="Pequena(10 a 12 funcionários)">Pequena(10 a 12 funcionários)</option>
-                                    <option value="Pequena(13 a 49 funcionários)">Pequena(13 a 49 funcionários)</option>
-                                    <option value="Média(50 a 99 funcionários)">Média(50 a 99 funcionários)</option>
-                                    <option value="Grande(+ de 100 funcionários)">Grande(+ de 100 funcionários)</option>
-                                    <option value="ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?">
-                                        ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
+                                    @foreach ($companyClassifications as $classification)
+                                        <option value="{{ $classification->id }}"
+                                            @if ($institutions->company_classification == $classification->id)
+                                                selected
+                                            @endif
+                                        >{{  $classification->type}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">

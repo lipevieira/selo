@@ -64,6 +64,5 @@
 @stop
 
 @section('adminlte_js')
-<script src="{{ asset('assets/institution/script.js') }}"></script>
-
+<script src="{{ asset('assets/institution/register/script.js') }}"></script>
 @stop

@@ -498,7 +498,8 @@ $(document).ready(function () {
 		var form = $('#register_form');
 		var formData = form.serialize();
 		var welcome = $(this).attr("welcome");
-		$(this).prop("disabled", true);
+		// var authorization = false;
+		// $(this).prop("disabled", true);
 
 		$.ajaxSetup({
 			headers: {
@@ -514,7 +515,7 @@ $(document).ready(function () {
 			},
 			success: function (data) {
 				if ((data.errors)) {
-					$(this).prop("disabled", false);
+					authorization = true;
 					$('#modalErrorCad').modal('show');
 					var danger = $('#danger');
 					danger.hide().find('ul').empty();
@@ -534,6 +535,9 @@ $(document).ready(function () {
 				alert('Erro ao salvar instituição  ' + erro);
 			}
 		});
+		// if(authorization === true){
+		// 	$(this).prop("disabled", false);
+		// }
 	});
 	
 	AddTableRowCnpjsAdicionais = function () {

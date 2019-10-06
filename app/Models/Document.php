@@ -11,4 +11,13 @@ class Document extends Model
         'created_id',
         'created_at',
     ];
+    /**
+     * Descrioption: Volta do relacionameto
+     * Muitos Documentos pertercem a uma Instituição
+     * @return Institution
+     */
+    public function institution()
+    {
+        return $this->belongsTo(Institution::class);
+    }
 }

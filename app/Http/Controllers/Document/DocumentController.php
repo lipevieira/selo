@@ -16,12 +16,20 @@ class DocumentController extends Controller
     }
     public function index()
     {
-        // TO-DE fazer: Join para pegar a classificação da empresa
+        $anexos = auth()->guard('client')->user()->institution->company_classification;
         $institution_id =  auth()->guard('client')->user()->institution_id;
         $documents = $this->document->where('institution_id', $institution_id)->get();
 
-        return view('institution.doc.index', compact('documents'));
+        // dd($documents);
+
+        return view('institution.doc.index', compact('documents', 'anexos'));
     }
+    /**
+     * Salvando o nome documento no DB e
+     * e o Documento na pasta
+     * @param Request $request
+     * @return app/public/documents/anexos
+     */
     public function saveDoc(Request $request)
     {
         $messages = [
@@ -67,12 +75,34 @@ class DocumentController extends Controller
     }
     public function show(Request $request)
     {
-        // TO-DE fazer: downloand do arquivo
-        $doc_name = $request->doc_name;
-        // $doc_name = '212225201910035d9690c180f1d.pdf';
+        $doc_name = $request->name;
 
-        // dd($doc_name);
-        // return response()->download(storage_path("app/public/storage/documents/anexos/".$doc_name));
-        return Storage::download("app/public/storage/documents/anexos/".$doc_name);
+        return response()->download(storage_path("app/public/documents/anexos/" . $doc_name));
+    }
+    /**
+     * Baixando o modelo do Anexo 01
+     *
+     * @return void
+     */
+    public function downloandAnexoOne()
+    {
+        return response()->download(storage_path("app/public/models/anexo01.doc"));
+    }
+    /**
+     * Baixando o modelo do Anexo 06
+     *
+     * @return void
+     */
+    public function downloandAnexoSix()
+    {
+        return response()->download(storage_path("app/public/models/anexo06.doc"));
+    }
+    /**
+     * Baixando o modelo do Anexo 07
+     * @return void
+     */
+    public function downloandAnexoServen()
+    {
+        return response()->download(storage_path("app/public/models/anexo07.doc"));
     }
 }

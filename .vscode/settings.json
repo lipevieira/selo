@@ -1,5 +1,4 @@
 {
-    "editor.fontFamily": "Times new Roram",
-    "blade.format.enable": true,
-    "editor.fontSize": 17
+    "editor.fontFamily": "Fira Code",
+    "blade.format.enable": true
 }

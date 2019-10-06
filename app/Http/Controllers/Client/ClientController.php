@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Institution;
+use App\Models\CompanyClassification;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,10 +14,12 @@ use Illuminate\Support\Facades\Auth;
 class ClientController extends Controller
 {
     private $institution;
+    private $companyClassification;
 
-    public function __construct(Institution $institution)
+    public function __construct(Institution $institution, CompanyClassification $companyClassification)
     {
         $this->institution = $institution;
+        $this->companyClassification = $companyClassification;
     }
     /**
      * Mostar o formulario de login
@@ -31,7 +34,9 @@ class ClientController extends Controller
     {
         $id = auth()->guard('client')->user()->institution_id;
         $institutions  = $this->institution->find($id);
-        return view('institution.update.update-institution', compact('institutions'));
+        $companyClassifications = $this->companyClassification->all(); 
+    
+        return view('institution.update.update-institution', compact('institutions', 'companyClassifications'));
     }
     /**
      * Fazendo login da instituição caso esteja cadastrada

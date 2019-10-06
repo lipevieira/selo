@@ -39,9 +39,13 @@
                         style="border:1px solid #ccc">Metodologia</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link inactive_tab1" id="list_resultados_esperados"
-                        style="border:1px solid #ccc">Resultados
+                    <a class="nav-link inactive_tab1" id="list_resultados_esperados" style="border:1px solid #ccc"
+                        id="resultado">Resultados
                         Esperados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link inactive_tab1" id="list_documentos" style="border:1px solid #ccc"
+                        id="documento">Documentos</a>
                 </li>
             </ul>
 
@@ -68,8 +72,13 @@
                                     <label for="email_two">Classificação da Empresa</label>
                                     <select class="form-control form-control-sm" id="company_classification"
                                         name="company_classification">
-                                        <option value="{{$instituion->company_classification}}">
-                                            {{$instituion->company_classification}}</option>
+                                        @foreach ($companyClassifications as $classification)
+                                        <option value="{{ $classification->id }}" @if ($instituion->
+                                            company_classification == $classification->id)
+                                            selected
+                                            @endif
+                                            >{{  $classification->type}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
@@ -206,30 +215,31 @@
                                     <label for="">Resposta</label>
                                     <select class="form-control form-control-sm" name="alternative_id[]">
                                         @foreach ($question->alternatives as $alternativa)
-                                            <option value="{{$alternativa->id}}" @foreach ($instituion->answers as $answer)
-                                                @if ($alternativa->id == $answer->alternative_id)
-                                                    selected
-                                                @endif
-                                                @endforeach
-                                                >{{ $alternativa->alternative }}
-                                            </option>
+                                        <option value="{{$alternativa->id}}" @foreach ($instituion->answers as $answer)
+                                            @if ($alternativa->id == $answer->alternative_id)
+                                            selected
+                                            @endif
+                                            @endforeach
+                                            >{{ $alternativa->alternative }}
+                                        </option>
 
                                         @endforeach
                                     </select>
 
                                     @if($question->field_option == "SIM")
                                     @foreach ($question->alternatives as $alternativa)
-                                        @foreach ($instituion->answers as $answer)
-                                            @if ($alternativa->id == $answer->alternative_id && $answer->others != null)
-                                                <label for="others">Se sim, quais?</label>
-                                                <input type="text" class="form-control" name="others[]" id="others" value="{{$answer->others}}">
-                                            @endif
-                                        @endforeach
+                                    @foreach ($instituion->answers as $answer)
+                                    @if ($alternativa->id == $answer->alternative_id && $answer->others != null)
+                                    <label for="others">Se sim, quais?</label>
+                                    <input type="text" class="form-control" name="others[]" id="others"
+                                        value="{{$answer->others}}">
+                                    @endif
                                     @endforeach
-                                        {{-- <label for="others">Se sim, quais?</label>
+                                    @endforeach
+                                    {{-- <label for="others">Se sim, quais?</label>
                                         <input type="text" class="form-control" name="others[]" id="others"> --}}
                                     @else
-                                        <input type="hidden" class="form-control" name="others[]" id="others">
+                                    <input type="hidden" class="form-control" name="others[]" id="others">
                                     @endif
                                 </div>
 
@@ -238,11 +248,7 @@
                             {{-- Tabelas perfil colaborador --}}
                             <div class="form-row">
                                 <div class="form-group col-md-12">
-                                    <h4>
-                                        <strong>Nivel de atividade dos colaboradores: Demais grupos
-                                            étnicos-raciais e Negros (pretos + pardos).
-                                        </strong>
-                                    </h4>
+                                    <h4>NIVEL DE ATIVIDADE DOS COLABORADORES</h4>
                                     <table class="table table-bordered table-striped" id="tblLevelActivicDemiasGroups">
                                         <thead>
                                             <tr>
@@ -271,26 +277,27 @@
                             </div>
                             {{-- perfil dos colaboradores  --}}
                             <div class="form-group col-md-12">
-
-                                <h4><strong>Perfil étnico racial dos colaboradores</strong></h4>
-                                <table class="table table-bordered">
+                                <h4>PEFIL/CENSO</h4>
+                                <table class="table table-striped" id="tblActivityLevelCollaborator">
                                     <thead>
                                         <tr>
-                                            <th scope="col">COD</th>
+                                            <th scope="col">INSTITUIÇÃO</th>
                                             <th scope="col">RAÇA/COR</th>
                                             <th scope="col">Nº HOMEMS</th>
                                             <th scope="col">Nº MULHERES</th>
+                                            <th scope="col">TOTAL DE PESSOAS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- @foreach ($instituion->profileCollaborators as $profileCollaborators)
+                                        @foreach ($profile as $item)
                                         <tr>
-                                            <th scope="row">{{$profileCollaborators->id}}</th>
-                                            <td>{{$profileCollaborators->profile_color}}</td>
-                                            <td>{{$profileCollaborators->human_quantity}}</td>
-                                            <td>{{$profileCollaborators->woman_quantity}}</td>
+                                            <td>{{$item->name}}</td>
+                                            <td>{{$item->color}}</td>
+                                            <td>{{$item->max_human}}</td>
+                                            <td>{{$item->max_woman}}</td>
+                                            <td>{{$item->max_human + $item->max_woman}}</td>
                                         </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -343,7 +350,8 @@
                         <div class="panel-heading">CRONOGRAMA</div>
                         <div class="panel-body">
                             <!-- Inicio do cronograma -->
-                            <h4>Cronograma (Data limite de entrega das atividades será <strong>{{date('30/11/Y')}})</strong>
+                            <h4>Cronograma (Data limite de entrega das atividades será
+                                <strong>{{date('30/11/Y')}})</strong>
                             </h4>
                             <h4>Listar todas as atividades necessárias à realização do projeto.</h4>
                             <table class="table table-bordered table-striped" id="tbl_schedules">
@@ -370,7 +378,7 @@
                                         <td>{{$schedule->status}}</td>
                                     </tr>
                                     @empty
-                                        <h1>A Instituição ainda não enviou o seu cronograma.</h1>
+                                    <h1>A Instituição ainda não enviou o seu cronograma.</h1>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -489,15 +497,58 @@
                             <div align="center">
                                 <button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
                                     class="btn btn-default btn-lg">Anterior</button>
-                            <a href="{{route('home')}}" class="btn btn-success btn-lg" role="button" aria-pressed="true">
-                                Voltar ao Menu
-                            </a> 
+
+                                <button type="button" name="btn_result_next" id="btn_result_next"
+                                    class="btn btn-info btn-lg">Proximo</button>
                             </div>
                             <br />
                         </div>
                     </div>
                 </div>
-            </div>
+                <!-- Campos para listagem de documentos -->
+                <div class="tab-pane fade" id="documento">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">DOCUMENTOS</div>
+                        <div class="panel-body">
+                            <h4>Documentos da Instituição</h4>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">COD</th>
+                                        <th scope="col">Data de Envio</th>
+                                        <th scope="col">Descrição do documento</th>
+                                        <th scope="col">Ver Documento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($instituion->documents as $document)
+                                    <tr>
+                                        <th scope="row">{{ $document->id }}</th>
+                                        <td>{{ $document->created_at->format('d/m/Y') }}</td>
+                                        <td>{{ $document->description }}</td>
+                                        <td>
+                                            <a href="{{ route('home.document.show',$document->doc_name) }}" class="btn btn-info btn-sm" role="button"
+                                                target="_blank">
+                                                <span class="glyphicon glyphicon-folder-open"></span> Documento
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <br />
+                            <div align="center">
+                                <button type="button" name="previous_btn_documentos"
+                                    id="previous_btn_documentos" class="btn btn-default btn-lg">Anterior</button>
+                                <a href="{{route('home')}}" class="btn btn-success btn-lg" role="button"
+                                    aria-pressed="true">
+                                    Voltar ao Menu
+                                </a>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                </div>
         </form>
     </div>
 </div>

@@ -21,7 +21,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-warning" style="display: none; " id="danger">
+					<div class="alert alert-danger" style="display: none; " id="danger">
 						<ul></ul>
 					</div>
 				</div>
@@ -126,15 +126,9 @@
 								<select class="form-control form-control-sm" id="company_classification"
 									name="company_classification">
 									<option value=""></option>
-									<option value="Micro(5 a 9 funcionários)">Micro(5 a 9 funcionários)</option>
-									<option value="Pequena(10 a 12 funcionários)">Pequena(10 a 12 funcionários)</option>
-									<option value="Pequena(13 a 49 funcionários)">Pequena(13 a 49 funcionários)</option>
-									<option value="Média(50 a 99 funcionários)">Média(50 a 99 funcionários)</option>
-									<option value="Grande(+ de 100 funcionários)">Grande(+ de 100 funcionários)</option>
-									<option
-										value="ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?">
-										ENTIDADE SEM FINS LUCRATIVOS QUE
-										LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
+									@foreach ($companyClassifications as $classification)
+										<option value="{{ $classification->id }}">{{ $classification->type }}</option>
+									@endforeach
 								</select>
 							</div>
 							<div class="col-md-4 mb-3">
@@ -822,5 +816,5 @@
 @section('adminlte_js')
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('assets/institution/mask.js') }}"></script>
-<script src="{{ asset('assets/institution/script.js') }}"></script>
+<script src="{{ asset('assets/institution/register/script.js') }}"></script>
 @stop
