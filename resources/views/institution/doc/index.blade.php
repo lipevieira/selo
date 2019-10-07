@@ -82,11 +82,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="doc_name">Documento</label>
-                    <input type="file" class="form-control" id="doc_name" name="doc_name">
+                    <input type="file" class="form-control" id="doc_name" name="doc_name" value="{{ old('doc_name') }}">
                 </div>
                 <div class="form-group">
-                    <label for="description" class="col-form-label">Descrição do Documento:</label>
-                    <textarea class="form-control" id="message-text" id="description" name="description"></textarea>
+                    <label for="description" class="col-form-label">Descrição do Documento: (Opcional)</label>
+                    <textarea class="form-control" id="message-text" id="description" name="description">{{ old('description') }}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" id="btnSavedoc">Salvar Documento</button>
             </form>

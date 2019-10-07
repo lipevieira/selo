@@ -42,8 +42,8 @@
                 </div>
                 <div class="form-group">
                     <label for="message-text" class="col-form-label">
-                        Atividade (O que é necessário fazer para atingir este objetivo):
-                    </label>
+                        Atividade (O que é necessário fazer para concluir essa ação):
+                     </label>
                     <textarea class="form-control" id="activity" name="activity">{{$schedule->activity}}</textarea>
                 </div>
                 <div class="form-group">
@@ -60,7 +60,9 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Data Limite:</label>
+                    <label for="recipient-name" class="col-form-label">
+                        Data Limite:(Será a Data que você concluiará a tividade escolhida para a Ação)
+                    </label>
                     <input type="date" class="form-control" id="deadline"
                         value="{{$schedule->deadline->format('Y-m-d')}}" name="deadline">
                 </div>

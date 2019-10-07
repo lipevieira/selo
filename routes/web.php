@@ -135,7 +135,7 @@ Route::group(['prefix' => 'filiais', 'namespace' => 'Branche', 'middleware'  => 
 /***
  * @description: Rotas para ActionSheduleController
  */
-Route::group(['prefix' => 'ações', 'namespace' => 'Shedule', 'middleware'  =>  'auth.institution:client'], function () {
+Route::group(['prefix' => 'ações', 'namespace' => 'Shedule'], function () {
    Route::get('/cronograma', 'SheduleActionController@index')->name('index.shedule.action');
    Route::post('/save', 'SheduleActionController@store')->name('store.shedule.action');
    Route::get('/show', 'SheduleActionController@showAction')->name('show.shedule.action');

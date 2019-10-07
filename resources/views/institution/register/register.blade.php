@@ -125,9 +125,9 @@
 										class="asterisco-input">*</small></label>
 								<select class="form-control form-control-sm" id="company_classification"
 									name="company_classification">
-									<option value=""></option>
+									<option></option>
 									@foreach ($companyClassifications as $classification)
-										<option value="{{ $classification->id }}">{{ $classification->type }}</option>
+									<option value="{{ $classification->id }}">{{ $classification->type }}</option>
 									@endforeach
 								</select>
 							</div>
@@ -185,7 +185,7 @@
 									name="phone_two">
 							</div>
 							<div class="col-md-6 mb-3">
-								<label for="email_two">Atividade <small class="asterisco-input">*</small></label>
+								<label for="email_two">Ramo de Atividade <small class="asterisco-input">*</small></label>
 								<select class="form-control form-control-sm" name="institution_activity">
 									<option></option>
 									<option value="Indústria">Indústria</option>
@@ -378,8 +378,8 @@
 											{{-- Mesclação --}}
 											{{-- <th width="160px;">
 											</th> --}}
-													<input type="hidden" class="form-control" id="activity_level" value="Operacional" readonly="readonly"
-														name="activity_level[]">
+											<input type="hidden" class="form-control" id="activity_level"
+												value="Operacional" readonly="readonly" name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -418,8 +418,8 @@
 											{{-- Mesclação --}}
 											{{-- <th width="160px;">
 											</th> --}}
-												<input type="hidden" class="form-control" id="activity_level"
-													value="Supervisão" name="activity_level[]">
+											<input type="hidden" class="form-control" id="activity_level"
+												value="Supervisão" name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -459,9 +459,8 @@
 											{{-- Mesclação --}}
 											{{-- <th width="160px;">
 											</th> --}}
-												<input type="hidden" class="form-control" id="activity_level"
-													value="Gerência / Chefia" readonly="readonly"
-													name="activity_level[]">
+											<input type="hidden" class="form-control" id="activity_level"
+												value="Gerência / Chefia" readonly="readonly" name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -500,8 +499,8 @@
 											{{-- Mesclação --}}
 											{{-- <th width="160px;">
 											</th> --}}
-												<input type="hidden" class="form-control" id="activity_level"
-													value="Direção" readonly="readonly" name="activity_level[]">
+											<input type="hidden" class="form-control" id="activity_level"
+												value="Direção" readonly="readonly" name="activity_level[]">
 											<th>
 												<input type="text" class="form-control" id="color"
 													value="Demais grupos étnicos-raciais" readonly="readonly"
@@ -593,7 +592,8 @@
 						</h4>
 						<h4>Listar todas as atividades necessárias à realização do projeto.</h4>
 						<label>
-							Autoriza a divulgação destas ações pela SEMUR? <small class="asterisco-input">*</small>
+							Autoriza a divulgação destas ações pela SEMUR? <small
+								class="asterisco-input-options">*</small>
 							<select class="form-control-sm" name="authorization">
 								<option></option>
 								<option value="SIM">SIM</option>
@@ -607,11 +607,14 @@
 											class="btn btn-success">Adicionar Linhas na Tabela </button></th>
 								</tr>
 								<tr>
-									<th scope="col">AÇÕES <small class="asterisco-input">*</small></th>
-									<th scope="col">ATIVIDADE(O que é necessário fazer para atingir este objetivo)
-										<small class="asterisco-input">*</small></th>
-									<th scope="col">QUANTIDADE<small class="asterisco-input">*</small></th>
-									<th scope="col">DATA LIMITE <small class="asterisco-input">*</small></th>
+									<th scope="col">AÇÕES <small class="asterisco-input-options">*</small></th>
+									<th scope="col">Atividade (O que é necessário fazer para concluir essa ação):
+										<small class="asterisco-input-options">*</small></th>
+									<th scope="col">
+										Quantidade:De vezes que Realizará essa atividade<small
+											class="asterisco-input-options">*</small>
+									</th>
+									<th scope="col">Data Limite: Para concluir Atividade<small class="asterisco-input-options">*</small></th>
 									<th scope="col">REMOVER</th>
 								</tr>
 							</thead>

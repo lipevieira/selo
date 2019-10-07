@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Ações:</label>
                     <select class="form-control form-control-sm" id="schedule_action_id" name="schedule_action_id">
-                        <option></option>
+                        <option value="">Click aqui para escolher sua Ação</option>
                         @foreach ($actions as $item)
                         <option value="{{$item->id}}" {{(old('schedule_action_id')==$item->id)? 'selected':''}}>
                             {{ $item->description}}</option>
@@ -39,14 +39,14 @@
                 </div>
                 <div class="form-group">
                     <label for="message-text" class="col-form-label">
-                        Atividade (O que é necessário fazer para atingir este objetivo):
+                        Atividade (O que é necessário fazer para concluir essa ação):
                     </label>
                     <textarea class="form-control" id="activity" name="activity">{{ old('activity') }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="recipient-name" class="col-form-label">Quantidade:</label>
                     <select class="form-control form-control-sm" name="amount">
-                        <option value=""></option>
+                        <option value="">Click aqui para escolher a quantidade de vezes que Realizará essa atividade</option>
                         <option value="1" {{(old('amount')==1)? 'selected':''}}>1</option>
                         <option value="2" {{(old('amount')==2)? 'selected':''}}>2</option>
                         <option value="3" {{(old('amount')==3)? 'selected':''}}>3</option>
@@ -57,7 +57,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Data Limite:</label>
+                    <label for="recipient-name" class="col-form-label">Data Limite:(Será a Data que você concluiará a tividade escolhida para a Ação)</label>
                     <input type="date" class="form-control" id="deadline" value="{{ old('deadline') }}" name="deadline">
                 </div>
                 <br /><br />

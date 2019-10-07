@@ -34,11 +34,12 @@ class DocumentController extends Controller
     {
         $messages = [
             'doc_name.required' => 'O campo Documento é obrigatório',
-            'description.required' => 'O campo descrição é obrigatório',
+            'description.max' => 'O campo Descrição não pode ser maior que 190 caracteres',
+            // 'description.required' => 'O campo descrição é obrigatório',
         ];
         $validator = Validator::make($request->all(), [
             'doc_name' => 'required',
-            'description' => 'required',
+            'description' => 'max:190',
         ], $messages);
         if ($validator->fails()) {
             return redirect()

@@ -114,7 +114,7 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="uf">UF:</label>
-                                <input type="text" class="form-control" id="uf" value="BA" name="uf" readonly="readonly">
+                                <input type="text" class="form-control" id="uf" value="{{ $institutions->uf }}" name="uf" readonly="readonly">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="address">Endereço <small class="asterisco-input">*</small></label>

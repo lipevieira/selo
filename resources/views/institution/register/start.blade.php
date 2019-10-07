@@ -21,7 +21,7 @@
                 <div class="form-group">
                     <label for="cb_company">Indentificação da Empresa</label>
                     <select class="form-control form-control-sm" id="cb_company" data-url="{{route('index.company')}}">
-                        <option></option>
+                        <option>click aqui para começar a responder</option>
                         <option>Micro(5 a 9 funcionários)</option>
                         <option>Pequena(10 a 12 funcionários)</option>
                         <option>Pequena(13 a 49 funcionários)</option>
@@ -33,7 +33,7 @@
                 <div class="form-group" id="etapa01">
                     <label for="cb_company_etapa01">PROPRIETÁRIO OU ADMINISTRADOR NEGRO?</label>
                     <select class="form-control form-control-sm" id="cb_company_01">
-                        <option></option>
+                        <option>click aqui para começar a responder</option>
                         <option>SIM</option>
                         <option>NÃO</option>
                     </select>
@@ -42,7 +42,7 @@
                     <label for="cb_company_etapa02">MAIORIA DOS FUNCIONÁRIOS NEGROS?</label>
                     <select class="form-control form-control-sm" id="cb_company_02"
                         data-url="{{route('index.company')}}">
-                        <option></option>
+                        <option>click aqui para começar a responder</option>
                         <option>SIM</option>
                         <option>NÃO</option>
                     </select>
@@ -52,7 +52,7 @@
                         DIVERSIDADE?</label>
                     <select class="form-control form-control-sm" id="cb_company_03"
                         data-url="{{route('index.company')}}">
-                        <option></option>
+                        <option>click aqui para começar a responder</option>
                         <option>SIM</option>
                         <option>NÃO</option>
                     </select>

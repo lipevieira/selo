@@ -20,7 +20,7 @@ class CreateInstitutionsTable extends Migration
             $table->string('activity_branch',100);
             $table->string('cnpj',20)->unique();
             $table->string('county',80);
-            $table->string('uf',2);
+            $table->string('uf',2)->default('BA');;
             $table->string('address',190);
             $table->string('email',150)->unique();
             $table->string('phone',20);

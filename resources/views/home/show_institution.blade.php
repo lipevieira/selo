@@ -82,7 +82,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
-                                    <label for="cnpj">CNPJ:</label>
+                                    <label for="cnpj" style="color:red;">CNPJ:Usado como senha para Login</label>
                                     <input type="text" class="form-control" id="cnpj" value="{{$instituion->cnpj}}"
                                         name="cnpj">
                                 </div>
