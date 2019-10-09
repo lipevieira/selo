@@ -17,7 +17,7 @@ class CreateInstitutionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 100);
             $table->string('fantasy_name',100);
-            $table->string('activity_branch',100);
+            // $table->string('activity_branch',100);
             $table->string('cnpj',20)->unique();
             $table->string('county',80);
             $table->string('uf',2)->default('BA');;
@@ -30,10 +30,10 @@ class CreateInstitutionsTable extends Migration
             $table->string('institution_activity',60);
             $table->string('company_classification',100);
             $table->string('authorization',3)->nullable();
-            $table->text('action_plan');
-            $table->text('partners');
+            $table->text('action_plan')->nullable();
+            $table->text('partners')->nullable();
             $table->text('methodology')->nullable();
-            $table->text('result');
+            $table->text('result')->nullable();
             
             $table->timestamps();
         });

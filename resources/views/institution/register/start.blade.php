@@ -17,17 +17,14 @@
                     class="d-inline-block align-top" alt="">
             </div>
             <h3>Antes de começar o seu cadastro vamos a algumas perguntas basicas.</h3>
-            <form>
+            <form method="GET" action="{{route('index.company')}}">
                 <div class="form-group">
                     <label for="cb_company">Indentificação da Empresa</label>
-                    <select class="form-control form-control-sm" id="cb_company" data-url="{{route('index.company')}}">
-                        <option>click aqui para começar a responder</option>
-                        <option>Micro(5 a 9 funcionários)</option>
-                        <option>Pequena(10 a 12 funcionários)</option>
-                        <option>Pequena(13 a 49 funcionários)</option>
-                        <option>Média(50 a 99 funcionários)</option>
-                        <option>Grande(+ de 100 funcionários)</option>
-                        <option>ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIRAÇÃO DA DIVERSIDADE?</option>
+                    <select class="form-control form-control-sm" id="cb_type_institution" name="cb_type_institution">
+                        <option></option>
+                        @foreach ($companyClassifications as $item)
+                        <option value="{{$item->id}}">{{$item->type}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group" id="etapa01">
@@ -39,7 +36,7 @@
                     </select>
                 </div>
                 <div class="form-group" id="etapa02">
-                    <label for="cb_company_etapa02">MAIORIA DOS FUNCIONÁRIOS NEGROS?</label>
+                    <label for="cb_company_02">MAIORIA DOS FUNCIONÁRIOS NEGROS?</label>
                     <select class="form-control form-control-sm" id="cb_company_02"
                         data-url="{{route('index.company')}}">
                         <option>click aqui para começar a responder</option>
@@ -50,13 +47,14 @@
                 <div class="form-group" id="etapa03">
                     <label for="cb_company_etapa03">ENTIDADE SEM FINS LUCRATIVOS QUE LUTA PELA VALORIZAÇÃO DA
                         DIVERSIDADE?</label>
-                    <select class="form-control form-control-sm" id="cb_company_03"
-                        data-url="{{route('index.company')}}">
+                    <select class="form-control form-control-sm" id="institution_entity" name="institution_entity">
                         <option>click aqui para começar a responder</option>
                         <option>SIM</option>
                         <option>NÃO</option>
                     </select>
                 </div>
+                <br/><br/>
+                <button type="submit" id="btn_star_register" class="btn btn-primary form-control">Iniciar Cadastro</button>
             </form>
         </div>
     </div>
@@ -64,5 +62,5 @@
 @stop
 
 @section('adminlte_js')
-<script src="{{ asset('assets/institution/register/script.js') }}"></script>
+<script src="{{ asset('assets/start/start.js') }}"></script>
 @stop

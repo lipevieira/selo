@@ -43,6 +43,9 @@ Route::group(['prefix' => 'institution', 'namespace' => 'Institution'], function
    Route::get('/', 'InstitutionController@index')->name('index.company');
    Route::get('/start', 'InstitutionController@start')->name('start.register');
    Route::post('salvar', 'InstitutionController@saveAllInstutition')->name('save.institution');
+   
+   Route::get('/document', 'InstitutionController@downloandAnexos')->name('document.seve');
+   Route::post('/savar/reconhecimento', 'InstitutionController@saveInstutitionRecognition')->name('save.institution.recognition');
    /**
     * Rotas para Instituições logados
     */

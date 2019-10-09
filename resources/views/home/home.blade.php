@@ -60,12 +60,12 @@
 @stop
 
 @section('js')
-<script src="http://selo.dev.com/js/libs/dataTables.bootstrap.min.js"></script>
-<script src="http://selo.dev.com/js/libs/dataTables.buttons.min.js"></script>
-<script src="http://selo.dev.com/js/libs/jszip.min.js"></script>
-<script src="http://selo.dev.com/js/libs/pdfmake.min.js"></script>
-<script src="http://selo.dev.com/js/libs/vfs_fonts.js"></script>
-<script src="http://selo.dev.com/js/libs/buttons.html5.min.js"></script>
+<script src="{{asset('js/libs/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('js/libs/dataTables.buttons.min.js') }}"></script>
+<script src="{{asset('js/libs/jszip.min.js')}}"></script>
+<script src="{{asset('js/libs/pdfmake.min.js')}}"></script>
+<script src="{{asset('js/libs/vfs_fonts.js')}}"></script>
+<script src="{{asset('js/libs/buttons.html5.min.js')}}"></script>
 
 <script src="{{asset('assets/home/script.js')}}"></script>
 @stop

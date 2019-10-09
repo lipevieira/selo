@@ -20,4 +20,26 @@ class Document extends Model
     {
         return $this->belongsTo(Institution::class);
     }
+    public function downloandAnexoOne()
+    {
+        return response()->download(storage_path("app/public/models/anexo01.doc"));
+    }
+    /**
+     * Baixando o modelo do Anexo 06
+     *
+     * @return void
+     */
+    public function downloandAnexoSix()
+    {
+        return response()->download(storage_path("app/public/models/anexo06.doc"));
+    }
+    /**
+     * Baixando o modelo do Anexo 07
+     * @return void
+     */
+    public function downloandAnexoServen()
+    {
+        return response()->download(storage_path("app/public/models/anexo07.doc"));
+    }
+    
 }

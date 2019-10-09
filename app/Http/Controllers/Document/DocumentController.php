@@ -20,8 +20,6 @@ class DocumentController extends Controller
         $institution_id =  auth()->guard('client')->user()->institution_id;
         $documents = $this->document->where('institution_id', $institution_id)->get();
 
-        // dd($documents);
-
         return view('institution.doc.index', compact('documents', 'anexos'));
     }
     /**

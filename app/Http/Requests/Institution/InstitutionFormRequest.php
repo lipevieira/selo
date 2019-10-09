@@ -26,7 +26,6 @@ class InstitutionFormRequest extends FormRequest
         return [
             'name' => 'required | min:3 | max:100',
             'fantasy_name' => 'required | min:3 | max:100',
-            'activity_branch' => 'required | min:3 | max:100',
             'cnpj' => 'required|unique:institutions|max:18',
             'county' => 'required',
             'uf' => 'required | max:2',
@@ -46,7 +45,6 @@ class InstitutionFormRequest extends FormRequest
         return [
             'name.required' => 'O campo nome é obrigatorio',
             'fantasy_name.required' => 'O campo nome fantasia  é obrigatorio',
-            'activity_branch.required' => 'O campo nivel de atividade  é obrigatorio',
             'cnpj.required' => 'O campo CNPJ é obrigatorio',
             'county.required' => 'O campo Municipio é obrigatorio',
             'uf.required' => 'O campo Estado é obrigatorio',

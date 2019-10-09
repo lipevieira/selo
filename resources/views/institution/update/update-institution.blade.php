@@ -8,12 +8,13 @@
 @section('body')
 <div class="container">
     @include('layouts.nav-bar-institution')
-    
+
     <form method="POST" id="formUpdate">
         @csrf
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active_tab1" style="border:1px solid #ccc" id="list_instituicao_detalhes">Indentificação
+                <a class="nav-link active_tab1" style="border:1px solid #ccc"
+                    id="list_instituicao_detalhes">Indentificação
                     da Instituição</a>
             </li>
             <li class="nav-item">
@@ -27,11 +28,12 @@
                 <a class="nav-link inactive_tab1" id="list_metodologia" style="border:1px solid #ccc">Metodologia</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link inactive_tab1" id="list_resultados_esperados" style="border:1px solid #ccc">Resultados
+                <a class="nav-link inactive_tab1" id="list_resultados_esperados"
+                    style="border:1px solid #ccc">Resultados
                     Esperados</a>
             </li>
         </ul>
-    
+
         @if ($errors->any())
         <div class="alert alert-warning">
             <ul>
@@ -71,7 +73,8 @@
                         <input type="hidden" name="id" value="{{$institutions->id}}" id="id">
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
-                                <label for="name">Nome da Instituição proponente <small class="asterisco-input">*</small>
+                                <label for="name">Nome da Instituição proponente <small
+                                        class="asterisco-input">*</small>
                                 </label>
                                 <input type="text" class="form-control " name="name" id="name"
                                     value="{{$institutions->name}}">
@@ -83,15 +86,15 @@
                                     value="{{$institutions->fantasy_name}}" name="fantasy_name">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="email_two">Classificação da Empresa <small
+                                <label for="company_classification">Classificação da Empresa <small
                                         class="asterisco-input">*</small></label>
                                 <select class="form-control form-control-sm" id="company_classification"
                                     name="company_classification">
                                     @foreach ($companyClassifications as $classification)
-                                        <option value="{{ $classification->id }}"
-                                            @if ($institutions->company_classification == $classification->id)
-                                                selected
-                                            @endif
+                                    <option value="{{ $classification->id }}" @if ($institutions->company_classification
+                                        == $classification->id)
+                                        selected
+                                        @endif
                                         >{{  $classification->type}}</option>
                                     @endforeach
                                 </select>
@@ -104,7 +107,8 @@
                             <div class="col-md-4 mb-3">
                                 <label for="county">Município <small class="asterisco-input">*</small></label>
                                 <select class="form-control form-control-sm" name="county">
-                                    <option value="{{$institutions->county}}" selected> {{$institutions->county}}</option>
+                                    <option value="{{$institutions->county}}" selected> {{$institutions->county}}
+                                    </option>
                                     <option value="Camaçari">Camaçari</option>
                                     <option value="Candeias">Candeias</option>
                                     <option value="Lauro de Freitas">Lauro de Freitas</option>
@@ -114,7 +118,8 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="uf">UF:</label>
-                                <input type="text" class="form-control" id="uf" value="{{ $institutions->uf }}" name="uf" readonly="readonly">
+                                <input type="text" class="form-control" id="uf" value="{{ $institutions->uf }}"
+                                    name="uf" readonly="readonly">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="address">Endereço <small class="asterisco-input">*</small></label>
@@ -122,7 +127,8 @@
                                     name="address">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="email">E-mail <small class="asterisco-input">*(Deve ser usado como seu Login)</small></label>
+                                <label for="email">E-mail <small class="asterisco-input">*(Deve ser usado como seu
+                                        Login)</small></label>
                                 <input type="email" class="form-control" id="email" value="{{$institutions->email}}"
                                     name="email">
                             </div>
@@ -147,7 +153,7 @@
                                 <input type="text" class="form-control" id="phone_two" placeholder="Telefone:"
                                     value="{{$institutions->phone_two}}" name="phone_two">
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-12 mb-3">
                                 <label for="email_two">Atividade <small class="asterisco-input">*</small></label>
                                 <select class="form-control form-control-sm" name="institution_activity">
                                     <option value="{{$institutions->institution_activity}}">
@@ -157,15 +163,17 @@
                                     <option value="Serviços">Serviços</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="activity_branch">Ramo de atividade <small
-                                        class="asterisco-input">*</small></label>
-                                <input type="text" class="form-control" id="activity_branch"
-                                    value="{{$institutions->activity_branch}}" name="activity_branch">
-                            </div>
                             <div align="center">
+                                @if ($institutions->company_classification == 1 || $institutions->company_classification
+                                == 2 || $institutions->company_classification == 6)
+                                <button type="button" name="btn_resultados_next" id="btn_resultados_next"
+                                    class="btn btn-success btn-lg" data-url="{{route('update.institution')}}">Atualizar
+                                    Informações</button>
+                                @else
                                 <button type="button" name="btn_indentificacao" id="btn_indentificacao"
-                                    class="btn btn-info btn-lg" data-url="{{route('update.institution')}}">Proximo</button>
+                                    class="btn btn-info btn-lg"
+                                    data-url="{{route('update.institution')}}">Proximo</button>
+                                @endif
                             </div>
                             <br />
                         </div>
@@ -213,7 +221,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <!-- Campos de texto para descrever as parceiras -->
             <div class="tab-pane fade" id="parceiras">
                 <div class="panel panel-default">
@@ -336,49 +344,49 @@
                 </div>
             </div>
         </div>
-        </div>
-    </form>
-    
-    {{-- Modal para messagem de campos invalidos --}}
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modalErrorCad">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title">Atenção: Há campos invalidos!</h1>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+</div>
+</form>
+
+{{-- Modal para messagem de campos invalidos --}}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" id="modalErrorCad">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Atenção: Há campos invalidos!</h1>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning" style="display: none; " id="danger">
+                    <ul></ul>
                 </div>
-                <div class="modal-body">
-                    <div class="alert alert-warning" style="display: none; " id="danger">
-                        <ul></ul>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
-    {{-- Modal para carregar messagem ao salvar Institução --}}
-    <div class="modal" tabindex="-1" role="dialog" id="loadUpdateInstitution">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Atualizando</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h1>Aguarde...</h1>
-                </div>
-                <div class="modal-footer">
-                    {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> --}}
-                </div>
+</div>
+{{-- Modal para carregar messagem ao salvar Institução --}}
+<div class="modal" tabindex="-1" role="dialog" id="loadUpdateInstitution">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atualizando</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1>Aguarde...</h1>
+            </div>
+            <div class="modal-footer">
+                {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button> --}}
             </div>
         </div>
     </div>
+</div>
 </div>
 @stop
 

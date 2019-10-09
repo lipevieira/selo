@@ -10,72 +10,75 @@
 <div class="container">
     @include('layouts.nav-bar-institution')
 
-    <div class="question-color">
-        <h1>Diagnóstico Censitário</h1>
-        {{-- Mostrando Messagem de atualização --}}
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
-        <br />
-        <form action="{{route('show.edit.answer')}}" method="POST">
-            @csrf
-
-            @foreach ($questionAlternatives as $question)
-            <p><strong>{{ $question->name }}</strong></p>
-            <div class="row">
-                <div class="col-md-12 mb-3">
-                    <label for="">
-                        Resposta <small class="asterisco-input">*</small>
-                    </label>
-
-                    <select class="form-control form-control-sm" name="alternative_id[]">
-                        {{-- <option value=""></option> --}}
-                        @foreach ($question->alternatives as $alternativa)
-                        <option value="{{$alternativa->id}}" @foreach ($institutions->answers as $answer)
-                            @if ($alternativa->id == $answer->alternative_id)
-                            selected
-                            @endif
-                            @endforeach
-                            >{{ $alternativa->alternative }}
-
-                        </option>
-                        @endforeach
-                    </select>
-
-                    @if($question->field_option == "SIM")
-                    {{-- TO=DE Fazer Mostar repostas dos campos opcionais do diagnostico--}}
-                    {{-- <label for="others">Se sim, quais?</label>
-                <input type="text" class="form-control" name="others[]" id="others" value=""> --}}
-                    @foreach ($question->alternatives as $alternativa)
-                    @foreach ($institutions->answers as $answer)
-                    @if ($alternativa->id == $answer->alternative_id && $answer->others != null)
-                    <label for="others">Se sim, quais?</label>
-                    <input type="text" class="form-control" name="others[]" id="others" value="{{$answer->others}}">
-                    @endif
-                    @endforeach
-                    @endforeach
-                    @else
-                    <input type="hidden" class="form-control" name="others[]" id="others">
-                    @endif
-                </div>
-
+    {{-- Verificando se a Instituição é RECONHECIMENTO OU COMPROMISSO --}}
+    @if ($institutions->company_classification == 3 || $institutions->company_classification == 4 || $institutions->company_classification == 5)
+        <div class="question-color">
+            <h1>Diagnóstico Censitário</h1>
+            {{-- Mostrando Messagem de atualização --}}
+            @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-            @endforeach
+            @endif
+            <br />
+            <form action="{{route('show.edit.answer')}}" method="POST">
+                @csrf
 
-            {{-- @foreach ($institutions->answers as $answer)
-        <input type="text"value="{{$answer->id}}" name="id[]">
-            @endforeach --}}
+                @foreach ($questionAlternatives as $question)
+                <p><strong>{{ $question->name }}</strong></p>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="">
+                            Resposta <small class="asterisco-input">*</small>
+                        </label>
 
-            <br><br>
-            {{-- <div class="form-group">
-            <button type="submit" class="btn btn-success form-control">Atualizar Diagnóstico Censitário</button>
-        </div> --}}
+                        <select class="form-control form-control-sm" name="alternative_id[]">
+                            {{-- <option value=""></option> --}}
+                            @foreach ($question->alternatives as $alternativa)
+                            <option value="{{$alternativa->id}}" @foreach ($institutions->answers as $answer)
+                                @if ($alternativa->id == $answer->alternative_id)
+                                selected
+                                @endif
+                                @endforeach
+                                >{{ $alternativa->alternative }}
 
-            <br><br>
-        </form>
-    </div>
+                            </option>
+                            @endforeach
+                        </select>
+
+                        @if($question->field_option == "SIM")
+                        {{-- TO=DE Fazer Mostar repostas dos campos opcionais do diagnostico--}}
+                        {{-- <label for="others">Se sim, quais?</label>
+                    <input type="text" class="form-control" name="others[]" id="others" value=""> --}}
+                        @foreach ($question->alternatives as $alternativa)
+                        @foreach ($institutions->answers as $answer)
+                        @if ($alternativa->id == $answer->alternative_id && $answer->others != null)
+                        <label for="others">Se sim, quais?</label>
+                        <input type="text" class="form-control" name="others[]" id="others" value="{{$answer->others}}">
+                        @endif
+                        @endforeach
+                        @endforeach
+                        @else
+                        <input type="hidden" class="form-control" name="others[]" id="others">
+                        @endif
+                    </div>
+
+                </div>
+                @endforeach
+
+                {{-- @foreach ($institutions->answers as $answer)
+            <input type="text"value="{{$answer->id}}" name="id[]">
+                @endforeach --}}
+
+                <br><br>
+                {{-- <div class="form-group">
+                <button type="submit" class="btn btn-success form-control">Atualizar Diagnóstico Censitário</button>
+            </div> --}}
+
+                <br><br>
+            </form>
+        </div>
+    @endif
     {{-- Tabelas perfil colaborador --}}
     <div class="form-group col-md-12 mb-3">
         <h4>

@@ -10,11 +10,13 @@ use App\Models\Client;
 use App\Models\CompanyClassification;
 use Illuminate\Http\Request;
 use App\Http\Requests\Institution\InstitutionFormRequest;
+use App\Models\Document;
+use App\Models\InstitutionRecognition;
 use DB;
 use \Validator;
 use Response;
 use App\Models\Schedule;
-use App\Notifications\InstitutionRegistered;
+use Symfony\Component\Console\Input\Input;
 
 class InstitutionController extends Controller
 {
@@ -28,13 +30,30 @@ class InstitutionController extends Controller
         $this->schedule = $schedule;
         $this->companyClassification = $companyClassification;
     }
-    public function index()
+    /**
+     * Verificação para qual anexos as Instituições 
+     * devem prenecher
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function index(Request $request)
     {
-        $actions = ScheduleAction::all();
-        $companyClassifications = $this->companyClassification->all(); 
-        $questionAlternatives = Question::with('alternatives')->get();
+        $type_institution = $request->cb_type_institution;
+        if ($type_institution != null) {
 
-        return view('institution.register.register', compact('questionAlternatives', 'actions', 'companyClassifications'));
+            if ($type_institution == 1 || $type_institution == 2 || $type_institution == 6) {
+                return view('institution.register.institution-recognition', compact('type_institution'));
+            } else {
+                $actions = ScheduleAction::all();
+                $companyClassifications = $this->companyClassification->all();
+                $questionAlternatives = Question::with('alternatives')->get();
+
+                return view('institution.register.register', compact('questionAlternatives', 'actions', 'companyClassifications', 'type_institution'));
+            }
+        } else {
+            return redirect()->back();
+        }
     }
     public function welcome()
     {
@@ -48,7 +67,9 @@ class InstitutionController extends Controller
      */
     public function start()
     {
-        return view('institution.register.start');
+        $companyClassifications = $this->companyClassification->all();
+
+        return view('institution.register.start', compact('companyClassifications'));
     }
 
     public function saveAllInstutition(Request $request)
@@ -269,10 +290,49 @@ class InstitutionController extends Controller
             'email'  =>  $dataForm['email'],
         ]);
 
-        if($client == true){
+        if ($client == true) {
             return true;
-        }else{
+        } else {
             return false;
         }
+    }
+
+    public function saveInstutitionRecognition(Request $request)
+    {
+        $dataForm = $request->all();
+        $validacaoInstiuicao = new InstitutionFormRequest();
+
+        $rules = $validacaoInstiuicao->rules();
+        $messages = $validacaoInstiuicao->messages();
+
+        $validator = Validator::make($dataForm, $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()
+                ->back()
+                ->withErrors($validator)
+                ->withInput();
+        }else{
+            $institution = $this->institution->create($dataForm);
+            $autentication = $institution->client()->create([
+                'name'  =>    $institution->name,
+                'email'  =>    $institution->email,
+                'password'  =>  bcrypt($institution->cnpj),
+                'institution_id'  =>   $institution->id,
+            ]);
+
+            if($institution == true && $autentication == true){
+                return redirect()
+                    ->route('login.client')
+                    ->with('success', 'Instituição salva com sucesso! Faça login para concluir seu cadastro.');
+            }else{
+                return redirect()->back()->with('errors', 'Erro ao salvar Instituição');
+            }
+
+        }
+
+    }
+    public function downloandAnexos(Document $document)
+    {
+        return $document->downloandAnexoServen();
     }
 }
