@@ -27,10 +27,6 @@
         </ul>
     </div>
     @endif
-
-    @if ($institutions->company_classification == 3 || $institutions->company_classification == 4 ||
-    $institutions->company_classification == 5)
-
     <table class="table table-striped" id="tblShedule">
         <thead>
             <tr>
@@ -72,7 +68,6 @@
             @endforeach
         </tbody>
     </table>
-    @endif
 </div>
 @stop
 

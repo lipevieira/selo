@@ -164,16 +164,9 @@
                                 </select>
                             </div>
                             <div align="center">
-                                @if ($institutions->company_classification == 1 || $institutions->company_classification
-                                == 2 || $institutions->company_classification == 6)
-                                <button type="button" name="btn_resultados_next" id="btn_resultados_next"
-                                    class="btn btn-success btn-lg" data-url="{{route('update.institution')}}">Atualizar
-                                    Informações</button>
-                                @else
                                 <button type="button" name="btn_indentificacao" id="btn_indentificacao"
                                     class="btn btn-info btn-lg"
                                     data-url="{{route('update.institution')}}">Proximo</button>
-                                @endif
                             </div>
                             <br />
                         </div>

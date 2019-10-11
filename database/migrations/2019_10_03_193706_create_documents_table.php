@@ -18,8 +18,10 @@ class CreateDocumentsTable extends Migration
             $table->string('doc_name');
             $table->string('description')->nullable();
 
-            $table->bigInteger('institution_id')->unsigned();
-            $table->foreign('institution_id')->references('id')->on('institutions');
+            $table->morphs('documenttable');
+
+            // $table->bigInteger('institution_id')->unsigned();
+            // $table->foreign('institution_id')->references('id')->on('institutions');
             $table->timestamps();
         });
     }

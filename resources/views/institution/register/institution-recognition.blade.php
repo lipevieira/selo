@@ -13,7 +13,7 @@
         <div class="tab-pane active" id="instituicao_detalhes">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong> IDENTIFICAÇÃO DA INSTITUIÇÃO</strong>
+                    <strong> IDENTIFICAÇÃO DA INSTITUIÇÃO RECONHECIMENTO</strong>
                     <div class="legends-forms">
                         <strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
                             class="asterisco-input-ogrigatorio">*</small>
@@ -29,7 +29,13 @@
                         </ul>
                     </div>
                     @endif
-                    <form action="{{route('save.institution.recognition')}}" method="POST">
+                    {{-- Messagem de sucesso caso tenha salvado --}}
+                    @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                    @endif
+                    <form action="{{route('save.institution.recognition')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
@@ -82,7 +88,7 @@
                                     name="address">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="email">E-mail:<small class="asterisco-input">(Deve ser usado como seu Login)*</small></label>
+                                <label for="email">E-mail:<small class="asterisco-input">*</small></label>
                                 <input type="email" class="form-control" id="email" placeholder="E-mail" value=""
                                     name="email">
                             </div>
@@ -107,7 +113,7 @@
                                 <input type="text" class="form-control" id="phone_two" placeholder="Telefone:" value=""
                                     name="phone_two">
                             </div>
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="email_two">Ramo de Atividade <small
                                         class="asterisco-input">*</small></label>
                                 <select class="form-control form-control-sm" name="institution_activity">
@@ -117,10 +123,20 @@
                                     <option value="Serviços">Serviços</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <br>
-                                <button type="submit" class="btn btn-primary btn-sm">Salvar Instituição</button>
+                            <div class="col-md-4 mb-3">
+                                <label for="doc_name">Anexo<small class="asterisco-input">*</small></label>
+                                <input type="file" class="form-control" id="doc_name" name="doc_name">
                             </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label>Para receber o Selo da Diversidade preenchar o Anexo</label>
+                                <a class="btn btn-danger form-control" href="{{route('document.seve')}}"
+                                    role="button">Click aqui para baixar o Anexo</a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <br><br><br>
+                            <button type="submit" class="btn btn-primary btn-sm">Salvar Instituição</button>
                         </div>
                     </form>
                 </div>

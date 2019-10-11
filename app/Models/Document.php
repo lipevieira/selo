@@ -4,22 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Document extends Model
 {
-    protected $fillable = ['doc_name', 'description', 'institution_id' ];
+    protected $fillable = ['doc_name', 'description',];
     protected $dates = [
         'created_id',
         'created_at',
     ];
     /**
-     * Descrioption: Volta do relacionameto
-     * Muitos Documentos pertercem a uma Instituição
+     * Relacionamento de morphTo
+     *
      * @return Institution
+     * @return InstitutionRecognition
      */
-    public function institution()
+    public function documenttable()
     {
-        return $this->belongsTo(Institution::class);
+        return $this->morphTo();
     }
+    
     public function downloandAnexoOne()
     {
         return response()->download(storage_path("app/public/models/anexo01.doc"));

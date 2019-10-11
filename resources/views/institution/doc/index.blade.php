@@ -20,11 +20,9 @@
                 <p>Para a instituição ser certificada baixe e preenchar os Anexo </p>
                 <a class="btn btn-primary btn-sm" href="{{ route('anexo01.show') }}" role="button" target="_blank">Baixar Anexo I
                 </a>
-                {{-- <a class="btn btn-primary btn-sm" href="{{ route('anexo07.show') }}" role="button" target="_blank">Baixar o Anexo IV
-                </a> --}}
+                
                 <a class="btn btn-primary btn-sm" href="{{ route('anexo06.show') }}" role="button" target="_blank">Baixar o AnexoVI
                 </a>
-                <a class="btn btn-primary btn-sm" href="{{ route('anexo07.show') }}" role="button" target="_blank">Baixar Anexo VII</a>
                 <p>APRESENTAR AS CERTIDÕES NEGATIVAS DAS ESFERAS MUNICIPAL, ESTADUAL E FEDERAL,              CONTRATO SOCIAL (OU DOCUMENTO EQUIVALENTE) E DECLARAÇÃO DE NÃO CONTRATAÇÃO DE MENORES.
                 </p>
 
