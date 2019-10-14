@@ -66,37 +66,36 @@ class InstitutionFormRequest extends FormRequest
     public function rulesMembers()
     {
         return [
-            'members_name.*'  => 'required | min:4 | max:100',
-            'members_email.*' => 'required|max:150 | distinct',
-            'members_email' => 'unique:commission_members',
-            'members_function.*' => 'required | max:60',
-            'members_phone.*' => 'required | min:4 | max:20',
+            'members_name.0'  => 'required|max:100',
+            'members_email.0' => 'required|max:150',
+            'members_function.0' => 'required|max:60',
+            'members_phone.0' => 'required|max:20',
         ];
     }
     public function messageMembers()
     {
         return [
             'members_name.0.required' => 'É obrigatório informa o nome do primeiro  membros da comissão',
-            'members_name.1.required' => 'É obrigatório informa o nome do segundo membros da comissão',
-            'members_name.2.required' => 'É obrigatório informa o nome do terceiro  membros da comissão',
+            // 'members_name.1.required' => 'É obrigatório informa o nome do segundo membros da comissão',
+            // 'members_name.2.required' => 'É obrigatório informa o nome do terceiro  membros da comissão',
             'members_email.0.required' => 'É obrigatório informa o E-mail do primeiro membros da comissão',
-            'members_email.1.required' => 'É obrigatório informa o E-mail do segundo membros da comissão',
-            'members_email.2.required' => 'É obrigatório informa o E-mail do terceiro  membros da comissão',
-            'members_email.unique' => 'O E-mail do Membros da comissão já esta cadastrando. Por favor informe um e-mail diferente',
+            // 'members_email.1.required' => 'É obrigatório informa o E-mail do segundo membros da comissão',
+            // 'members_email.2.required' => 'É obrigatório informa o E-mail do terceiro  membros da comissão',
+            // 'members_email.unique' => 'O E-mail do Membros da comissão já esta cadastrando. Por favor informe um e-mail diferente',
             'members_function.0.required' => 'É obrigatório informa a Função/Setor do primeiro  membros da comissão',
-            'members_function.1.required' => 'É obrigatório informa a Função/Setor segundo membros da comissão',
-            'members_function.2.required' => 'É obrigatório informa a Função/Setor do terceiro  membros da comissão',
+            // 'members_function.1.required' => 'É obrigatório informa a Função/Setor segundo membros da comissão',
+            // 'members_function.2.required' => 'É obrigatório informa a Função/Setor do terceiro  membros da comissão',
             'members_phone.0.required' => 'É obrigatório informa o Telefone do primeiro  membros da comissão',
-            'members_phone.1.required' => 'É obrigatório informa o Telefone do segundo membros da comissão',
-            'members_phone.2.required' => 'É obrigatório informa o Telefone o nome do terceiro  membros da comissão',
-            'members_email.*.distinct' => 'Os e-mails dos membros  membros da comissão devem ser todos diferentes',
+            // 'members_phone.1.required' => 'É obrigatório informa o Telefone do segundo membros da comissão',
+            // 'members_phone.2.required' => 'É obrigatório informa o Telefone o nome do terceiro  membros da comissão',
 
         ];
     }
     public function rulesDiagnosticoCencitario()
     {
         return [
-            'alternative_id.*' => 'required',
+            'alternative_id.0' => 'required',
+            'alternative_id.1' => 'required',
         ];
     }
     public function messagesDiagnosticoCencitario()
@@ -104,14 +103,14 @@ class InstitutionFormRequest extends FormRequest
         return [
             'alternative_id.0.required' => 'É obrigatório responder a questões 01 do diagnóstico censitário',
             'alternative_id.1.required' => 'É obrigatório responder a questões 02 questões do diagnóstico censitário',
-            'alternative_id.2.required' => 'É obrigatório responder a questões 03 questões do diagnóstico censitário',
-            'alternative_id.3.required' => 'É obrigatório responder a questões 04 do diagnóstico censitário',
-            'alternative_id.4.required' => 'É obrigatório responder a questões 05 do diagnóstico censitário',
-            'alternative_id.5.required' => 'É obrigatório responder a questões 06 do diagnóstico censitário',
-            'alternative_id.6.required' => 'É obrigatório responder a questões 07 questões do diagnóstico censitário',
-            'alternative_id.7.required' => 'É obrigatório responder a questões 08 questões do diagnóstico censitário',
-            'alternative_id.8.required' => 'É obrigatório responder a questões 09 questões do diagnóstico censitário',
-            'alternative_id.9.required' => 'É obrigatório responder a questões 10 questões do diagnóstico censitário',
+            // 'alternative_id.2.required' => 'É obrigatório responder a questões 03 questões do diagnóstico censitário',
+            // 'alternative_id.3.required' => 'É obrigatório responder a questões 04 do diagnóstico censitário',
+            // 'alternative_id.4.required' => 'É obrigatório responder a questões 05 do diagnóstico censitário',
+            // 'alternative_id.5.required' => 'É obrigatório responder a questões 06 do diagnóstico censitário',
+            // 'alternative_id.6.required' => 'É obrigatório responder a questões 07 questões do diagnóstico censitário',
+            // 'alternative_id.7.required' => 'É obrigatório responder a questões 08 questões do diagnóstico censitário',
+            // 'alternative_id.8.required' => 'É obrigatório responder a questões 09 questões do diagnóstico censitário',
+            // 'alternative_id.9.required' => 'É obrigatório responder a questões 10 questões do diagnóstico censitário',
         ];
     }
     public function rulesPlainAction()

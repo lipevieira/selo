@@ -26,18 +26,20 @@
             <p><strong>{{ $question->name }}</strong></p>
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    <label for="">
+                    @if ($question->id == 1 || $question->id == 2)
+                    <label>
                         Resposta <small class="asterisco-input">*</small>
                     </label>
+                    @endif
 
                     <select class="form-control form-control-sm" name="alternative_id[]">
-                        {{-- <option value=""></option> --}}
+                        <option value=""></option>
                         @foreach ($question->alternatives as $alternativa)
                         <option value="{{$alternativa->id}}" @foreach ($institutions->answers as $answer)
                             @if ($alternativa->id == $answer->alternative_id)
-                            selected
+                                selected
                             @endif
-                            @endforeach
+                        @endforeach
                             >{{ $alternativa->alternative }}
 
                         </option>

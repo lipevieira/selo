@@ -32,7 +32,7 @@
                         @foreach ($collaboratorActivitylevels as $item)
                         <tr>
                             <th scope="row">{{$item->id}}</th>
-                            <td>{{$item->institution->name}}</td>
+                            <td>{{$item->institution->fantasy_name}}</td>
                             <td>{{$item->activity_level}}</td>
                             <td>{{$item->color}}</td>
                             <td>{{$item->human_quantity_activity_level}}</td>

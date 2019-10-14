@@ -41,12 +41,13 @@ class InstitutionController extends Controller
     {
         $type_institution = $request->cb_type_institution;
         if ($type_institution != null) {
+            $companyClassifications = $this->companyClassification->all();
 
             if ($type_institution == 1 || $type_institution == 2 || $type_institution == 6) {
-                return view('institution.register.institution-recognition', compact('type_institution'));
+                return view('institution.register.institution-recognition', compact('type_institution', 'companyClassifications'));
             } else {
                 $actions = ScheduleAction::all();
-                $companyClassifications = $this->companyClassification->all();
+              
                 $questionAlternatives = Question::with('alternatives')->get();
 
                 return view('institution.register.register', compact('questionAlternatives', 'actions', 'companyClassifications', 'type_institution'));
@@ -295,51 +296,5 @@ class InstitutionController extends Controller
         } else {
             return false;
         }
-    }
-
-    public function saveInstutitionRecognition(Request $request, InstitutionRecognition $institutionRecognition)
-    {
-        $dataForm = $request->all();
-        $rules = $institutionRecognition->rules();
-        $messages = $institutionRecognition->messages();
-        $validator = Validator::make($dataForm, $rules, $messages);
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-
-            $recognitionInstitution = $institutionRecognition->create($dataForm);
-           
-            $name = uniqid(date('HisYmd'). $recognitionInstitution);
-            $extension = $request->doc_name->extension();
-            $nameFile = "{$name}.{$extension}";
-            $upload = $request->doc_name->storeAs('documents/recognition', $nameFile);
-            if (!$upload) {
-                return redirect()
-                    ->back()
-                    ->with('error', 'Falha ao fazer upload de arquivos')
-                    ->withInput();
-            } else {
-                $recognitionInstitution->documents()->create([
-                    'doc_name'  => $nameFile,
-                ]);
-                return redirect()
-                    ->back()
-                    ->with('success', 'Instituição salva com sucesso!');
-            }
-        }
-    }
-    /**
-     * Buscando o modelo de anexo 07 para 
-     * as Instituições do tipo reconheicmento
-     *
-     * @param Document $document
-     * @return void
-     */
-    public function downloandAnexos(Document $document)
-    {
-        return $document->downloandAnexoServen();
     }
 }

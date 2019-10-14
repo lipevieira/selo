@@ -34,6 +34,10 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth']
    Route::get('/user-index', 'HomeController@getIndexUser')->name('home.index.user');
    Route::get('show/document/{name}', 'HomeController@show')->name('home.document.show');
 
+   Route::get('/recognition', 'HomeController@getInstitutionRecognition')->name('home.recognition');
+   Route::get('/recognition/detalhes/{id}', 'HomeController@getShowInstitutionRecognition')->name('home.recognition.detalhes');
+   Route::get('/show-recognition-document/{doc_name}', 'HomeController@showDocumentRecongnition')->name('recongnition.show.document');
+
 });
 
 /**
@@ -44,8 +48,8 @@ Route::group(['prefix' => 'institution', 'namespace' => 'Institution'], function
    Route::get('/start', 'InstitutionController@start')->name('start.register');
    Route::post('salvar', 'InstitutionController@saveAllInstutition')->name('save.institution');
    
-   Route::get('/document', 'InstitutionController@downloandAnexos')->name('document.seve');
-   Route::post('/savar/reconhecimento', 'InstitutionController@saveInstutitionRecognition')->name('save.institution.recognition');
+   // Route::get('/document', 'InstitutionController@downloandAnexos')->name('document.seve');
+   // Route::post('/savar/reconhecimento', 'InstitutionController@saveInstutitionRecognition')->name('save.institution.recognition');
    /**
     * Rotas para Instituições logados
     */
@@ -53,6 +57,19 @@ Route::group(['prefix' => 'institution', 'namespace' => 'Institution'], function
       Route::post('/update', 'InstitutionController@update')->name('update.institution');
    });
 });
+
+/***
+ * @description rotas para Instituições que
+ * são reconhecimento
+ */
+Route::group(['prefix' => 'recognition', 'namespace' => 'Recognition'], function () {
+   Route::get('/document', 'RecognitionController@downloandAnexos')->name('document.seve');
+
+   Route::post('/savar', 'RecognitionController@save')->name('save.institution.recognition');
+});
+
+
+
 /***
  * @description Autenticação da Instituição
  */
@@ -71,7 +88,7 @@ Route::group(['prefix' => 'autentication-client', 'namespace' => 'Client'], func
 
 
 /***
- * @description: Rotas para editar o diagnostico censitario
+ * @description: Rotas para Nivel de atividades dos Colaboradores
  */
 Route::group(['prefix' => 'nivel-collaboradores-atividade', 'namespace' => 'CollaboratorActivityLevel'], function () {
    /**

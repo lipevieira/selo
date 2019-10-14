@@ -18,9 +18,9 @@ class Document extends Model
      * @return Institution
      * @return InstitutionRecognition
      */
-    public function documenttable()
+    public function institution()
     {
-        return $this->morphTo();
+        return $this->belongsTo(Institution::class);
     }
     
     public function downloandAnexoOne()

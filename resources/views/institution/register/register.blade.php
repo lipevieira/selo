@@ -99,7 +99,6 @@
 						<div class="legends-forms">
 							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
 								class="asterisco-input-ogrigatorio">*</small>
-							<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -121,13 +120,14 @@
 									value="{{old('fantasy_name')}}" name="fantasy_name">
 							</div>
 							<div class="col-md-4 mb-3">
-								<label for="email_two">Classificação da Empresa <small
-										class="asterisco-input">*</small></label>
+								<label for="email_two">Classificação da Empresa </label>
 								<select class="form-control form-control-sm" id="company_classification"
 									name="company_classification">
-									<option></option>
 									@foreach ($companyClassifications as $classification)
-									<option value="{{ $classification->id }}">{{ $classification->type }}</option>
+									@if ($classification->id == $type_institution)
+									<option value="{{ $classification->id }}" selected>{{ $classification->type }}
+									</option>
+									@endif
 									@endforeach
 								</select>
 							</div>
@@ -180,25 +180,19 @@
 									name="formation">
 							</div>
 							<div class="col-md-4 mb-3">
-								<label for="phone_two">Telefone <small class="asterisco-input">*</small></label>
+								<label for="phone_two">Telefone </label>
 								<input type="text" class="form-control" id="phone_two" placeholder="Telefone:" value=""
 									name="phone_two">
 							</div>
-							<div class="col-md-6 mb-3">
-								<label for="email_two">Ramo de Atividade <small class="asterisco-input">*</small></label>
+							<div class="col-md-12 mb-3">
+								<label for="email_two">Ramo de Atividade <small
+										class="asterisco-input">*</small></label>
 								<select class="form-control form-control-sm" name="institution_activity">
 									<option></option>
 									<option value="Indústria">Indústria</option>
 									<option value="Comércio">Comércio</option>
 									<option value="Serviços">Serviços</option>
 								</select>
-							</div>
-							<div class="col-md-6 mb-3">
-								<label for="activity_branch">Ramo de atividade <small
-										class="asterisco-input">*</small></label>
-								<input type="text" class="form-control" id="activity_branch"
-									placeholder="Ramo de atividade:" value="{{old('activity_branch')}}"
-									name="activity_branch">
 							</div>
 							<!-- Membros da comisão -->
 							<h5 class="col-md-12 mb-3"> <strong> Recomendamos eleger três colaboradores para tratar da
@@ -226,23 +220,19 @@
 										<tr>
 											<td>
 												<input type="text" class="form-control" id="members_name"
-													placeholder="Nome" value="{{old('members_name[]')}}"
-													name="members_name[]">
+													placeholder="Nome" value="" name="members_name[]">
 											</td>
 											<td>
 												<input type="text" class="form-control" id="members_function"
-													placeholder="Função / setor" value="{{old('members_function[]')}}"
-													name="members_function[]">
+													placeholder="Função / setor" value="" name="members_function[]">
 											</td>
 											<td>
 												<input type="text" class="form-control members_phone" id="members_phone"
-													placeholder="Telefone" value="{{old('members_phone[]')}}"
-													name="members_phone[]">
+													placeholder="Telefone" value="" name="members_phone[]">
 											</td>
 											<td>
 												<input type="email" class="form-control" id="members_email"
-													placeholder="E-mail" value="{{old('members_email[]')}}"
-													name="members_email[]">
+													placeholder="E-mail" value="" name="members_email[]">
 											</td>
 										</tr>
 										@endforeach
@@ -259,7 +249,7 @@
 											<thead>
 												<tr>
 													<th scope="col">Informe os CNPJs, caso sua instituição/Empresa tenha
-														Filiais <small class="asterisco-input-options">*</small></th>
+														Filiais </th>
 													<th scope="col">Remover</th>
 												</tr>
 											</thead>
@@ -298,7 +288,6 @@
 						<div class="legends-forms">
 							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
 								class="asterisco-input-ogrigatorio">*</small>
-							<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -308,9 +297,11 @@
 							<p><strong>{{ $question->name }}</strong></p>
 							<div class="row">
 								<div class="col-md-12 mb-3">
-									<label for="">
+									@if ($question->id == 1 || $question->id == 2)
+									<label>
 										Resposta <small class="asterisco-input">*</small>
 									</label>
+									@endif
 
 									<select class="form-control form-control-sm" name="alternative_id[]">
 										<option value=""></option>
@@ -338,20 +329,13 @@
 								<table class="table" id="tblLevelActivicDemiasGroups">
 									<thead>
 										<tr>
-											<th scope="col">NIVEL DE ATIVIDADE<small
-													class="asterisco-input-options">*</small></th>
-											<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small>
-											</th>
-											<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small>
-											</th>
-											<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small>
-											</th>
-											<th scope="col">RAÇA/COR<small class="asterisco-input-options">*</small>
-											</th>
-											<th scope="col">Nº HOMEMS<small class="asterisco-input-options">*</small>
-											</th>
-											<th scope="col">Nº MULHERES<small class="asterisco-input-options">*</small>
-											</th>
+											<th scope="col">NIVEL DE ATIVIDADE</th>
+											<th scope="col">RAÇA/COR</th>
+											<th scope="col">Nº HOMEMS</th>
+											<th scope="col">Nº MULHERES</th>
+											<th scope="col">RAÇA/COR</th>
+											<th scope="col">Nº HOMEMS</th>
+											<th scope="col">Nº MULHERES</th>
 											<th></th>
 										</tr>
 									</thead>
@@ -541,7 +525,6 @@
 						<div class="legends-forms">
 							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
 								class="asterisco-input-ogrigatorio">*</small>
-							<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -582,7 +565,6 @@
 						<div class="legends-forms">
 							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
 								class="asterisco-input-ogrigatorio">*</small>
-							<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -592,8 +574,7 @@
 						</h4>
 						<h4>Listar todas as atividades necessárias à realização do projeto.</h4>
 						<label>
-							Autoriza a divulgação destas ações pela SEMUR? <small
-								class="asterisco-input-options">*</small>
+							Autoriza a divulgação destas ações pela SEMUR?<small class="asterisco-input">*</small>
 							<select class="form-control-sm" name="authorization">
 								<option></option>
 								<option value="SIM">SIM</option>
@@ -607,14 +588,15 @@
 											class="btn btn-success">Adicionar Linhas na Tabela </button></th>
 								</tr>
 								<tr>
-									<th scope="col">AÇÕES <small class="asterisco-input-options">*</small></th>
+									<th scope="col">AÇÕES <small class="asterisco-input">*</small></th>
 									<th scope="col">Atividade (O que é necessário fazer para concluir essa ação):
-										<small class="asterisco-input-options">*</small></th>
+										<small class="asterisco-input">*</small></th>
 									<th scope="col">
 										Quantidade:De vezes que Realizará essa atividade<small
-											class="asterisco-input-options">*</small>
+											class="asterisco-input">*</small>
 									</th>
-									<th scope="col">Data Limite: Para concluir Atividade<small class="asterisco-input-options">*</small></th>
+									<th scope="col">Data Limite: Para concluir Atividade<small
+											class="asterisco-input">*</small></th>
 									<th scope="col">REMOVER</th>
 								</tr>
 							</thead>
@@ -677,7 +659,6 @@
 						<div class="legends-forms">
 							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
 								class="asterisco-input-ogrigatorio">*</small>
-							<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -716,7 +697,6 @@
 						<div class="legends-forms">
 							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
 								class="asterisco-input-ogrigatorio">*</small>
-							<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 						</div>
 					</div>
 					<div class="panel-body">
@@ -758,7 +738,6 @@
 						<div class="legends-forms">
 							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
 								class="asterisco-input-ogrigatorio">*</small>
-							<strong> Campos Opicionais</strong> <small class="asterisco-input-options">*</small>
 						</div>
 					</div>
 					<div class="panel-body">

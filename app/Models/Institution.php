@@ -75,7 +75,7 @@ class Institution extends Model
      *  @description: Uma instuição tem muitos Documentos 
      * Relacionamento 1 - N
      * @return Document
-     */ 
+     */
     public function documents()
     {
         return $this->hasMany(Document::class);

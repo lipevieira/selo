@@ -30,7 +30,7 @@
                     <tbody>
                         @foreach ($profileCollaborator as $item)
                         <tr>
-                            <td>{{$item->name}}</td>
+                            <td>{{$item->fantasy_name}}</td>
                             <td>{{$item->color}}</td>
                             <td>{{$item->max_human}}</td>
                             <td>{{$item->max_woman}}</td>

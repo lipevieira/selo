@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Document;
+use App\Models\Institution;
 
 class DocumentController extends Controller
 {
     private $document;
-    public function __construct(Document $document)
+    private $institution;
+    public function __construct(Document $document, Institution $institution)
     {
         $this->document = $document;
+        $this->institution = $institution;
     }
     public function index()
     {
@@ -47,10 +50,11 @@ class DocumentController extends Controller
         } else {
             # Define um nome aleatório para o arquivo baseado no timestamps atual
             $name = uniqid(date('HisYmd'));
+            $fantasyName =  auth()->guard('client')->user()->institution->fantasy_name;
             # Recupera a extensão do arquivo
             $extension = $request->doc_name->extension();
             # Define finalmente o nome
-            $nameFile = "{$name}.{$extension}";
+            $nameFile = "{$fantasyName}.{$name}.{$extension}";
             # Faz o upload para uma pasta chamdas de documents:
             $upload = $request->doc_name->storeAs('documents/anexos', $nameFile);
             # Verifica se NÃO deu certo o upload (Redireciona de volta)
@@ -61,11 +65,16 @@ class DocumentController extends Controller
                     ->withInput();
             } else {
                 # Salvando registro no banco de dados.
-                $this->document->doc_name = $nameFile;
-                // $documento->caminho = url('storage/arquivos/'.$nameFile);
-                $this->document->description = $request->description;
-                $this->document->institution_id = auth()->guard('client')->user()->institution_id;
-                $this->document->save();
+                // $this->document->doc_name = $nameFile;
+                // $this->document->description = $request->description;
+                // $this->document->institution_id = auth()->guard('client')->user()->institution_id;
+
+                // $this->document->save();
+                $institution_id =  auth()->guard('client')->user()->institution_id;
+                $recognitionInstitution = $this->institution->find($institution_id);
+                $recognitionInstitution->documents()->create([
+                    'doc_name'  => $nameFile,
+                ]);
                 return redirect()
                     ->route('doc.index')
                     ->with('success', 'Documento salvo com sucesso!');
@@ -76,7 +85,7 @@ class DocumentController extends Controller
     {
         $doc_name = $request->name;
 
-        return response()->download(storage_path("app/public/documents/anexos/" . $doc_name));
+        return response()->download(storage_path("app/public/anexos/" . $doc_name));
     }
     /**
      * Baixando o modelo do Anexo 01

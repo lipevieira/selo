@@ -35,7 +35,13 @@
                         {{ session('success') }}
                     </div>
                     @endif
-                    <form action="{{route('save.institution.recognition')}}" method="POST" enctype="multipart/form-data">
+                    @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                    @endif
+                    <form action="{{route('save.institution.recognition')}}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
                             <div class="col-md-4 mb-3">
@@ -53,28 +59,36 @@
                                     value="{{old('fantasy_name')}}" name="fantasy_name">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="email_two">Classificação da Empresa <small
-                                        class="asterisco-input">*</small></label>
+                                <label for="email_two">Classificação da Empresa</label>
                                 <select class="form-control form-control-sm" id="company_classification"
                                     name="company_classification">
-                                    <option value="{{$type_institution}}">{{$type_institution}}</option>
-
+                                    @foreach ($companyClassifications as $item)
+                                    @if ($item->id == $type_institution)
+                                    <option value="{{$item->id}}">{{$item->type}}</option>
+                                    @endif
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="cnpj">CNPJ <small class="asterisco-input">*</small></label>
                                 <input type="text" class="form-control" id="cnpj" placeholder="Informe apenas números"
-                                    value="" name="cnpj">
+                                    value="{{ old('cnpj') }}" name="cnpj">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="county">Município <small class="asterisco-input">*</small></label>
                                 <select class="form-control form-control-sm" name="county">
                                     <option></option>
-                                    <option value="Camaçari">Camaçari</option>
-                                    <option value="Candeias">Candeias</option>
-                                    <option value="Lauro de Freitas">Lauro de Freitas</option>
-                                    <option value="Salvador">Salvador</option>
-                                    <option value="Simões Filho">Simões Filho</option>
+                                    <option value="Camaçari" @if (old('county')=="Camaçari" ) {{ 'selected' }} @endif>
+                                        Camaçari</option>
+                                    <option value="Candeias" @if (old('county')=="Candeias" ) {{ 'selected' }} @endif>
+                                        Candeias
+                                    </option>
+                                    <option value="Lauro de Freitas" @if (old('county')=="Lauro de Freitas" )
+                                        {{ 'selected' }} @endif>Lauro de Freitas</option>
+                                    <option value="Salvador" @if (old('county')=="Salvador" ) {{ 'selected' }} @endif>
+                                        Salvador</option>
+                                    <option value="Simões Filho" value="Candeias" @if (old('county')=="Simões Filho" )
+                                        {{ 'selected' }} @endif>Simões Filho</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
@@ -84,48 +98,55 @@
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="address">Endereço <small class="asterisco-input">*</small></label>
-                                <input type="text" class="form-control" id="address" placeholder="Endereço:" value=""
-                                    name="address">
+                                <input type="text" class="form-control" id="address" placeholder="Endereço:"
+                                    value="{{ old('address') }}" name="address">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="email">E-mail:<small class="asterisco-input">*</small></label>
-                                <input type="email" class="form-control" id="email" placeholder="E-mail" value=""
-                                    name="email">
+                                <input type="email" class="form-control" id="email" placeholder="E-mail"
+                                    value="{{ old('email') }}" name="email">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="phone">Telefone <small class="asterisco-input">*</small></label>
-                                <input type="text" class="form-control" id="phone" placeholder="Telefone" value=""
-                                    name="phone">
+                                <input type="text" class="form-control" id="phone" placeholder="Telefone"
+                                    value="{{ old('phone') }}" name="phone">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="technical_manager">Responsável técnico <small
                                         class="asterisco-input">*</small></label>
                                 <input type="text" class="form-control" id="technical_manager"
-                                    placeholder="Responsável técnico:" value="" name="technical_manager">
+                                    placeholder="Responsável técnico:" value="{{ old('technical_manager') }}"
+                                    name="technical_manager">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="formation">Formação <small class="asterisco-input">*</small></label>
-                                <input type="text" class="form-control" id="formation" placeholder="Formação:" value=""
-                                    name="formation">
+                                <input type="text" class="form-control" id="formation" placeholder="Formação:"
+                                    value="{{ old('formation') }}" name="formation">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="phone_two">Telefone</label>
-                                <input type="text" class="form-control" id="phone_two" placeholder="Telefone:" value=""
-                                    name="phone_two">
+                                <input type="text" class="form-control" id="phone_two" placeholder="Telefone:"
+                                    value="{{ old('phone_two') }}" name="phone_two">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="email_two">Ramo de Atividade <small
                                         class="asterisco-input">*</small></label>
                                 <select class="form-control form-control-sm" name="institution_activity">
                                     <option></option>
-                                    <option value="Indústria">Indústria</option>
-                                    <option value="Comércio">Comércio</option>
-                                    <option value="Serviços">Serviços</option>
+                                    <option value="Indústria" @if (old('institution_activity')=="Indústria" )
+                                        {{ 'selected' }} @endif>Indústria</option>
+
+                                    <option value="Comércio" @if (old('institution_activity')=="Comércio" )
+                                        {{ 'selected' }} @endif>Comércio</option>
+
+                                    <option value="Serviços" @if (old('institution_activity')=="Serviços" )
+                                        {{ 'selected' }} @endif>Serviços</option>
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label for="doc_name">Anexo<small class="asterisco-input">*</small></label>
-                                <input type="file" class="form-control" id="doc_name" name="doc_name">
+                                <input type="file" class="form-control" id="doc_name" name="doc_name"
+                                    value="{{ old('doc_name') }}">
                             </div>
 
                             <div class="col-md-4 mb-3">

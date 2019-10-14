@@ -70,25 +70,25 @@ class AlternativeTableSeed extends Seeder
                 'alternative' => '(c) Não existe',
                 'question_id' => '7',
             ],[
-                'alternative' => '(d) Outros:',
+                'alternative' => '(d) Outros',
                 'question_id' => '7',
             ],[
-                'alternative' => '(a) Sim:',
+                'alternative' => '(a) Sim',
                 'question_id' => '8',
             ],[
-                'alternative' => '(b) Não:',
+                'alternative' => '(b) Não',
                 'question_id' => '8',
             ],[
                 'alternative' => '(a) Sim',
                 'question_id' => '9',
             ],[
-                'alternative' => '(b) Não:',
+                'alternative' => '(b) Não',
                 'question_id' => '9',
             ],[
-                'alternative' => '(a) Sim:',
+                'alternative' => '(a) Sim',
                 'question_id' => '10',
             ],[
-                'alternative' => '(b) Não:',
+                'alternative' => '(b) Não',
                 'question_id' => '10',
             ]
         ]);

@@ -209,17 +209,20 @@
                         <div class="panel-body">
                             <!-- Inicio das Questões -->
                             @foreach ($questionAlternatives as $question)
+                            
                             <p><strong>{{ $question->name }}</strong></p>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
                                     <label for="">Resposta</label>
                                     <select class="form-control form-control-sm" name="alternative_id[]">
+                                        <option value=""></option>
                                         @foreach ($question->alternatives as $alternativa)
-                                        <option value="{{$alternativa->id}}" @foreach ($instituion->answers as $answer)
+                                        <option value="{{$alternativa->id}}" 
+                                        @foreach ($instituion->answers as $answer)
                                             @if ($alternativa->id == $answer->alternative_id)
                                             selected
                                             @endif
-                                            @endforeach
+                                        @endforeach
                                             >{{ $alternativa->alternative }}
                                         </option>
 
@@ -236,8 +239,6 @@
                                     @endif
                                     @endforeach
                                     @endforeach
-                                    {{-- <label for="others">Se sim, quais?</label>
-                                        <input type="text" class="form-control" name="others[]" id="others"> --}}
                                     @else
                                     <input type="hidden" class="form-control" name="others[]" id="others">
                                     @endif
@@ -257,6 +258,7 @@
                                                 <th scope="col">RAÇA/COR</th>
                                                 <th scope="col">Nº HOMEMS</th>
                                                 <th scope="col">Nº MULHERES</th>
+                                                <th scope="col">TOTAL DE PESSOAS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -267,7 +269,8 @@
                                                 <td>{{$collaboratorActivityLevel->activity_level}}</td>
                                                 <td>{{$collaboratorActivityLevel->color}}</td>
                                                 <td>{{$collaboratorActivityLevel->human_quantity_activity_level}}</td>
-                                                <td>{{$collaboratorActivityLevel->woman_quantity_activity_level}}</td>
+                                                <td>{{ $collaboratorActivityLevel->woman_quantity_activity_level }}</td>
+                                                <td>{{ $collaboratorActivityLevel->woman_quantity_activity_level + $collaboratorActivityLevel->human_quantity_activity_level }}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -291,7 +294,7 @@
                                     <tbody>
                                         @foreach ($profile as $item)
                                         <tr>
-                                            <td>{{$item->name}}</td>
+                                            <td>{{$item->fantasy_name}}</td>
                                             <td>{{$item->color}}</td>
                                             <td>{{$item->max_human}}</td>
                                             <td>{{$item->max_woman}}</td>

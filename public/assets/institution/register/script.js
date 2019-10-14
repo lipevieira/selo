@@ -76,7 +76,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'POST',
 			url: url,
-			data: formData,		
+			data: formData,
 			success: function (data) {
 				if ((data.errors)) {
 					$('#modalErrorCad').modal('show');
@@ -444,15 +444,15 @@ $(document).ready(function () {
 						danger.find('ul').append('<li>' + error + '</li>');
 					});
 					danger.show();
-					$('#loadSaveInstitution').modal('hide'); 
+					$('#loadSaveInstitution').modal('hide');
 				} else {
-					$('#loadSaveInstitution').modal('hide'); 
-					alert('Instituição salva com sucesso!');	
+					$('#loadSaveInstitution').modal('hide');
+					alert('Instituição salva com sucesso!');
 					window.location.href = welcome;
 				}
 			},
 			error: function (request, status, erro) {
-				$('#loadSaveInstitution').modal('hide'); 
+				$('#loadSaveInstitution').modal('hide');
 				alert('Erro ao salvar instituição  ' + erro);
 			}
 		});
@@ -460,11 +460,11 @@ $(document).ready(function () {
 		// 	$(this).prop("disabled", false);
 		// }
 	});
-	
+
 	AddTableRowCnpjsAdicionais = function () {
 		var table = $('#tbl_cnpj_add'),
-		lastRow = table.find('tbody tr:last'),
-		rowClone = lastRow.clone();
+			lastRow = table.find('tbody tr:last'),
+			rowClone = lastRow.clone();
 		table.find('tbody').append(rowClone);
 
 		// Pegando a ultima posição do array e add o Mask
@@ -478,12 +478,8 @@ $(document).ready(function () {
 	};
 	// Buuton remover linha da Tabela de cnpsj adcionais
 	RemoveTableRow = function (handler) {
-		var tr = $(handler).closest('tr:');
-
-		tr.fadeOut(400, function () {
-			tr.remove();
-		});
-
+		var tr = $(handler).closest('tr');
+		tr.remove();
 		return false;
 	};
 

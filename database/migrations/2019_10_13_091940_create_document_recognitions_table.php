@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDocumentsTable extends Migration
+class CreateDocumentRecognitionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('documents', function (Blueprint $table) {
+        Schema::create('document_recognitions', function (Blueprint $table) {
             $table->bigIncrements('id');
+
             $table->text('doc_name');
-            $table->string('description')->nullable();
 
+            $table->bigInteger('institution_recognition_id')->unsigned();
+            $table->foreign('institution_recognition_id')->references('id')->on('institution_recognitions');
 
-            $table->bigInteger('institution_id')->unsigned();
-            $table->foreign('institution_id')->references('id')->on('institutions');
-            
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('documents');
+        Schema::dropIfExists('document_recognitions');
     }
 }

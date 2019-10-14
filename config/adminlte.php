@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Selo Étnico Racial',
+    'title' => 'Selo Diversidade',
 
     'title_prefix' => '',
 
@@ -113,8 +113,6 @@ return [
             'text'        => 'Home',
             'url'         => 'home',
             'icon'        => 'home',
-            // 'label'       => 4,
-            // 'label_color' => 'success',
         ],
         [
             'text'    => 'Detalhes da Instituição',
@@ -139,6 +137,11 @@ return [
                     'text' => 'Cronograma',
                     'url'  => 'home/cronograma',
                     'icon' => 'table',
+                ],
+                [
+                    'text' => 'Reconhecimento',
+                    'url'  => 'home/recognition',
+                    'icon' => 'registered',
                 ],
                 
             ],

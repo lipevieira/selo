@@ -14,8 +14,8 @@ class Answer extends Model
         return $this->belongsTo(Institution::class);
     }
 
-    public function alternatives()
-    {
-        return $this->hasMany(Alternative::class);
-    }
+    // public function alternatives()
+    // {
+    //     return $this->hasMany(Alternative::class);
+    // }
 }

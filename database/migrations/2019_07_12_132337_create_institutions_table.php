@@ -25,14 +25,14 @@ class CreateInstitutionsTable extends Migration
             $table->string('phone',20);
             $table->string('technical_manager',130);
             $table->string('formation',80);
-            $table->string('phone_two',20);
+            $table->string('phone_two',20)->nullable();
             $table->string('institution_activity',60);
             $table->string('company_classification',100);
             $table->string('authorization',3)->nullable();
-            $table->text('action_plan')->nullable();
-            $table->text('partners')->nullable();
+            $table->text('action_plan');
+            $table->text('partners');
             $table->text('methodology')->nullable();
-            $table->text('result')->nullable();
+            $table->text('result');
             
             $table->timestamps();
         });

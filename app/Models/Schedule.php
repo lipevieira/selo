@@ -41,7 +41,7 @@ class Schedule extends Model
         $now = new Carbon();
         $ano = $now->year;
         $mes = 11;
-        $dia = 29;
+        $dia = 30;
         $deadlineValidate = Carbon::createFromDate($ano, $mes, $dia);
         $valida = true;
 
@@ -63,7 +63,7 @@ class Schedule extends Model
         $now = new Carbon();
         $ano = $now->year;
         $mes = 11;
-        $dia = 29;
+        $dia = 30;
         $deadlineValidate = Carbon::createFromDate($ano, $mes, $dia);
         $valida = true;
 

@@ -27,20 +27,20 @@ class CollaboratorActivityLevel extends Model
     {
         return DB::table('institutions')
             ->join('collaborator_activity_levels', 'institutions.id', '=', 'collaborator_activity_levels.institution_id')
-            ->selectRaw('collaborator_activity_levels.color, institutions.name,
+            ->selectRaw('collaborator_activity_levels.color, institutions.fantasy_name,
               sum(collaborator_activity_levels.human_quantity_activity_level)  as max_human,
                sum(collaborator_activity_levels.woman_quantity_activity_level) as max_woman')
-            ->groupBy('collaborator_activity_levels.color', 'institutions.name')
+            ->groupBy('collaborator_activity_levels.color', 'institutions.fantasy_name')
             ->get();
     }
     public function getProfileCollaboratorDetail($id)
     {
         return DB::table('institutions')
             ->join('collaborator_activity_levels', 'institutions.id', '=', 'collaborator_activity_levels.institution_id')
-            ->selectRaw('collaborator_activity_levels.color, institutions.name,
+            ->selectRaw('collaborator_activity_levels.color, institutions.fantasy_name,
               sum(collaborator_activity_levels.human_quantity_activity_level)  as max_human,
                sum(collaborator_activity_levels.woman_quantity_activity_level) as max_woman')
-            ->groupBy('collaborator_activity_levels.color', 'institutions.name')
+            ->groupBy('collaborator_activity_levels.color', 'institutions.fantasy_name')
             ->where('institution_id',$id)
             ->get();
     }

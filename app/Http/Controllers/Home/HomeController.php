@@ -9,6 +9,7 @@ use App\Models\CollaboratorActivityLevel;
 use App\Models\CommissionMembers;
 use App\Models\Schedule;
 use App\Models\Question;
+use App\Models\InstitutionRecognition;
 use App\Models\ScheduleAction;
 use Illuminate\Support\Facades\DB;
 use App\Models\CompanyClassification;
@@ -22,6 +23,7 @@ class HomeController extends Controller
     private $commissionMembers;
     private $schedule;
     private $companyClassification;
+    private $institutionRecognition;
     /**
      * Create a new controller instance.
      *
@@ -32,13 +34,15 @@ class HomeController extends Controller
         CollaboratorActivityLevel $collaboratorActivitylevel,
         CommissionMembers $commissionMembers,
         Schedule $schedule,
-        CompanyClassification $companyClassification
+        CompanyClassification $companyClassification,
+        InstitutionRecognition $institutionRecognition
     ) {
         $this->institution = $institution;
         $this->collaboratorActivitylevel = $collaboratorActivitylevel;
         $this->commissionMembers = $commissionMembers;
         $this->schedule = $schedule;
         $this->companyClassification = $companyClassification;
+        $this->institutionRecognition = $institutionRecognition;
     }
     /**
      * Mostrar a tela home.
@@ -97,7 +101,6 @@ class HomeController extends Controller
     }
     public function getInstituitionDetails($id)
     {
-        // Buscando o Diagnostico censitário
         $actions = ScheduleAction::all();
         $questionAlternatives = Question::with('alternatives')->get();
         $instituion = $this->institution->find($id);
@@ -117,6 +120,39 @@ class HomeController extends Controller
 
         return response()->download(storage_path("app/public/documents/anexos/" . $doc_name));
     }
+    /**
+     * Listando todas as Instituições
+     * que são reconhecimento
+     * @return void
+     */
+    public function getInstitutionRecognition()
+    {
+        $recognition = $this->institutionRecognition->all();
+
+        return view('home.recognition.recognition', compact('recognition'));
+    }
+    /**
+     * Listando todas as Informações da Instituição
+     * Com seus documentos
+     *
+     * @param [interger] $id
+     * @return void
+     */
+    public function getShowInstitutionRecognition($id)
+    {
+        $recognition = $this->institutionRecognition->find($id);
+        $companyClassifications = $this->companyClassification->all();
+
+        return view('home.recognition.recognition-detalhes',compact('recognition', 'companyClassifications'));
+    }
+    public function showDocumentRecongnition(Request $request)
+    {
+        $doc_name = $request->doc_name;
+
+        return response()->download(storage_path("app/public/recognition/".$doc_name));
+    }
+
+
     /***
      * @return Page Inex-user
      *
