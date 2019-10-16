@@ -175,7 +175,7 @@
 									placeholder="Responsável técnico:" value="" name="technical_manager">
 							</div>
 							<div class="col-md-4 mb-3">
-								<label for="formation">Formação <small class="asterisco-input">*</small></label>
+								<label for="formation">Profissição/Cargo <small class="asterisco-input">*</small></label>
 								<input type="text" class="form-control" id="formation" placeholder="Formação:" value=""
 									name="formation">
 							</div>
@@ -185,7 +185,7 @@
 									name="phone_two">
 							</div>
 							<div class="col-md-12 mb-3">
-								<label for="email_two">Ramo de Atividade <small
+								<label for="email_two">Atividade <small
 										class="asterisco-input">*</small></label>
 								<select class="form-control form-control-sm" name="institution_activity">
 									<option></option>
@@ -297,7 +297,7 @@
 							<p><strong>{{ $question->name }}</strong></p>
 							<div class="row">
 								<div class="col-md-12 mb-3">
-									@if ($question->id == 1 || $question->id == 2)
+									@if ($question->id == 1 || $question->id == 2 || $question->id == 9)
 									<label>
 										Resposta <small class="asterisco-input">*</small>
 									</label>
@@ -311,7 +311,11 @@
 										@endforeach
 									</select>
 									@if($question->field_option == "SIM")
-									<label for="others">Se sim, quais?</label>
+										@if ($question->id == 7)
+											<label for="others">Se outros, quais?</label>
+										@else
+											<label for="others">Se sim, quais?</label>										
+										@endif
 									<input type="text" class="form-control" name="others[]" id="others">
 									@else
 									<input type="hidden" class="form-control" name="others[]" id="others">
@@ -624,6 +628,11 @@
 											<option>4</option>
 											<option>5</option>
 											<option>6</option>
+											<option>7</option>
+											<option>8</option>
+											<option>9</option>
+											<option>10</option>
+											<option>11</option>
 											<option>12</option>
 										</select>
 									</td>
@@ -695,13 +704,12 @@
 				<div class="panel panel-default">
 					<div class="panel-heading"> PLANO DE TRABALHO DE DIVERSIDADE ÉTNICO-RACIAL
 						<div class="legends-forms">
-							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
-								class="asterisco-input-ogrigatorio">*</small>
+							<strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong>
 						</div>
 					</div>
 					<div class="panel-body">
 						<!-- Incio dos Inputs -->
-						<h4>METODOLOGIA<small class="asterisco-input-options">*</small></h4>
+						<h4>METODOLOGIA</h4>
 						<strong>
 							(Descrever as estratégias a serem utilizadas na intervenção, as etapas do trabalho a serem
 							desenvolvidas, os instrumentos, técnicas previstas e registros de sistematização a ser

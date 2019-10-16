@@ -9,11 +9,34 @@
 .d-inline-block {
     margin-top: 20px;
 }
-
-.logo {
+.institution_auth, .semur_auth, .wellcome {
     text-align: center;
 }
 
-.institution_auth, .semur_auth, .wellcome {
+.container {
     text-align: center;
+}
+
+#btn_semur {
+    position: absolute;
+    margin-left: 40px;
+    margin-top: -345px;
+    padding: 0px;
+    border: none!important;
+}
+
+#btn_login {
+    position: absolute;
+    padding: 0px;
+    border: none!important;
+    margin-top: -230px;
+    margin-left: -360px;
+}
+
+#btn_register {
+    position: absolute;
+    padding: 0px;
+    border: none!important;
+    margin-top: -233px;
+    margin-left: -160px;
 }
