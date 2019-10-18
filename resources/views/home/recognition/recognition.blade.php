@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Home')
+@section('title', 'Instiuições Reconhecimento')
 
 @section('content_header')
 @stop

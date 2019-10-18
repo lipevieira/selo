@@ -15,7 +15,7 @@
                 <p></p>
             </div>
             <div class="box-body">
-                <table class="table table-striped" id="tblLevelActivity">
+                <table class="table table-striped table-hover" id="tblLevelActivity">
                     <thead>
                         <tr>
                             <th scope="col">COD</th>

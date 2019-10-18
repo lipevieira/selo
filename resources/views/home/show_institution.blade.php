@@ -250,7 +250,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <h4>NIVEL DE ATIVIDADE DOS COLABORADORES</h4>
-                                    <table class="table table-bordered table-striped" id="tblLevelActivicDemiasGroups">
+                                    <table class="table table-bordered table-striped table-hover" id="tblLevelActivity">
                                         <thead>
                                             <tr>
                                                 <th scope="col">COD</th>
@@ -274,6 +274,16 @@
                                             </tr>
                                             @endforeach
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th scope="col">COD</th>
+                                                <th scope="col">NIVEL DE ATIVIDADE</th>
+                                                <th scope="col">RAÇA/COR</th>
+                                                <th scope="col">Nº HOMEMS</th>
+                                                <th scope="col">Nº MULHERES</th>
+                                                <th scope="col">TOTAL</th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
 
@@ -281,10 +291,10 @@
                             {{-- perfil dos colaboradores  --}}
                             <div class="form-group col-md-12">
                                 <h4>PEFIL/CENSO</h4>
-                                <table class="table table-striped" id="tblActivityLevelCollaborator">
+                                <table class="table table-striped table-hover" id="tblProfileCollaborator">
                                     <thead>
                                         <tr>
-                                            <th scope="col">INSTITUIÇÃO</th>
+                                            {{-- <th scope="col">INSTITUIÇÃO</th> --}}
                                             <th scope="col">RAÇA/COR</th>
                                             <th scope="col">Nº HOMEMS</th>
                                             <th scope="col">Nº MULHERES</th>
@@ -294,7 +304,7 @@
                                     <tbody>
                                         @foreach ($profile as $item)
                                         <tr>
-                                            <td>{{$item->fantasy_name}}</td>
+                                            {{-- <td>{{$item->fantasy_name}}</td> --}}
                                             <td>{{$item->color}}</td>
                                             <td>{{$item->max_human}}</td>
                                             <td>{{$item->max_woman}}</td>
@@ -302,6 +312,15 @@
                                         </tr>
                                         @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            {{-- <th scope="col">INSTITUIÇÃO</th> --}}
+                                            <th scope="col">RAÇA/COR</th>
+                                            <th scope="col">Nº HOMEMS</th>
+                                            <th scope="col">Nº MULHERES</th>
+                                            <th scope="col">TOTAL DE PESSOAS</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                             <!-- Final das questões -->

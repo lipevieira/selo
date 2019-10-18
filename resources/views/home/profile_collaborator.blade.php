@@ -17,7 +17,7 @@
                     atividade por exemplo:</p> --}}
             </div>
             <div class="box-body">
-                <table class="table table-striped" id="tblActivityLevelCollaborator">
+                <table class="table table-striped table-hover" id="tblActivityLevelCollaborator">
                     <thead>
                         <tr>
                             <th scope="col">INSTITUIÇÃO</th>

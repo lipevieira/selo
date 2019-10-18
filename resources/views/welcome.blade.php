@@ -11,7 +11,7 @@
 @section('body')
 <div class="container">
     <div class="logo">
-        <img src="{{asset('images/pag_start/capa_start.jpg')}}" width="800" height="800"
+        <img src="{{asset('images/pag_start/capa_start.jpg')}}" width="100%" height="100%"
             class="d-inline-block align-top" alt="">
     </div>
     <div class="logo">

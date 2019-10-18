@@ -14,7 +14,7 @@
                 <h3>Membros da Comissão:</h3>
             </div>
             <div class="box-body">
-                <table class="table table-striped" id="tblMembrersComission">
+                <table class="table table-striped table-hover" id="tblMembrersComission">
                     <thead>
                         <tr>
                             <th scope="col">COD</th>

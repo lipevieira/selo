@@ -47,7 +47,7 @@ class InstitutionController extends Controller
                 return view('institution.register.institution-recognition', compact('type_institution', 'companyClassifications'));
             } else {
                 $actions = ScheduleAction::all();
-              
+
                 $questionAlternatives = Question::with('alternatives')->get();
 
                 return view('institution.register.register', compact('questionAlternatives', 'actions', 'companyClassifications', 'type_institution'));
@@ -117,13 +117,9 @@ class InstitutionController extends Controller
                 }
                 break;
             case 4:
-                for ($i = 0; $i < count($request->schedule_action_id); $i++) {
-                    if ($request->schedule_action_id[$i] != null || $request->activity[$i] || $request->amount[$i] || $request->deadline[$i]) {
-                        $validator  = Validator::make($dataForm,  $validacaoInstiuicao->rulesSchedule(), $validacaoInstiuicao->messagesSchedule());
-                        if ($validator->fails()) {
-                            return response()->json(['errors' => $validator->errors()->all()]);
-                        }
-                    }
+                $validator  = Validator::make($dataForm,  $validacaoInstiuicao->rulesSchedule(), $validacaoInstiuicao->messagesSchedule());
+                if ($validator->fails()) {
+                    return response()->json(['errors' => $validator->errors()->all()]);
                 }
                 // Validando a Data Limte
                 if ($this->schedule->validateDeadline($request->deadline) == false) {

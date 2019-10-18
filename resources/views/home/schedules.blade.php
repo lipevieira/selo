@@ -14,7 +14,7 @@
                 <h3>Cronograma das Instituições:</h3>
             </div>
             <div class="box-body">
-                <table class="table table-striped" id="tblShedule">
+                <table class="table table-striped table-hover" id="tblShedule">
                     <thead>
                         <tr>
                             <th scope="col">COD</th>

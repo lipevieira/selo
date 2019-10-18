@@ -137,6 +137,7 @@ class InstitutionFormRequest extends FormRequest
             'schedule_action_id.*' => 'required',
             'activity.*' => 'required',
             'amount.*' => 'required',
+            'authorization' => 'required',
             'deadline.*' => 'required|date',
         ];
     }
@@ -147,6 +148,7 @@ class InstitutionFormRequest extends FormRequest
             'activity.*.required' => 'O campo Atividade obrigatório',
             'amount.*.required' => 'O campo Quantidade obrigatório ',
             'deadline.*.required' => 'O campo Data Limite obrigatório',
+            'authorization.required' => 'É obrigatório responder se permite a autorização dessas informações pela SEMUR',
         ];
     }
 

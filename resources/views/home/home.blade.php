@@ -12,7 +12,7 @@
         <h4>Instituições Cadastradas que são Compromisso.</h4>
     </div>
     <div class="box-body">
-        <table class="table table-striped" id="tblInstitution">
+        <table class="table table-striped table-hover" id="tblInstitution">
             <thead>
                 <tr>
                     <th scope="col">COD</th>

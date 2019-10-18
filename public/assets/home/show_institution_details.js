@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Menu de cadastro de instituição.
 
     $('#btn_indentificacao').click(function () {
 
@@ -10,6 +9,7 @@ $(document).ready(function () {
         // Ativando outra aba no menu
         $('#list_diagnostico_censitario').removeClass('inactive_tab1');
         $('#list_diagnostico_censitario').addClass('active_tab1 active');
+
         $('#list_diagnostico_censitario').attr('href', '#diagnostico_censitario');
         $('#list_diagnostico_censitario').attr('data-toggle', 'tab');
         $('#diagnostico_censitario').addClass('active in');
@@ -218,7 +218,7 @@ $(document).ready(function () {
         $('#documento').addClass('active in');
     });
 
-    $('#previous_btn_documentos').on('click', function(){
+    $('#previous_btn_documentos').on('click', function () {
         $('#list_documentos').removeClass('active active_tab1');
         $('#list_documentos').removeAttr('href data-toggle');
 
@@ -233,4 +233,161 @@ $(document).ready(function () {
         $('#list_resultados_esperados').attr('data-toggle', 'tab');
         $('#resultados_esperados').addClass('active in');
     });
+
+    $('#tblLevelActivity').DataTable({
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            // Total da coluna de homems
+            pageMem = api
+                .column(3, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(3).footer()).html(
+                pageMem
+            );
+            // Total da coluna de mulheres
+            pageWomana = api
+                .column(4, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(4).footer()).html(
+                pageWomana
+            );
+            // Total da Coluna total
+            pageTotal = api
+                .column(5, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(5).footer()).html(
+                pageTotal
+            );
+
+        },
+        dom: 'Bfrtip',
+        "bPaginate": false,
+        "language": {
+            "lengthMenu": "Mostrando _MENU_ registros por página",
+            "zeroRecords": "Nada Encontrado",
+            "info": "Mostrando páginas _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro encontrado",
+            "infoFiltered": "(Filtrado de _MAX_ registros no total)",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próximo"
+            },
+            "search": "Pesquisar"
+        },
+        "bFilter": false,
+        buttons: [
+            {
+                extend: 'excel', footer: true,
+                text: '<i class="fa fa-files-o"></i> Excel',
+                titleAttr: 'Excel',
+                className: 'btn btn-primary btn-sm',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+        ]
+    });
+    $('#tblProfileCollaborator').DataTable({
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (i) {
+                return typeof i === 'string' ?
+                    i.replace(/[\$,]/g, '') * 1 :
+                    typeof i === 'number' ?
+                        i : 0;
+            };
+            // Total da coluna de homens
+            pageHomens = api
+                .column(1, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            $(api.column(1).footer()).html(
+                pageHomens
+            );
+
+
+            // Total da coluna de mulhres
+            pageMulhres = api
+                .column(2, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(2).footer()).html(
+                pageMulhres
+            );
+            // Total da coluna TOTAL
+            pageWomana = api
+                .column(3, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(3).footer()).html(
+                pageWomana
+            );
+
+
+        },
+        "bFilter": false,
+        dom: 'Bfrtip',
+        "bPaginate": false,
+        "language": {
+            "lengthMenu": "Mostrando _MENU_ registros por página",
+            "zeroRecords": "Nada Encontrado",
+            "info": "Mostrando páginas _PAGE_ de _PAGES_",
+            "infoEmpty": "Nenhum registro encontrado",
+            "infoFiltered": "(Filtrado de _MAX_ registros no total)",
+            "paginate": {
+                "previous": "Anterior",
+                "next": "Próximo"
+            },
+            "search": "Pesquisar"
+        },
+        buttons: [
+            {
+                extend: 'excel', footer: true,
+                text: '<i class="fa fa-files-o"></i> Excel',
+                titleAttr: 'Excel',
+                className: 'btn btn-primary btn-sm',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+        ]
+    });
+
+
 });
