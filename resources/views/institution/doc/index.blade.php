@@ -9,21 +9,16 @@
 <div class="container">
     @include('layouts.nav-bar-institution')
     <div class="row show-grid">
-        {{-- Preenchimento do Anexo SETE Reconhecimento --}}
         <div class="col-md-8">
-            @if ($anexos == 1 || $anexos == 2 || $anexos == 6)
-                <p>Para a instituição ser certificada baixe e preenchar o Anexo </p>
-                <a class="btn btn-primary btn-sm" href="{{ route('anexo07.show') }}" role="button" target="_blank">Baixar Anexo VII</a>
-            @endif
         {{-- Prenechimento de todos os anexos --}}
         @if ($anexos == 3 || $anexos == 4 || $anexos == 5)
-                <p>Para a instituição ser certificada baixe e preenchar os Anexo </p>
+                <p style="color: red">Para a instituição ser certificada baixe e preenchar os Anexo </p>
                 <a class="btn btn-primary btn-sm" href="{{ route('anexo01.show') }}" role="button" target="_blank">Baixar Anexo I
                 </a>
                 
                 <a class="btn btn-primary btn-sm" href="{{ route('anexo06.show') }}" role="button" target="_blank">Baixar o AnexoVI
                 </a>
-                <p>APRESENTAR AS CERTIDÕES NEGATIVAS DAS ESFERAS MUNICIPAL, ESTADUAL E FEDERAL,              CONTRATO SOCIAL (OU DOCUMENTO EQUIVALENTE) E DECLARAÇÃO DE NÃO CONTRATAÇÃO DE MENORES.
+                <p style="color: red" >APRESENTAR AS CERTIDÕES NEGATIVAS DAS ESFERAS MUNICIPAL, ESTADUAL E FEDERAL,              CONTRATO SOCIAL (OU DOCUMENTO EQUIVALENTE) E DECLARAÇÃO DE NÃO CONTRATAÇÃO DE MENORES.
                 </p>
 
             @endif
@@ -38,7 +33,7 @@
                 {{ session('success') }}
             </div>
             @endif
-            <table class="table">
+            <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th scope="col">COD</th>

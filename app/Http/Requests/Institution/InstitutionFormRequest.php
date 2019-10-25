@@ -55,7 +55,7 @@ class InstitutionFormRequest extends FormRequest
             'phone.min' => 'O campo Telefone não pode ser menor que 3 caracteres',
             'technical_manager.required' => 'O campo Responsável técnico é obrigatório',
             'formation.required' => 'O campo Formação é obrigatório',
-            'institution_activity.required' => 'O campo Ramo de atividade é obrigatório',
+            'institution_activity.required' => 'O campo Atividade é obrigatório',
             'company_classification.required' => 'O campo Classificação da Empresa é obrigatório',
             'company_classification.exists' => 'O valor selecionado para o campo Classificação da Empresa é inválido.',
             'cnpj_additional.*.distinct' => 'O CNPJ adicional não pode ser repetido'
@@ -98,7 +98,7 @@ class InstitutionFormRequest extends FormRequest
     {
         return [
             'alternative_id.0' => 'required',
-            'alternative_id.1' => 'required',
+            // 'alternative_id.1' => 'required',
             'alternative_id.9' => 'required',
         ];
     }
@@ -106,7 +106,7 @@ class InstitutionFormRequest extends FormRequest
     {
         return [
             'alternative_id.0.required' => 'É obrigatório responder a questões 01 do diagnóstico censitário',
-            'alternative_id.1.required' => 'É obrigatório responder a questões 02 questões do diagnóstico censitário',
+            // 'alternative_id.1.required' => 'É obrigatório responder a questões 02 questões do diagnóstico censitário',
             // 'alternative_id.2.required' => 'É obrigatório responder a questões 03 questões do diagnóstico censitário',
             // 'alternative_id.3.required' => 'É obrigatório responder a questões 04 do diagnóstico censitário',
             // 'alternative_id.4.required' => 'É obrigatório responder a questões 05 do diagnóstico censitário',

@@ -3,13 +3,14 @@
 @section('adminlte_css')
 {{-- Arquivos de css --}}
 
+
 @section('body_class')
 
 @section('body')
 <div class="container">
     @include('layouts.nav-bar-institution')
 
-    <h3>Cronograma (Data limite de entrega das atividades será <strong> {{date('30/11/Y')}})</strong></h3>
+    <h3 style="text-align: center">Cronograma (Data limite de entrega das atividades será <strong> 30  de Novembro</strong>)</h3>
     <br />
 
     @if(session('success'))

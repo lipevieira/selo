@@ -33,7 +33,7 @@
                         @foreach ($schedules as $item)
                         <tr>
                             <th scope="row">{{$item->id}}</th>
-                            <td>{{$item->institution->name}}</td>
+                            <td>{{$item->institution->fantasy_name}}</td>
                             <td>{{$item->action->description}}</td>
                             <td>{{$item->action->weight}}</td>
                             <td>{{$item->activity}}</td>

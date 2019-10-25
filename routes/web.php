@@ -17,6 +17,14 @@ Route::get('/', 'Institution\InstitutionController@welcome')->name('welcome');
 
 Auth::routes();
 /***
+ * @description rotas para Gerenciamento de Usuarios
+ */
+Route::group(['prefix' => 'gerenciamento-users', 'namespace' => 'Auth', 'middleware' => 'auth'], function () {
+   Route::get('/user-index', 'ManagementUserController@index')->name('management.users.index');
+   Route::get('/resert-user/{id}', 'ManagementUserController@resertUser')->name('resert.user');
+   Route::post('perfil/update-user', 'ManagementUserController@updateUser')->name('update-user');
+});
+/***
  * Salvando Usuario
  */
 Route::post('/user-register', 'Auth\RegisterController@create')->name('user.register');
@@ -31,7 +39,9 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth']
    Route::get('/perfil-membros-comissão', 'HomeController@getCommissionMembers')->name('home.membros.comissao');
    Route::get('/cronograma', 'HomeController@getSchedules')->name('home.schedules');
    Route::get('/detalhes-instituição/{id}', 'HomeController@getInstituitionDetails')->name('home.details.institution');
-   Route::get('/user-index', 'HomeController@getIndexUser')->name('home.index.user');
+
+   // Route::get('/user-index', 'HomeController@getIndexUser')->name('home.index.user');
+
    Route::get('show/document/{name}', 'HomeController@show')->name('home.document.show');
 
    Route::get('/recognition', 'HomeController@getInstitutionRecognition')->name('home.recognition');
@@ -110,7 +120,7 @@ Route::group(['prefix' => 'reposta', 'namespace' => 'Answer'], function () {
     * Rotas para Instituições logados
     */
    Route::group(['middleware'  =>  'auth.institution:client'], function () {
-      Route::post('/', 'AnswerController@show')->name('show.edit.answer');
+      Route::post('/', 'AnswerController@update')->name('update.answer');
    });
 });
 /***

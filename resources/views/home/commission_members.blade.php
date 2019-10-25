@@ -29,7 +29,7 @@
                         @foreach ($membrers as $item)
                         <tr>
                             <th scope="row">{{$item->id}}</th>
-                            <td>{{$item->institution->name}}</td>
+                            <td>{{$item->institution->fantasy_name}}</td>
                             <td>{{$item->members_name}}</td>
                             <td>{{$item->members_email}}</td>
                             <td>{{$item->members_function}}</td>

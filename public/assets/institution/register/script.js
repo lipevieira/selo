@@ -477,12 +477,25 @@ $(document).ready(function () {
 		values.push($(inputs[values.length - 1]).mask('00.000.000/0000-00').val(""));
 	};
 	// Buuton remover linha da Tabela de cnpsj adcionais
-	RemoveTableRow = function (handler) {
-		var tr = $(handler).closest('tr');
-		tr.remove();
-		return false;
+	RemoveTableRowCnpjAdd = function (handler) {
+		var inputs = jQuery('input[name^="cnpj_additional"]');
+		if (inputs.length != 1){
+			var tr = $(handler).closest('tr');
+			tr.remove();
+			return false;
+		}
 	};
-
+	/***
+	 * Removendo linhas do tabela do Cronograma
+	 */
+	RemoveTableRowSchedule = function (handler) {
+		var inputs = jQuery('select[name^="schedule_action_id"]');
+		if (inputs.length != 1){
+			var tr = $(handler).closest('tr');
+			tr.remove();
+			return false;
+		}
+	};
 });
 // Buuton adcionar linhas na tabela de cronograma
 AddTableRowSchedule = function () {

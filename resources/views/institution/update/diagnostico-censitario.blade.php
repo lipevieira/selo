@@ -11,7 +11,7 @@
     @include('layouts.nav-bar-institution')
 
     <div class="question-color">
-        <h1>Diagnóstico Censitário</h1>
+        <h1 style="text-align: center">Diagnóstico Censitário</h1>
         {{-- Mostrando Messagem de atualização --}}
         @if(session('success'))
         <div class="alert alert-success">
@@ -19,14 +19,14 @@
         </div>
         @endif
         <br />
-        <form action="{{route('show.edit.answer')}}" method="POST">
+        <form action="{{route('update.answer')}}" method="POST">
             @csrf
 
             @foreach ($questionAlternatives as $question)
             <p><strong>{{ $question->name }}</strong></p>
             <div class="row">
                 <div class="col-md-12 mb-3">
-                    @if ($question->id == 1 || $question->id == 2)
+                    @if ($question->id == 1 || $question->id == 10)
                     <label>
                         Resposta <small class="asterisco-input">*</small>
                     </label>
@@ -41,28 +41,37 @@
                             @endif
                         @endforeach
                             >{{ $alternativa->alternative }}
-
                         </option>
                         @endforeach
                     </select>
 
                     @if($question->field_option == "SIM")
-                    @foreach ($question->alternatives as $alternativa)
-                    @foreach ($institutions->answers as $answer)
-                    @if ($alternativa->id == $answer->alternative_id && $answer->others != null)
-                    <label for="others">Se sim, quais?</label>
-                    <input type="text" class="form-control" name="others[]" id="others" value="{{$answer->others}}">
-                    @endif
-                    @endforeach
-                    @endforeach
+                        @foreach ($question->alternatives as $alternativa)
+                            @foreach ($institutions->answers as $answer)
+                                @if ($alternativa->id == $answer->alternative_id )
+                                    @if ($question->id == 7)
+                                        <label for="others">Se outros, quais?</label>
+                                    @else
+                                        <label for="others">Se sim, quais?</label>
+                                    @endif
+                                        <input type="text" class="form-control" name="others[]" id="others" value="{{$answer->others}}">
+                                    @endif
+                                    @endforeach
+                                @endforeach
                     @else
-                    <input type="hidden" class="form-control" name="others[]" id="others">
+                        <input type="hidden" class="form-control" name="others[]" id="others">
                     @endif
                 </div>
-
             </div>
             @endforeach
+            {{-- Teste --}}
+            @foreach ($institutions->answers as $answer)
+                <input type="hidden" class="form-control" name="id[]" id="id" value="{{$answer->id}}">
+            @endforeach
             <br><br>
+            <div style="text-align: center">
+                <button type="submit" class="btn btn-success">Atualizar Diagnóstico Censitário</button>
+            </div>
             <br><br>
         </form>
     </div>

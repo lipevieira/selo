@@ -11,10 +11,6 @@
 @section('body')
 
 <div class="login-box">
-    <div style="text-align: center;">
-        <img src="{{asset('images/selo_horizontal.jpg')}}" width="200" height="75" class="d-inline-block align-top"
-            alt="">
-    </div>
     <h3 class="display-4">Bem-Vindo ao Selo da diversidade</h3>
    {{-- Messagem de sucesso para documentos salvos --}}
     @if(session('success'))

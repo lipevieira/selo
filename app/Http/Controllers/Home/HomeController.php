@@ -143,26 +143,13 @@ class HomeController extends Controller
         $recognition = $this->institutionRecognition->find($id);
         $companyClassifications = $this->companyClassification->all();
 
-        return view('home.recognition.recognition-detalhes',compact('recognition', 'companyClassifications'));
+        return view('home.recognition.recognition-detalhes', compact('recognition', 'companyClassifications'));
     }
     public function showDocumentRecongnition(Request $request)
     {
         $doc_name = $request->doc_name;
 
-        return response()->download(storage_path("app/public/recognition/".$doc_name));
+        return response()->download(storage_path("app/public/recognition/" . $doc_name));
     }
-
-
-    /***
-     * @return Page Inex-user
-     *
-     */
-    public function getIndexUser()
-    {
-        return view('auth.index');
-    }
-    public function getUserCad()
-    {
-        return view('auth.register');
-    }
+   
 }

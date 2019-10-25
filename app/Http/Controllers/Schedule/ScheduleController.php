@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use App\Models\ScheduleAction;
 use App\Models\Institution;
+use Carbon\Carbon;
 
 
 class ScheduleController extends Controller
@@ -53,9 +54,10 @@ class ScheduleController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        if ($validateDataLimite == false) {
-
-            return redirect()->back()->with('error', 'Não é permitido uma data maior ou igual ao dia 30 de novembro!');
+        if ($validateDataLimite) {
+            return redirect()->back()->with('error', 'Não é permitido uma data maior que 30 de Novembro!')
+                            ->withErrors($validator)
+                            ->withInput();
         } else {
             $this->schedule->schedule_action_id = $request->schedule_action_id;
             $this->schedule->activity = $request->activity;
@@ -79,7 +81,7 @@ class ScheduleController extends Controller
         $schedule = $this->schedule->find($id);
         $actions = ScheduleAction::all();
 
-        $this->authorize('updateInstitution',$schedule);
+        $this->authorize('updateInstitution', $schedule);
 
         return view('institution.update.shedule-update', compact('actions', 'schedule'));
     }
@@ -106,8 +108,9 @@ class ScheduleController extends Controller
                 ->withInput();
         }
         if ($validateDataLimite == false) {
-
-            return redirect()->back()->with('error', 'Não é permitido uma data maior ou igual ao dia 30 de novembro!');
+            return redirect()->back()->with('error', 'Não é permitido uma data maior que 30 de Novembro!')
+                ->withErrors($validator)
+                ->withInput();
         } else {
             $schedule = $this->schedule->find($dataForm['id']);
 

@@ -13,7 +13,9 @@
         <div class="tab-pane active" id="instituicao_detalhes">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <strong> IDENTIFICAÇÃO DA INSTITUIÇÃO RECONHECIMENTO</strong>
+                    <div style="text-align: center">
+                        <strong> IDENTIFICAÇÃO DA INSTITUIÇÃO RECONHECIMENTO</strong>
+                    </div>
                     <div class="legends-forms">
                         <strong>LEGENDA DO FORMULÁRIO: Campos obrigatórios </strong><small
                             class="asterisco-input-ogrigatorio">*</small>
@@ -144,16 +146,21 @@
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label for="doc_name">Anexo<small class="asterisco-input">*</small></label>
+                                <label for="doc_name"><small class="asterisco-input">Anexar aquivo*</small></label>
                                 <input type="file" class="form-control" id="doc_name" name="doc_name"
                                     value="{{ old('doc_name') }}">
                             </div>
 
                             <div class="col-md-4 mb-3">
-                                <label>Para receber o Selo da Diversidade preenchar o Anexo</label>
+                                <label>preencher anexo</label>
                                 <a class="btn btn-danger form-control" href="{{route('document.seve')}}"
                                     role="button">Click aqui para baixar o Anexo</a>
                             </div>
+                            <div class="col-md-12 mb-3">
+                                <p><strong> Para receber o selo reconhecimento é necessário Imprimir, preencher, assinar
+                                        e anexar arquivo no botao acima</strong></p>
+                            </div>
+
                         </div>
                         <div class="col-md-6 mb-3">
                             <br><br><br>

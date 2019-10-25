@@ -77,6 +77,9 @@ html, body {
 .form-textarea, .class_textarea {
     min-height: 600px;
 }
+.form-textarea-result{
+    min-height: 400px;
+}
 
 .qtd_caracteres {
     text-align: right;

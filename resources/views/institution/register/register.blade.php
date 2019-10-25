@@ -261,7 +261,7 @@
 															name="cnpj_additional[]" value="">
 													</td>
 													<td>
-														<button onclick="RemoveTableRow(this)" type="button"
+														<button onclick="RemoveTableRowCnpjAdd(this)" type="button"
 															class="btn btn-danger">Remover Linha</button>
 													</td>
 												</tr>
@@ -297,13 +297,12 @@
 							<p><strong>{{ $question->name }}</strong></p>
 							<div class="row">
 								<div class="col-md-12 mb-3">
-									@if ($question->id == 1 || $question->id == 2 || $question->id == 9)
+									@if ($question->id == 1  || $question->id == 10)
 									<label>
 										Resposta <small class="asterisco-input">*</small>
 									</label>
 									@endif
-
-									<select class="form-control form-control-sm" name="alternative_id[]">
+									<select class="form-control form-control-sm" name="alternative_id[]" id="alternative_id">
 										<option value=""></option>
 										@foreach ($question->alternatives as $alternativa)
 										<option value="{{$alternativa->id}}">{{ $alternativa->alternative }}
@@ -574,8 +573,7 @@
 					<div class="panel-body">
 						<!-- Inicio do cronograma -->
 						<h4>Cronograma (Data limite de entrega das atividades será <strong>
-								{{date('30/11/Y')}})</strong>
-						</h4>
+								30 de Novembro</strong>)</h4>
 						<h4>Listar todas as atividades necessárias à realização do projeto.</h4>
 						<label>
 							Autoriza a divulgação destas ações pela SEMUR?<small class="asterisco-input">*</small>
@@ -634,6 +632,15 @@
 											<option>10</option>
 											<option>11</option>
 											<option>12</option>
+											<option>13</option>
+											<option>14</option>
+											<option>15</option>
+											<option>16</option>
+											<option>17</option>
+											<option>18</option>
+											<option>19</option>
+											<option>20</option>
+											{{-- <option>Permanente</option> --}}
 										</select>
 									</td>
 									<td>
@@ -641,7 +648,7 @@
 											name="deadline[]">
 									</td>
 									<td>
-										<button onclick="RemoveTableRow(this)" type="button"
+										<button onclick="RemoveTableRowSchedule(this)" type="button"
 											class="btn btn-danger">Remover
 											Linha</button>
 									</td>
@@ -762,10 +769,14 @@
 							<strong>
 								<p><small class="caracteres_result"></small></p>
 							</strong>
-							<textarea class="form-control class_textarea" id="result" rows="3" name="result"></textarea>
+							<textarea class="form-control form-textarea-result" id="result" rows="3" name="result"></textarea>
 						</div>
 						<!-- Final dos Inputs -->
 						<br />
+						{{-- Aviso para a Instituição --}}
+						<p class="asterisco-input-ogrigatorio" style="text-align: center">
+							<strong>Após salvar as informações, é fundamental, fazer login para finalizar o cadastro.</strong>
+						</p>
 						<div align="center">
 							<button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
 								class="btn btn-default btn-lg">Anterior</button>
@@ -780,7 +791,6 @@
 			</div>
 		</div>
 	</form>
-
 	{{-- Modal para carregar messagem ao salvar Institução --}}
 	<div class="modal" tabindex="-1" role="dialog" id="loadSaveInstitution">
 		<div class="modal-dialog" role="document">

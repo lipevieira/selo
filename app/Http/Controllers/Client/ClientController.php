@@ -35,6 +35,7 @@ class ClientController extends Controller
         $id = auth()->guard('client')->user()->institution_id;
         $institutions  = $this->institution->find($id);
         $companyClassifications = $this->companyClassification->all(); 
+        
     
         return view('institution.update.update-institution', compact('institutions', 'companyClassifications'));
     }

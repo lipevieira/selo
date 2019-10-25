@@ -3,40 +3,31 @@ $(document).ready(function () {
     $('#etapa02').hide();
     $('#etapa03').hide();
     $('#btn_star_register').hide();
-    // var company_classification;
-    $("#cb_type_institution").change(function () {
-        // let url = $(this).data('url');
 
+    $("#cb_type_institution").change(function () {
+        $('#btn_star_register').hide();
+        $('#etapa01').hide();
+        $('#etapa02').hide();
+        $('#etapa03').hide();
         switch ($(this).val()) {
             case '1':
                 $('#etapa01').show();
                 break;
-
             case '2':
                 $('#etapa01').show();
                 break;
-
             case '3':
-                // window.location.href = url;
-                // break;
-                $('#btn_star_register').show();
+                    $('#btn_star_register').show();
                 break;
-
             case '4':
-                // window.location.href = url;
-                // break;
                 $('#btn_star_register').show();
                 break;
-
             case '5':
-                // window.location.href = url;
-                // break;
                 $('#btn_star_register').show();
                 break;
             case '6':
-                $('#etapa03').show(); // Abrir o Container das entidades sem finslucrativos
+                $('#etapa03').show(); // Abrir o Container das entidades sem fins lucrativos
                 break;
-
             default:
                 alert('Por favor selecione a quantidade de funcionário da sua empresa!')
                 break;
@@ -79,4 +70,7 @@ $(document).ready(function () {
         }
     });
 
+    function hideButtonRegister() {
+        $('#btn_star_register').hide();
+    }
 });

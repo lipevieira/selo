@@ -154,7 +154,7 @@ return [
         ],
         [
             'text'        => 'Usuários',
-            'url'         => 'home/user-index',
+            'url'         => 'gerenciamento-users/user-index',
             'icon'        => 'user-plus',
             // 'label'       => 4,
             // 'label_color' => 'success',
