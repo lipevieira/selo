@@ -192,12 +192,6 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <br />
-                                <div align="center">
-                                    <button type="button" name="btn_indentificacao" id="btn_indentificacao"
-                                        class="btn btn-info btn-lg">Proximo</button>
-                                </div>
-                                <br />
                             </div>
                         </div>
                     </div>
@@ -294,7 +288,6 @@
                                 <table class="table table-striped table-hover" id="tblProfileCollaborator">
                                     <thead>
                                         <tr>
-                                            {{-- <th scope="col">INSTITUIÇÃO</th> --}}
                                             <th scope="col">RAÇA/COR</th>
                                             <th scope="col">Nº HOMEMS</th>
                                             <th scope="col">Nº MULHERES</th>
@@ -304,7 +297,6 @@
                                     <tbody>
                                         @foreach ($profile as $item)
                                         <tr>
-                                            {{-- <td>{{$item->fantasy_name}}</td> --}}
                                             <td>{{$item->color}}</td>
                                             <td>{{$item->max_human}}</td>
                                             <td>{{$item->max_woman}}</td>
@@ -314,7 +306,6 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            {{-- <th scope="col">INSTITUIÇÃO</th> --}}
                                             <th scope="col">RAÇA/COR</th>
                                             <th scope="col">Nº HOMEMS</th>
                                             <th scope="col">Nº MULHERES</th>
@@ -324,14 +315,6 @@
                                 </table>
                             </div>
                             <!-- Final das questões -->
-                            <br /><br /><br /><br /><br />
-                            <div align="center">
-                                <button type="button" name="btn_previous_diagnostico" id="btn_previous_diagnostico"
-                                    class="btn btn-default btn-lg">Anterior</button>
-                                <button type="button" name="btn_diagnostico_next" id="btn_diagnostico_next"
-                                    class="btn btn-info btn-lg">Proximo</button>
-                            </div>
-                            <br />
                         </div>
                     </div>
                 </div>
@@ -355,14 +338,6 @@
                                 </div>
                             </div>
                             <!-- Final do plano de trabalho -->
-                            <br />
-                            <div align="center">
-                                <button type="button" name="previous_btn_personal_details"
-                                    id="btn_previous_plano_trabalho" class="btn btn-default btn-lg">Anterior</button>
-                                <button type="button" name="btn_instituicacao_next" id="btn_plano_trabalho_next"
-                                    class="btn btn-info btn-lg">Proximo</button>
-                            </div>
-                            <br />
                         </div>
                     </div>
                 </div>
@@ -405,14 +380,6 @@
                                 </tbody>
                             </table>
                             <!-- Final do cronograma -->
-                            <br />
-                            <div align="center">
-                                <button type="button" name="btn_previous_cronograma" id="btn_previous_cronograma"
-                                    class="btn btn-default btn-lg">Anterior</button>
-                                <button type="button" name="btn_plano_next" id="btn_plano_next"
-                                    class="btn btn-info btn-lg">Proximo</button>
-                            </div>
-                            <br />
                         </div>
                     </div>
                 </div>
@@ -440,14 +407,6 @@
                                 </textarea>
                             </div>
                             <!-- Final dos inputs -->
-                            <br />
-                            <div align="center">
-                                <button type="button" name="btn_previous_parceiras" id="btn_previous_parceiras"
-                                    class="btn btn-default btn-lg">Anterior</button>
-                                <button type="button" name="btn_next_parceiras" id="btn_next_parceiras"
-                                    class="btn btn-info btn-lg">Proximo</button>
-                            </div>
-                            <br />
                         </div>
                     </div>
                 </div>
@@ -481,14 +440,6 @@
                                 </textarea>
                             </div>
                             <!-- Final dos Inpust -->
-                            <br />
-                            <div align="center">
-                                <button type="button" name="btn_previous_parceiras" id="btn_metodologia_previous"
-                                    class="btn btn-default btn-lg">Anterior</button>
-                                <button type="button" name="btn_contact_details" id="btn_metodologia_next"
-                                    class="btn btn-info btn-lg">Proximo</button>
-                            </div>
-                            <br />
                         </div>
                     </div>
                 </div>
@@ -515,15 +466,6 @@
                                 </textarea>
                             </div>
                             <!-- Final dos Inputs -->
-                            <br />
-                            <div align="center">
-                                <button type="button" name="btn_previous_parceiras" id="btn_resultados_previous"
-                                    class="btn btn-default btn-lg">Anterior</button>
-
-                                <button type="button" name="btn_result_next" id="btn_result_next"
-                                    class="btn btn-info btn-lg">Proximo</button>
-                            </div>
-                            <br />
                         </div>
                     </div>
                 </div>
@@ -560,8 +502,6 @@
                             </table>
                             <br />
                             <div align="center">
-                                <button type="button" name="previous_btn_documentos"
-                                    id="previous_btn_documentos" class="btn btn-default btn-lg">Anterior</button>
                                 <a href="{{route('home')}}" class="btn btn-success btn-lg" role="button"
                                     aria-pressed="true">
                                     Voltar ao Menu

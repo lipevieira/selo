@@ -42,14 +42,14 @@ class ManagementUserController extends Controller
     public function resertUser($id)
     {
         $update = $this->user->find($id);
-     
+
         $update->update([
             'password'  =>  bcrypt('12345678'),
         ]);
-        if ($update){
+        if ($update) {
             return redirect()
-                        ->back()
-                        ->with('success', 'A senha do Usuario foi Alterada para 12345678 !');
+                ->back()
+                ->with('success', 'A senha do Usuario foi Alterada para 12345678');
         }
         return redirect()->back()->with('error', 'Falhar ao atualizar perfil...');
     }
@@ -71,10 +71,26 @@ class ManagementUserController extends Controller
         $update = auth()->user()->update($data);
 
         if ($update)
-            return redirect()->back()   
+            return redirect()->back()
                 ->with('success', 'Atualizado com sucesso!');
 
 
         return redirect()->back()->with('error', 'Falhar ao atualizar perfil...');
+    }
+    /**
+     * Deltetando um Usuario da Area administrativa 
+     *
+     * @param [int] $id
+     * @return void
+     */
+    public function delete(Request $request)
+    {
+
+        $delete  = $this->user->find($request->id_user)->delete();
+
+        if ($delete)
+            return \redirect()->back()->with('success', 'Usuário deletado com sucesso!!');
+        else
+            return redirect()->back()->with('error', 'Falhar ao Deletar  Usuário');
     }
 }

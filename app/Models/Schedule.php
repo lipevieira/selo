@@ -35,30 +35,10 @@ class Schedule extends Model
     /**
      * Validação de Data Limite do cronograma
      *
-     * @param array $dataForm
-     * @return Boolean
-     */
-    public  function validateDeadline($dataForm = [])
-    {
-        $this->carbon = new Carbon();
-        $this->year = $this->carbon->create('Y', 11, 30);
-        $this->currentYear =  $this->carbon->createFromDate($this->year->year, 11, 30);
-        $this->finalYear =  $this->carbon->createFromDate($this->year->year, 12, 31);
-
-        foreach ($dataForm as $value) {
-            if ($value > $this->currentYear && $value <= $this->finalYear || $value > $this->currentYear->addYear())
-                return false;
-            else
-                return true;
-        }
-    }
-    /**
-     * Validação de Data Limite do cronograma
-     *
      * @param  $data
      * @return Boolean
      */
-    public  function validateDeadlineUpdate($data)
+    public  function validateDeadline($data)
     {
         $this->carbon = new Carbon();
         $this->year = $this->carbon->create('Y', 11, 30);

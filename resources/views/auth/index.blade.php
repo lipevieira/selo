@@ -40,12 +40,14 @@
                     </div>
                     <div class="form-group has-feedback {{ $errors->has('password') ? 'has-error' : '' }}">
                         <input type="password" name="password" class="form-control"
-                            placeholder="{{ trans('adminlte::adminlte.password') }}" readonly="readonly" value="12345678">
+                            placeholder="{{ trans('adminlte::adminlte.password') }}" readonly="readonly"
+                            value="12345678">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback {{ $errors->has('password_confirmation') ? 'has-error' : '' }}">
                         <input type="password" name="password_confirmation" class="form-control"
-                            placeholder="{{ trans('adminlte::adminlte.retype_password') }}" readonly="readonly" value="12345678">
+                            placeholder="{{ trans('adminlte::adminlte.retype_password') }}" readonly="readonly"
+                            value="12345678">
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
                     <button type="button" class="btn btn-primary btn-block btn-flat" id="btnSaveuser"
@@ -81,7 +83,7 @@
                     <span class="glyphicon glyphicon-plus"></span> Inserir novo usuário
                 </button>
             </tr>
-            <br/><br/>
+            <br /><br />
             <thead>
                 <tr>
                     <th scope="col">CÓDICO</th>
@@ -92,19 +94,45 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                    <tr>
+                <tr>
                     <th scope="row">{{$user->id}}</th>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
-                        <td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>
                         <a href="{{route('resert.user', $user->id)}}" class="btn btn-warning btn-sm" role="button">
-                                <span class="glyphicon glyphicon-pencil"></span> Resetar Senha
-                            </a>
-                        </td>
-                    </tr>
+                            <span class="glyphicon glyphicon-pencil"></span> Resetar Senha
+                        </a>
+                        <button type="button" class="btn btn-danger btn-sm" id_user="{{$user->id}}"
+                            id="btn_delete_user">
+                            <span class="glyphicon glyphicon-trash"></span> Deletar
+                        </button>
+                    </td>
+                </tr>
                 @endforeach
             </tbody>
         </table>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalconfirmationDeleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div style="text-align: center">
+                    <h3>Deseja realmente Excluir esse Usuário?</h3>
+                </div>
+                <form action="{{route('delete.user')}}" method="POST">
+                    @csrf
+                    <input type="hidden" value="" name="id_user" id="id_user">
+
+            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-danger btn-sm">Confimar</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 @stop
@@ -115,4 +143,12 @@
 
 @section('js')
 <script src="{{asset('assets/users/script.js')}}"></script>
+<script>
+    $('table tr td #btn_delete_user').on('click', function(){
+         let id = $(this).attr("id_user");
+         $('#id_user').val(id);
+
+         $('#modalconfirmationDeleteUser').modal('show');
+    });
+</script>
 @stop

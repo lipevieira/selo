@@ -121,10 +121,11 @@ class InstitutionController extends Controller
                 if ($validator->fails()) {
                     return response()->json(['errors' => $validator->errors()->all()]);
                 }
-                // Validando a Data Limte
-                if ($this->schedule->validateDeadline($request->deadline) == false) {
-                    $validator = ['errors' => 'Não é permitido uma data maior ou igual ao dia 30 de novembro',];
-                    return response()->json(['errors' => $validator]);
+                for ($i=0; $i < count($request->deadline); $i++) { 
+                    if ($this->schedule->validateDeadline($request->deadline[$i]) == false) {
+                        $validator = ['errors' => 'Não é permitido uma data maior que o dia 30 de novembro',];
+                        return response()->json(['errors' => $validator]);
+                    }
                 }
                 break;
             case 5:

@@ -23,6 +23,7 @@ Route::group(['prefix' => 'gerenciamento-users', 'namespace' => 'Auth', 'middlew
    Route::get('/user-index', 'ManagementUserController@index')->name('management.users.index');
    Route::get('/resert-user/{id}', 'ManagementUserController@resertUser')->name('resert.user');
    Route::post('perfil/update-user', 'ManagementUserController@updateUser')->name('update-user');
+   Route::post('/delete', 'ManagementUserController@delete')->name('delete.user');
 });
 /***
  * Salvando Usuario

@@ -46,7 +46,7 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make(Input::all(),  $this->schedule->rules(), $this->schedule->messages());
-        $validateDataLimite = $this->schedule->validateDeadlineUpdate($request->deadline);
+        $validateDataLimite = $this->schedule->validateDeadline($request['deadline']);
 
         if ($validator->fails()) {
             return redirect()
@@ -54,7 +54,7 @@ class ScheduleController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        if ($validateDataLimite) {
+        if ($validateDataLimite == false) {
             return redirect()->back()->with('error', 'Não é permitido uma data maior que 30 de Novembro!')
                             ->withErrors($validator)
                             ->withInput();
@@ -99,7 +99,7 @@ class ScheduleController extends Controller
         ];
 
         $validator = Validator::make(Input::all(),  $rules, $this->schedule->messages());
-        $validateDataLimite = $this->schedule->validateDeadlineUpdate($dataForm['deadline']);
+        $validateDataLimite = $this->schedule->validateDeadline($dataForm['deadline']);
 
         if ($validator->fails()) {
             return redirect()
