@@ -13,6 +13,7 @@ use App\Models\InstitutionRecognition;
 use App\Models\ScheduleAction;
 use Illuminate\Support\Facades\DB;
 use App\Models\CompanyClassification;
+use App\Models\DateOpenSystemClose;
 
 
 class HomeController extends Controller
@@ -24,6 +25,7 @@ class HomeController extends Controller
     private $schedule;
     private $companyClassification;
     private $institutionRecognition;
+    private $dateOpenSystemClose;
     /**
      * Create a new controller instance.
      *
@@ -35,7 +37,8 @@ class HomeController extends Controller
         CommissionMembers $commissionMembers,
         Schedule $schedule,
         CompanyClassification $companyClassification,
-        InstitutionRecognition $institutionRecognition
+        InstitutionRecognition $institutionRecognition,
+        DateOpenSystemClose    $dateOpenSystemClose
     ) {
         $this->institution = $institution;
         $this->collaboratorActivitylevel = $collaboratorActivitylevel;
@@ -43,6 +46,7 @@ class HomeController extends Controller
         $this->schedule = $schedule;
         $this->companyClassification = $companyClassification;
         $this->institutionRecognition = $institutionRecognition;
+        $this->dateOpenSystemClose = $dateOpenSystemClose;
     }
     /**
      * Mostrar a tela home.
@@ -52,8 +56,9 @@ class HomeController extends Controller
     public function index()
     {
         $instituions = $this->institution->all();
+        $dates = $this->dateOpenSystemClose->find(1);
 
-        return view('home.home', compact('instituions'));
+        return view('home.home', compact('instituions', 'dates'));
     }
     /**
      * Undocumented function
@@ -151,5 +156,17 @@ class HomeController extends Controller
 
         return response()->download(storage_path("app/public/recognition/" . $doc_name));
     }
-   
+    public function updateDatesOpenCloseSystem(Request $request)
+    {
+        $dataForm = $request->all();
+
+        $update =  $this->dateOpenSystemClose->find(1);
+
+        $update->update($dataForm);
+
+        if ($update)
+            return \redirect()->route('home')->with('success',' Data Atualizada com sucesso!');
+        else    
+            return \redirect()->back()->with('error','Ocorreu um erro ao atualizar as Datas, tente novamente.');
+    }  
 }

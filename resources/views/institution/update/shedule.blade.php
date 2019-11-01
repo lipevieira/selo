@@ -54,7 +54,13 @@
                 <td>{{$item->action->description}}</td>
                 <td>{{$item->activity}}</td>
                 <td>{{$item->amount}}</td>
-                <td>{{$item->status}}</td>
+                <td>
+                    @if ($item->status == "Pendente")
+                        <span class="label label-warning">{{$item->status}}</span>
+                    @else
+                        <span class="label label-success">{{$item->status}}</span>
+                    @endif
+                </td>
                 <td>{{$item->deadline->format('d/m/Y')}}</td>
                 <td>{{$item->institution->authorization}}</td>
                 <td>

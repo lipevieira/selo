@@ -128,17 +128,12 @@
                                     <input type="text" class="form-control" id="phone_two" placeholder="Telefone:"
                                         value="{{$instituion->phone_two}}" name="phone_two">
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <div class="col-md-4 mb-3">
                                     <label for="email_two">Atividade:</label>
                                     <select class="form-control form-control-sm" name="institution_activity">
                                         <option value="{{$instituion->institution_activity}}">
                                             {{$instituion->institution_activity}}</option>
                                     </select>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="activity_branch">Ramo de atividade:</label>
-                                    <input type="text" class="form-control" id="activity_branch"
-                                        value="{{$instituion->activity_branch}}" name="activity_branch">
                                 </div>
                                 <!-- Membros da comiisão -->
                                 <h1 class="col-md-12 mb-3">
@@ -372,7 +367,13 @@
                                         <td>{{$schedule->activity}}</td>
                                         <td>{{$schedule->amount}}</td>
                                         <td>{{$schedule->deadline->format('d/m/Y')}}</td>
-                                        <td>{{$schedule->status}}</td>
+                                        <td>
+                                            @if ($schedule->status == "Pendente")
+                                                <span class="label label-warning">{{$schedule->status}}</span>
+                                            @else
+                                                <span class="label label-success">{{$schedule->status}}</span>  
+                                            @endif
+                                        </td>
                                     </tr>
                                     @empty
                                     <h1>A Instituição ainda não enviou o seu cronograma.</h1>
