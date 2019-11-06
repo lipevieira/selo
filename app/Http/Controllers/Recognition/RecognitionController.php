@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\InstitutionRecognition;
 use App\Models\DocumentRecognition;
+use App\Models\CompanyClassification;
 use App\Models\Institution;
 use \Validator;
 
@@ -15,7 +16,7 @@ class RecognitionController extends Controller
     private $documentRecognition;
     private $institution;
 
-    public function __construct(InstitutionRecognition $institutionRecognition, DocumentRecognition $documentRecognition,Institution $institution)
+    public function __construct(InstitutionRecognition $institutionRecognition, DocumentRecognition $documentRecognition, Institution $institution)
     {
         $this->institutionRecognition = $institutionRecognition;
         $this->documentRecognition = $documentRecognition;
@@ -32,10 +33,10 @@ class RecognitionController extends Controller
                 ->back()
                 ->withErrors($validator)
                 ->withInput();
-        }if($this->institution->validateCnpj($dataForm['cnpj']) == false){
-            return redirect()->back()->with('error' ,'CNPJ Inválido por favor corrija');
-        } 
-        else {
+        }
+        if ($this->institution->validateCnpj($dataForm['cnpj']) == false) {
+            return redirect()->back()->with('error', 'CNPJ Inválido por favor corrija');
+        } else {
             $recognitionInstitution = $this->institutionRecognition->create($dataForm);
             $fantasyName = $recognitionInstitution->fantasy_name;
 
@@ -74,11 +75,67 @@ class RecognitionController extends Controller
      * Buscando o modelo de anexo 07 para 
      * as Instituições do tipo reconheicmento
      *
-     * @param Document $document
+     * @param null 
      * @return void
      */
     public function downloandAnexos()
     {
         return $this->documentRecognition->downloandAnexoServen();
+    }
+    /**
+     * chamando a tela de atualização para as 
+     * instituições que são reconhecimento
+     *
+     * @return void
+     */
+    public function show(Request $request)
+    {
+        if ($request->cnpj != null) {
+            $companyClassifications = CompanyClassification::all();
+            $institution = $this->institutionRecognition->where('cnpj', $request->cnpj)->first();
+        } else {
+            $institution  = null;
+        }
+        return view('institution.update.recognition.recognition-update', \compact('institution', 'companyClassifications'));
+    }
+    /**
+     * Atulizando uma Instituição reconhecimento
+     * e arquiviando seus documento.
+     *
+     * @param Request $request
+     * @return Boolean
+     */
+    public function update(Request $request)
+    {
+        $dataForm = $request->all();
+        $institution = $this->institutionRecognition->find($dataForm['id']);
+        $institution->update($dataForm);
+        $fantasyName = $institution->fantasy_name;
+
+        if ($request->hasFile('doc_name') && $request->file('doc_name')->isValid()) {
+            $name = uniqid(date('HisYmd'));
+            $extension = $request->doc_name->extension();
+            $nameFile = "{$fantasyName}.{$name}.{$extension}";
+            $upload = $request->doc_name->storeAs('recognition', $nameFile);
+
+            $institution->documents()->create([
+                'doc_name'  =>  $nameFile,
+            ]);
+
+            if (!$upload) {
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload de arquivos')
+                    ->withInput();
+            }
+        }
+        if ($institution)
+            return \redirect()->back()
+                ->with('success', 'Informações atualizadas com sucesso!')
+                ->withInput();
+        else
+            return \redirect()->back()
+                ->with('erro', 'Ocorreu um erro ao atualizar as informações!')
+                ->withInput();
     }
 }

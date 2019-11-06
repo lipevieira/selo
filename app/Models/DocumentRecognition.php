@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DocumentRecognition extends Model
 {
-    protected $fillable = ['doc_name',];
+    protected $fillable = ['doc_name'];
     protected $dates = [
         'created_id',
         'created_at',

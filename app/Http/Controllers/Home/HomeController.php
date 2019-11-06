@@ -14,6 +14,7 @@ use App\Models\ScheduleAction;
 use Illuminate\Support\Facades\DB;
 use App\Models\CompanyClassification;
 use App\Models\DateOpenSystemClose;
+use Illuminate\Support\Facades\Validator;
 
 
 class HomeController extends Controller
@@ -158,11 +159,27 @@ class HomeController extends Controller
     }
     public function updateDatesOpenCloseSystem(Request $request)
     {
+       
         $dataForm = $request->all();
+        $message = [
+            'date_open.required' => 'O campo Data de abertura é obrigatorio',
+            'date_close.required' => 'O campo Data de encerramento é obrigatorio',
+            'date_close.after' => 'O campo Data de Abertura não pode ser maior que o Campo de Encerramento',
+        ];
+        $validator = Validator::make($dataForm, [
+            'date_open' => 'required|date',
+            'date_close' => 'required|date',
+            'date_close' => 'required|date|after:date_open'
+        ], $message);
 
-        $update =  $this->dateOpenSystemClose->find(1);
-
-        $update->update($dataForm);
+        if ($validator->fails()) 
+            return redirect()
+                ->route('home')
+                ->withErrors($validator)
+                ->withInput();
+        else
+            $update =  $this->dateOpenSystemClose->find(1);
+            $update->update($dataForm);
 
         if ($update)
             return \redirect()->route('home')->with('success',' Data Atualizada com sucesso!');

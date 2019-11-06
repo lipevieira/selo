@@ -9,6 +9,7 @@
 @section('body_class')
 
 @section('body')
+
 <div class="container">
     <div class="logo">
         <img src="{{asset('images/pag_start/capa_start.jpg')}}" width="800" height="800"

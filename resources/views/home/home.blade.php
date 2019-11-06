@@ -20,59 +20,41 @@
     {{ session('error') }}
 </div>
 @endif
+{{-- Messagem para erros de formularios --}}
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
 
 <div class="box">
     <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="ion ion-ios-gear-outline"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"><strong>DATA DE ABERTURA DO SISTEMA</strong></span>
-                    <span class="info-box-number">{{$dates->date_open->format('d/m/Y')}}</span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="ion ion-ios-gear-outline"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"><strong>DATA DE ENCERRAMENTO DO SISTEMA</strong></span>
-                    <span class="info-box-number">{{$dates->date_close->format('d/m/Y')}}</span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-            <!-- /.info-box -->
-        </div>
-        <!-- /.col -->
-        <!-- fix for small devices only -->
         <div class="clearfix visible-sm-block"></div>
-
         <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="fa fa-calendar"></i></span>
-
+        
                 <div class="info-box-content">
                     <form action="{{route('home.update.dates')}}" method="POST">
                         @method('PUT')
                         @csrf
                         <div class="form-row">
-                            <div class="col-md-4 mb-3">
-                                <label for="date_open">Data de Abertura</label>
+                            <div class="col-md-4 mb-4">
+                                <span class="info-box-text"><strong>DATA DE ABERTURA</strong></span>
                                 <input type="date" class="form-control" id="date_open" name="date_open"
                                     value="{{$dates->date_open->format('Y-m-d')}}" required>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="date_close">Data de Encerramento</label>
+                            <div class="col-md-4 mb-4">
+                               <span class="info-box-text"><strong>DATA DE ENCERRAMENTO </strong></span>
                                 <input type="date" class="form-control" id="date_close" name="date_close"
                                     value="{{$dates->date_close->format('Y-m-d')}}" required>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="validationCustom02">Atualizar Informações</label>
+                            <div class="col-md-4 mb-4">
+                                <span class="info-box-text"><strong>ATUALIZAR DATAS</strong></span>
                                 <button type="submit" class="btn btn-success form-control">Salvar</button>
                             </div>
                         </div>

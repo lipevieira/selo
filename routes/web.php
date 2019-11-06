@@ -74,6 +74,8 @@ Route::middleware('verified.dates.system')->group(function () {
       Route::get('/document', 'RecognitionController@downloandAnexos')->name('document.seve');
 
       Route::post('/savar', 'RecognitionController@save')->name('save.institution.recognition');
+      Route::get('/show', 'RecognitionController@show')->name('show.institution.recognition');
+      Route::put('/update', 'RecognitionController@update')->name('update.institution.recognition');
    });
    /***
     * @description Autenticação da Instituição

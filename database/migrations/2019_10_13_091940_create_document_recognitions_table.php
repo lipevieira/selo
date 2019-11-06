@@ -20,6 +20,8 @@ class CreateDocumentRecognitionsTable extends Migration
 
             $table->bigInteger('institution_recognition_id')->unsigned();
             $table->foreign('institution_recognition_id')->references('id')->on('institution_recognitions');
+                                                        // ->onUpdate('cascade')
+                                                        // ->onDelete('cascade');
 
             $table->timestamps();
         });
