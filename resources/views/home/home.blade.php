@@ -54,8 +54,40 @@
                                     value="{{$dates->date_close->format('Y-m-d')}}" required>
                             </div>
                             <div class="col-md-4 mb-4">
-                                <span class="info-box-text"><strong>ATUALIZAR DATAS</strong></span>
-                                <button type="submit" class="btn btn-success form-control">Salvar</button>
+                                {{-- <span class="info-box-text"><strong>ATUALIZAR DATAS</strong></span> --}}
+                                <button type="submit" class="btn btn-success form-control" style="margin-top: 19px;">Atualizar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        {{-- Formulario para documentos --}}
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <div class="info-box-content">
+                    <form action="{{route('update.anexos')}}" method="POST" enctype="multipart/form-data">
+                        @method('PUT')
+                        @csrf
+                        <div class="form-row">
+                            <div class="col-md-4 mb-4">
+                                <span class="info-box-text"><strong>Anexar Documento</strong></span>
+                                <input type="file" class="form-control" id="" name="document" value="" required>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                               <span class="info-box-text"><strong>Nome Anexo</strong></span>
+                                <select class="form-control form-control-sm" name="doc_name" required>
+                                    <option value=""></option>
+                                   <option value="anexo01.doc">Anexo - 01</option>
+                                   <option value="anexo06.doc">Anexo - 06</option>
+                                   <option value="anexo07.doc">Anexo - 07</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <button type="submit" class="btn btn-block btn-info" style="margin-top: 19px;">Atualizar</button>
                             </div>
                         </div>
                     </form>
@@ -65,6 +97,8 @@
             <!-- /.info-box -->
         </div>
     </div>
+    
+    {{-- Final teste --}}
     <div class="box-header">
         <h3>Instituições cadastradas que são compromisso.</h3>
     </div>

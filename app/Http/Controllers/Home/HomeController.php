@@ -14,6 +14,7 @@ use App\Models\ScheduleAction;
 use Illuminate\Support\Facades\DB;
 use App\Models\CompanyClassification;
 use App\Models\DateOpenSystemClose;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -157,9 +158,14 @@ class HomeController extends Controller
 
         return response()->download(storage_path("app/public/recognition/" . $doc_name));
     }
+    /**
+     * Atualizando as Datas de abertura e encerramento
+     *
+     * @param Request $request
+     * @return void
+     */
     public function updateDatesOpenCloseSystem(Request $request)
     {
-       
         $dataForm = $request->all();
         $message = [
             'date_open.required' => 'O campo Data de abertura é obrigatorio',
@@ -172,18 +178,34 @@ class HomeController extends Controller
             'date_close' => 'required|date|after:date_open'
         ], $message);
 
-        if ($validator->fails()) 
+        if ($validator->fails())
             return redirect()
                 ->route('home')
                 ->withErrors($validator)
                 ->withInput();
         else
             $update =  $this->dateOpenSystemClose->find(1);
-            $update->update($dataForm);
+        $update->update($dataForm);
 
         if ($update)
-            return \redirect()->route('home')->with('success',' Data Atualizada com sucesso!');
-        else    
-            return \redirect()->back()->with('error','Ocorreu um erro ao atualizar as Datas, tente novamente.');
-    }  
+            return \redirect()->route('home')->with('success', ' Data Atualizada com sucesso!');
+        else
+            return \redirect()->back()->with('error', 'Ocorreu um erro ao atualizar as Datas, tente novamente.');
+    }
+    public function updatAnexos(Request $request)
+    {
+        if ($request->hasFile('document') && $request->file('document')->isValid())
+            $name = $request->doc_name;
+            $nameFile = "{$name}";
+            Storage::delete("models/{$nameFile}");
+            $upload = $request->document->storeAs('models', $nameFile);
+
+        if (!$upload)
+            return redirect()
+                ->back()
+                ->with('error', 'Falha ao fazer upload de arquivos')
+                ->withInput();
+        else
+            return \redirect()->route('home')->with('success', 'Anexo Atualizado com sucesso');
+    }
 }

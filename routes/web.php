@@ -47,6 +47,8 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth']
    Route::get('/recognition', 'HomeController@getInstitutionRecognition')->name('home.recognition');
    Route::get('/recognition/detalhes/{id}', 'HomeController@getShowInstitutionRecognition')->name('home.recognition.detalhes');
    Route::get('/show-recognition-document/{doc_name}', 'HomeController@showDocumentRecongnition')->name('recongnition.show.document');
+
+   Route::put('/update-anexos', 'HomeController@updatAnexos')->name('update.anexos');
 });
 
 /**
