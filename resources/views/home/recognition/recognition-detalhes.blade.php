@@ -1,9 +1,22 @@
 @extends('adminlte::page')
 
-@section('title', 'Dashboard')
+@section('title', 'Instituições Reconhecimento')
 
 @section('content_header')
 <h1>Informações Completas</h1>
+
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
+
 @stop
 
 @section('content')
@@ -94,15 +107,20 @@
                 </thead>
                 <tbody>
                     @foreach ($recognition->documents as $item)
-                        <tr>
-                            <th scope="row">{{ $item->id }}</th>
-                            <td> {{ $item->created_at->format('d/m/Y') }}</td>
-                            <td>
-                                <a href="{{ route('recongnition.show.document',$item->doc_name) }}" class="btn btn-info btn-sm" role="button" target="_blank">
-                                    <span class="glyphicon glyphicon-folder-open"></span> Documento
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <th scope="row">{{ $item->id }}</th>
+                        <td> {{ $item->created_at->format('d/m/Y') }}</td>
+                        <td>
+                            <a href="{{ route('recongnition.show.document',$item->doc_name) }}"
+                                class="btn btn-info btn-sm" role="button" target="_blank">
+                                <span class="glyphicon glyphicon-folder-open"></span> Documento
+                            </a>
+                            <a href="{{route('show.document.recognition.delete', $item->id)}}" class="btn btn-danger btn-sm"
+                                role="button">
+                                <span class="glyphicon glyphicon-trash"></span> Delete
+                            </a>
+                        </td>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

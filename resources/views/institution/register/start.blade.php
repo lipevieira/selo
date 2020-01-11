@@ -11,7 +11,7 @@
 @section('body')
 <div class="container">
     <div class="jumbotron">
-        <h1 class="display-4">Selo da Diversidade Ético-Racial</h1>
+        <h1 class="display-4">Selo da Diversidade Étnico-Racial</h1>
         <p class="lead">Antes de começar o seu cadastro vamos a algumas perguntas basicas.</p>
         <hr class="my-4">
         <form method="GET" action="{{route('index.company')}}">

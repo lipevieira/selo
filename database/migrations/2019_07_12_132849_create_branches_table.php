@@ -17,7 +17,9 @@ class CreateBranchesTable extends Migration
             $table->bigIncrements('id');
             $table->string('cnpj_additional',20)->unique();
             $table->bigInteger('institution_id')->unsigned();
-            $table->foreign('institution_id')->references('id')->on('institutions');
+            $table->foreign('institution_id')->references('id')->on('institutions')  
+                                                                ->onUpdate('cascade')
+                                                                ->onDelete('cascade');
             $table->timestamps();
         });
     }

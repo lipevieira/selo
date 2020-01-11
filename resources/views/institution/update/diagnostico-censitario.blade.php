@@ -131,7 +131,7 @@
                     <form id="updateCollaboratorActivityLevel" method="POST" action="{{route('update.censitario')}}">
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
-                        <input type="hidden" class="form-control" id="id" name="id">
+                        <input type="hidden" class="form-control" id="id_collaborator" name="id">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Nivel de Atividade:</label>
                             <input type="text" class="form-control" id="activity_level" name="activity_level"

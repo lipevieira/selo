@@ -21,7 +21,9 @@ class CreateCommissionMembersTable extends Migration
             $table->string('members_phone', 20)->nullable();
             
             $table->bigInteger('institution_id')->unsigned();
-            $table->foreign('institution_id')->references('id')->on('institutions');
+            $table->foreign('institution_id')->references('id')->on('institutions')
+                                                                ->onUpdate('cascade')
+                                                                ->onDelete('cascade');
             $table->timestamps();
         });
     }

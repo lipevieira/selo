@@ -11,12 +11,16 @@ use App\Models\Schedule;
 use App\Models\Question;
 use App\Models\InstitutionRecognition;
 use App\Models\ScheduleAction;
+use App\Models\Document;
+use App\Models\DocumentRecognition;
 use Illuminate\Support\Facades\DB;
 use App\Models\CompanyClassification;
 use App\Models\DateOpenSystemClose;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class HomeController extends Controller
 {
@@ -59,6 +63,7 @@ class HomeController extends Controller
     {
         $instituions = $this->institution->all();
         $dates = $this->dateOpenSystemClose->find(1);
+        
 
         return view('home.home', compact('instituions', 'dates'));
     }
@@ -114,7 +119,10 @@ class HomeController extends Controller
         $profile = $this->collaboratorActivitylevel->getProfileCollaboratorDetail($id);
         $companyClassifications = $this->companyClassification->all();
 
-        return view('home.show_institution', compact('questionAlternatives', 'actions', 'instituion', 'companyClassifications', 'profile'));
+        $now = new Carbon('next year');
+        $yearNow = $now->year;
+
+        return view('home.show_institution', compact('questionAlternatives', 'actions', 'instituion', 'companyClassifications', 'profile','yearNow'));
     }
     /**
      * Baixando ducumentos da isntituição
@@ -134,9 +142,11 @@ class HomeController extends Controller
      */
     public function getInstitutionRecognition()
     {
+        $dates = $this->dateOpenSystemClose->find(1);
+
         $recognition = $this->institutionRecognition->all();
 
-        return view('home.recognition.recognition', compact('recognition'));
+        return view('home.recognition.recognition', compact('recognition','dates'));
     }
     /**
      * Listando todas as Informações da Instituição
@@ -208,4 +218,122 @@ class HomeController extends Controller
         else
             return \redirect()->route('home')->with('success', 'Anexo Atualizado com sucesso');
     }
+   /**
+     *@param Type var Request
+     * Descricption - Deletando um documento
+     * da instituição compromisso
+     * 
+     */
+    public function delete($id)
+    {
+        $document = Document::find($id);
+        $name = $document->doc_name;
+        $document->delete();
+            
+        $check = Storage::delete("documents/anexos/{$name}"); // true ou false
+
+        if($check && $document)
+            return redirect()->back()
+                             ->with('success', 'Documento deletado com Sucesso')
+                             ->withInput();
+        else
+            return redirect()->back()
+                             ->with('error', 'Aconteçeu um error ao deletar o Documento!')
+                             ->withInput();
+    }
+    public function deleteActionSchedule($id)
+    {
+        $actionSchedule = $this->schedule->find($id);
+        
+        $actionSchedule->delete();
+
+        if($actionSchedule)
+             return redirect()->back()
+            ->with('success', 'Ação deletada com Sucesso')
+            ->withInput();
+        else
+            return redirect()->back()
+                             ->with('error', 'Aconteçeu um error ao deletar a Ação do cronograma!')
+                             ->withInput();
+    }
+    /**
+     *@param Type var Request
+     * Descricption - Deletando um documento
+     * da instituição reconhecimento
+     * 
+     */
+    public function deleteDocumentionRecognition($id)
+    {
+        $document =  DocumentRecognition::find($id);
+        $name = $document->doc_name;
+        $document->delete();
+            
+        $check = Storage::delete("recognition/{$name}"); 
+
+        if($check && $document)
+            return redirect()->back()
+                             ->with('success', 'Documento deletado com Sucesso')
+                             ->withInput();
+        else
+            return redirect()->back()
+                             ->with('error', 'Aconteçeu um error ao deletar o Documento!')
+                             ->withInput();
+    }
+    /**
+     * @param Type var Request
+     * @Descricption - Recuperando id da Instituição reconhecimento 
+     * @InstitutionRecognition
+     */
+    public function findIdInstitutionRegnition(Request $request)
+    {
+        $recognition = $this->institutionRecognition->find($request->id);
+
+        return response()->json($recognition);
+    }
+    public function delelteInstitutionRecognition(Request $request)
+    {
+        $id = $request->id;
+        $delete = $this->institutionRecognition->find($id)->delete();
+        if($delete)
+            return redirect()->back()
+                             ->with('success', 'Instituição deletada com Sucesso!')
+                             ->withInput();
+        else
+            return redirect()->back()
+                             ->with('error', 'Aconteçeu um error ao deletar essa Instituição!')
+                             ->withInput();
+
+    }
+    /**
+    * @param Type var Request
+    * @Descricption - Recuperando id da Instituição compromisso 
+    * @InstitutionRecognition
+    */
+    public function findIdInstitutionCommitment(Request $request)
+    {
+        $Commitment = $this->institution->find($request->id);
+
+        return response()->json($Commitment);
+    }
+    /**
+     * @description Deletando uma instituição compromisso
+     * juntamente com todo o seu plano de trabalho
+     * @param int
+     * @return Boolean
+     */
+    public function deleteInstitutionCommitment(Request $request)
+    {
+        $id = $request->id;
+        $delete = $this->institution->find($id)->delete();
+        
+        if($delete)
+            return redirect()->back()
+                             ->with('success', 'Instituição deletada com Sucesso!')
+                             ->withInput();
+        else
+            return redirect()->back()
+                             ->with('error', 'Aconteçeu um error ao deletar essa Instituição!')
+                             ->withInput();
+    }
+    
 }

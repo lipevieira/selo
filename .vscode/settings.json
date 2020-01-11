@@ -1,5 +1,5 @@
 {
-    "editor.fontFamily": "Times New Roman",
+    "editor.fontFamily": "Fira Code",
     "blade.format.enable": true,
-    "editor.fontSize": 18
+    "editor.fontSize": 13
 }

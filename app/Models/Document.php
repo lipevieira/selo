@@ -44,5 +44,5 @@ class Document extends Model
     {
         return response()->download(storage_path("app/public/models/anexo07.doc"));
     }
-    
+   
 }

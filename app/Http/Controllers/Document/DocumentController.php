@@ -103,4 +103,5 @@ class DocumentController extends Controller
     {
         return response()->download(storage_path("app/public/models/anexo07.doc"));
     }
+    
 }

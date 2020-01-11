@@ -10,7 +10,7 @@
 <div class="container">
     @include('layouts.nav-bar-institution')
 
-    <h3 style="text-align: center">Cronograma (Data limite de entrega das atividades será <strong> 30  de Novembro</strong>)</h3>
+    <h3 style="text-align: center">Cronograma (Data limite de entrega das atividades será <strong> 30/11/{{$yearNow }}</strong>)</h3>
     <br />
 
     @if(session('success'))
@@ -57,7 +57,7 @@
                 <td>
                     @if ($item->status == "Pendente")
                         <span class="label label-warning">{{$item->status}}</span>
-                    @else
+                    @elseif($item->status == "Realizado")
                         <span class="label label-success">{{$item->status}}</span>
                     @endif
                 </td>

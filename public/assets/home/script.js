@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('#tblInstitution').DataTable({
+        // "scrollX": true,
         dom: 'Bfrtip',
         "language": {
             "lengthMenu": "Mostrando _MENU_ registros por página",

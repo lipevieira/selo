@@ -25,7 +25,7 @@
                             <th scope="col">QUANTIDADE</th>
                             <th scope="col">STATUS</th>
                             <th scope="col">DATA LIMITE</th>
-                            <th scope="col">ALTORIZAÇÃO DAS AÇÕES</th>
+                            <th scope="col">AUTORIZAÇÃO DAS AÇÕES</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,7 +41,7 @@
                             <td>
                                 @if ($item->status == "Pendente")
                                     <span class="label label-warning">{{$item->status}}</span>
-                                @else
+                                @elseif($item->status == "Realizado")
                                     <span class="label label-success">{{$item->status}}</span>
                                 @endif
                             </td>
@@ -60,7 +60,7 @@
                             <th scope="col">QUANTIDADE</th>
                             <th scope="col">STATUS</th>
                             <th scope="col">DATA LIMITE</th>
-                            <th scope="col">ALTORIZAÇÃO DAS AÇÕES</th>
+                            <th scope="col">AUTORIZAÇÃO DAS AÇÕES</th>
                             {{-- <th colspan="3" style="text-align:right">TOTAL:</th>
                             <th></th> --}}
                         </tr>

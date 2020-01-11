@@ -16,6 +16,7 @@ use DB;
 use \Validator;
 use Response;
 use App\Models\Schedule;
+use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Console\Input\Input;
 
 class InstitutionController extends Controller
@@ -211,9 +212,8 @@ class InstitutionController extends Controller
                         && $transctionSchedules && $transctionCnpj && $autentication
                     ) {
                         DB::commit();
-                        //TO-DE Fazer: notificação após salvar uma Instituição
-                        // $institutionRegisted = $institution;
-                        // $institutionRegisted->notify(new InstitutionRegistered($institution));
+                     
+                        $this->notifiableEmailRegisterInstitution($institution);
                     } else {
                         DB::rollBack();
                     }
@@ -293,5 +293,19 @@ class InstitutionController extends Controller
         } else {
             return false;
         }
+    }
+    /**
+     * @description- Enviar uma notificação por E-mail
+     * Após uma instituição se cadastrar.
+     * @param array
+     * @return void
+     */
+    private function notifiableEmailRegisterInstitution($institution = array())
+    {
+        Mail::send('email.register',compact('institution'),function($message){
+            $adresses = "testepi2018.1@gmail.com";
+            $message->to($adresses);
+            $message->subject('Novo cadastro no selo da diversidade!');
+        });
     }
 }

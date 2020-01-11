@@ -42,7 +42,7 @@
                     <label for="recipient-name" class="col-form-label">Status:</label>
                     <select class="form-control form-control-sm" id="status" name="status">
                         <option value="{{$schedule->status}}">{{$schedule->status}}</option>
-                        <option value="Pedente">Pedente</option>
+                        <option value="Pendente">Pendente</option>
                         <option value="Realizado">Realizado</option>
                     </select>
                 </div>

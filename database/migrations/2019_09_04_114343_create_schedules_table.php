@@ -22,7 +22,9 @@ class CreateSchedulesTable extends Migration
             $table->date('deadline');
 
             $table->bigInteger('institution_id')->unsigned();
-            $table->foreign('institution_id')->references('id')->on('institutions');
+            $table->foreign('institution_id')->references('id')->on('institutions')
+                                                                ->onUpdate('cascade')
+                                                                ->onDelete('cascade');
 
             $table->bigInteger('schedule_action_id')->unsigned();
             $table->foreign('schedule_action_id')->references('id')->on('schedule_actions');

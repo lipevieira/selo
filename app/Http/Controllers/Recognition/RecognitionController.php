@@ -8,6 +8,8 @@ use App\Models\InstitutionRecognition;
 use App\Models\DocumentRecognition;
 use App\Models\CompanyClassification;
 use App\Models\Institution;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use \Validator;
 
 class RecognitionController extends Controller
@@ -53,6 +55,8 @@ class RecognitionController extends Controller
                 $recognitionInstitution->documents()->create([
                     'doc_name'  => $nameFile,
                 ]);
+                $this->notifiableEmailRegisterInstitution($recognitionInstitution);
+
                 return redirect()
                     ->back()
                     ->with('success', 'Instituição salva com sucesso!');
@@ -66,9 +70,9 @@ class RecognitionController extends Controller
      */
     public function getInstitutionRecognition()
     {
-        $recognition = $this->institutionRecognition->all();
 
-        return view('home.recognition.recognition', compact('recognition'));
+        $recognition = $this->institutionRecognition->all();
+        return view('home.recognition.recognition', compact('recognition','dates'));
     }
 
     /**
@@ -138,4 +142,19 @@ class RecognitionController extends Controller
                 ->with('erro', 'Ocorreu um erro ao atualizar as informações!')
                 ->withInput();
     }
+    /**
+     * @description- Enviar uma notificação por E-mail
+     * Após uma instituição se cadastrar.
+     * @param array
+     * @return void
+     */
+    private function notifiableEmailRegisterInstitution($institution = array())
+    {
+        Mail::send('email.register',compact('institution'),function($message){
+            $adresses = "testepi2018.1@gmail.com";
+            $message->to($adresses);
+            $message->subject('Novo cadastro no selo da diversidade!');
+        });
+    }
+    
 }

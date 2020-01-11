@@ -18,11 +18,10 @@ class CreateAnswersTable extends Migration
             $table->text('others')->nullable();
             $table->integer('alternative_id')->nullable();
 
-            // $table->bigInteger('alternative_id')->unsigned();
-            // $table->foreign('alternative_id')->references('id')->on('alternatives');
-
             $table->bigInteger('institution_id')->unsigned();
-            $table->foreign('institution_id')->references('id')->on('institutions');
+            $table->foreign('institution_id')->references('id')->on('institutions')
+                                                                ->onUpdate('cascade')
+                                                                ->onDelete('cascade');
             $table->timestamps();
         });
     }

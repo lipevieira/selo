@@ -94,6 +94,7 @@ $(document).ready(function () {
             "search": "Pesquisar"
         },
         "bFilter": false,
+
         buttons: [
             {
                 extend: 'excel', footer: true,
@@ -158,6 +159,7 @@ $(document).ready(function () {
 
         },
         "bFilter": false,
+
         dom: 'Bfrtip',
         "bPaginate": false,
         "language": {
@@ -184,6 +186,4 @@ $(document).ready(function () {
             },
         ]
     });
-
-
 });

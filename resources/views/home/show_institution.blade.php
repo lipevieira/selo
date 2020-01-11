@@ -4,6 +4,19 @@
 
 @section('content_header')
 <h1>Informações completa da instituição</h1>
+
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif 
+
 @stop
 
 @section('content')
@@ -198,7 +211,7 @@
                         <div class="panel-body">
                             <!-- Inicio das Questões -->
                             @foreach ($questionAlternatives as $question)
-                            
+
                             <p><strong>{{ $question->name }}</strong></p>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
@@ -206,12 +219,11 @@
                                     <select class="form-control form-control-sm" name="alternative_id[]">
                                         <option value=""></option>
                                         @foreach ($question->alternatives as $alternativa)
-                                        <option value="{{$alternativa->id}}" 
-                                        @foreach ($instituion->answers as $answer)
+                                        <option value="{{$alternativa->id}}" @foreach ($instituion->answers as $answer)
                                             @if ($alternativa->id == $answer->alternative_id)
                                             selected
                                             @endif
-                                        @endforeach
+                                            @endforeach
                                             >{{ $alternativa->alternative }}
                                         </option>
 
@@ -259,7 +271,8 @@
                                                 <td>{{$collaboratorActivityLevel->color}}</td>
                                                 <td>{{$collaboratorActivityLevel->human_quantity_activity_level}}</td>
                                                 <td>{{ $collaboratorActivityLevel->woman_quantity_activity_level }}</td>
-                                                <td>{{ $collaboratorActivityLevel->woman_quantity_activity_level + $collaboratorActivityLevel->human_quantity_activity_level }}</td>
+                                                <td>{{ $collaboratorActivityLevel->woman_quantity_activity_level + $collaboratorActivityLevel->human_quantity_activity_level }}
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -342,8 +355,8 @@
                         <div class="panel-heading">CRONOGRAMA</div>
                         <div class="panel-body">
                             <!-- Inicio do cronograma -->
-                            <h4>Cronograma (Data limite de entrega das atividades será
-                                <strong>{{date('30/11/Y')}})</strong>
+                            <h4>Cronograma (Data limite de entrega das atividades será <strong>
+                                    30/11/{{$yearNow }}</strong>)
                             </h4>
                             <h4>Listar todas as atividades necessárias à realização do projeto.</h4>
                             <table class="table table-bordered table-striped" id="tbl_schedules">
@@ -356,6 +369,7 @@
                                         <th scope="col">QUANTIDADE</th>
                                         <th scope="col">DATA LIMITE</th>
                                         <th scope="col">STATUS</th>
+                                        <th scope="col">DELETE</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -369,10 +383,16 @@
                                         <td>{{$schedule->deadline->format('d/m/Y')}}</td>
                                         <td>
                                             @if ($schedule->status == "Pendente")
-                                                <span class="label label-warning">{{$schedule->status}}</span>
+                                            <span class="label label-warning">{{$schedule->status}}</span>
                                             @else
-                                                <span class="label label-success">{{$schedule->status}}</span>  
+                                            <span class="label label-success">{{$schedule->status}}</span>
                                             @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{route('show.action.schedule.delete', $schedule->id)}}"
+                                                class="btn btn-danger btn-sm" role="button">
+                                                <span class="glyphicon glyphicon-trash"></span> Delete
+                                            </a>
                                         </td>
                                     </tr>
                                     @empty
@@ -492,9 +512,13 @@
                                         <td>{{ $document->created_at->format('d/m/Y') }}</td>
                                         <td>{{ $document->description }}</td>
                                         <td>
-                                            <a href="{{ route('home.document.show',$document->doc_name) }}" class="btn btn-info btn-sm" role="button"
-                                                target="_blank">
+                                            <a href="{{ route('home.document.show',$document->doc_name) }}"
+                                                class="btn btn-info btn-sm" role="button" target="_blank">
                                                 <span class="glyphicon glyphicon-folder-open"></span> Documento
+                                            </a>
+                                            <a href="{{route('show.document.delete',$document->id)}}"
+                                                class="btn btn-danger btn-sm" role="button">
+                                                <span class="glyphicon glyphicon-trash"></span> Delete
                                             </a>
                                         </td>
                                     </tr>
@@ -521,5 +545,6 @@
 
 @section('js')
 <script src="{{asset('assets/home/show_institution_details.js')}}"></script>
+
 @stop
 @stop

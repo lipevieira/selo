@@ -20,7 +20,9 @@ class CreateDocumentsTable extends Migration
 
 
             $table->bigInteger('institution_id')->unsigned();
-            $table->foreign('institution_id')->references('id')->on('institutions');
+            $table->foreign('institution_id')->references('id')->on('institutions')
+                                                                ->onUpdate('cascade')
+                                                                ->onDelete('cascade');
             
             $table->timestamps();
         });

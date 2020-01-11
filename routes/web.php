@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Institution\InstitutionController@welcome')->name('welcome');
@@ -41,14 +42,25 @@ Route::group(['prefix' => 'home', 'namespace' => 'Home', 'middleware' => 'auth']
    Route::get('/cronograma', 'HomeController@getSchedules')->name('home.schedules');
    Route::get('/detalhes-instituição/{id}', 'HomeController@getInstituitionDetails')->name('home.details.institution');
    Route::put('/update-datas', 'HomeController@updateDatesOpenCloseSystem')->name('home.update.dates');
-
    Route::get('show/document/{name}', 'HomeController@show')->name('home.document.show');
-
+   Route::get('show/id-recognition-commitment','HomeController@findIdInstitutionCommitment')->name('show.id.commitment');
+   Route::post('/delete/commitment/institution','HomeController@deleteInstitutionCommitment')->name('commitment.delete');
+  
+   /**
+    * Rotas para empresas reconhecimento
+    */
    Route::get('/recognition', 'HomeController@getInstitutionRecognition')->name('home.recognition');
    Route::get('/recognition/detalhes/{id}', 'HomeController@getShowInstitutionRecognition')->name('home.recognition.detalhes');
    Route::get('/show-recognition-document/{doc_name}', 'HomeController@showDocumentRecongnition')->name('recongnition.show.document');
+   Route::get('/show/recognition-document/delete/{id}','HomeController@deleteDocumentionRecognition')->name('show.document.recognition.delete');
+   Route::get('/show/id-recognition','HomeController@findIdInstitutionRegnition')->name('show.id.recognition');
+   Route::post('/delete/recognition/institution','HomeController@delelteInstitutionRecognition')->name('recognition.delete');
+
 
    Route::put('/update-anexos', 'HomeController@updatAnexos')->name('update.anexos');
+   Route::get('/show/document/delete/{id}','HomeController@delete')->name('show.document.delete');
+   Route::get('/show/action/delete/{id}','HomeController@deleteActionSchedule')->name('show.action.schedule.delete');
+
 });
 
 /**

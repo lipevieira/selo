@@ -19,7 +19,7 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (data) {
                 console.log(data)
-                $("#id").val(data.id);
+                $("#id_collaborator").val(data.id);
                 $("#activity_level").val(data.activity_level);
                 $("#color").val(data.color);
                 $("#human_quantity_activity_level").val(data.human_quantity_activity_level);
